@@ -23,6 +23,7 @@ import { educationCommand } from './education';
 import { blogCommand } from './blog';
 import { projectsCommand } from './projects';
 import { messageCommand } from './message';
+import { envCommand } from './env';
 
 // Easter egg commands
 import { cowsayCommand } from './easter-eggs/cowsay';
@@ -32,6 +33,7 @@ import { matrixCommand } from './easter-eggs/matrix';
 import { hackerCommand } from './easter-eggs/hacker';
 import { sudoCommand } from './easter-eggs/sudo';
 import { snakeCommand } from './easter-eggs/snake';
+import { prometheusCommand } from './easter-eggs/prometheus';
 import { exitCommand, rebootCommand } from './exit';
 
 // Command registry
@@ -58,6 +60,7 @@ const allCommands: Command[] = [
   blogCommand,
   projectsCommand,
   messageCommand,
+  envCommand,
   exitCommand,
   rebootCommand,
   // Easter eggs
@@ -68,6 +71,7 @@ const allCommands: Command[] = [
   hackerCommand,
   sudoCommand,
   snakeCommand,
+  prometheusCommand,
 ];
 
 // Initialize command registry

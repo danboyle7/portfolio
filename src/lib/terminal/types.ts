@@ -16,7 +16,7 @@ export interface AnimatedLine {
 }
 
 export interface InteractiveMode {
-  type: 'blog' | 'search' | 'snake' | null;
+  type: 'blog' | 'search' | 'snake' | 'echo' | null;
   data?: unknown;
 }
 

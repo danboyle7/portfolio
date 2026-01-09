@@ -162,12 +162,23 @@ export function TerminalInput({
         onSubmit('clear');
         setInput('');
       }
+
+      // Cancel current line with Ctrl+C or Cmd+C
+      if (e.key === 'c' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        // Submit current text + ^C indicator, then clear
+        const cancelledLine = input + '^C';
+        setInput('');
+        setHistoryIndex(-1);
+        setSavedInput('');
+        onSubmit(cancelledLine);
+      }
     },
     [input, commandHistory, historyIndex, savedInput, onSubmit, currentPath, fileSystem]
   );
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-0 text-sm">
+    <form onSubmit={handleSubmit} className="flex items-center gap-0 text-sm outline-none" tabIndex={-1}>
       {/* Prompt */}
       <span className="text-green-400 font-bold shrink-0">{user}@{hostname}</span>
       <span className="text-green-600 shrink-0">:</span>
@@ -187,7 +198,11 @@ export function TerminalInput({
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           disabled={disabled}
-          className="absolute inset-0 w-full h-full opacity-0 cursor-text"
+          className="terminal-input absolute inset-0 w-full h-full opacity-0 cursor-text outline-none border-none focus:outline-none focus:ring-0 focus:border-none"
+          style={{
+            WebkitAppearance: 'none',
+            boxShadow: 'none',
+          }}
           spellCheck={false}
           autoComplete="off"
           autoCorrect="off"

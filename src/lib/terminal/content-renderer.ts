@@ -1,4 +1,11 @@
-// Content renderer for dynamic content types
+/**
+ * Content Renderer
+ *
+ * Renders content from the content cache for display in the terminal.
+ * All content comes from YAML files via the generated content.
+ *
+ * NO DEFAULT CONTENT - YAML files are the single source of truth.
+ */
 
 import type { CommandResult, ContentData, About, Experience, SkillCategory, Education, BlogPost, ContactInfo, Hobby } from './types';
 import { createLine, createProgressBar } from './utils';
@@ -32,21 +39,23 @@ export function renderContentData(content: ContentData): CommandResult {
   }
 }
 
-function renderAbout(): CommandResult {
-  const aboutData = getContentData('about') as About | undefined;
-
-  const defaultAbout: About = {
-    name: 'Daniel Boyle',
-    title: 'Full-Stack Developer',
-    tagline: 'Building the future, one commit at a time',
-    bio: [
-      'Passionate software engineer with 6+ years of experience building web applications.',
-      'I love creating elegant solutions to complex problems and contributing to open source.',
-      'When I\'m not coding, you\'ll find me exploring new technologies or hiking in the mountains.',
+function noContentMessage(type: string): CommandResult {
+  return {
+    output: [
+      createLine('', 'output'),
+      createLine(`No ${type} data found.`, 'warning'),
+      createLine('Content may not be loaded. Try running: pnpm run generate-content', 'system'),
+      createLine('', 'output'),
     ],
   };
+}
 
-  const about = aboutData ?? defaultAbout;
+function renderAbout(): CommandResult {
+  const about = getContentData('about') as About | undefined;
+
+  if (!about) {
+    return noContentMessage('about');
+  }
 
   const lines: string[] = [];
   lines.push('');
@@ -74,21 +83,11 @@ function renderAbout(): CommandResult {
 }
 
 function renderExperience(): CommandResult {
-  const experienceData = getContentData('experience') as Experience[] | undefined;
+  const experience = getContentData('experience') as Experience[] | undefined;
 
-  const defaultExperience: Experience[] = [
-    {
-      company: 'Current Company',
-      role: 'Senior Developer',
-      period: '2022 - Present',
-      location: 'Remote',
-      description: 'Leading development of cloud-native applications.',
-      highlights: ['Built scalable microservices', 'Mentored junior developers'],
-      technologies: ['TypeScript', 'React', 'Node.js'],
-    },
-  ];
-
-  const experience = experienceData ?? defaultExperience;
+  if (!experience || experience.length === 0) {
+    return noContentMessage('experience');
+  }
 
   const lines: string[] = [];
   lines.push('');
@@ -122,21 +121,11 @@ function renderExperience(): CommandResult {
 }
 
 function renderSkills(): CommandResult {
-  const skillsData = getContentData('skills') as SkillCategory[] | undefined;
+  const skills = getContentData('skills') as SkillCategory[] | undefined;
 
-  const defaultSkills: SkillCategory[] = [
-    {
-      name: 'Languages',
-      icon: '>>',
-      skills: [
-        { name: 'TypeScript', level: 95 },
-        { name: 'JavaScript', level: 95 },
-        { name: 'Python', level: 85 },
-      ],
-    },
-  ];
-
-  const skills = skillsData ?? defaultSkills;
+  if (!skills || skills.length === 0) {
+    return noContentMessage('skills');
+  }
 
   const lines: string[] = [];
   lines.push('');
@@ -164,19 +153,11 @@ function renderSkills(): CommandResult {
 }
 
 function renderEducation(): CommandResult {
-  const educationData = getContentData('education') as Education[] | undefined;
+  const education = getContentData('education') as Education[] | undefined;
 
-  const defaultEducation: Education[] = [
-    {
-      institution: 'University',
-      degree: 'Bachelor of Science',
-      field: 'Computer Science',
-      period: '2014 - 2018',
-      location: 'Location',
-    },
-  ];
-
-  const education = educationData ?? defaultEducation;
+  if (!education || education.length === 0) {
+    return noContentMessage('education');
+  }
 
   const lines: string[] = [];
   lines.push('');
@@ -218,7 +199,7 @@ function renderBlogList(): CommandResult {
       lines.push('');
     }
   } else {
-    lines.push('Blog posts will appear here once content is loaded.');
+    lines.push('No blog posts found.');
     lines.push('');
   }
 
@@ -231,17 +212,11 @@ function renderBlogList(): CommandResult {
 }
 
 function renderContact(): CommandResult {
-  const contactData = getContentData('contact') as ContactInfo | undefined;
+  const contact = getContentData('contact') as ContactInfo | undefined;
 
-  const defaultContact: ContactInfo = {
-    email: 'hello@example.com',
-    github: 'github.com/username',
-    linkedin: 'linkedin.com/in/username',
-    location: 'Location',
-    availability: 'Open to opportunities',
-  };
-
-  const contact = contactData ?? defaultContact;
+  if (!contact) {
+    return noContentMessage('contact');
+  }
 
   const lines: string[] = [];
   lines.push('');
@@ -266,16 +241,11 @@ function renderContact(): CommandResult {
 }
 
 function renderHobbies(): CommandResult {
-  const hobbiesData = getContentData('hobbies') as Hobby[] | undefined;
+  const hobbies = getContentData('hobbies') as Hobby[] | undefined;
 
-  const defaultHobbies: Hobby[] = [
-    { name: 'Coding', icon: '>>', description: 'Building side projects and contributing to open source' },
-    { name: 'Gaming', icon: '>>', description: 'Strategy and puzzle games' },
-    { name: 'Reading', icon: '>>', description: 'Tech books and sci-fi novels' },
-    { name: 'Hiking', icon: '>>', description: 'Exploring nature and mountains' },
-  ];
-
-  const hobbies = hobbiesData ?? defaultHobbies;
+  if (!hobbies || hobbies.length === 0) {
+    return noContentMessage('hobbies');
+  }
 
   const lines: string[] = [];
   lines.push('');
@@ -284,7 +254,8 @@ function renderHobbies(): CommandResult {
   lines.push('');
 
   for (const hobby of hobbies) {
-    lines.push(`<span class="term-cyan">${hobby.icon} ${hobby.name}</span>`);
+    // Use >> instead of emoji icons
+    lines.push(`<span class="term-cyan">>> ${hobby.name}</span>`);
     lines.push(`   ${hobby.description}`);
     lines.push('');
   }
@@ -307,31 +278,11 @@ interface Project {
 }
 
 function renderProjects(): CommandResult {
-  const projectsData = getContentData('projects') as Project[] | undefined;
+  const projects = getContentData('projects') as Project[] | undefined;
 
-  const defaultProjects: Project[] = [
-    {
-      name: 'Portfolio Terminal',
-      description: 'An interactive terminal-style portfolio website built with Next.js',
-      technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-      github: 'github.com/danielboyle/portfolio',
-      status: 'Active',
-    },
-    {
-      name: 'Open Source Contributions',
-      description: 'Various contributions to open source projects',
-      technologies: ['TypeScript', 'React', 'Node.js'],
-      status: 'Ongoing',
-    },
-    {
-      name: 'Side Projects',
-      description: 'Collection of experiments and learning projects',
-      technologies: ['Rust', 'Go', 'Python'],
-      status: 'Experimental',
-    },
-  ];
-
-  const projects = projectsData ?? defaultProjects;
+  if (!projects || projects.length === 0) {
+    return noContentMessage('projects');
+  }
 
   const lines: string[] = [];
   lines.push('');

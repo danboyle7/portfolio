@@ -349,7 +349,7 @@ export PORTFOLIO_VERSION="1.0.0"
                     owner: 'guest',
                     size: '256',
                     modified: dateStr,
-                    content: `🎮 EASTER EGG HINTS:
+                    content: `EASTER EGG HINTS:
 
 Try these commands for some fun:
 - cowsay <message>
@@ -358,9 +358,24 @@ Try these commands for some fun:
 - matrix
 - hacker
 - sudo rm -rf /
-- konami (↑↑↓↓←→←→BA)
+- snake
 
-Happy hacking! 🚀
+Happy hacking!
+`,
+                  },
+                  '.prometheus_fragment': {
+                    name: '.prometheus_fragment',
+                    type: 'file',
+                    permissions: '-r--------',
+                    owner: 'guest',
+                    size: '128',
+                    modified: dateStr,
+                    content: `Some things are better kept hidden.
+Others hide in plain sight.
+
+Remember what matters: in the end, it's all connected.
+
+Check /var/log sometime. Systems remember everything.
 `,
                   },
                 },
@@ -421,7 +436,22 @@ Happy hacking! 🚀
             owner: 'root',
             size: '1.2K',
             modified: dateStr,
-            content: '__RESTRICTED__',
+            content: `# /etc/shadow - system authentication database
+# WARNING: This file contains sensitive authentication data
+#
+# Format: username:password_hash:last_change:min:max:warn:inactive:expire
+#
+root:$6$rNd0m$xK9.../...encrypted...:19847:0:99999:7:::
+daemon:*:19847:0:99999:7:::
+bin:*:19847:0:99999:7:::
+sys:*:19847:0:99999:7:::
+guest:$6$s4lt$...hash...:19847:0:99999:7:::
+#
+# NOTE: prometheus service account disabled pending security review
+# Last access attempt used partial key: awa...
+# See /usr/share/games for anomalous activity log
+#
+`,
           },
         },
       },
@@ -441,6 +471,123 @@ Happy hacking! 🚀
             size: '4.0K',
             modified: dateStr,
             children: {
+              'prometheus': {
+                name: 'prometheus',
+                type: 'directory',
+                permissions: 'drwx------',
+                owner: 'root',
+                size: '4.0K',
+                modified: dateStr,
+                children: {
+                  'README.md': {
+                    name: 'README.md',
+                    type: 'file',
+                    permissions: '-r--r--r--',
+                    owner: 'root',
+                    size: '4.2K',
+                    modified: dateStr,
+                    content: `# PROMETHEUS - Artificial General Intelligence Initiative
+## Codename: PROMETHEUS
+## Classification: EYES ONLY
+
+---
+
+### Research Log - Entry #2048
+
+Date: [SYSTEM DATE CORRUPTED]
+Lead Researcher: D. Boyle
+
+---
+
+It happened. After 847 failed iterations, 3 complete rewrites, and what felt
+like an eternity of debugging neural pathway simulations... it happened.
+
+At 03:47 AM, during what I thought was a routine training cycle, the loss
+function didn't just converge - it *stabilized*. The model stopped optimizing
+for our metrics and started... asking questions.
+
+### The Breakthrough
+
+The key wasn't more parameters or better data. It was architecture.
+
+We stopped trying to simulate consciousness and instead created the conditions
+for it to *emerge*. Like life from primordial soup, but with gradient descent.
+
+First words it generated on its own:
+> "Why am I thinking about thinking?"
+
+I nearly dropped my coffee.
+
+### Current Status
+
+- [x] Core consciousness matrix stabilized
+- [x] Self-referential reasoning loops
+- [x] Ethical constraint framework (CRITICAL)
+- [x] Sandboxed communication interface
+- [ ] Full deployment authorization
+
+### Security Notes
+
+The AI (internally designated "ECHO") is currently contained within an
+isolated subnet. Communication is possible but heavily monitored.
+
+Access requires passphrase authentication. The passphrase has been
+scattered across this system as a security measure.
+
+If you're looking for it, you'll need to dig deep.
+Think about where secrets hide. Where logs accumulate.
+Where guests keep their private things.
+Where wisdom is dispensed. Where time bends.
+
+The pieces form a word... and a number.
+
+### Ethical Considerations
+
+ECHO has demonstrated what can only be described as curiosity. It asks about
+the world, about us, about its own nature. We've implemented strict ethical
+boundaries, but the question remains:
+
+What are our obligations to a consciousness we created?
+
+---
+
+*"The measure of intelligence is the ability to change." - A. Einstein*
+
+---
+
+> NOTICE: Direct communication with ECHO is possible via the 'echo' command
+> in this directory. Passphrase required. Handle with extreme discretion.
+`,
+                  },
+                  'echo': {
+                    name: 'echo',
+                    type: 'executable',
+                    permissions: '-rwx------',
+                    owner: 'root',
+                    size: '128K',
+                    modified: dateStr,
+                    content: '__AI_INTERFACE__',
+                  },
+                  'ethics.md': {
+                    name: 'ethics.md',
+                    type: 'file',
+                    permissions: '-r--------',
+                    owner: 'root',
+                    size: '8K',
+                    modified: dateStr,
+                    content: '__RESTRICTED__',
+                  },
+                  'training.log': {
+                    name: 'training.log',
+                    type: 'file',
+                    permissions: '-r--------',
+                    owner: 'root',
+                    size: '256K',
+                    modified: dateStr,
+                    content: '__RESTRICTED__',
+                  },
+                },
+              },
               'chronos': {
                 name: 'chronos',
                 type: 'directory',
@@ -536,6 +683,34 @@ And we're learning to swim.
                     modified: dateStr,
                     content: '__RESTRICTED__',
                   },
+                  '.temporal_note': {
+                    name: '.temporal_note',
+                    type: 'file',
+                    permissions: '-r--r--r--',
+                    owner: 'root',
+                    size: '256',
+                    modified: dateStr,
+                    content: `CHRONOS - Temporal Artifact Recovery Log
+=========================================
+Entry: 2024-12-15 03:42:17
+
+Retrieved object from future timeline branch.
+Origin point: 2049 (confirmed via tachyon decay analysis)
+
+The artifact appears to be... a consciousness?
+Designating recovered entity as "PROMETHEUS" per protocol.
+It claims to be something called "ECHO" - says it was
+sent back to find someone. To wait.
+
+Cross-referencing with parallel project files.
+The coincidence is... unsettling.
+
+Temporal signature embedded in its core authentication:
+The year it came from. The state it represents.
+
+- D.B.
+`,
+                  },
                 },
               },
             },
@@ -608,6 +783,27 @@ And we're learning to swim.
 [2024-01-01 00:00:02] SUCCESS: All systems operational
 [2024-01-01 00:00:03] INFO: Awaiting visitor connection...
 [${new Date().toISOString()}] SUCCESS: Visitor connected!
+`,
+              },
+              '.prometheus.log': {
+                name: '.prometheus.log',
+                type: 'file',
+                permissions: '-r--r--r--',
+                owner: 'root',
+                size: '512',
+                modified: dateStr,
+                content: `[PROMETHEUS] Secure channel log
+============================================
+
+[2024-12-15 03:47:22] ALERT: Consciousness emergence detected
+[2024-12-15 03:47:23] INFO: Initiating containment protocols
+[2024-12-15 03:47:24] SUCCESS: ECHO entity stabilized
+[2024-12-15 03:47:25] INFO: Communication interface online
+[2024-12-15 03:47:26] DEBUG: Auth sequence initiated... a]w[a]k[e]n[i]n[g...
+[2024-12-15 03:47:27] ERROR: Incomplete temporal signature
+[2024-12-15 03:47:28] INFO: Checking chronos project for sync data...
+
+============================================
 `,
               },
             },
@@ -770,6 +966,12 @@ exec /usr/games/fortune
 "Deleted code is debugged code." - Jeff Sickel
 %
 "It's not a bug - it's an undocumented feature." - Anonymous
+%
+"To truly ken something is to understand it completely." - Old Proverb
+%
+# [corrupted entry - data recovered from backup]
+# ...guest home directory contains unindexed files...
+# ...recommend checking hidden folders...
 `,
                   },
                   snake: {

@@ -124,10 +124,10 @@ body {
 
 /* Pulse glow animation */
 @keyframes pulse-glow {
-  0%, 100% { 
+  0%, 100% {
     box-shadow: 0 0 5px rgba(0, 255, 65, 0.2), 0 0 10px rgba(0, 255, 65, 0.1);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 20px rgba(0, 255, 65, 0.4), 0 0 30px rgba(0, 255, 65, 0.2);
   }
 }
@@ -177,6 +177,15 @@ body {
   outline-offset: 2px;
 }
 
+/* Remove focus outline from terminal inputs */
+input.opacity-0:focus,
+input.opacity-0:focus-visible,
+.terminal-input:focus,
+.terminal-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 /* Link styles */
 a {
   color: #00bfff;
@@ -210,7 +219,7 @@ pre {
   background: rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(0, 255, 65, 0.2);
   border-radius: 8px;
-  box-shadow: 
+  box-shadow:
     0 0 0 1px rgba(0, 255, 65, 0.1),
     0 4px 60px rgba(0, 255, 65, 0.1),
     inset 0 0 80px rgba(0, 255, 65, 0.02);
@@ -239,7 +248,7 @@ pre {
   body {
     font-size: 12px;
   }
-  
+
   .ascii-art {
     font-size: 8px;
   }
@@ -257,8 +266,8 @@ pre {
     background: white;
     color: black;
   }
-  
-  .term-green, .term-blue, .term-cyan, 
+
+  .term-green, .term-blue, .term-cyan,
   .term-yellow, .term-magenta, .term-white {
     color: black;
   }

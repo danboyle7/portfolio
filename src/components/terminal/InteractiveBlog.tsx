@@ -14,48 +14,9 @@ export function InteractiveBlog({ onExit, onSelectPost }: InteractiveBlogProps) 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Default blog posts
-  const defaultPosts: BlogPost[] = [
-    {
-      slug: 'building-terminal-portfolio',
-      title: 'Building a Terminal-Style Portfolio with Next.js',
-      date: '2024-01-15',
-      excerpt: 'How I created this unique terminal-inspired portfolio website using Next.js and TypeScript.',
-      tags: ['Next.js', 'TypeScript', 'Portfolio', 'Creative'],
-      content: 'Full article content...',
-      readTime: '8 min read',
-    },
-    {
-      slug: 'typescript-best-practices',
-      title: 'TypeScript Best Practices for 2024',
-      date: '2024-01-10',
-      excerpt: 'A comprehensive guide to writing clean, maintainable TypeScript code.',
-      tags: ['TypeScript', 'Best Practices', 'Clean Code'],
-      content: 'Full article content...',
-      readTime: '12 min read',
-    },
-    {
-      slug: 'microservices-lessons',
-      title: 'Lessons Learned from Building Microservices',
-      date: '2023-12-20',
-      excerpt: 'Real-world insights from architecting and scaling microservices in production.',
-      tags: ['Microservices', 'Architecture', 'DevOps'],
-      content: 'Full article content...',
-      readTime: '15 min read',
-    },
-    {
-      slug: 'react-performance',
-      title: 'React Performance Optimization Techniques',
-      date: '2023-12-05',
-      excerpt: 'Practical tips for making your React applications blazing fast.',
-      tags: ['React', 'Performance', 'Frontend'],
-      content: 'Full article content...',
-      readTime: '10 min read',
-    },
-  ];
-
+  // Get posts from content cache - YAML is the source of truth
   const blogData = getContentData('blog') as BlogPost[] | undefined;
-  const allPosts = blogData ?? defaultPosts;
+  const allPosts = blogData ?? [];
 
   // Filter posts based on search
   const filteredPosts = allPosts.filter((post) => {
@@ -110,6 +71,28 @@ export function InteractiveBlog({ onExit, onSelectPost }: InteractiveBlogProps) 
     [filteredPosts, selectedIndex, searchQuery, onSelectPost, onExit]
   );
 
+  // Handle case when no posts are available
+  if (allPosts.length === 0) {
+    return (
+      <div className="bg-black border border-green-900 rounded-lg p-4 font-mono text-sm">
+        <div className="border-b border-green-900 pb-2 mb-3">
+          <div className="flex items-center justify-between">
+            <span className="text-green-400 font-bold">BLOG - Interactive Mode</span>
+            <span className="text-gray-500 text-xs">[ESC to exit]</span>
+          </div>
+        </div>
+        <div className="text-yellow-500 text-center py-8">
+          No blog posts found.
+          <br />
+          <span className="text-gray-500 text-xs">Content may not be loaded. Try running: pnpm run generate-content</span>
+        </div>
+        <div className="border-t border-green-900 pt-2 mt-3 text-xs text-gray-500">
+          <span>Press ESC to exit</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-black border border-green-900 rounded-lg p-4 font-mono text-sm">
       {/* Header */}
@@ -122,7 +105,7 @@ export function InteractiveBlog({ onExit, onSelectPost }: InteractiveBlogProps) 
 
       {/* Search input */}
       <div className="mb-3">
-        <div className="flex items-center gap-2 bg-gray-900 border border-green-900 rounded px-3 py-2">
+        <div className="flex items-center gap-2 bg-gray-900 border border-green-900 rounded px-3 py-2 focus-within:border-green-700">
           <span className="text-yellow-500">/</span>
           <input
             ref={inputRef}
@@ -131,7 +114,7 @@ export function InteractiveBlog({ onExit, onSelectPost }: InteractiveBlogProps) 
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type to search posts..."
-            className="bg-transparent flex-1 text-green-300 placeholder-gray-600 outline-none"
+            className="terminal-input bg-transparent flex-1 text-green-300 placeholder-gray-600 outline-none focus:outline-none focus:ring-0 border-none"
             spellCheck={false}
           />
           <span className="text-gray-500 text-xs">
@@ -211,4 +194,3 @@ export function InteractiveBlog({ onExit, onSelectPost }: InteractiveBlogProps) 
     </div>
   );
 }
-

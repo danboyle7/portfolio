@@ -15,6 +15,7 @@ import { MatrixRain } from './MatrixRain';
 import { TerminalHeader } from './TerminalHeader';
 import { InteractiveBlog } from './InteractiveBlog';
 import { SnakeGame } from './SnakeGame';
+import { InteractiveEcho } from './InteractiveEcho';
 import type { InteractiveMode } from '@/lib/terminal/types';
 
 // Initialize content on module load
@@ -35,24 +36,24 @@ const welcomeLines: TerminalLine[] = [
   createLine('<span class="term-green">  ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ </span>', 'output', { isHtml: true }),
   createLine('', 'output'),
   createLine('<span class="term-cyan">  ┌───────────────────────────────────────────────────────────────────────┐</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  │</span>                                                                       <span class="term-cyan">│</span>', 'output', { isHtml: true }),
   createLine('<span class="term-cyan">  │</span>     <span class="term-white font-bold">Welcome to Daniel Boyle\'s Interactive Portfolio Terminal</span>          <span class="term-cyan">│</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  │</span>                                                                       <span class="term-cyan">│</span>', 'output', { isHtml: true }),
   createLine('<span class="term-cyan">  │</span>     <span class="term-dim">Full-Stack Developer | Open Source Enthusiast | Problem Solver</span>   <span class="term-cyan"> │</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  │</span>                                                                       <span class="term-cyan">│</span>', 'output', { isHtml: true }),
   createLine('<span class="term-cyan">  └───────────────────────────────────────────────────────────────────────┘</span>', 'output', { isHtml: true }),
   createLine('', 'output'),
   createLine('<span class="term-dim">  Navigate this terminal like you would any Unix system.</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-dim">  Explore the filesystem, run commands, discover easter eggs.</span>', 'output', { isHtml: true }),
+  createLine('<span class="term-dim">  Explore the filesystem and run commands.</span>', 'output', { isHtml: true }),
   createLine('', 'output'),
   createLine('  <span class="term-yellow">[Quick Start]</span>', 'output', { isHtml: true }),
   createLine('    <span class="term-green">help</span>        <span class="term-dim">-</span> List available commands', 'output', { isHtml: true }),
-  createLine('    <span class="term-green">profile</span>     <span class="term-dim">-</span> View my profile and skills', 'output', { isHtml: true }),
-  createLine('    <span class="term-green">experience</span>  <span class="term-dim">-</span> See my work history', 'output', { isHtml: true }),
+  createLine('    <span class="term-green">profile</span>     <span class="term-dim">-</span> View my profile', 'output', { isHtml: true }),
+  createLine('    <span class="term-green">skills</span>      <span class="term-dim">-</span> See my technical skills', 'output', { isHtml: true }),
+  createLine('    <span class="term-green">experience</span>  <span class="term-dim">-</span> Work history', 'output', { isHtml: true }),
+  createLine('    <span class="term-green">education</span>   <span class="term-dim">-</span> Education background', 'output', { isHtml: true }),
   createLine('    <span class="term-green">projects</span>    <span class="term-dim">-</span> Browse my portfolio', 'output', { isHtml: true }),
+  createLine('    <span class="term-green">blog</span>        <span class="term-dim">-</span> Read my articles', 'output', { isHtml: true }),
   createLine('    <span class="term-green">contact</span>     <span class="term-dim">-</span> Get in touch', 'output', { isHtml: true }),
   createLine('', 'output'),
-  createLine('<span class="term-dim">  Hint: Try exploring with</span> <span class="term-green">ls</span><span class="term-dim">,</span> <span class="term-green">cd</span><span class="term-dim">, and</span> <span class="term-green">cat</span> <span class="term-dim">- there might be secrets...</span>', 'output', { isHtml: true }),
+  createLine('<span class="term-dim">  Hint: Try</span> <span class="term-green">ls</span><span class="term-dim">,</span> <span class="term-green">cd</span><span class="term-dim">, and</span> <span class="term-green">cat</span> <span class="term-dim">to explore - there might be secrets...</span>', 'output', { isHtml: true }),
   createLine('', 'output'),
 ];
 
@@ -79,13 +80,23 @@ export function Terminal() {
   const [glitchActive, setGlitchActive] = useState(false);
   const [matrixIntense, setMatrixIntense] = useState(false);
   const [interactiveMode, setInteractiveMode] = useState<InteractiveMode | null>(null);
+  const [crtEnabled, setCrtEnabled] = useState(true);
+  const [env, setEnv] = useState<Record<string, string>>({
+    USER,
+    HOME: HOME_PATH,
+    HOSTNAME,
+    PATH: '/usr/bin:/bin',
+    SHELL: '/bin/zsh',
+    TERM: 'xterm-256color',
+    PORTFOLIO_VERSION: '1.0.0',
+    '0': 'zsh',
+    '?': '0',
+    '$': '1337', // Fake PID
+  });
   const terminalRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = useCallback(() => {
-    if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-    }
-  }, []);
+  const inputLineRef = useRef<HTMLDivElement>(null);
+  const scrollAnchorRef = useRef<HTMLDivElement>(null);
+  const lastHistoryLengthRef = useRef(0);
 
   const handleBootComplete = useCallback(() => {
     setIsBooting(false);
@@ -103,8 +114,17 @@ export function Terminal() {
     async (command: string) => {
       const trimmedCommand = command.trim();
 
-      // Always scroll to bottom when Enter is pressed
-      scrollToBottom();
+      // Handle Ctrl+C - show whatever was typed + ^C and create new prompt
+      if (trimmedCommand.endsWith('^C')) {
+        const entry: HistoryEntry = {
+          id: generateId(),
+          command: trimmedCommand, // Shows "sometext^C"
+          path: state.currentPath,
+          output: [],
+        };
+        setHistory((prev) => [...prev, entry]);
+        return;
+      }
 
       // Empty command - just show a new prompt line
       if (!trimmedCommand) {
@@ -115,6 +135,30 @@ export function Terminal() {
           output: [],
         };
         setHistory((prev) => [...prev, entry]);
+        return;
+      }
+
+      // Handle CRT toggle command
+      if (trimmedCommand === 'crt' || trimmedCommand === 'effects') {
+        const newState = !crtEnabled;
+        setCrtEnabled(newState);
+        const entry: HistoryEntry = {
+          id: generateId(),
+          command: trimmedCommand,
+          path: state.currentPath,
+          output: [
+            createLine('', 'output'),
+            createLine(
+              `<span class="term-cyan">CRT effects ${newState ? '<span class="term-green">enabled</span>' : '<span class="term-red">disabled</span>'}</span>`,
+              'output',
+              { isHtml: true }
+            ),
+            createLine('<span class="term-dim">Toggle with: crt | effects</span>', 'output', { isHtml: true }),
+            createLine('', 'output'),
+          ],
+        };
+        setHistory((prev) => [...prev, entry]);
+        setState((prev) => ({ ...prev, commandHistory: [...prev.commandHistory, trimmedCommand] }));
         return;
       }
 
@@ -161,24 +205,65 @@ export function Terminal() {
       // Add to command history (store original command for display)
       const newCommandHistory = [...state.commandHistory, trimmedCommand];
 
+      // Check for variable assignment (VAR=value or export VAR=value)
+      const exportMatch = actualCommand.match(/^export\s+(\w+)=(.*)$/);
+      const assignMatch = actualCommand.match(/^(\w+)=(.*)$/);
+
+      if (exportMatch || assignMatch) {
+        const [, varName, varValue] = (exportMatch || assignMatch)!;
+        setEnv(prev => ({ ...prev, [varName!]: varValue ?? '' }));
+        const entry: HistoryEntry = {
+          id: generateId(),
+          command: trimmedCommand,
+          path: state.currentPath,
+          output: [],
+        };
+        setHistory((prev) => [...prev, entry]);
+        setState((prev) => ({
+          ...prev,
+          commandHistory: newCommandHistory,
+        }));
+        return;
+      }
+
+      // Check for unset command
+      const unsetMatch = actualCommand.match(/^unset\s+(\w+)$/);
+      if (unsetMatch) {
+        const [, varName] = unsetMatch;
+        setEnv(prev => {
+          const newEnv = { ...prev };
+          delete newEnv[varName!];
+          return newEnv;
+        });
+        const entry: HistoryEntry = {
+          id: generateId(),
+          command: trimmedCommand,
+          path: state.currentPath,
+          output: [],
+        };
+        setHistory((prev) => [...prev, entry]);
+        setState((prev) => ({
+          ...prev,
+          commandHistory: newCommandHistory,
+        }));
+        return;
+      }
+
       // Execute command
       const context = {
         currentPath: state.currentPath,
         fileSystem,
         history: newCommandHistory,
-        env: {
-          USER,
-          HOME: HOME_PATH,
-          HOSTNAME,
-          PATH: '/usr/bin:/bin',
-          SHELL: '/bin/zsh',
-          PORTFOLIO_VERSION: '1.0.0',
-        },
+        env,
         user: USER,
         hostname: HOSTNAME,
       };
 
       const result = await executeCommand(actualCommand, context);
+
+      // Update $? based on command result (0 for success, 1 for error)
+      const exitCode = result.output.some(line => line.type === 'error') ? '1' : '0';
+      setEnv(prev => ({ ...prev, '?': exitCode }));
 
       // Handle effects
       if (result.triggerEffect) {
@@ -242,14 +327,12 @@ export function Terminal() {
               }
               return newHistory;
             });
-            scrollToBottom();
           }, totalDelay);
         }
 
         // Re-enable input after animation completes
         setTimeout(() => {
           setState((prev) => ({ ...prev, inputEnabled: true }));
-          scrollToBottom();
         }, totalDelay + 100);
       } else {
         // Create history entry (show original command, not mapped)
@@ -286,7 +369,7 @@ export function Terminal() {
         };
       });
     },
-    [state.currentPath, state.commandHistory, fileSystem, scrollToBottom]
+    [state.currentPath, state.commandHistory, fileSystem, env]
   );
 
   // Handle exiting interactive mode
@@ -318,14 +401,7 @@ export function Terminal() {
         currentPath: state.currentPath,
         fileSystem,
         history: state.commandHistory,
-        env: {
-          USER,
-          HOME: HOME_PATH,
-          HOSTNAME,
-          PATH: '/usr/bin:/bin',
-          SHELL: '/bin/zsh',
-          PORTFOLIO_VERSION: '1.0.0',
-        },
+        env,
         user: USER,
         hostname: HOSTNAME,
       };
@@ -338,16 +414,43 @@ export function Terminal() {
       };
       setHistory((prev) => [...prev, entry]);
     },
-    [state.currentPath, state.commandHistory, fileSystem]
+    [state.currentPath, state.commandHistory, fileSystem, env]
   );
 
-  // Scroll to bottom on new content - use setTimeout to ensure DOM is updated
+  // Scroll input into view when NEW history entries are added
   useEffect(() => {
-    const timer = setTimeout(() => {
-      scrollToBottom();
-    }, 10);
-    return () => clearTimeout(timer);
-  }, [history, state.lines, scrollToBottom]);
+    // Only scroll if history grew (new command was added by user)
+    if (history.length > lastHistoryLengthRef.current) {
+      // Use setTimeout to ensure DOM has fully updated after React render
+      const timer = setTimeout(() => {
+        if (!scrollAnchorRef.current || !terminalRef.current) return;
+
+        const anchor = scrollAnchorRef.current;
+        const container = terminalRef.current;
+
+        // Check if container is scrollable at all
+        const isScrollable = container.scrollHeight > container.clientHeight;
+        if (!isScrollable) {
+          // Not scrollable = all content fits on screen, nothing to do
+          return;
+        }
+
+        const anchorRect = anchor.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+
+        // Check if anchor is below visible area - need to scroll
+        if (anchorRect.bottom > containerRect.bottom) {
+          const scrollNeeded = anchorRect.bottom - containerRect.bottom + 8;
+          container.scrollTop += scrollNeeded;
+        }
+      }, 16);
+
+      lastHistoryLengthRef.current = history.length;
+      return () => clearTimeout(timer);
+    }
+
+    lastHistoryLengthRef.current = history.length;
+  }, [history.length]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -362,8 +465,8 @@ export function Terminal() {
   if (isBooting) {
     return (
       <>
-        <CRTEffect />
-        <MatrixRain opacity={0.03} />
+        {crtEnabled && <CRTEffect />}
+        {crtEnabled && <MatrixRain opacity={0.03} />}
         <BootSequence onComplete={handleBootComplete} />
       </>
     );
@@ -371,9 +474,9 @@ export function Terminal() {
 
   return (
     <>
-      <CRTEffect />
-      <GlitchEffect active={glitchActive} />
-      <MatrixRain opacity={matrixIntense ? 0.15 : 0.03} speed={matrixIntense ? 2 : 1} />
+      {crtEnabled && <CRTEffect />}
+      {crtEnabled && <GlitchEffect active={glitchActive} />}
+      {crtEnabled && <MatrixRain opacity={matrixIntense ? 0.15 : 0.03} speed={matrixIntense ? 2 : 1} />}
 
       <div className="min-h-screen bg-black text-green-500 font-mono">
         <TerminalHeader
@@ -384,7 +487,9 @@ export function Terminal() {
 
         <main
           ref={terminalRef}
-          className="max-w-5xl mx-auto p-4 md:p-6 pb-32 min-h-[calc(100vh-60px)] overflow-y-auto"
+          className={`mx-auto p-4 md:p-6 h-[calc(100vh-60px)] overflow-y-auto ${
+            interactiveMode?.type === 'snake' ? 'max-w-none px-2' : 'max-w-5xl'
+          }`}
         >
           {/* Initial welcome message */}
           <TerminalOutput lines={state.lines} />
@@ -417,7 +522,7 @@ export function Terminal() {
           )}
 
           {interactiveMode?.type === 'snake' && (
-            <div className="mt-4 mb-4">
+            <div className="mt-4 mb-4 flex justify-center">
               <SnakeGame
                 onExit={handleExitInteractive}
                 onGameOver={handleSnakeGameOver}
@@ -425,9 +530,17 @@ export function Terminal() {
             </div>
           )}
 
+          {interactiveMode?.type === 'echo' && (
+            <div className="mt-4 mb-4">
+              <InteractiveEcho
+                onExit={handleExitInteractive}
+              />
+            </div>
+          )}
+
           {/* Input line - only show when not in interactive mode */}
           {!interactiveMode && (
-            <div className="mt-2">
+            <div ref={inputLineRef} className="mt-2">
               <TerminalInput
                 currentPath={state.currentPath}
                 hostname={HOSTNAME}
@@ -439,6 +552,9 @@ export function Terminal() {
               />
             </div>
           )}
+
+          {/* Scroll anchor - this is what we scroll to, positioned just below input with small gap */}
+          <div ref={scrollAnchorRef} className="h-4" aria-hidden="true" />
         </main>
       </div>
     </>

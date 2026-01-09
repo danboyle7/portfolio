@@ -18,55 +18,20 @@ export const projectsCommand: Command = {
   usage: 'projects [--detailed]',
   aliases: ['portfolio', 'repos'],
   execute: (args): CommandResult => {
-    const projectsData = getContentData('projects') as Project[] | undefined;
+    const projects = getContentData('projects') as Project[] | undefined;
     const detailed = args.includes('--detailed') || args.includes('-d');
 
-    // Default projects
-    const defaultProjects: Project[] = [
-      {
-        name: 'terminal-portfolio',
-        description: 'This terminal-style portfolio you\'re viewing right now!',
-        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-        status: 'production',
-        github: 'github.com/danielboyle/terminal-portfolio',
-        live: 'danielboyle.dev',
-        stars: 42,
-      },
-      {
-        name: 'cloud-sync',
-        description: 'Real-time file synchronization service with conflict resolution',
-        technologies: ['Rust', 'gRPC', 'PostgreSQL', 'Redis'],
-        status: 'production',
-        github: 'github.com/danielboyle/cloud-sync',
-        stars: 128,
-      },
-      {
-        name: 'devtools-extension',
-        description: 'Browser extension for debugging React applications',
-        technologies: ['TypeScript', 'React', 'Chrome APIs'],
-        status: 'beta',
-        github: 'github.com/danielboyle/devtools-extension',
-        stars: 67,
-      },
-      {
-        name: 'ml-pipeline',
-        description: 'Automated machine learning pipeline for data processing',
-        technologies: ['Python', 'TensorFlow', 'Docker', 'Airflow'],
-        status: 'development',
-        github: 'github.com/danielboyle/ml-pipeline',
-        stars: 34,
-      },
-      {
-        name: 'api-gateway',
-        description: 'High-performance API gateway with rate limiting and caching',
-        technologies: ['Go', 'Redis', 'Prometheus', 'Kubernetes'],
-        status: 'production',
-        github: 'github.com/danielboyle/api-gateway',
-        stars: 256,
-      },
-    ];
-
-    const projects = projectsData ?? defaultProjects;
+    // Check if content is loaded
+    if (!projects || projects.length === 0) {
+      return {
+        output: [
+          createLine('', 'output'),
+          createLine('No projects found.', 'warning'),
+          createLine('Content may not be loaded. Try running: pnpm run generate-content', 'system'),
+          createLine('', 'output'),
+        ],
+      };
+    }
 
     const lines: string[] = [];
     lines.push('');

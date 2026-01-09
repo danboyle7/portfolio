@@ -8,38 +8,19 @@ export const educationCommand: Command = {
   usage: 'education',
   aliases: ['edu', 'school'],
   execute: (): CommandResult => {
-    const educationData = getContentData('education') as Education[] | undefined;
+    const education = getContentData('education') as Education[] | undefined;
 
-    // Default education data
-    const defaultEducation: Education[] = [
-      {
-        institution: 'University of Technology',
-        degree: 'Bachelor of Science',
-        field: 'Computer Science',
-        period: '2014 - 2018',
-        location: 'San Francisco, CA',
-        gpa: '3.8',
-        highlights: [
-          'Dean\'s List all semesters',
-          'Senior capstone: Distributed systems project',
-          'Teaching assistant for Data Structures course',
+    // Check if content is loaded
+    if (!education || education.length === 0) {
+      return {
+        output: [
+          createLine('', 'output'),
+          createLine('No education data found.', 'warning'),
+          createLine('Content may not be loaded. Try running: pnpm run generate-content', 'system'),
+          createLine('', 'output'),
         ],
-      },
-      {
-        institution: 'Online Learning',
-        degree: 'Professional Certifications',
-        field: 'Various',
-        period: '2018 - Present',
-        location: 'Remote',
-        highlights: [
-          'AWS Solutions Architect Associate',
-          'Google Cloud Professional Developer',
-          'Kubernetes Administrator (CKA)',
-        ],
-      },
-    ];
-
-    const education = educationData ?? defaultEducation;
+      };
+    }
 
     const lines: string[] = [];
     lines.push('');

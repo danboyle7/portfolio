@@ -12,25 +12,40 @@ interface SnakeGameProps {
   onGameOver: (score: number) => void;
 }
 
-const GRID_WIDTH = 30;
-const GRID_HEIGHT = 15;
-const INITIAL_SPEED = 150;
+// Larger grid for fullscreen effect
+const GRID_WIDTH = 60;
+const GRID_HEIGHT = 25;
+const INITIAL_SPEED = 100;
+const CELL_CHAR_WIDTH = 2; // Each cell is 2 characters wide for better proportions
 
 export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
-  const [snake, setSnake] = useState<Position[]>([{ x: 15, y: 7 }]);
-  const [food, setFood] = useState<Position>({ x: 20, y: 7 });
+  const [snake, setSnake] = useState<Position[]>([{ x: 30, y: 12 }]);
+  const [food, setFood] = useState<Position>({ x: 45, y: 12 });
   const [direction, setDirection] = useState<'UP' | 'DOWN' | 'LEFT' | 'RIGHT'>('RIGHT');
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [highScore, setHighScore] = useState(0);
+  const [finalScore, setFinalScore] = useState(0);
   const gameLoopRef = useRef<NodeJS.Timeout | null>(null);
   const directionRef = useRef(direction);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Update direction ref when direction changes
   useEffect(() => {
     directionRef.current = direction;
   }, [direction]);
+
+  // Call onGameOver when game ends (NOT during render)
+  useEffect(() => {
+    if (gameOver && finalScore > 0) {
+      // Use setTimeout to ensure this happens after render
+      const timer = setTimeout(() => {
+        onGameOver(finalScore);
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [gameOver, finalScore, onGameOver]);
 
   // Generate random food position
   const generateFood = useCallback((currentSnake: Position[]): Position => {
@@ -70,15 +85,15 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
 
       // Check wall collision
       if (head.x < 0 || head.x >= GRID_WIDTH || head.y < 0 || head.y >= GRID_HEIGHT) {
+        setFinalScore(score);
         setGameOver(true);
-        onGameOver(score);
         return prevSnake;
       }
 
       // Check self collision
       if (prevSnake.some(seg => seg.x === head.x && seg.y === head.y)) {
+        setFinalScore(score);
         setGameOver(true);
-        onGameOver(score);
         return prevSnake;
       }
 
@@ -99,7 +114,7 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
 
       return newSnake;
     });
-  }, [gameOver, isPaused, food, score, highScore, generateFood, onGameOver]);
+  }, [gameOver, isPaused, food, score, highScore, generateFood]);
 
   // Start game loop
   useEffect(() => {
@@ -117,10 +132,11 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
       if (gameOver) {
         if (e.key === 'r' || e.key === 'R') {
           // Restart
-          setSnake([{ x: 15, y: 7 }]);
-          setFood({ x: 20, y: 7 });
+          setSnake([{ x: 30, y: 12 }]);
+          setFood({ x: 45, y: 12 });
           setDirection('RIGHT');
           setScore(0);
+          setFinalScore(0);
           setGameOver(false);
         } else if (e.key === 'q' || e.key === 'Q' || e.key === 'Escape') {
           onExit();
@@ -178,20 +194,20 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
     for (let y = 0; y < GRID_HEIGHT; y++) {
       grid[y] = [];
       for (let x = 0; x < GRID_WIDTH; x++) {
-        grid[y]![x] = ' ';
+        grid[y]![x] = '  '; // Two spaces for better proportions
       }
     }
 
     // Place snake
     snake.forEach((segment, index) => {
       if (segment.y >= 0 && segment.y < GRID_HEIGHT && segment.x >= 0 && segment.x < GRID_WIDTH) {
-        grid[segment.y]![segment.x] = index === 0 ? '@' : 'o';
+        grid[segment.y]![segment.x] = index === 0 ? '@@' : 'oo';
       }
     });
 
     // Place food
     if (food.y >= 0 && food.y < GRID_HEIGHT && food.x >= 0 && food.x < GRID_WIDTH) {
-      grid[food.y]![food.x] = '*';
+      grid[food.y]![food.x] = '**';
     }
 
     return grid;
@@ -200,64 +216,68 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
   const grid = renderGrid();
 
   return (
-    <div className="bg-black border border-green-900 rounded-lg p-4 font-mono text-xs">
+    <div
+      ref={containerRef}
+      className="bg-black border-2 border-green-600 rounded-lg p-4 font-mono w-full overflow-x-auto"
+    >
       {/* Header */}
-      <div className="flex items-center justify-between mb-2 text-green-400">
-        <span className="font-bold">SNAKE</span>
-        <span>Score: {score} | High: {highScore}</span>
+      <div className="flex items-center justify-between mb-3 text-green-400 text-lg">
+        <span className="font-bold text-xl">
+          {'>>> SNAKE <<<'}
+        </span>
+        <span className="text-base">
+          Score: <span className="text-yellow-400 font-bold">{score}</span> | High: <span className="text-cyan-400">{highScore}</span>
+        </span>
       </div>
 
-      {/* Game area */}
-      <div className="border border-green-800 p-1 bg-black">
-        <pre className="text-green-500 leading-none">
-          <span className="text-green-800">{'┌' + '─'.repeat(GRID_WIDTH) + '┐'}</span>
+      {/* Game area - fullscreen style */}
+      <div className="border border-green-700 bg-gray-950 relative overflow-hidden">
+        <pre className="text-green-500 leading-none select-none" style={{ fontSize: '14px', lineHeight: '16px' }}>
+          <span className="text-green-700">{'╔' + '═'.repeat(GRID_WIDTH * CELL_CHAR_WIDTH) + '╗'}</span>
           {'\n'}
           {grid.map((row, y) => (
             <React.Fragment key={y}>
-              <span className="text-green-800">│</span>
+              <span className="text-green-700">║</span>
               {row.map((cell, x) => {
-                if (cell === '@') return <span key={x} className="text-green-400 font-bold">@</span>;
-                if (cell === 'o') return <span key={x} className="text-green-500">o</span>;
-                if (cell === '*') return <span key={x} className="text-red-500">*</span>;
-                return <span key={x}> </span>;
+                if (cell === '@@') return <span key={x} className="text-green-300 font-bold bg-green-900">@@</span>;
+                if (cell === 'oo') return <span key={x} className="text-green-500 bg-green-950">oo</span>;
+                if (cell === '**') return <span key={x} className="text-red-400 font-bold animate-pulse">**</span>;
+                return <span key={x} className="text-gray-900">  </span>;
               })}
-              <span className="text-green-800">│</span>
+              <span className="text-green-700">║</span>
               {'\n'}
             </React.Fragment>
           ))}
-          <span className="text-green-800">{'└' + '─'.repeat(GRID_WIDTH) + '┘'}</span>
+          <span className="text-green-700">{'╚' + '═'.repeat(GRID_WIDTH * CELL_CHAR_WIDTH) + '╝'}</span>
         </pre>
+
+        {/* Game over overlay */}
+        {gameOver && (
+          <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center">
+            <div className="text-red-500 font-bold text-3xl mb-2">GAME OVER</div>
+            <div className="text-yellow-400 text-xl mb-4">
+              Final Score: {score}
+            </div>
+            <div className="text-gray-400 text-sm">
+              [R] Restart | [Q/ESC] Quit
+            </div>
+          </div>
+        )}
+
+        {/* Pause overlay */}
+        {isPaused && !gameOver && (
+          <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center">
+            <div className="text-yellow-400 font-bold text-2xl">PAUSED</div>
+            <div className="text-gray-500 text-sm mt-2">[P] Resume</div>
+          </div>
+        )}
       </div>
 
-      {/* Game over overlay */}
-      {gameOver && (
-        <div className="mt-2 text-center">
-          <div className="text-red-500 font-bold">GAME OVER</div>
-          <div className="text-gray-500 text-xs mt-1">
-            Final Score: {score}
-          </div>
-          <div className="text-gray-600 text-xs mt-2">
-            [R] Restart | [Q] Quit
-          </div>
-        </div>
-      )}
-
-      {/* Pause overlay */}
-      {isPaused && !gameOver && (
-        <div className="mt-2 text-center">
-          <div className="text-yellow-500">PAUSED</div>
-          <div className="text-gray-600 text-xs mt-1">[P] Resume</div>
-        </div>
-      )}
-
       {/* Controls */}
-      {!gameOver && !isPaused && (
-        <div className="mt-2 flex justify-between text-gray-600 text-xs">
-          <span>[WASD/Arrows] Move</span>
-          <span>[P] Pause | [Q] Quit</span>
-        </div>
-      )}
+      <div className="mt-3 flex justify-between text-gray-500 text-sm">
+        <span>[W/A/S/D or Arrow Keys] Move</span>
+        <span>[P] Pause | [Q/ESC] Quit</span>
+      </div>
     </div>
   );
 }
-

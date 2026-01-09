@@ -8,20 +8,19 @@ export const contactCommand: Command = {
   usage: 'contact',
   aliases: ['email', 'socials'],
   execute: (): CommandResult => {
-    const contactData = getContentData('contact') as ContactInfo | undefined;
+    const contact = getContentData('contact') as ContactInfo | undefined;
 
-    // Default contact info
-    const defaultContact: ContactInfo = {
-      email: 'hello@danielboyle.dev',
-      github: 'github.com/danielboyle',
-      linkedin: 'linkedin.com/in/danielboyle',
-      twitter: 'twitter.com/danielboyle',
-      website: 'danielboyle.dev',
-      location: 'San Francisco, CA',
-      availability: 'Open to opportunities',
-    };
-
-    const contact = contactData ?? defaultContact;
+    // Check if content is loaded
+    if (!contact) {
+      return {
+        output: [
+          createLine('', 'output'),
+          createLine('No contact information found.', 'warning'),
+          createLine('Content may not be loaded. Try running: pnpm run generate-content', 'system'),
+          createLine('', 'output'),
+        ],
+      };
+    }
 
     const lines: string[] = [];
     lines.push('');

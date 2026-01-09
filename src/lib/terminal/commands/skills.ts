@@ -7,59 +7,20 @@ export const skillsCommand: Command = {
   description: 'Display technical skills',
   usage: 'skills [category]',
   execute: (args): CommandResult => {
-    const skillsData = getContentData('skills') as SkillCategory[] | undefined;
+    const skills = getContentData('skills') as SkillCategory[] | undefined;
 
-    // Default skills if no content loaded
-    const defaultSkills: SkillCategory[] = [
-      {
-        name: 'Languages',
-        icon: '>>',
-        skills: [
-          { name: 'TypeScript', level: 95 },
-          { name: 'JavaScript', level: 95 },
-          { name: 'Python', level: 85 },
-          { name: 'Rust', level: 70 },
-          { name: 'Go', level: 65 },
-          { name: 'SQL', level: 80 },
+    // Check if content is loaded
+    if (!skills || skills.length === 0) {
+      return {
+        output: [
+          createLine('', 'output'),
+          createLine('No skills data found.', 'warning'),
+          createLine('Content may not be loaded. Try running: pnpm run generate-content', 'system'),
+          createLine('', 'output'),
         ],
-      },
-      {
-        name: 'Frameworks',
-        icon: '>>',
-        skills: [
-          { name: 'React', level: 95 },
-          { name: 'Next.js', level: 95 },
-          { name: 'Node.js', level: 90 },
-          { name: 'Express', level: 85 },
-          { name: 'FastAPI', level: 75 },
-          { name: 'Tailwind CSS', level: 90 },
-        ],
-      },
-      {
-        name: 'Tools & DevOps',
-        icon: '>>',
-        skills: [
-          { name: 'Git', level: 95 },
-          { name: 'Docker', level: 85 },
-          { name: 'Kubernetes', level: 70 },
-          { name: 'AWS', level: 80 },
-          { name: 'CI/CD', level: 85 },
-          { name: 'Linux', level: 85 },
-        ],
-      },
-      {
-        name: 'Databases',
-        icon: '>>',
-        skills: [
-          { name: 'PostgreSQL', level: 90 },
-          { name: 'MongoDB', level: 80 },
-          { name: 'Redis', level: 75 },
-          { name: 'SQLite', level: 85 },
-        ],
-      },
-    ];
+      };
+    }
 
-    const skills = skillsData ?? defaultSkills;
     const category = args[0]?.toLowerCase();
 
     // Filter by category if specified
@@ -87,7 +48,9 @@ export const skillsCommand: Command = {
     lines.push('');
 
     for (const cat of filteredSkills) {
-      lines.push(`<span class="term-cyan font-bold">${cat.icon} ${cat.name.toUpperCase()}</span>`);
+      // Use >> as icon if emoji present (to avoid emojis in terminal)
+      const icon = cat.icon && !cat.icon.includes('>') ? '>>' : cat.icon;
+      lines.push(`<span class="term-cyan font-bold">${icon} ${cat.name.toUpperCase()}</span>`);
       lines.push('<span class="term-dim">---------------------------------------------------</span>');
 
       for (const skill of cat.skills) {

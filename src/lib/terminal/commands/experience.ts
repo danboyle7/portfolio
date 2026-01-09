@@ -8,53 +8,20 @@ export const experienceCommand: Command = {
   usage: 'experience [--timeline]',
   aliases: ['work', 'jobs'],
   execute: (args): CommandResult => {
-    const experienceData = getContentData('experience') as Experience[] | undefined;
+    const experience = getContentData('experience') as Experience[] | undefined;
     const showTimeline = args.includes('--timeline') || args.includes('-t');
 
-    // Default experience data
-    const defaultExperience: Experience[] = [
-      {
-        company: 'Tech Innovations Inc.',
-        role: 'Senior Full-Stack Developer',
-        period: '2022 - Present',
-        location: 'San Francisco, CA',
-        description: 'Leading development of cloud-native applications and mentoring junior developers.',
-        highlights: [
-          'Architected microservices handling 1M+ requests/day',
-          'Reduced deployment time by 60% with CI/CD improvements',
-          'Led team of 5 developers on flagship product rewrite',
+    // Check if content is loaded
+    if (!experience || experience.length === 0) {
+      return {
+        output: [
+          createLine('', 'output'),
+          createLine('No experience data found.', 'warning'),
+          createLine('Content may not be loaded. Try running: pnpm run generate-content', 'system'),
+          createLine('', 'output'),
         ],
-        technologies: ['TypeScript', 'React', 'Node.js', 'AWS', 'PostgreSQL'],
-      },
-      {
-        company: 'StartupXYZ',
-        role: 'Full-Stack Developer',
-        period: '2020 - 2022',
-        location: 'Remote',
-        description: 'Built and scaled a SaaS platform from 0 to 50,000 users.',
-        highlights: [
-          'Implemented real-time collaboration features',
-          'Built payment integration handling $500K+ MRR',
-          'Optimized database queries reducing load times by 40%',
-        ],
-        technologies: ['JavaScript', 'Vue.js', 'Python', 'Django', 'MongoDB'],
-      },
-      {
-        company: 'Digital Agency Co.',
-        role: 'Frontend Developer',
-        period: '2018 - 2020',
-        location: 'New York, NY',
-        description: 'Developed responsive web applications for enterprise clients.',
-        highlights: [
-          'Delivered 20+ client projects on time and within budget',
-          'Introduced component library reducing dev time by 30%',
-          'Mentored 3 junior developers',
-        ],
-        technologies: ['React', 'TypeScript', 'CSS', 'Node.js'],
-      },
-    ];
-
-    const experience = experienceData ?? defaultExperience;
+      };
+    }
 
     if (showTimeline) {
       return renderTimeline(experience);

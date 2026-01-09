@@ -8,50 +8,20 @@ export const blogCommand: Command = {
   usage: 'blog [post-slug] | blog -i (interactive)',
   aliases: ['posts', 'articles'],
   execute: (args): CommandResult => {
-    const blogData = getContentData('blog') as BlogPost[] | undefined;
+    const posts = getContentData('blog') as BlogPost[] | undefined;
     const interactive = args.includes('-i') || args.includes('--interactive');
 
-    // Default blog posts
-    const defaultPosts: BlogPost[] = [
-      {
-        slug: 'building-terminal-portfolio',
-        title: 'Building a Terminal-Style Portfolio with Next.js',
-        date: '2024-01-15',
-        excerpt: 'How I created this unique terminal-inspired portfolio website using Next.js and TypeScript.',
-        tags: ['Next.js', 'TypeScript', 'Portfolio', 'Creative'],
-        content: 'Full article content...',
-        readTime: '8 min read',
-      },
-      {
-        slug: 'typescript-best-practices',
-        title: 'TypeScript Best Practices for 2024',
-        date: '2024-01-10',
-        excerpt: 'A comprehensive guide to writing clean, maintainable TypeScript code.',
-        tags: ['TypeScript', 'Best Practices', 'Clean Code'],
-        content: 'Full article content...',
-        readTime: '12 min read',
-      },
-      {
-        slug: 'microservices-lessons',
-        title: 'Lessons Learned from Building Microservices',
-        date: '2023-12-20',
-        excerpt: 'Real-world insights from architecting and scaling microservices in production.',
-        tags: ['Microservices', 'Architecture', 'DevOps'],
-        content: 'Full article content...',
-        readTime: '15 min read',
-      },
-      {
-        slug: 'react-performance',
-        title: 'React Performance Optimization Techniques',
-        date: '2023-12-05',
-        excerpt: 'Practical tips for making your React applications blazing fast.',
-        tags: ['React', 'Performance', 'Frontend'],
-        content: 'Full article content...',
-        readTime: '10 min read',
-      },
-    ];
-
-    const posts = blogData ?? defaultPosts;
+    // Check if content is loaded
+    if (!posts || posts.length === 0) {
+      return {
+        output: [
+          createLine('', 'output'),
+          createLine('No blog posts found.', 'warning'),
+          createLine('Content may not be loaded. Try running: pnpm run generate-content', 'system'),
+          createLine('', 'output'),
+        ],
+      };
+    }
 
     // Interactive mode
     if (interactive) {
@@ -112,38 +82,6 @@ export const blogCommand: Command = {
   },
 };
 
-function renderInteractive(posts: BlogPost[]): CommandResult {
-  const lines: string[] = [];
-
-  lines.push('');
-  lines.push('+------------------------------------------------------------------+');
-  lines.push('|                    BLOG - INTERACTIVE MODE                       |');
-  lines.push('+------------------------------------------------------------------+');
-  lines.push('');
-  lines.push('  <span class="term-dim">Navigate: Type the number and press Enter</span>');
-  lines.push('');
-  lines.push('  +--------------------------------------------------------------+');
-
-  for (let i = 0; i < posts.length; i++) {
-    const post = posts[i]!;
-    const num = `[${i + 1}]`.padEnd(4);
-    const title = post.title.length > 45 ? post.title.slice(0, 42) + '...' : post.title;
-    const date = post.date;
-    lines.push(`  | ${num} <span class="term-green">${title.padEnd(45)}</span> <span class="term-dim">${date}</span> |`);
-  }
-
-  lines.push('  +--------------------------------------------------------------+');
-  lines.push('');
-  lines.push('  <span class="term-cyan">></span> Enter post number (1-' + posts.length + ') or type `blog <slug>` to read');
-  lines.push('');
-  lines.push('  <span class="term-dim">TIP: You can search with `blog <keyword>` in future updates</span>');
-  lines.push('');
-
-  return {
-    output: lines.map((line) => createLine(line, 'output', { isHtml: true })),
-  };
-}
-
 function renderPost(post: BlogPost): CommandResult {
   const lines: string[] = [];
 
@@ -157,9 +95,33 @@ function renderPost(post: BlogPost): CommandResult {
   lines.push('');
   lines.push('====================================================================');
   lines.push('');
-  lines.push(post.excerpt);
-  lines.push('');
-  lines.push('<span class="term-dim">[Full article content would be rendered here from markdown]</span>');
+
+  // Render the full content if available
+  if (post.content && post.content !== 'Full article content...') {
+    // Split content by lines and render
+    const contentLines = post.content.split('\n');
+    for (const line of contentLines) {
+      // Handle markdown headers
+      if (line.startsWith('# ')) {
+        lines.push(`<span class="term-green font-bold">${line.slice(2)}</span>`);
+      } else if (line.startsWith('## ')) {
+        lines.push(`<span class="term-cyan font-bold">${line.slice(3)}</span>`);
+      } else if (line.startsWith('### ')) {
+        lines.push(`<span class="term-yellow">${line.slice(4)}</span>`);
+      } else if (line.startsWith('- ')) {
+        lines.push(`  * ${line.slice(2)}`);
+      } else if (line.startsWith('**') && line.endsWith('**')) {
+        lines.push(`<span class="term-white font-bold">${line.slice(2, -2)}</span>`);
+      } else {
+        lines.push(line);
+      }
+    }
+  } else {
+    lines.push(post.excerpt);
+    lines.push('');
+    lines.push('<span class="term-dim">[Full article content would be rendered here]</span>');
+  }
+
   lines.push('');
   lines.push('====================================================================');
   lines.push('');
