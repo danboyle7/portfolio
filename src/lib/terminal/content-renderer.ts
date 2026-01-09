@@ -23,6 +23,8 @@ export function renderContentData(content: ContentData): CommandResult {
       return renderContact();
     case 'hobbies':
       return renderHobbies();
+    case 'projects':
+      return renderProjects();
     default:
       return {
         output: [createLine('[Content not available]', 'warning')],
@@ -287,7 +289,71 @@ function renderHobbies(): CommandResult {
     lines.push('');
   }
 
-  lines.push('<span class="term-dim">Life isn\'t all about code... but mostly it is! :)</span>');
+  lines.push('<span class="term-dim">Life isn\'t all about code... but mostly it is!</span>');
+  lines.push('');
+
+  return {
+    output: lines.map((line) => createLine(line, 'output', { isHtml: true })),
+  };
+}
+
+interface Project {
+  name: string;
+  description: string;
+  technologies: string[];
+  url?: string;
+  github?: string;
+  status: string;
+}
+
+function renderProjects(): CommandResult {
+  const projectsData = getContentData('projects') as Project[] | undefined;
+
+  const defaultProjects: Project[] = [
+    {
+      name: 'Portfolio Terminal',
+      description: 'An interactive terminal-style portfolio website built with Next.js',
+      technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+      github: 'github.com/danielboyle/portfolio',
+      status: 'Active',
+    },
+    {
+      name: 'Open Source Contributions',
+      description: 'Various contributions to open source projects',
+      technologies: ['TypeScript', 'React', 'Node.js'],
+      status: 'Ongoing',
+    },
+    {
+      name: 'Side Projects',
+      description: 'Collection of experiments and learning projects',
+      technologies: ['Rust', 'Go', 'Python'],
+      status: 'Experimental',
+    },
+  ];
+
+  const projects = projectsData ?? defaultProjects;
+
+  const lines: string[] = [];
+  lines.push('');
+  lines.push('# PROJECTS');
+  lines.push('===================================================================');
+  lines.push('');
+
+  for (const project of projects) {
+    lines.push(`<span class="term-green font-bold">[*] ${project.name}</span>`);
+    lines.push(`    ${project.description}`);
+    lines.push(`    <span class="term-magenta">Stack: ${project.technologies.join(' | ')}</span>`);
+    if (project.github) {
+      lines.push(`    <span class="term-cyan">Repo: ${project.github}</span>`);
+    }
+    if (project.url) {
+      lines.push(`    <span class="term-cyan">URL: ${project.url}</span>`);
+    }
+    lines.push(`    <span class="term-dim">Status: ${project.status}</span>`);
+    lines.push('');
+  }
+
+  lines.push('<span class="term-dim">Run `projects` for the full interactive projects view</span>');
   lines.push('');
 
   return {

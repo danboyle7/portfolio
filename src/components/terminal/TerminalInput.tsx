@@ -35,8 +35,11 @@ export function TerminalInput({
   // Focus input on mount and when clicked anywhere
   useEffect(() => {
     const focusInput = () => {
-      if (!disabled) {
-        inputRef.current?.focus();
+      if (!disabled && inputRef.current) {
+        inputRef.current.focus();
+        // Move cursor to end of input
+        const len = inputRef.current.value.length;
+        inputRef.current.setSelectionRange(len, len);
       }
     };
 
@@ -45,6 +48,13 @@ export function TerminalInput({
 
     return () => window.removeEventListener('click', focusInput);
   }, [disabled]);
+
+  // Re-focus when input value changes (for backspace to work properly)
+  useEffect(() => {
+    if (!disabled && inputRef.current && document.activeElement !== inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [input, disabled]);
 
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {

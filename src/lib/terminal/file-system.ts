@@ -433,36 +433,115 @@ Happy hacking! 🚀
         size: '4.0K',
         modified: dateStr,
         children: {
-          '.project_x': {
-            name: '.project_x',
+          projects: {
+            name: 'projects',
             type: 'directory',
             permissions: 'drwx------',
             owner: 'root',
             size: '4.0K',
             modified: dateStr,
             children: {
-              'README.md': {
-                name: 'README.md',
-                type: 'file',
-                permissions: '-r--------',
+              'chronos': {
+                name: 'chronos',
+                type: 'directory',
+                permissions: 'drwx------',
                 owner: 'root',
-                size: '2.8K',
+                size: '4.0K',
                 modified: dateStr,
-                content: '__RESTRICTED__',
-              },
-              'prototype.ts': {
-                name: 'prototype.ts',
-                type: 'file',
-                permissions: '-r--------',
-                owner: 'root',
-                size: '48K',
-                modified: dateStr,
-                content: '__RESTRICTED__',
+                children: {
+                  'README.md': {
+                    name: 'README.md',
+                    type: 'file',
+                    permissions: '-r--r--r--',
+                    owner: 'root',
+                    size: '2.8K',
+                    modified: dateStr,
+                    content: `# CHRONOS - Temporal Displacement Research
+## Codename: CHRONOS
+## Classification: BEYOND TOP SECRET
+
+---
+
+### Research Log - Entry #147
+
+Date: [REDACTED]
+Lead Researcher: D. Boyle
+
+---
+
+After months of failed attempts, I believe I've finally isolated the key variable
+in the Novikov self-consistency equation. The bootstrap paradox isn't a problem
+if we treat time as a crystalline structure rather than a fluid medium.
+
+Key breakthrough: The observer effect isn't just quantum - it's temporal.
+Consciousness collapses not just wave functions, but timeline potentialities.
+
+### Current Status
+
+- [x] Theoretical framework complete
+- [x] Quantum entanglement stabilization
+- [x] Tachyon field generator prototype
+- [ ] Closed timelike curve navigation
+- [ ] Paradox resolution algorithm
+
+### Files
+
+- prototype.py   : Core temporal algorithm (RESTRICTED)
+- timeline.log   : Experiment recordings (RESTRICTED)
+- config.yaml    : System configuration (RESTRICTED)
+
+### Notes
+
+The prototype.py contains the core algorithm. It's not ready for public release.
+If you're reading this... how did you get here?
+
+Remember: Time is not a river. It's an ocean.
+And we're learning to swim.
+
+---
+
+*"The distinction between past, present, and future is only a stubbornly*
+*persistent illusion." - A. Einstein*
+
+---
+
+> WARNING: Unauthorized access to prototype.py is strictly prohibited.
+> The code contains potentially reality-altering algorithms.
+`,
+                  },
+                  'prototype.py': {
+                    name: 'prototype.py',
+                    type: 'file',
+                    permissions: '-r--------',
+                    owner: 'root',
+                    size: '48K',
+                    modified: dateStr,
+                    content: '__RESTRICTED__',
+                  },
+                  'timeline.log': {
+                    name: 'timeline.log',
+                    type: 'file',
+                    permissions: '-r--------',
+                    owner: 'root',
+                    size: '12K',
+                    modified: dateStr,
+                    content: '__RESTRICTED__',
+                  },
+                  'config.yaml': {
+                    name: 'config.yaml',
+                    type: 'file',
+                    permissions: '-r--------',
+                    owner: 'root',
+                    size: '2K',
+                    modified: dateStr,
+                    content: '__RESTRICTED__',
+                  },
+                },
               },
             },
           },
-          'notes.txt': {
-            name: 'notes.txt',
+          '.notes': {
+            name: '.notes',
             type: 'file',
             permissions: '-r--------',
             owner: 'root',
@@ -550,7 +629,89 @@ Happy hacking! 🚀
             owner: 'root',
             size: '4.0K',
             modified: dateStr,
-            children: {},
+            children: {
+              'ls': {
+                name: 'ls',
+                type: 'executable',
+                permissions: '-rwxr-xr-x',
+                owner: 'root',
+                size: '140K',
+                modified: dateStr,
+                content: '#!/bin/bash\n# list directory contents\nexec /bin/ls "$@"',
+              },
+              'cat': {
+                name: 'cat',
+                type: 'executable',
+                permissions: '-rwxr-xr-x',
+                owner: 'root',
+                size: '32K',
+                modified: dateStr,
+                content: '#!/bin/bash\n# concatenate and print files\nexec /bin/cat "$@"',
+              },
+              'cd': {
+                name: 'cd',
+                type: 'executable',
+                permissions: '-rwxr-xr-x',
+                owner: 'root',
+                size: '8K',
+                modified: dateStr,
+                content: '#!/bin/bash\n# change directory\nbuiltin cd "$@"',
+              },
+              'pwd': {
+                name: 'pwd',
+                type: 'executable',
+                permissions: '-rwxr-xr-x',
+                owner: 'root',
+                size: '32K',
+                modified: dateStr,
+                content: '#!/bin/bash\n# print working directory\nexec /bin/pwd "$@"',
+              },
+              'tree': {
+                name: 'tree',
+                type: 'executable',
+                permissions: '-rwxr-xr-x',
+                owner: 'root',
+                size: '84K',
+                modified: dateStr,
+                content: '#!/bin/bash\n# display directory tree\nexec /usr/bin/tree "$@"',
+              },
+              'echo': {
+                name: 'echo',
+                type: 'executable',
+                permissions: '-rwxr-xr-x',
+                owner: 'root',
+                size: '32K',
+                modified: dateStr,
+                content: '#!/bin/bash\n# display a line of text\nbuiltin echo "$@"',
+              },
+              'clear': {
+                name: 'clear',
+                type: 'executable',
+                permissions: '-rwxr-xr-x',
+                owner: 'root',
+                size: '20K',
+                modified: dateStr,
+                content: '#!/bin/bash\n# clear terminal screen\nexec /usr/bin/clear',
+              },
+              'fortune': {
+                name: 'fortune',
+                type: 'executable',
+                permissions: '-rwxr-xr-x',
+                owner: 'root',
+                size: '28K',
+                modified: dateStr,
+                content: '#!/bin/bash\n# print a random fortune\n# Usage: fortune\nexec fortune "$@"',
+              },
+              'cowsay': {
+                name: 'cowsay',
+                type: 'executable',
+                permissions: '-rwxr-xr-x',
+                owner: 'root',
+                size: '24K',
+                modified: dateStr,
+                content: '#!/usr/bin/perl\n# configurable speaking cow\n# Usage: cowsay [message]',
+              },
+            },
           },
           share: {
             name: 'share',
@@ -568,12 +729,27 @@ Happy hacking! 🚀
                 size: '4.0K',
                 modified: dateStr,
                 children: {
-                  fortunes: {
-                    name: 'fortunes',
+                  fortune: {
+                    name: 'fortune',
+                    type: 'executable',
+                    permissions: '-rwxr-xr-x',
+                    owner: 'root',
+                    size: '4.0K',
+                    modified: dateStr,
+                    content: `#!/bin/bash
+# Display a random fortune cookie
+# Usage: fortune
+# Data file: /usr/share/games/fortune.dat
+
+exec /usr/games/fortune
+`,
+                  },
+                  'fortune.dat': {
+                    name: 'fortune.dat',
                     type: 'file',
                     permissions: '-rw-r--r--',
                     owner: 'root',
-                    size: '4.0K',
+                    size: '2.8K',
                     modified: dateStr,
                     content: `"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler
 %
@@ -593,7 +769,20 @@ Happy hacking! 🚀
 %
 "Deleted code is debugged code." - Jeff Sickel
 %
-"It's not a bug – it's an undocumented feature." - Anonymous
+"It's not a bug - it's an undocumented feature." - Anonymous
+`,
+                  },
+                  snake: {
+                    name: 'snake',
+                    type: 'executable',
+                    permissions: '-rwxr-xr-x',
+                    owner: 'root',
+                    size: '12K',
+                    modified: dateStr,
+                    content: `#!/bin/bash
+# Terminal Snake Game
+# Usage: snake
+exec /usr/games/snake
 `,
                   },
                 },
@@ -616,26 +805,46 @@ Happy hacking! 🚀
 }
 
 /**
- * Navigate to a path in the file system
+ * Navigate to a path in the file system (follows symlinks)
  */
 export function navigateToPath(
   fileSystem: FileSystemNode,
-  path: string
+  path: string,
+  followSymlinks: boolean = true
 ): FileSystemNode | null {
   if (path === '/') return fileSystem;
 
   const segments = path.split('/').filter(Boolean);
-  let current: FileSystemNode | undefined = fileSystem;
+  let current: FileSystemNode = fileSystem;
 
   for (const segment of segments) {
     if (current.type !== 'directory' || !current.children) {
+      // Handle symlinks that point to directories
+      if (current.type === 'symlink' && current.target && followSymlinks) {
+        const resolved = navigateToPath(fileSystem, current.target, false);
+        if (resolved && resolved.type === 'directory' && resolved.children) {
+          const next = resolved.children[segment];
+          if (!next) return null;
+          current = next;
+          continue;
+        }
+      }
       return null;
     }
-    current = current.children[segment];
-    if (!current) return null;
+    const next = current.children[segment];
+    if (!next) return null;
+    current = next;
+
+    // Follow symlink if it points to a directory
+    if (current.type === 'symlink' && current.target && followSymlinks) {
+      const resolved = navigateToPath(fileSystem, current.target, false);
+      if (resolved) {
+        current = resolved;
+      }
+    }
   }
 
-  return current ?? null;
+  return current;
 }
 
 /**

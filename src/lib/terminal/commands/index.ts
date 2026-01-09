@@ -31,7 +31,8 @@ import { fortuneCommand } from './easter-eggs/fortune';
 import { matrixCommand } from './easter-eggs/matrix';
 import { hackerCommand } from './easter-eggs/hacker';
 import { sudoCommand } from './easter-eggs/sudo';
-import { exitCommand } from './exit';
+import { snakeCommand } from './easter-eggs/snake';
+import { exitCommand, rebootCommand } from './exit';
 
 // Command registry
 const commands: Map<string, Command> = new Map();
@@ -58,6 +59,7 @@ const allCommands: Command[] = [
   projectsCommand,
   messageCommand,
   exitCommand,
+  rebootCommand,
   // Easter eggs
   cowsayCommand,
   slCommand,
@@ -65,6 +67,7 @@ const allCommands: Command[] = [
   matrixCommand,
   hackerCommand,
   sudoCommand,
+  snakeCommand,
 ];
 
 // Initialize command registry

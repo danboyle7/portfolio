@@ -14,6 +14,7 @@ import { CRTEffect, GlitchEffect } from './CRTEffect';
 import { MatrixRain } from './MatrixRain';
 import { TerminalHeader } from './TerminalHeader';
 import { InteractiveBlog } from './InteractiveBlog';
+import { SnakeGame } from './SnakeGame';
 import type { InteractiveMode } from '@/lib/terminal/types';
 
 // Initialize content on module load
@@ -33,13 +34,13 @@ const welcomeLines: TerminalLine[] = [
   createLine('<span class="term-green">  ██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝</span>', 'output', { isHtml: true }),
   createLine('<span class="term-green">  ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ </span>', 'output', { isHtml: true }),
   createLine('', 'output'),
-  createLine('<span class="term-cyan">  ┌─────────────────────────────────────────────────────────────────────┐</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  │</span>                                                                     <span class="term-cyan">│</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  │</span>   <span class="term-white font-bold">Welcome to Daniel Boyle\'s Interactive Portfolio Terminal</span>         <span class="term-cyan">│</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  │</span>                                                                     <span class="term-cyan">│</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  │</span>   <span class="term-dim">Full-Stack Developer | Open Source Enthusiast | Problem Solver</span>   <span class="term-cyan">│</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  │</span>                                                                     <span class="term-cyan">│</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  └─────────────────────────────────────────────────────────────────────┘</span>', 'output', { isHtml: true }),
+  createLine('<span class="term-cyan">  ┌───────────────────────────────────────────────────────────────────────┐</span>', 'output', { isHtml: true }),
+  createLine('<span class="term-cyan">  │</span>                                                                       <span class="term-cyan">│</span>', 'output', { isHtml: true }),
+  createLine('<span class="term-cyan">  │</span>     <span class="term-white font-bold">Welcome to Daniel Boyle\'s Interactive Portfolio Terminal</span>          <span class="term-cyan">│</span>', 'output', { isHtml: true }),
+  createLine('<span class="term-cyan">  │</span>                                                                       <span class="term-cyan">│</span>', 'output', { isHtml: true }),
+  createLine('<span class="term-cyan">  │</span>     <span class="term-dim">Full-Stack Developer | Open Source Enthusiast | Problem Solver</span>   <span class="term-cyan"> │</span>', 'output', { isHtml: true }),
+  createLine('<span class="term-cyan">  │</span>                                                                       <span class="term-cyan">│</span>', 'output', { isHtml: true }),
+  createLine('<span class="term-cyan">  └───────────────────────────────────────────────────────────────────────┘</span>', 'output', { isHtml: true }),
   createLine('', 'output'),
   createLine('<span class="term-dim">  Navigate this terminal like you would any Unix system.</span>', 'output', { isHtml: true }),
   createLine('<span class="term-dim">  Explore the filesystem, run commands, discover easter eggs.</span>', 'output', { isHtml: true }),
@@ -117,22 +118,42 @@ export function Terminal() {
         return;
       }
 
+      // Map executable names to commands
+      const execMap: Record<string, string> = {
+        'send_message': 'message',
+        'timeline': 'experience --timeline',
+        'fortune': 'fortune',
+        'snake': 'snake',
+        'cowsay': 'cowsay',
+      };
+
       // Handle ./command syntax for executables in current directory
       let actualCommand = trimmedCommand;
       if (trimmedCommand.startsWith('./')) {
-        const execName = trimmedCommand.slice(2).split(' ')[0];
+        const parts = trimmedCommand.slice(2).split(' ');
+        const execName = parts[0];
+        const execArgs = parts.slice(1).join(' ');
         const execPath = resolvePath(state.currentPath, execName ?? '');
         const node = navigateToPath(fileSystem, execPath);
 
         if (node && node.type === 'executable') {
-          // Map executable names to commands
-          const execMap: Record<string, string> = {
-            'send_message': 'message',
-            'timeline': 'experience --timeline',
-          };
           const mappedCmd = execMap[execName ?? ''];
           if (mappedCmd) {
-            actualCommand = mappedCmd;
+            actualCommand = execArgs ? `${mappedCmd} ${execArgs}` : mappedCmd;
+          }
+        }
+      } else {
+        // Check if command matches an executable in current directory
+        const parts = trimmedCommand.split(' ');
+        const cmdName = parts[0];
+        const cmdArgs = parts.slice(1).join(' ');
+        const execPath = resolvePath(state.currentPath, cmdName ?? '');
+        const node = navigateToPath(fileSystem, execPath);
+
+        if (node && node.type === 'executable') {
+          const mappedCmd = execMap[cmdName ?? ''];
+          if (mappedCmd) {
+            actualCommand = cmdArgs ? `${mappedCmd} ${cmdArgs}` : mappedCmd;
           }
         }
       }
@@ -273,6 +294,21 @@ export function Terminal() {
     setInteractiveMode(null);
   }, []);
 
+  // Handle snake game over
+  const handleSnakeGameOver = useCallback((score: number) => {
+    const entry: HistoryEntry = {
+      id: generateId(),
+      command: '',
+      path: state.currentPath,
+      output: [
+        createLine('', 'output'),
+        createLine(`<span class="term-yellow">Game Over! Final Score: ${score}</span>`, 'output', { isHtml: true }),
+        createLine('', 'output'),
+      ],
+    };
+    setHistory((prev) => [...prev, entry]);
+  }, [state.currentPath]);
+
   // Handle blog post selection
   const handleBlogSelect = useCallback(
     async (slug: string) => {
@@ -305,9 +341,12 @@ export function Terminal() {
     [state.currentPath, state.commandHistory, fileSystem]
   );
 
-  // Scroll to bottom on new content
+  // Scroll to bottom on new content - use setTimeout to ensure DOM is updated
   useEffect(() => {
-    scrollToBottom();
+    const timer = setTimeout(() => {
+      scrollToBottom();
+    }, 10);
+    return () => clearTimeout(timer);
   }, [history, state.lines, scrollToBottom]);
 
   // Keyboard shortcuts
@@ -373,6 +412,15 @@ export function Terminal() {
               <InteractiveBlog
                 onExit={handleExitInteractive}
                 onSelectPost={handleBlogSelect}
+              />
+            </div>
+          )}
+
+          {interactiveMode?.type === 'snake' && (
+            <div className="mt-4 mb-4">
+              <SnakeGame
+                onExit={handleExitInteractive}
+                onGameOver={handleSnakeGameOver}
               />
             </div>
           )}

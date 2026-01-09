@@ -31,26 +31,26 @@ export const contactCommand: Command = {
     lines.push('');
     lines.push('  +--------------------------------------------------------------+');
     lines.push('  |                                                              |');
-    lines.push(`  |   <span class="term-cyan">Email</span>        <span class="term-green">${contact.email.padEnd(40)}</span> |`);
+    lines.push(`  |   <span class="term-cyan">Email</span>        <span class="term-green">${contact.email.padEnd(40)}</span>      |`);
     lines.push('  |                                                              |');
-    lines.push(`  |   <span class="term-cyan">GitHub</span>       <span class="term-white">${contact.github.padEnd(40)}</span> |`);
+    lines.push(`  |   <span class="term-cyan">GitHub</span>       <span class="term-white">${contact.github.padEnd(40)}</span>      |`);
     lines.push('  |                                                              |');
-    lines.push(`  |   <span class="term-cyan">LinkedIn</span>     <span class="term-white">${contact.linkedin.padEnd(40)}</span> |`);
+    lines.push(`  |   <span class="term-cyan">LinkedIn</span>     <span class="term-white">${contact.linkedin.padEnd(40)}</span>      |`);
     lines.push('  |                                                              |');
 
     if (contact.twitter) {
-      lines.push(`  |   <span class="term-cyan">Twitter</span>      <span class="term-white">${contact.twitter.padEnd(40)}</span> |`);
+      lines.push(`  |   <span class="term-cyan">Twitter</span>      <span class="term-white">${contact.twitter.padEnd(40)}</span>      |`);
       lines.push('  |                                                              |');
     }
 
     if (contact.website) {
-      lines.push(`  |   <span class="term-cyan">Website</span>      <span class="term-white">${contact.website.padEnd(40)}</span> |`);
+      lines.push(`  |   <span class="term-cyan">Website</span>      <span class="term-white">${contact.website.padEnd(40)}</span>      |`);
       lines.push('  |                                                              |');
     }
 
-    lines.push(`  |   <span class="term-cyan">Location</span>     <span class="term-dim">${contact.location.padEnd(40)}</span> |`);
+    lines.push(`  |   <span class="term-cyan">Location</span>     <span class="term-dim">${contact.location.padEnd(40)}</span>      |`);
     lines.push('  |                                                              |');
-    lines.push(`  |   <span class="term-cyan">Status</span>       <span class="term-green font-bold">${contact.availability.padEnd(40)}</span> |`);
+    lines.push(`  |   <span class="term-cyan">Status</span>       <span class="term-green font-bold">${contact.availability.padEnd(40)}</span>      |`);
     lines.push('  |                                                              |');
     lines.push('  +--------------------------------------------------------------+');
     lines.push('');
