@@ -10,11 +10,23 @@ export interface TerminalLine {
   className?: string;
 }
 
+export interface AnimatedLine {
+  line: TerminalLine;
+  delay: number; // Delay before showing this line (in ms)
+}
+
+export interface InteractiveMode {
+  type: 'blog' | 'search' | null;
+  data?: unknown;
+}
+
 export interface CommandResult {
   output: TerminalLine[];
   clearScreen?: boolean;
   changeDirectory?: string;
   triggerEffect?: 'matrix' | 'glitch' | 'reboot' | 'hacker' | 'destroy' | 'cowsay';
+  animatedOutput?: AnimatedLine[]; // For step-by-step animation
+  enterInteractiveMode?: InteractiveMode; // Enter an interactive TUI mode
 }
 
 export interface Command {
@@ -48,7 +60,7 @@ export interface FileSystemNode {
 }
 
 export interface ContentData {
-  type: 'experience' | 'skills' | 'education' | 'hobbies' | 'blog' | 'contact' | 'about';
+  type: 'experience' | 'skills' | 'education' | 'hobbies' | 'blog' | 'contact' | 'about' | 'projects';
   data: unknown;
 }
 

@@ -33,12 +33,12 @@ export const helpCommand: Command = {
     return {
       output: [
         createLine('', 'output'),
-        createLine('╔══════════════════════════════════════════════════════════════════╗', 'system'),
-        createLine('║                    PORTFOLIO TERMINAL v1.0.0                     ║', 'system'),
-        createLine('╚══════════════════════════════════════════════════════════════════╝', 'system'),
+        createLine('+------------------------------------------------------------------+', 'system'),
+        createLine('|                    PORTFOLIO TERMINAL v1.0.0                     |', 'system'),
+        createLine('+------------------------------------------------------------------+', 'system'),
         createLine('', 'output'),
         createLine('  NAVIGATION', 'success'),
-        createLine('  ──────────', 'system'),
+        createLine('  ----------', 'system'),
         createLine('  cd <dir>       Change directory (try: cd ~/experience)', 'output'),
         createLine('  ls [-la]       List directory contents', 'output'),
         createLine('  pwd            Print working directory', 'output'),
@@ -46,7 +46,7 @@ export const helpCommand: Command = {
         createLine('  cat <file>     Display file contents', 'output'),
         createLine('', 'output'),
         createLine('  PORTFOLIO', 'success'),
-        createLine('  ─────────', 'system'),
+        createLine('  ---------', 'system'),
         createLine('  profile        Display system/profile info', 'output'),
         createLine('  skills         View technical skills', 'output'),
         createLine('  experience     View work experience', 'output'),
@@ -57,7 +57,7 @@ export const helpCommand: Command = {
         createLine('  message        Send me a message', 'output'),
         createLine('', 'output'),
         createLine('  UTILITIES', 'success'),
-        createLine('  ─────────', 'system'),
+        createLine('  ---------', 'system'),
         createLine('  whoami         Display current user', 'output'),
         createLine('  date           Display current date/time', 'output'),
         createLine('  echo <text>    Print text to terminal', 'output'),
@@ -114,14 +114,50 @@ function getCommandHelp(name: string): CommandHelp | null {
       description: 'Display technical skills with proficiency levels',
       usage: 'skills [category]\n\n  Categories: languages, frameworks, tools, all',
     },
+    blog: {
+      name: 'blog',
+      description: 'Display blog posts',
+      usage: 'blog [slug]\nblog -i\n\n  Options:\n    -i    Interactive mode (TUI)',
+    },
     clear: {
       name: 'clear',
       description: 'Clear the terminal screen',
       usage: 'clear',
       aliases: ['cls'],
     },
+    whoami: {
+      name: 'whoami',
+      description: 'Display the current user',
+      usage: 'whoami',
+      aliases: ['user'],
+    },
+    message: {
+      name: 'message',
+      description: 'Send a message (simulated)',
+      usage: 'message [-t "title"] "your message"\n\n  Examples:\n    message "Hello!"\n    message -t "Job Inquiry" "I saw your portfolio..."',
+      aliases: ['msg'],
+    },
+    experience: {
+      name: 'experience',
+      description: 'Display work experience history',
+      usage: 'experience [--timeline]\n\n  Options:\n    --timeline    Show interactive timeline',
+    },
+    education: {
+      name: 'education',
+      description: 'Display education history',
+      usage: 'education',
+    },
+    projects: {
+      name: 'projects',
+      description: 'Display portfolio projects',
+      usage: 'projects [name]',
+    },
+    contact: {
+      name: 'contact',
+      description: 'Display contact information',
+      usage: 'contact',
+    },
   };
 
   return helpData[name] ?? null;
 }
-

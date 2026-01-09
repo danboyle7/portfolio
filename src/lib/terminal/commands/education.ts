@@ -43,32 +43,32 @@ export const educationCommand: Command = {
 
     const lines: string[] = [];
     lines.push('');
-    lines.push('╔══════════════════════════════════════════════════════════════════╗');
-    lines.push('║                        EDUCATION                                 ║');
-    lines.push('╚══════════════════════════════════════════════════════════════════╝');
+    lines.push('+------------------------------------------------------------------+');
+    lines.push('|                          EDUCATION                               |');
+    lines.push('+------------------------------------------------------------------+');
     lines.push('');
 
     for (const edu of education) {
       // Certificate-style box
-      lines.push('  ╭───────────────────────────────────────────────────────────╮');
-      lines.push(`  │  <span class="term-yellow font-bold">🎓 ${edu.degree}</span>`);
-      lines.push(`  │     <span class="term-cyan">${edu.field}</span>`);
-      lines.push('  │');
-      lines.push(`  │  <span class="term-green">${edu.institution}</span>`);
-      lines.push(`  │  <span class="term-dim">${edu.period} • ${edu.location}</span>`);
-      
+      lines.push('  +------------------------------------------------------------+');
+      lines.push(`  |  <span class="term-yellow font-bold">[*] ${edu.degree}</span>`);
+      lines.push(`  |      <span class="term-cyan">${edu.field}</span>`);
+      lines.push('  |');
+      lines.push(`  |  <span class="term-green">${edu.institution}</span>`);
+      lines.push(`  |  <span class="term-dim">${edu.period} | ${edu.location}</span>`);
+
       if (edu.gpa) {
-        lines.push(`  │  <span class="term-magenta">GPA: ${edu.gpa}</span>`);
+        lines.push(`  |  <span class="term-magenta">GPA: ${edu.gpa}</span>`);
       }
-      
+
       if (edu.highlights && edu.highlights.length > 0) {
-        lines.push('  │');
+        lines.push('  |');
         for (const highlight of edu.highlights) {
-          lines.push(`  │  <span class="term-dim">▸</span> ${highlight}`);
+          lines.push(`  |  <span class="term-dim">></span> ${highlight}`);
         }
       }
-      
-      lines.push('  ╰───────────────────────────────────────────────────────────╯');
+
+      lines.push('  +------------------------------------------------------------+');
       lines.push('');
     }
 
@@ -77,4 +77,3 @@ export const educationCommand: Command = {
     };
   },
 };
-

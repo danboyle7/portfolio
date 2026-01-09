@@ -25,41 +25,40 @@ export const contactCommand: Command = {
 
     const lines: string[] = [];
     lines.push('');
-    lines.push('╔══════════════════════════════════════════════════════════════════╗');
-    lines.push('║                      GET IN TOUCH                                ║');
-    lines.push('╚══════════════════════════════════════════════════════════════════╝');
+    lines.push('+------------------------------------------------------------------+');
+    lines.push('|                        GET IN TOUCH                              |');
+    lines.push('+------------------------------------------------------------------+');
     lines.push('');
-    lines.push('  ┌─────────────────────────────────────────────────────────────┐');
-    lines.push('  │                                                             │');
-    lines.push(`  │   <span class="term-cyan">📧 Email</span>      <span class="term-green">${contact.email}</span>`);
-    lines.push('  │                                                             │');
-    lines.push(`  │   <span class="term-cyan">🐙 GitHub</span>     <span class="term-white">${contact.github}</span>`);
-    lines.push('  │                                                             │');
-    lines.push(`  │   <span class="term-cyan">💼 LinkedIn</span>   <span class="term-white">${contact.linkedin}</span>`);
-    lines.push('  │                                                             │');
-    
+    lines.push('  +--------------------------------------------------------------+');
+    lines.push('  |                                                              |');
+    lines.push(`  |   <span class="term-cyan">Email</span>        <span class="term-green">${contact.email.padEnd(40)}</span> |`);
+    lines.push('  |                                                              |');
+    lines.push(`  |   <span class="term-cyan">GitHub</span>       <span class="term-white">${contact.github.padEnd(40)}</span> |`);
+    lines.push('  |                                                              |');
+    lines.push(`  |   <span class="term-cyan">LinkedIn</span>     <span class="term-white">${contact.linkedin.padEnd(40)}</span> |`);
+    lines.push('  |                                                              |');
+
     if (contact.twitter) {
-      lines.push(`  │   <span class="term-cyan">🐦 Twitter</span>    <span class="term-white">${contact.twitter}</span>`);
-      lines.push('  │                                                             │');
+      lines.push(`  |   <span class="term-cyan">Twitter</span>      <span class="term-white">${contact.twitter.padEnd(40)}</span> |`);
+      lines.push('  |                                                              |');
     }
-    
+
     if (contact.website) {
-      lines.push(`  │   <span class="term-cyan">🌐 Website</span>    <span class="term-white">${contact.website}</span>`);
-      lines.push('  │                                                             │');
+      lines.push(`  |   <span class="term-cyan">Website</span>      <span class="term-white">${contact.website.padEnd(40)}</span> |`);
+      lines.push('  |                                                              |');
     }
-    
-    lines.push(`  │   <span class="term-cyan">📍 Location</span>   <span class="term-dim">${contact.location}</span>`);
-    lines.push('  │                                                             │');
-    lines.push(`  │   <span class="term-cyan">💼 Status</span>     <span class="term-green font-bold">${contact.availability}</span>`);
-    lines.push('  │                                                             │');
-    lines.push('  └─────────────────────────────────────────────────────────────┘');
+
+    lines.push(`  |   <span class="term-cyan">Location</span>     <span class="term-dim">${contact.location.padEnd(40)}</span> |`);
+    lines.push('  |                                                              |');
+    lines.push(`  |   <span class="term-cyan">Status</span>       <span class="term-green font-bold">${contact.availability.padEnd(40)}</span> |`);
+    lines.push('  |                                                              |');
+    lines.push('  +--------------------------------------------------------------+');
     lines.push('');
-    lines.push('  <span class="term-yellow">💡 TIP:</span> The best way to reach me is via email!');
+    lines.push('  <span class="term-yellow">TIP:</span> The best way to reach me is via email!');
     lines.push('');
-    lines.push('  <span class="term-dim">────────────────────────────────────────────────────────────────</span>');
+    lines.push('  -------------------------------------------------------------------');
     lines.push('');
-    lines.push('  <span class="term-magenta">Want to send a message directly?</span>');
-    lines.push('  <span class="term-green">Run: cd ~/contact && ./send_message</span>');
+    lines.push('  Want to send a message? Run: <span class="term-green">message</span>');
     lines.push('');
 
     return {
@@ -67,4 +66,3 @@ export const contactCommand: Command = {
     };
   },
 };
-

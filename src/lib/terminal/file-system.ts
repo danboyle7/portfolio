@@ -350,7 +350,7 @@ export PORTFOLIO_VERSION="1.0.0"
                     size: '256',
                     modified: dateStr,
                     content: `🎮 EASTER EGG HINTS:
-                    
+
 Try these commands for some fun:
 - cowsay <message>
 - sl
@@ -385,15 +385,15 @@ Happy hacking! 🚀
             size: '512',
             modified: dateStr,
             content: `
-╔══════════════════════════════════════════════════════════════╗
-║                                                              ║
-║          Welcome to Daniel Boyle's Portfolio Terminal        ║
-║                                                              ║
-║    Type 'help' to see available commands                     ║
-║    Type 'neofetch' for system info                          ║
-║    Type 'tree' to explore the file structure                ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
++--------------------------------------------------------------+
+|                                                              |
+|          Welcome to Daniel Boyle's Portfolio Terminal        |
+|                                                              |
+|    Type 'help' to see available commands                     |
+|    Type 'profile' for system info                            |
+|    Type 'tree' to explore the file structure                 |
+|                                                              |
++--------------------------------------------------------------+
 `,
           },
           hostname: {
@@ -404,6 +404,71 @@ Happy hacking! 🚀
             size: '16',
             modified: dateStr,
             content: 'portfolio',
+          },
+          '.classified': {
+            name: '.classified',
+            type: 'file',
+            permissions: '-r--------',
+            owner: 'root',
+            size: '4.2K',
+            modified: dateStr,
+            content: '__RESTRICTED__',
+          },
+          'shadow': {
+            name: 'shadow',
+            type: 'file',
+            permissions: '-r--------',
+            owner: 'root',
+            size: '1.2K',
+            modified: dateStr,
+            content: '__RESTRICTED__',
+          },
+        },
+      },
+      root: {
+        name: 'root',
+        type: 'directory',
+        permissions: 'drwx------',
+        owner: 'root',
+        size: '4.0K',
+        modified: dateStr,
+        children: {
+          '.project_x': {
+            name: '.project_x',
+            type: 'directory',
+            permissions: 'drwx------',
+            owner: 'root',
+            size: '4.0K',
+            modified: dateStr,
+            children: {
+              'README.md': {
+                name: 'README.md',
+                type: 'file',
+                permissions: '-r--------',
+                owner: 'root',
+                size: '2.8K',
+                modified: dateStr,
+                content: '__RESTRICTED__',
+              },
+              'prototype.ts': {
+                name: 'prototype.ts',
+                type: 'file',
+                permissions: '-r--------',
+                owner: 'root',
+                size: '48K',
+                modified: dateStr,
+                content: '__RESTRICTED__',
+              },
+            },
+          },
+          'notes.txt': {
+            name: 'notes.txt',
+            type: 'file',
+            permissions: '-r--------',
+            owner: 'root',
+            size: '512',
+            modified: dateStr,
+            content: '__RESTRICTED__',
           },
         },
       },

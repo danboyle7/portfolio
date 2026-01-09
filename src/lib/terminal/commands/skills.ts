@@ -8,12 +8,12 @@ export const skillsCommand: Command = {
   usage: 'skills [category]',
   execute: (args): CommandResult => {
     const skillsData = getContentData('skills') as SkillCategory[] | undefined;
-    
+
     // Default skills if no content loaded
     const defaultSkills: SkillCategory[] = [
       {
         name: 'Languages',
-        icon: '💻',
+        icon: '>>',
         skills: [
           { name: 'TypeScript', level: 95 },
           { name: 'JavaScript', level: 95 },
@@ -25,7 +25,7 @@ export const skillsCommand: Command = {
       },
       {
         name: 'Frameworks',
-        icon: '🚀',
+        icon: '>>',
         skills: [
           { name: 'React', level: 95 },
           { name: 'Next.js', level: 95 },
@@ -37,7 +37,7 @@ export const skillsCommand: Command = {
       },
       {
         name: 'Tools & DevOps',
-        icon: '🔧',
+        icon: '>>',
         skills: [
           { name: 'Git', level: 95 },
           { name: 'Docker', level: 85 },
@@ -49,7 +49,7 @@ export const skillsCommand: Command = {
       },
       {
         name: 'Databases',
-        icon: '🗄️',
+        icon: '>>',
         skills: [
           { name: 'PostgreSQL', level: 90 },
           { name: 'MongoDB', level: 80 },
@@ -68,7 +68,7 @@ export const skillsCommand: Command = {
       filteredSkills = skills.filter(
         (cat) => cat.name.toLowerCase().includes(category)
       );
-      
+
       if (filteredSkills.length === 0) {
         return {
           output: [
@@ -81,24 +81,24 @@ export const skillsCommand: Command = {
 
     const lines: string[] = [];
     lines.push('');
-    lines.push('╔══════════════════════════════════════════════════════════════╗');
-    lines.push('║                    TECHNICAL SKILLS                          ║');
-    lines.push('╚══════════════════════════════════════════════════════════════╝');
+    lines.push('+------------------------------------------------------------------+');
+    lines.push('|                      TECHNICAL SKILLS                            |');
+    lines.push('+------------------------------------------------------------------+');
     lines.push('');
 
     for (const cat of filteredSkills) {
       lines.push(`<span class="term-cyan font-bold">${cat.icon} ${cat.name.toUpperCase()}</span>`);
-      lines.push('<span class="term-dim">───────────────────────────────────────────────────</span>');
-      
+      lines.push('<span class="term-dim">---------------------------------------------------</span>');
+
       for (const skill of cat.skills) {
         const bar = createProgressBar(skill.level, 25, '█', '░');
         const levelStr = `${skill.level}%`.padStart(4);
         const nameStr = skill.name.padEnd(15);
-        
+
         let barColor = 'term-green';
         if (skill.level < 70) barColor = 'term-yellow';
         if (skill.level < 50) barColor = 'term-red';
-        
+
         lines.push(
           `  ${nameStr} <span class="${barColor}">${bar}</span> <span class="term-dim">${levelStr}</span>`
         );
@@ -111,4 +111,3 @@ export const skillsCommand: Command = {
     };
   },
 };
-

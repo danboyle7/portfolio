@@ -24,4 +24,3 @@ export const matrixCommand: Command = {
     };
   },
 };
-

@@ -70,9 +70,9 @@ export const projectsCommand: Command = {
 
     const lines: string[] = [];
     lines.push('');
-    lines.push('╔══════════════════════════════════════════════════════════════════╗');
-    lines.push('║                        PROJECTS                                  ║');
-    lines.push('╚══════════════════════════════════════════════════════════════════╝');
+    lines.push('+------------------------------------------------------------------+');
+    lines.push('|                          PROJECTS                                |');
+    lines.push('+------------------------------------------------------------------+');
     lines.push('');
 
     for (const project of projects) {
@@ -83,17 +83,17 @@ export const projectsCommand: Command = {
         archived: 'term-dim',
       };
       const statusColor = statusColors[project.status] ?? 'term-dim';
-      const statusIcon = project.status === 'production' ? '●' : project.status === 'beta' ? '◐' : project.status === 'development' ? '○' : '◌';
+      const statusIcon = project.status === 'production' ? '[+]' : project.status === 'beta' ? '[~]' : project.status === 'development' ? '[.]' : '[-]';
 
-      lines.push(`<span class="term-blue font-bold">📁 ${project.name}</span>  <span class="${statusColor}">${statusIcon} ${project.status.toUpperCase()}</span>`);
+      lines.push(`<span class="term-blue font-bold">>> ${project.name}</span>  <span class="${statusColor}">${statusIcon} ${project.status.toUpperCase()}</span>`);
       lines.push(`   ${project.description}`);
-      lines.push(`   <span class="term-magenta">${project.technologies.join(' • ')}</span>`);
-      
+      lines.push(`   <span class="term-magenta">${project.technologies.join(' | ')}</span>`);
+
       if (detailed || project.stars) {
         const extras: string[] = [];
-        if (project.stars) extras.push(`⭐ ${project.stars}`);
-        if (project.github) extras.push(`🔗 ${project.github}`);
-        if (project.live) extras.push(`🌐 ${project.live}`);
+        if (project.stars) extras.push(`* ${project.stars}`);
+        if (project.github) extras.push(`@ ${project.github}`);
+        if (project.live) extras.push(`> ${project.live}`);
         if (extras.length > 0) {
           lines.push(`   <span class="term-dim">${extras.join('  ')}</span>`);
         }
@@ -102,8 +102,8 @@ export const projectsCommand: Command = {
     }
 
     const totalStars = projects.reduce((sum, p) => sum + (p.stars ?? 0), 0);
-    lines.push('─'.repeat(68));
-    lines.push(`<span class="term-dim">Total: ${projects.length} projects • ${totalStars} ⭐</span>`);
+    lines.push('-------------------------------------------------------------------');
+    lines.push(`<span class="term-dim">Total: ${projects.length} projects | ${totalStars} stars</span>`);
     lines.push('');
 
     return {
@@ -111,4 +111,3 @@ export const projectsCommand: Command = {
     };
   },
 };
-

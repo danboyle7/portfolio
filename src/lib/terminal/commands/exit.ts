@@ -10,17 +10,16 @@ export const exitCommand: Command = {
     return {
       output: [
         createLine('', 'output'),
-        createLine('╔════════════════════════════════════════════════╗', 'system'),
-        createLine('║                                                ║', 'system'),
-        createLine('║   Thanks for visiting my portfolio!            ║', 'system'),
-        createLine('║                                                ║', 'system'),
-        createLine('║   The terminal is eternal... refreshing...     ║', 'system'),
-        createLine('║                                                ║', 'system'),
-        createLine('╚════════════════════════════════════════════════╝', 'system'),
+        createLine('+------------------------------------------------+', 'system'),
+        createLine('|                                                |', 'system'),
+        createLine('|   Thanks for visiting my portfolio!            |', 'system'),
+        createLine('|                                                |', 'system'),
+        createLine('|   The terminal is eternal... refreshing...     |', 'system'),
+        createLine('|                                                |', 'system'),
+        createLine('+------------------------------------------------+', 'system'),
         createLine('', 'output'),
       ],
       triggerEffect: 'reboot',
     };
   },
 };
-

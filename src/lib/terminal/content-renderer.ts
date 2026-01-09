@@ -49,21 +49,21 @@ function renderAbout(): CommandResult {
   const lines: string[] = [];
   lines.push('');
   lines.push('# ABOUT ME');
-  lines.push('───────────────────────────────────────────────────────────');
+  lines.push('-----------------------------------------------------------');
   lines.push('');
   lines.push(`<span class="term-green font-bold">${about.name}</span>`);
   lines.push(`<span class="term-cyan">${about.title}</span>`);
   lines.push(`<span class="term-dim">"${about.tagline}"</span>`);
   lines.push('');
-  
+
   for (const paragraph of about.bio) {
     lines.push(paragraph);
     lines.push('');
   }
 
-  lines.push('───────────────────────────────────────────────────────────');
+  lines.push('-----------------------------------------------------------');
   lines.push('');
-  lines.push('<span class="term-yellow">💡 TIP:</span> Run `neofetch` for a prettier overview!');
+  lines.push('<span class="term-yellow">TIP:</span> Run `profile` for a prettier overview!');
   lines.push('');
 
   return {
@@ -91,7 +91,7 @@ function renderExperience(): CommandResult {
   const lines: string[] = [];
   lines.push('');
   lines.push('# WORK EXPERIENCE');
-  lines.push('═══════════════════════════════════════════════════════════════');
+  lines.push('===================================================================');
   lines.push('');
 
   for (const job of experience) {
@@ -102,12 +102,12 @@ function renderExperience(): CommandResult {
     lines.push('');
     lines.push('<span class="term-yellow">Highlights:</span>');
     for (const highlight of job.highlights) {
-      lines.push(`  • ${highlight}`);
+      lines.push(`  * ${highlight}`);
     }
     lines.push('');
-    lines.push(`<span class="term-magenta">Stack: ${job.technologies.join(' • ')}</span>`);
+    lines.push(`<span class="term-magenta">Stack: ${job.technologies.join(' | ')}</span>`);
     lines.push('');
-    lines.push('───────────────────────────────────────────────────────────────');
+    lines.push('-------------------------------------------------------------------');
     lines.push('');
   }
 
@@ -125,7 +125,7 @@ function renderSkills(): CommandResult {
   const defaultSkills: SkillCategory[] = [
     {
       name: 'Languages',
-      icon: '💻',
+      icon: '>>',
       skills: [
         { name: 'TypeScript', level: 95 },
         { name: 'JavaScript', level: 95 },
@@ -139,13 +139,13 @@ function renderSkills(): CommandResult {
   const lines: string[] = [];
   lines.push('');
   lines.push('# TECHNICAL SKILLS');
-  lines.push('═══════════════════════════════════════════════════════════════');
+  lines.push('===================================================================');
   lines.push('');
 
   for (const category of skills) {
-    lines.push(`<span class="term-cyan font-bold">${category.icon} ${category.name}</span>`);
+    lines.push(`<span class="term-cyan font-bold">>> ${category.name}</span>`);
     lines.push('');
-    
+
     for (const skill of category.skills) {
       const bar = createProgressBar(skill.level, 20, '▓', '░');
       lines.push(`  ${skill.name.padEnd(15)} <span class="term-green">${bar}</span> ${skill.level}%`);
@@ -179,15 +179,15 @@ function renderEducation(): CommandResult {
   const lines: string[] = [];
   lines.push('');
   lines.push('# EDUCATION');
-  lines.push('═══════════════════════════════════════════════════════════════');
+  lines.push('===================================================================');
   lines.push('');
 
   for (const edu of education) {
-    lines.push(`<span class="term-green font-bold">🎓 ${edu.degree} in ${edu.field}</span>`);
-    lines.push(`   <span class="term-cyan">${edu.institution}</span>`);
-    lines.push(`   <span class="term-dim">${edu.period} | ${edu.location}</span>`);
+    lines.push(`<span class="term-green font-bold">[*] ${edu.degree} in ${edu.field}</span>`);
+    lines.push(`    <span class="term-cyan">${edu.institution}</span>`);
+    lines.push(`    <span class="term-dim">${edu.period} | ${edu.location}</span>`);
     if (edu.gpa) {
-      lines.push(`   <span class="term-yellow">GPA: ${edu.gpa}</span>`);
+      lines.push(`    <span class="term-yellow">GPA: ${edu.gpa}</span>`);
     }
     lines.push('');
   }
@@ -206,12 +206,12 @@ function renderBlogList(): CommandResult {
   const lines: string[] = [];
   lines.push('');
   lines.push('# BLOG');
-  lines.push('═══════════════════════════════════════════════════════════════');
+  lines.push('===================================================================');
   lines.push('');
 
   if (blogData && blogData.length > 0) {
     for (const post of blogData.slice(0, 5)) {
-      lines.push(`<span class="term-green">📝 ${post.title}</span>`);
+      lines.push(`<span class="term-green">>> ${post.title}</span>`);
       lines.push(`   <span class="term-dim">${post.date}</span>`);
       lines.push('');
     }
@@ -244,16 +244,16 @@ function renderContact(): CommandResult {
   const lines: string[] = [];
   lines.push('');
   lines.push('# CONTACT');
-  lines.push('═══════════════════════════════════════════════════════════════');
+  lines.push('===================================================================');
   lines.push('');
-  lines.push(`<span class="term-cyan">📧 Email:</span>    <span class="term-green">${contact.email}</span>`);
-  lines.push(`<span class="term-cyan">🐙 GitHub:</span>   ${contact.github}`);
-  lines.push(`<span class="term-cyan">💼 LinkedIn:</span> ${contact.linkedin}`);
+  lines.push(`<span class="term-cyan">Email:</span>    <span class="term-green">${contact.email}</span>`);
+  lines.push(`<span class="term-cyan">GitHub:</span>   ${contact.github}`);
+  lines.push(`<span class="term-cyan">LinkedIn:</span> ${contact.linkedin}`);
   if (contact.twitter) {
-    lines.push(`<span class="term-cyan">🐦 Twitter:</span>  ${contact.twitter}`);
+    lines.push(`<span class="term-cyan">Twitter:</span>  ${contact.twitter}`);
   }
-  lines.push(`<span class="term-cyan">📍 Location:</span> ${contact.location}`);
-  lines.push(`<span class="term-cyan">💼 Status:</span>   <span class="term-green">${contact.availability}</span>`);
+  lines.push(`<span class="term-cyan">Location:</span> ${contact.location}`);
+  lines.push(`<span class="term-cyan">Status:</span>   <span class="term-green">${contact.availability}</span>`);
   lines.push('');
   lines.push('<span class="term-dim">Run `contact` for more details</span>');
   lines.push('');
@@ -267,10 +267,10 @@ function renderHobbies(): CommandResult {
   const hobbiesData = getContentData('hobbies') as Hobby[] | undefined;
 
   const defaultHobbies: Hobby[] = [
-    { name: 'Coding', icon: '💻', description: 'Building side projects and contributing to open source' },
-    { name: 'Gaming', icon: '🎮', description: 'Strategy and puzzle games' },
-    { name: 'Reading', icon: '📚', description: 'Tech books and sci-fi novels' },
-    { name: 'Hiking', icon: '🥾', description: 'Exploring nature and mountains' },
+    { name: 'Coding', icon: '>>', description: 'Building side projects and contributing to open source' },
+    { name: 'Gaming', icon: '>>', description: 'Strategy and puzzle games' },
+    { name: 'Reading', icon: '>>', description: 'Tech books and sci-fi novels' },
+    { name: 'Hiking', icon: '>>', description: 'Exploring nature and mountains' },
   ];
 
   const hobbies = hobbiesData ?? defaultHobbies;
@@ -278,7 +278,7 @@ function renderHobbies(): CommandResult {
   const lines: string[] = [];
   lines.push('');
   lines.push('# HOBBIES & INTERESTS');
-  lines.push('═══════════════════════════════════════════════════════════════');
+  lines.push('===================================================================');
   lines.push('');
 
   for (const hobby of hobbies) {
@@ -287,11 +287,10 @@ function renderHobbies(): CommandResult {
     lines.push('');
   }
 
-  lines.push('<span class="term-dim">Life isn\'t all about code... but mostly it is! 😄</span>');
+  lines.push('<span class="term-dim">Life isn\'t all about code... but mostly it is! :)</span>');
   lines.push('');
 
   return {
     output: lines.map((line) => createLine(line, 'output', { isHtml: true })),
   };
 }
-

@@ -49,7 +49,8 @@ export function TerminalInput({
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      if (input.trim() && !disabled) {
+      if (!disabled) {
+        // Submit even if empty (for new line behavior)
         onSubmit(input);
         setInput('');
         setHistoryIndex(-1);

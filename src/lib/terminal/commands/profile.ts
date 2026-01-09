@@ -15,39 +15,42 @@ export const profileCommand: Command = {
     const title = aboutData?.title ?? 'Full-Stack Developer';
     const tagline = aboutData?.tagline ?? 'Building the future, one commit at a time';
 
-    // Large ASCII art name "DANIEL"
+    // Large ASCII art name "DANIEL" - properly aligned
     const asciiName = [
-      ' ██████╗   █████╗  ███╗   ██╗ ██╗ ███████╗ ██╗     ',
-      ' ██╔══██╗ ██╔══██╗ ████╗  ██║ ██║ ██╔════╝ ██║     ',
-      ' ██║  ██║ ███████║ ██╔██╗ ██║ ██║ █████╗   ██║     ',
-      ' ██║  ██║ ██╔══██║ ██║╚██╗██║ ██║ ██╔══╝   ██║     ',
-      ' ██████╔╝ ██║  ██║ ██║ ╚████║ ██║ ███████╗ ███████╗',
-      ' ╚═════╝  ╚═╝  ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚══════╝ ╚══════╝',
+      ' ██████╗   █████╗  ███╗   ██╗ ██╗ ███████╗ ██╗      ',
+      ' ██╔══██╗ ██╔══██╗ ████╗  ██║ ██║ ██╔════╝ ██║      ',
+      ' ██║  ██║ ███████║ ██╔██╗ ██║ ██║ █████╗   ██║      ',
+      ' ██║  ██║ ██╔══██║ ██║╚██╗██║ ██║ ██╔══╝   ██║      ',
+      ' ██████╔╝ ██║  ██║ ██║ ╚████║ ██║ ███████╗ ███████╗ ',
+      ' ╚═════╝  ╚═╝  ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚══════╝ ╚══════╝ ',
     ];
 
+    const boxWidth = 68;
     const output: string[] = [];
     output.push('');
-    output.push('<span class="term-dim">╔══════════════════════════════════════════════════════════════════╗</span>');
-    output.push('<span class="term-dim">║</span>                                                                  <span class="term-dim">║</span>');
-    
-    // Add ASCII name
+    output.push('<span class="term-dim">+' + '-'.repeat(boxWidth) + '+</span>');
+    output.push('<span class="term-dim">|</span>' + ' '.repeat(boxWidth) + '<span class="term-dim">|</span>');
+
+    // Add ASCII name centered in box
     for (const line of asciiName) {
-      output.push(`<span class="term-dim">║</span> <span class="term-green font-bold">${line}</span> <span class="term-dim">║</span>`);
+      const padding = Math.floor((boxWidth - line.length) / 2);
+      const paddedLine = ' '.repeat(padding) + line + ' '.repeat(boxWidth - padding - line.length);
+      output.push(`<span class="term-dim">|</span><span class="term-green font-bold">${paddedLine}</span><span class="term-dim">|</span>`);
     }
-    
-    output.push('<span class="term-dim">║</span>                                                                  <span class="term-dim">║</span>');
-    output.push('<span class="term-dim">╚══════════════════════════════════════════════════════════════════╝</span>');
+
+    output.push('<span class="term-dim">|</span>' + ' '.repeat(boxWidth) + '<span class="term-dim">|</span>');
+    output.push('<span class="term-dim">+' + '-'.repeat(boxWidth) + '+</span>');
     output.push('');
-    
+
     // System info section
     output.push('  <span class="term-cyan font-bold">' + context.user + '@' + context.hostname + '</span>');
-    output.push('  <span class="term-dim">────────────────────────────────────────────</span>');
+    output.push('  <span class="term-dim">' + '-'.repeat(44) + '</span>');
     output.push('');
     output.push(`  <span class="term-cyan">Name</span>       <span class="term-white">${name}</span>`);
     output.push(`  <span class="term-cyan">Title</span>      <span class="term-white">${title}</span>`);
     output.push(`  <span class="term-cyan">Tagline</span>    <span class="term-dim">"${tagline}"</span>`);
     output.push('');
-    output.push('  <span class="term-dim">────────────────────────────────────────────</span>');
+    output.push('  <span class="term-dim">' + '-'.repeat(44) + '</span>');
     output.push('');
     output.push('  <span class="term-cyan">OS</span>         <span class="term-white">Portfolio OS v1.0.0</span>');
     output.push('  <span class="term-cyan">Host</span>       <span class="term-white">Web Browser</span>');
@@ -55,13 +58,13 @@ export const profileCommand: Command = {
     output.push('  <span class="term-cyan">Shell</span>      <span class="term-white">zsh 5.9</span>');
     output.push('  <span class="term-cyan">Terminal</span>   <span class="term-white">Portfolio Terminal</span>');
     output.push('');
-    output.push('  <span class="term-dim">────────────────────────────────────────────</span>');
+    output.push('  <span class="term-dim">' + '-'.repeat(44) + '</span>');
     output.push('');
     output.push('  <span class="term-cyan">Languages</span>  <span class="term-yellow">TypeScript</span> <span class="term-dim">|</span> <span class="term-blue">Python</span> <span class="term-dim">|</span> <span class="term-orange">Rust</span>');
     output.push('  <span class="term-cyan">Frameworks</span> <span class="term-cyan">React</span> <span class="term-dim">|</span> <span class="term-white">Next.js</span> <span class="term-dim">|</span> <span class="term-green">Node.js</span>');
     output.push('  <span class="term-cyan">Tools</span>      <span class="term-red">Git</span> <span class="term-dim">|</span> <span class="term-blue">Docker</span> <span class="term-dim">|</span> <span class="term-yellow">AWS</span>');
     output.push('');
-    
+
     // Color palette using blocks
     output.push('  <span class="term-bg-black">   </span><span class="term-bg-red">   </span><span class="term-bg-green">   </span><span class="term-bg-yellow">   </span><span class="term-bg-blue">   </span><span class="term-bg-magenta">   </span><span class="term-bg-cyan">   </span><span class="term-bg-white">   </span>');
     output.push('');

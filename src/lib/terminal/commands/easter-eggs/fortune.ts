@@ -11,7 +11,7 @@ const fortunes = [
   '"Programming isn\'t about what you know; it\'s about what you can figure out." - Chris Pine',
   '"The only way to learn a new programming language is by writing programs in it." - Dennis Ritchie',
   '"Deleted code is debugged code." - Jeff Sickel',
-  '"It\'s not a bug – it\'s an undocumented feature." - Anonymous',
+  '"It\'s not a bug - it\'s an undocumented feature." - Anonymous',
   '"Talk is cheap. Show me the code." - Linus Torvalds',
   '"Programs must be written for people to read, and only incidentally for machines to execute." - Harold Abelson',
   '"The most disastrous thing that you can ever learn is your first programming language." - Alan Kay',
@@ -31,29 +31,29 @@ export const fortuneCommand: Command = {
   hidden: true,
   execute: (): CommandResult => {
     const fortune = randomFrom(fortunes);
-    
+
     const lines: string[] = [];
     lines.push('');
-    lines.push('╭────────────────────────────────────────────────────────────────╮');
-    lines.push('│  <span class="term-yellow">🔮 FORTUNE COOKIE</span>                                             │');
-    lines.push('├────────────────────────────────────────────────────────────────┤');
-    
+    lines.push('+------------------------------------------------------------------+');
+    lines.push('|  <span class="term-yellow">[*] FORTUNE COOKIE</span>                                             |');
+    lines.push('+------------------------------------------------------------------+');
+
     // Word wrap the fortune
     const words = fortune.split(' ');
-    let currentLine = '│  ';
+    let currentLine = '|  ';
     const maxWidth = 60;
-    
+
     for (const word of words) {
       if ((currentLine + word).length > maxWidth) {
-        lines.push(currentLine.padEnd(66) + '│');
-        currentLine = '│  ' + word + ' ';
+        lines.push(currentLine.padEnd(66) + '|');
+        currentLine = '|  ' + word + ' ';
       } else {
         currentLine += word + ' ';
       }
     }
-    lines.push(currentLine.padEnd(66) + '│');
-    
-    lines.push('╰────────────────────────────────────────────────────────────────╯');
+    lines.push(currentLine.padEnd(66) + '|');
+
+    lines.push('+------------------------------------------------------------------+');
     lines.push('');
 
     return {
@@ -61,4 +61,3 @@ export const fortuneCommand: Command = {
     };
   },
 };
-

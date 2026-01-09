@@ -39,6 +39,41 @@ export const catCommand: Command = {
       };
     }
 
+    // Check for restricted files
+    if (content === '__RESTRICTED__') {
+      const lines: string[] = [];
+      lines.push('');
+      lines.push('<span class="term-red font-bold">ACCESS DENIED</span>');
+      lines.push('');
+      lines.push(`<span class="term-dim">cat: ${target}: Permission denied</span>`);
+      lines.push('');
+      lines.push('<span class="term-yellow">You do not have permission to view this file.</span>');
+      lines.push('<span class="term-dim">This file is owned by root and requires elevated privileges.</span>');
+      lines.push('');
+
+      // Add intriguing hints based on the file
+      if (target.includes('classified') || target.includes('project_x')) {
+        lines.push('<span class="term-dim">+----------------------------------------------------------+</span>');
+        lines.push('<span class="term-dim">|</span> <span class="term-yellow">NOTICE:</span> This file contains classified information.     <span class="term-dim">|</span>');
+        lines.push('<span class="term-dim">|</span> Unauthorized access attempts are logged and monitored.   <span class="term-dim">|</span>');
+        lines.push('<span class="term-dim">+----------------------------------------------------------+</span>');
+        lines.push('');
+        lines.push('<span class="term-dim">Curious about what\'s inside? Some secrets are meant to</span>');
+        lines.push('<span class="term-dim">stay hidden... for now. ;)</span>');
+      } else if (target.includes('shadow')) {
+        lines.push('<span class="term-dim">The shadow file contains encrypted password hashes.</span>');
+        lines.push('<span class="term-dim">Nice try though!</span>');
+      } else if (target.includes('notes')) {
+        lines.push('<span class="term-dim">Personal notes of the system administrator.</span>');
+        lines.push('<span class="term-dim">What could they be working on?</span>');
+      }
+      lines.push('');
+
+      return {
+        output: lines.map((line) => createLine(line, 'output', { isHtml: true })),
+      };
+    }
+
     // Check if it's dynamic content
     if (typeof content === 'object' && 'type' in content) {
       return renderContentData(content as ContentData);
@@ -54,10 +89,9 @@ export const catCommand: Command = {
     // Regular text file
     const lines = (content as string).split('\n');
     return {
-      output: lines.map((line) => 
+      output: lines.map((line) =>
         createLine(escapeHtml(line), 'output', { isHtml: true })
       ),
     };
   },
 };
-

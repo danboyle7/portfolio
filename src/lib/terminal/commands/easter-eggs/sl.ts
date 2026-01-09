@@ -10,7 +10,7 @@ export const slCommand: Command = {
     // ASCII art train
     const train = [
       '',
-      '<span class="term-yellow">You meant "ls", didn\'t you? 🚂</span>',
+      '<span class="term-yellow">You meant "ls", didn\'t you? :)</span>',
       '',
       '      ====        ________                ___________',
       '  _D _|  |_______/        \\__I_I_____===__|_________|',
@@ -23,7 +23,7 @@ export const slCommand: Command = {
       ' |/-=|___|=    ||    ||    ||    |_____/~\\___/       ',
       '  \\_/      \\O=====O=====O=====O_/      \\_/           ',
       '',
-      '<span class="term-dim">Pro tip: Be careful with those fingers! 😉</span>',
+      '<span class="term-dim">Pro tip: Be careful with those fingers! ;)</span>',
       '',
     ];
 
@@ -32,4 +32,3 @@ export const slCommand: Command = {
     };
   },
 };
-

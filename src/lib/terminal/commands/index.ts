@@ -165,17 +165,27 @@ export async function executeCommand(
  */
 export function getCommandSuggestions(partial: string): string[] {
   const lower = partial.toLowerCase();
-  const suggestions: string[] = [];
+  const suggestions = new Set<string>();
 
-  for (const cmd of commands.values()) {
-    if (cmd.name.startsWith(lower) && !cmd.hidden) {
-      if (!suggestions.includes(cmd.name)) {
-        suggestions.push(cmd.name);
+  for (const cmd of allCommands) {
+    if (cmd.hidden) continue;
+
+    // Match command name
+    if (cmd.name.startsWith(lower)) {
+      suggestions.add(cmd.name);
+    }
+
+    // Match aliases
+    if (cmd.aliases) {
+      for (const alias of cmd.aliases) {
+        if (alias.startsWith(lower)) {
+          suggestions.add(alias);
+        }
       }
     }
   }
 
-  return suggestions.sort();
+  return Array.from(suggestions).sort();
 }
 
 export { allCommands };
