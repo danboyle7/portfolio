@@ -1,0 +1,30 @@
+/* Decap CMS Preview Styles */
+
+body {
+  font-family: 'Fira Code', monospace;
+  background-color: #000;
+  color: #00ff41;
+  padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #00ff41;
+}
+
+a {
+  color: #00bfff;
+}
+
+code {
+  background: rgba(0, 255, 65, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+pre {
+  background: rgba(0, 255, 65, 0.05);
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+

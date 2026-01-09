@@ -1,0 +1,51 @@
+# Blog Post
+
+slug: "building-terminal-portfolio"
+title: "Building a Terminal-Style Portfolio with Next.js"
+date: "2024-01-15"
+excerpt: "How I created this unique terminal-inspired portfolio website using Next.js and TypeScript."
+readTime: "8 min read"
+tags:
+  - "Next.js"
+  - "TypeScript"
+  - "Portfolio"
+  - "Creative"
+  - "React"
+
+content: |
+  # Building a Terminal-Style Portfolio
+
+  When I set out to create my portfolio, I wanted something that would stand out 
+  and showcase my personality as a developer. What better way than to build an 
+  interactive terminal experience?
+
+  ## The Concept
+
+  The idea was simple: create a portfolio that feels like a real terminal, complete 
+  with a boot sequence, file system navigation, and easter eggs for the curious.
+
+  ## Technical Implementation
+
+  The portfolio is built with:
+  - **Next.js 16** for the framework
+  - **TypeScript** for type safety
+  - **Tailwind CSS** for styling
+  - **React hooks** for state management
+
+  ## Key Features
+
+  1. **Boot Sequence** - A dramatic initialization that sets the mood
+  2. **Virtual File System** - Navigate through my experience like files
+  3. **Real Commands** - ls, cd, cat, and more actually work
+  4. **Easter Eggs** - Try `cowsay`, `matrix`, or `sudo rm -rf /`
+
+  ## Lessons Learned
+
+  Building this taught me a lot about:
+  - Creating immersive user experiences
+  - Balancing creativity with usability
+  - The importance of small details
+
+  The terminal aesthetic isn't just a gimmick—it's a statement about who I am as 
+  a developer: someone who lives in the command line and loves what they do.
+

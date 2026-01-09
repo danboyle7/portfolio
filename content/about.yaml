@@ -1,0 +1,16 @@
+# About Me - Personal Information
+# Edit this file to update your portfolio information
+
+name: "Daniel Boyle"
+title: "Full-Stack Developer"
+tagline: "Building the future, one commit at a time"
+
+bio:
+  - "Passionate software engineer with 6+ years of experience building web applications and scalable systems."
+  - "I love creating elegant solutions to complex problems, contributing to open source, and mentoring other developers."
+  - "When I'm not coding, you'll find me exploring new technologies, hiking in the mountains, or working on side projects."
+
+# Optional fields
+avatar: "/images/avatar.png"
+resumeUrl: "/resume.pdf"
+

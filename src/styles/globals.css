@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+/* ============================================
+   TERMINAL PORTFOLIO STYLES
+   ============================================ */
+
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Base terminal styles */
+html {
+  background-color: #000;
+  color: #00ff41;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: #000;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Terminal color classes */
+.term-green { color: #00ff41; }
+.term-blue { color: #00bfff; }
+.term-cyan { color: #00ffff; }
+.term-yellow { color: #ffff00; }
+.term-orange { color: #ff8c00; }
+.term-red { color: #ff4444; }
+.term-magenta { color: #ff00ff; }
+.term-white { color: #ffffff; }
+.term-dim { color: #4a5568; }
+.term-gray { color: #718096; }
+
+/* Background color variants */
+.term-bg-black { background-color: #000000; }
+.term-bg-red { background-color: #ff4444; }
+.term-bg-green { background-color: #00ff41; }
+.term-bg-yellow { background-color: #ffff00; }
+.term-bg-blue { background-color: #00bfff; }
+.term-bg-magenta { background-color: #ff00ff; }
+.term-bg-cyan { background-color: #00ffff; }
+.term-bg-white { background-color: #ffffff; }
+
+/* Blinking cursor animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+/* Cursor blink for terminal */
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.animate-cursor-blink {
+  animation: cursor-blink 1s steps(1) infinite;
+}
+
+/* Matrix rain fall animation */
+@keyframes matrix-fall {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Glitch effect */
+@keyframes glitch {
+  0% { transform: translate(0); filter: hue-rotate(0deg); }
+  10% { transform: translate(-5px, -5px); filter: hue-rotate(90deg); }
+  20% { transform: translate(5px, 5px); filter: hue-rotate(180deg); }
+  30% { transform: translate(-5px, 5px); filter: hue-rotate(270deg); }
+  40% { transform: translate(5px, -5px); filter: hue-rotate(360deg); }
+  50% { transform: translate(-5px, 0); }
+  60% { transform: translate(5px, 0); }
+  70% { transform: translate(0, -5px); }
+  80% { transform: translate(0, 5px); }
+  90% { transform: translate(-2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.animate-glitch {
+  animation: glitch 0.3s ease-in-out infinite;
+}
+
+/* Scan line animation */
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-scan {
+  animation: scan 8s linear infinite;
+}
+
+/* Typing animation */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.animate-typing {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 2s steps(40, end);
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Pulse glow animation */
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(0, 255, 65, 0.2), 0 0 10px rgba(0, 255, 65, 0.1);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4), 0 0 30px rgba(0, 255, 65, 0.2);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Terminal scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a3a1a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2a5a2a;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1a3a1a #0a0a0a;
+}
+
+/* Selection colors */
+::selection {
+  background: rgba(0, 255, 65, 0.3);
+  color: #00ff41;
+}
+
+/* Focus styles */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 1px solid #00ff41;
+  outline-offset: 2px;
+}
+
+/* Link styles */
+a {
+  color: #00bfff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #00ffff;
+  text-decoration: underline;
+}
+
+/* Code blocks */
+pre, code {
+  font-family: var(--font-mono);
+  background: rgba(0, 255, 65, 0.05);
+  border-radius: 4px;
+}
+
+code {
+  padding: 0.1em 0.3em;
+}
+
+pre {
+  padding: 1em;
+  overflow-x: auto;
+}
+
+/* Terminal window styles */
+.terminal-window {
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  border-radius: 8px;
+  box-shadow: 
+    0 0 0 1px rgba(0, 255, 65, 0.1),
+    0 4px 60px rgba(0, 255, 65, 0.1),
+    inset 0 0 80px rgba(0, 255, 65, 0.02);
+}
+
+/* Terminal glow effect */
+.terminal-glow {
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+}
+
+/* ASCII art text */
+.ascii-art {
+  font-family: var(--font-mono);
+  line-height: 1.2;
+  white-space: pre;
+  letter-spacing: 0;
+}
+
+/* Progress bar styles */
+.progress-bar {
+  font-family: var(--font-mono);
+}
+
+/* Responsive text sizes */
+@media (max-width: 640px) {
+  body {
+    font-size: 12px;
+  }
+  
+  .ascii-art {
+    font-size: 8px;
+  }
+}
+
+/* Disable user selection on decorative elements */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .term-green, .term-blue, .term-cyan, 
+  .term-yellow, .term-magenta, .term-white {
+    color: black;
+  }
+}

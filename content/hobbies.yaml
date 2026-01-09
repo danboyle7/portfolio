@@ -1,0 +1,33 @@
+# Hobbies & Interests
+
+hobbies:
+  - name: "Open Source"
+    icon: "🌐"
+    description: "Contributing to open source projects and maintaining my own libraries"
+    level: "Active contributor"
+
+  - name: "Gaming"
+    icon: "🎮"
+    description: "Strategy games, puzzle games, and the occasional indie gem"
+    level: "Casual"
+
+  - name: "Reading"
+    icon: "📚"
+    description: "Tech books, sci-fi novels, and software architecture papers"
+    level: "Avid reader"
+
+  - name: "Hiking"
+    icon: "🥾"
+    description: "Exploring trails and enjoying nature"
+    level: "Weekend warrior"
+
+  - name: "Photography"
+    icon: "📷"
+    description: "Capturing landscapes and urban scenes"
+    level: "Hobbyist"
+
+  - name: "Music"
+    icon: "🎵"
+    description: "Playing guitar and exploring new genres"
+    level: "Learning"
+

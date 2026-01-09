@@ -1,0 +1,26 @@
+# Education History
+
+education:
+  - institution: "University of Technology"
+    degree: "Bachelor of Science"
+    field: "Computer Science"
+    period: "2014 - 2018"
+    location: "San Francisco, CA"
+    gpa: "3.8"
+    highlights:
+      - "Dean's List all semesters"
+      - "Senior capstone: Distributed systems project"
+      - "Teaching assistant for Data Structures course"
+      - "Member of ACM student chapter"
+
+  - institution: "Professional Certifications"
+    degree: "Industry Certifications"
+    field: "Cloud & DevOps"
+    period: "2018 - Present"
+    location: "Online"
+    highlights:
+      - "AWS Solutions Architect Associate"
+      - "Google Cloud Professional Developer"
+      - "Kubernetes Administrator (CKA)"
+      - "Terraform Associate"
+

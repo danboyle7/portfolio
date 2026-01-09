@@ -1,0 +1,62 @@
+# Portfolio Projects
+
+projects:
+  - name: "terminal-portfolio"
+    description: "This terminal-style portfolio you're viewing right now!"
+    technologies:
+      - "Next.js"
+      - "TypeScript"
+      - "Tailwind CSS"
+      - "React"
+    status: "production"
+    github: "github.com/danielboyle/terminal-portfolio"
+    live: "danielboyle.dev"
+    stars: 42
+
+  - name: "cloud-sync"
+    description: "Real-time file synchronization service with conflict resolution and cross-platform support"
+    technologies:
+      - "Rust"
+      - "gRPC"
+      - "PostgreSQL"
+      - "Redis"
+      - "Docker"
+    status: "production"
+    github: "github.com/danielboyle/cloud-sync"
+    stars: 128
+
+  - name: "devtools-extension"
+    description: "Browser extension for debugging React applications with component tree visualization"
+    technologies:
+      - "TypeScript"
+      - "React"
+      - "Chrome APIs"
+      - "WebExtensions"
+    status: "beta"
+    github: "github.com/danielboyle/devtools-extension"
+    stars: 67
+
+  - name: "ml-pipeline"
+    description: "Automated machine learning pipeline for data processing, training, and deployment"
+    technologies:
+      - "Python"
+      - "TensorFlow"
+      - "Docker"
+      - "Airflow"
+      - "MLflow"
+    status: "development"
+    github: "github.com/danielboyle/ml-pipeline"
+    stars: 34
+
+  - name: "api-gateway"
+    description: "High-performance API gateway with rate limiting, caching, and observability"
+    technologies:
+      - "Go"
+      - "Redis"
+      - "Prometheus"
+      - "Kubernetes"
+      - "gRPC"
+    status: "production"
+    github: "github.com/danielboyle/api-gateway"
+    stars: 256
+

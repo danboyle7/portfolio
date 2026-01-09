@@ -1,0 +1,180 @@
+# Decap CMS Configuration
+# https://decapcms.org/docs/configuration-options/
+
+backend:
+  name: git-gateway
+  branch: main # Branch to update
+
+# Local backend for development
+# Uncomment below for local development:
+# local_backend: true
+
+# Media files configuration
+media_folder: "public/images"
+public_folder: "/images"
+
+# Site URL (update with your actual domain)
+site_url: https://danielboyle.dev
+display_url: https://danielboyle.dev
+logo_url: https://danielboyle.dev/favicon.ico
+
+# Collections
+collections:
+  # About/Profile
+  - name: "about"
+    label: "About"
+    files:
+      - name: "about"
+        label: "About Me"
+        file: "content/about.yaml"
+        format: "yaml"
+        fields:
+          - { name: "name", label: "Full Name", widget: "string" }
+          - { name: "title", label: "Job Title", widget: "string" }
+          - { name: "tagline", label: "Tagline", widget: "string" }
+          - { name: "bio", label: "Bio Paragraphs", widget: "list", field: { name: "paragraph", widget: "text" } }
+          - { name: "avatar", label: "Avatar Image", widget: "image", required: false }
+          - { name: "resumeUrl", label: "Resume URL", widget: "string", required: false }
+
+  # Experience
+  - name: "experience"
+    label: "Experience"
+    files:
+      - name: "experience"
+        label: "Work Experience"
+        file: "content/experience.yaml"
+        format: "yaml"
+        fields:
+          - name: "experience"
+            label: "Jobs"
+            widget: "list"
+            fields:
+              - { name: "company", label: "Company", widget: "string" }
+              - { name: "role", label: "Role/Title", widget: "string" }
+              - { name: "period", label: "Time Period", widget: "string" }
+              - { name: "location", label: "Location", widget: "string" }
+              - { name: "description", label: "Description", widget: "text" }
+              - { name: "highlights", label: "Highlights", widget: "list", field: { name: "item", widget: "string" } }
+              - { name: "technologies", label: "Technologies", widget: "list", field: { name: "tech", widget: "string" } }
+
+  # Skills
+  - name: "skills"
+    label: "Skills"
+    files:
+      - name: "skills"
+        label: "Technical Skills"
+        file: "content/skills.yaml"
+        format: "yaml"
+        fields:
+          - name: "skills"
+            label: "Skill Categories"
+            widget: "list"
+            fields:
+              - { name: "name", label: "Category Name", widget: "string" }
+              - { name: "icon", label: "Icon (emoji)", widget: "string" }
+              - name: "skills"
+                label: "Skills"
+                widget: "list"
+                fields:
+                  - { name: "name", label: "Skill Name", widget: "string" }
+                  - { name: "level", label: "Proficiency (0-100)", widget: "number", min: 0, max: 100 }
+                  - { name: "years", label: "Years of Experience", widget: "number", required: false }
+
+  # Education
+  - name: "education"
+    label: "Education"
+    files:
+      - name: "education"
+        label: "Education History"
+        file: "content/education.yaml"
+        format: "yaml"
+        fields:
+          - name: "education"
+            label: "Education"
+            widget: "list"
+            fields:
+              - { name: "institution", label: "Institution", widget: "string" }
+              - { name: "degree", label: "Degree", widget: "string" }
+              - { name: "field", label: "Field of Study", widget: "string" }
+              - { name: "period", label: "Time Period", widget: "string" }
+              - { name: "location", label: "Location", widget: "string" }
+              - { name: "gpa", label: "GPA", widget: "string", required: false }
+              - { name: "highlights", label: "Highlights", widget: "list", required: false, field: { name: "item", widget: "string" } }
+
+  # Hobbies
+  - name: "hobbies"
+    label: "Hobbies"
+    files:
+      - name: "hobbies"
+        label: "Hobbies & Interests"
+        file: "content/hobbies.yaml"
+        format: "yaml"
+        fields:
+          - name: "hobbies"
+            label: "Hobbies"
+            widget: "list"
+            fields:
+              - { name: "name", label: "Name", widget: "string" }
+              - { name: "icon", label: "Icon (emoji)", widget: "string" }
+              - { name: "description", label: "Description", widget: "text" }
+              - { name: "level", label: "Level", widget: "string", required: false }
+
+  # Contact
+  - name: "contact"
+    label: "Contact"
+    files:
+      - name: "contact"
+        label: "Contact Information"
+        file: "content/contact.yaml"
+        format: "yaml"
+        fields:
+          - name: "contact"
+            label: "Contact Info"
+            widget: "object"
+            fields:
+              - { name: "email", label: "Email", widget: "string" }
+              - { name: "github", label: "GitHub URL", widget: "string" }
+              - { name: "linkedin", label: "LinkedIn URL", widget: "string" }
+              - { name: "twitter", label: "Twitter URL", widget: "string", required: false }
+              - { name: "website", label: "Website URL", widget: "string", required: false }
+              - { name: "location", label: "Location", widget: "string" }
+              - { name: "availability", label: "Availability Status", widget: "string" }
+
+  # Projects
+  - name: "projects"
+    label: "Projects"
+    files:
+      - name: "projects"
+        label: "Portfolio Projects"
+        file: "content/projects.yaml"
+        format: "yaml"
+        fields:
+          - name: "projects"
+            label: "Projects"
+            widget: "list"
+            fields:
+              - { name: "name", label: "Project Name", widget: "string" }
+              - { name: "description", label: "Description", widget: "text" }
+              - { name: "technologies", label: "Technologies", widget: "list", field: { name: "tech", widget: "string" } }
+              - { name: "status", label: "Status", widget: "select", options: ["production", "beta", "development", "archived"] }
+              - { name: "github", label: "GitHub URL", widget: "string", required: false }
+              - { name: "live", label: "Live URL", widget: "string", required: false }
+              - { name: "stars", label: "GitHub Stars", widget: "number", required: false }
+
+  # Blog Posts
+  - name: "blog"
+    label: "Blog"
+    folder: "content/blog"
+    format: "yaml"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "slug"
+    fields:
+      - { name: "slug", label: "Slug", widget: "string" }
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "date", label: "Date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { name: "excerpt", label: "Excerpt", widget: "text" }
+      - { name: "readTime", label: "Read Time", widget: "string" }
+      - { name: "tags", label: "Tags", widget: "list", field: { name: "tag", widget: "string" } }
+      - { name: "content", label: "Content", widget: "markdown" }
+

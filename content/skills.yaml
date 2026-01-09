@@ -1,0 +1,86 @@
+# Technical Skills
+# Organize your skills by category with proficiency levels (0-100)
+
+skills:
+  - name: "Languages"
+    icon: "💻"
+    skills:
+      - name: "TypeScript"
+        level: 95
+        years: 6
+      - name: "JavaScript"
+        level: 95
+        years: 8
+      - name: "Python"
+        level: 85
+        years: 5
+      - name: "Rust"
+        level: 70
+        years: 2
+      - name: "Go"
+        level: 65
+        years: 2
+      - name: "SQL"
+        level: 85
+        years: 6
+
+  - name: "Frameworks"
+    icon: "🚀"
+    skills:
+      - name: "React"
+        level: 95
+        years: 6
+      - name: "Next.js"
+        level: 95
+        years: 4
+      - name: "Node.js"
+        level: 90
+        years: 6
+      - name: "Express"
+        level: 85
+        years: 5
+      - name: "FastAPI"
+        level: 75
+        years: 2
+      - name: "Tailwind CSS"
+        level: 90
+        years: 3
+
+  - name: "Tools & DevOps"
+    icon: "🔧"
+    skills:
+      - name: "Git"
+        level: 95
+        years: 8
+      - name: "Docker"
+        level: 85
+        years: 4
+      - name: "Kubernetes"
+        level: 70
+        years: 2
+      - name: "AWS"
+        level: 80
+        years: 4
+      - name: "CI/CD"
+        level: 85
+        years: 5
+      - name: "Linux"
+        level: 85
+        years: 8
+
+  - name: "Databases"
+    icon: "🗄️"
+    skills:
+      - name: "PostgreSQL"
+        level: 90
+        years: 5
+      - name: "MongoDB"
+        level: 80
+        years: 4
+      - name: "Redis"
+        level: 75
+        years: 3
+      - name: "SQLite"
+        level: 85
+        years: 6
+

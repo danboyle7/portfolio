@@ -1,0 +1,202 @@
+'use client';
+
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { formatPath, resolvePath } from '@/lib/terminal/utils';
+import { getCommandSuggestions } from '@/lib/terminal/commands';
+import { listDirectory } from '@/lib/terminal/file-system';
+import type { FileSystemNode } from '@/lib/terminal/types';
+
+interface TerminalInputProps {
+  currentPath: string;
+  hostname: string;
+  user: string;
+  onSubmit: (command: string) => void;
+  commandHistory: string[];
+  fileSystem: FileSystemNode;
+  disabled?: boolean;
+}
+
+export function TerminalInput({
+  currentPath,
+  hostname,
+  user,
+  onSubmit,
+  commandHistory,
+  fileSystem,
+  disabled = false,
+}: TerminalInputProps) {
+  const [input, setInput] = useState('');
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [savedInput, setSavedInput] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const displayPath = formatPath(currentPath);
+
+  // Focus input on mount and when clicked anywhere
+  useEffect(() => {
+    const focusInput = () => {
+      if (!disabled) {
+        inputRef.current?.focus();
+      }
+    };
+
+    focusInput();
+    window.addEventListener('click', focusInput);
+
+    return () => window.removeEventListener('click', focusInput);
+  }, [disabled]);
+
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (input.trim() && !disabled) {
+        onSubmit(input);
+        setInput('');
+        setHistoryIndex(-1);
+        setSavedInput('');
+      }
+    },
+    [input, disabled, onSubmit]
+  );
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      // History navigation
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (commandHistory.length === 0) return;
+
+        if (historyIndex === -1) {
+          setSavedInput(input);
+        }
+
+        const newIndex = Math.min(historyIndex + 1, commandHistory.length - 1);
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[commandHistory.length - 1 - newIndex] ?? '');
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyIndex <= 0) {
+          setHistoryIndex(-1);
+          setInput(savedInput);
+          return;
+        }
+
+        const newIndex = historyIndex - 1;
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[commandHistory.length - 1 - newIndex] ?? '');
+      }
+
+      // Tab completion
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const parts = input.split(' ');
+        const lastPart = parts[parts.length - 1] ?? '';
+
+        if (parts.length === 1 && !lastPart.includes('/') && !lastPart.startsWith('.')) {
+          // Command completion
+          const suggestions = getCommandSuggestions(lastPart);
+          if (suggestions.length === 1) {
+            setInput(suggestions[0]! + ' ');
+          } else if (suggestions.length > 1) {
+            const commonPrefix = findCommonPrefix(suggestions);
+            if (commonPrefix.length > lastPart.length) {
+              setInput(commonPrefix);
+            }
+          }
+        } else {
+          // Path completion
+          const pathToComplete = lastPart;
+          const basePath = pathToComplete.includes('/')
+            ? pathToComplete.substring(0, pathToComplete.lastIndexOf('/') + 1)
+            : '';
+          const partial = pathToComplete.includes('/')
+            ? pathToComplete.substring(pathToComplete.lastIndexOf('/') + 1)
+            : pathToComplete.replace('./', '');
+
+          const searchPath = resolvePath(currentPath, basePath || '.');
+          const entries = listDirectory(fileSystem, searchPath);
+
+          if (entries) {
+            const matches = entries
+              .filter(e => e.name.toLowerCase().startsWith(partial.toLowerCase()))
+              .map(e => e.type === 'directory' ? e.name + '/' : e.name);
+
+            if (matches.length === 1) {
+              const prefix = parts.slice(0, -1).join(' ');
+              const newPath = basePath + matches[0];
+              setInput(prefix ? prefix + ' ' + newPath : newPath);
+            } else if (matches.length > 1) {
+              const commonPrefix = findCommonPrefix(matches);
+              if (commonPrefix.length > partial.length) {
+                const prefix = parts.slice(0, -1).join(' ');
+                const newPath = basePath + commonPrefix;
+                setInput(prefix ? prefix + ' ' + newPath : newPath);
+              }
+            }
+          }
+        }
+      }
+
+      // Clear line with Ctrl+U
+      if (e.key === 'u' && e.ctrlKey) {
+        e.preventDefault();
+        setInput('');
+      }
+
+      // Clear screen with Ctrl+L
+      if (e.key === 'l' && e.ctrlKey) {
+        e.preventDefault();
+        onSubmit('clear');
+        setInput('');
+      }
+    },
+    [input, commandHistory, historyIndex, savedInput, onSubmit, currentPath, fileSystem]
+  );
+
+  return (
+    <form onSubmit={handleSubmit} className="flex items-center gap-0 text-sm">
+      {/* Prompt */}
+      <span className="text-green-400 font-bold shrink-0">{user}@{hostname}</span>
+      <span className="text-green-600 shrink-0">:</span>
+      <span className="text-blue-400 font-bold shrink-0">{displayPath}</span>
+      <span className="text-green-600 shrink-0">$</span>
+      <div className="ml-2 flex-1 relative">
+        {/* Visible text with cursor */}
+        <div className="flex items-center">
+          <span className="text-green-300 whitespace-pre">{input}</span>
+          <span className="inline-block w-2 h-5 bg-green-400 animate-blink" />
+        </div>
+        {/* Hidden input for capturing keystrokes */}
+        <input
+          ref={inputRef}
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          disabled={disabled}
+          className="absolute inset-0 w-full h-full opacity-0 cursor-text"
+          spellCheck={false}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+        />
+      </div>
+    </form>
+  );
+}
+
+function findCommonPrefix(strings: string[]): string {
+  if (strings.length === 0) return '';
+  if (strings.length === 1) return strings[0]!;
+
+  let prefix = strings[0]!;
+  for (let i = 1; i < strings.length; i++) {
+    while (!strings[i]!.startsWith(prefix)) {
+      prefix = prefix.slice(0, -1);
+      if (prefix === '') return '';
+    }
+  }
+  return prefix;
+}
