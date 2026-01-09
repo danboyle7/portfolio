@@ -8,7 +8,12 @@ export const echoCommand: Command = {
   execute: (args, context): CommandResult => {
     let text = args.join(' ');
 
-    // Handle environment variables
+    // Handle special shell variables ($?, $$, $0, etc.)
+    text = text.replace(/\$\?/g, context.env['?'] ?? '0');
+    text = text.replace(/\$\$/g, context.env['$'] ?? '1337');
+    text = text.replace(/\$0/g, context.env['0'] ?? 'zsh');
+
+    // Handle regular environment variables
     text = text.replace(/\$(\w+)/g, (_, varName) => {
       return context.env[varName] ?? '';
     });
@@ -18,7 +23,7 @@ export const echoCommand: Command = {
       .replace(/\\n/g, '\n')
       .replace(/\\t/g, '\t');
 
-    const lines = text.split('\n').map((line) => 
+    const lines = text.split('\n').map((line) =>
       createLine(escapeHtml(line), 'output', { isHtml: true })
     );
 

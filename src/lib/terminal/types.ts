@@ -16,8 +16,9 @@ export interface AnimatedLine {
 }
 
 export interface InteractiveMode {
-  type: 'blog' | 'search' | 'snake' | 'echo' | null;
+  type: 'blog' | 'search' | 'snake' | 'echo' | 'portfolio' | null;
   data?: unknown;
+  section?: 'skills' | 'experience' | 'education' | 'projects';
 }
 
 export interface CommandResult {

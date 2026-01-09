@@ -16,6 +16,7 @@ import { TerminalHeader } from './TerminalHeader';
 import { InteractiveBlog } from './InteractiveBlog';
 import { SnakeGame } from './SnakeGame';
 import { InteractiveEcho } from './InteractiveEcho';
+import { InteractivePortfolio } from './InteractivePortfolio';
 import type { InteractiveMode } from '@/lib/terminal/types';
 
 // Initialize content on module load
@@ -533,6 +534,15 @@ export function Terminal() {
           {interactiveMode?.type === 'echo' && (
             <div className="mt-4 mb-4">
               <InteractiveEcho
+                onExit={handleExitInteractive}
+              />
+            </div>
+          )}
+
+          {interactiveMode?.type === 'portfolio' && interactiveMode.section && (
+            <div className="fixed inset-0 z-50 bg-black">
+              <InteractivePortfolio
+                section={interactiveMode.section}
                 onExit={handleExitInteractive}
               />
             </div>

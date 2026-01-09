@@ -15,9 +15,17 @@ interface Project {
 export const projectsCommand: Command = {
   name: 'projects',
   description: 'Display portfolio projects',
-  usage: 'projects [--detailed]',
+  usage: 'projects [-i] [--detailed]',
   aliases: ['portfolio', 'repos'],
   execute: (args): CommandResult => {
+    // Check for interactive mode flag (default if no args)
+    if (args.includes('-i') || args.includes('--interactive') || args.length === 0) {
+      return {
+        output: [createLine('Launching interactive projects viewer...', 'system')],
+        enterInteractiveMode: { type: 'portfolio', section: 'projects' },
+      };
+    }
+
     const projects = getContentData('projects') as Project[] | undefined;
     const detailed = args.includes('--detailed') || args.includes('-d');
 

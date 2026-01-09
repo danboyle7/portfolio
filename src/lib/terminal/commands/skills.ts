@@ -5,8 +5,16 @@ import { getContentData } from '../file-system';
 export const skillsCommand: Command = {
   name: 'skills',
   description: 'Display technical skills',
-  usage: 'skills [category]',
+  usage: 'skills [-i] [category]',
   execute: (args): CommandResult => {
+    // Check for interactive mode flag
+    if (args.includes('-i') || args.includes('--interactive') || args.length === 0) {
+      return {
+        output: [createLine('Launching interactive skills viewer...', 'system')],
+        enterInteractiveMode: { type: 'portfolio', section: 'skills' },
+      };
+    }
+
     const skills = getContentData('skills') as SkillCategory[] | undefined;
 
     // Check if content is loaded
@@ -21,7 +29,8 @@ export const skillsCommand: Command = {
       };
     }
 
-    const category = args[0]?.toLowerCase();
+    const filteredArgs = args.filter(a => a !== '-i' && a !== '--interactive');
+    const category = filteredArgs[0]?.toLowerCase();
 
     // Filter by category if specified
     let filteredSkills = skills;

@@ -5,9 +5,17 @@ import { getContentData } from '../file-system';
 export const experienceCommand: Command = {
   name: 'experience',
   description: 'Display work experience',
-  usage: 'experience [--timeline]',
+  usage: 'experience [-i] [--timeline]',
   aliases: ['work', 'jobs'],
   execute: (args): CommandResult => {
+    // Check for interactive mode flag (default if no args)
+    if (args.includes('-i') || args.includes('--interactive') || args.length === 0) {
+      return {
+        output: [createLine('Launching interactive experience viewer...', 'system')],
+        enterInteractiveMode: { type: 'portfolio', section: 'experience' },
+      };
+    }
+
     const experience = getContentData('experience') as Experience[] | undefined;
     const showTimeline = args.includes('--timeline') || args.includes('-t');
 

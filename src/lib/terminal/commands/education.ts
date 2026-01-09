@@ -5,9 +5,17 @@ import { getContentData } from '../file-system';
 export const educationCommand: Command = {
   name: 'education',
   description: 'Display education history',
-  usage: 'education',
+  usage: 'education [-i]',
   aliases: ['edu', 'school'],
-  execute: (): CommandResult => {
+  execute: (args): CommandResult => {
+    // Check for interactive mode flag (default if no args or with -i)
+    if (args.includes('-i') || args.includes('--interactive') || args.length === 0) {
+      return {
+        output: [createLine('Launching interactive education viewer...', 'system')],
+        enterInteractiveMode: { type: 'portfolio', section: 'education' },
+      };
+    }
+
     const education = getContentData('education') as Education[] | undefined;
 
     // Check if content is loaded
