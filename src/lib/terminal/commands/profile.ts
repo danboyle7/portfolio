@@ -17,33 +17,23 @@ export const profileCommand: Command = {
 
     // Large ASCII art name "DANIEL" - properly aligned
     const asciiName = [
-      ' ██████╗   █████╗  ███╗   ██╗ ██╗ ███████╗ ██╗      ',
-      ' ██╔══██╗ ██╔══██╗ ████╗  ██║ ██║ ██╔════╝ ██║      ',
-      ' ██║  ██║ ███████║ ██╔██╗ ██║ ██║ █████╗   ██║      ',
-      ' ██║  ██║ ██╔══██║ ██║╚██╗██║ ██║ ██╔══╝   ██║      ',
-      ' ██████╔╝ ██║  ██║ ██║ ╚████║ ██║ ███████╗ ███████╗ ',
-      ' ╚═════╝  ╚═╝  ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚══════╝ ╚══════╝ ',
+      '██████╗   █████╗  ███╗   ██╗ ██╗ ███████╗ ██╗     ',
+      '██╔══██╗ ██╔══██╗ ████╗  ██║ ██║ ██╔════╝ ██║     ',
+      '██║  ██║ ███████║ ██╔██╗ ██║ ██║ █████╗   ██║     ',
+      '██║  ██║ ██╔══██║ ██║╚██╗██║ ██║ ██╔══╝   ██║     ',
+      '██████╔╝ ██║  ██║ ██║ ╚████║ ██║ ███████╗ ██████╗ ',
+      '╚═════╝  ╚═╝  ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚══════╝ ╚═════╝ ',
     ];
 
-    const boxWidth = 68;
     const output: string[] = [];
-    output.push('');
-    output.push('<span class="term-dim">+' + '-'.repeat(boxWidth) + '+</span>');
-    output.push('<span class="term-dim">|</span>' + ' '.repeat(boxWidth) + '<span class="term-dim">|</span>');
 
-    // Add ASCII name centered in box
+    // Add ASCII name
     for (const line of asciiName) {
-      const padding = Math.floor((boxWidth - line.length) / 2);
-      const paddedLine = ' '.repeat(padding) + line + ' '.repeat(boxWidth - padding - line.length);
-      output.push(`<span class="term-dim">|</span><span class="term-green font-bold">${paddedLine}</span><span class="term-dim">|</span>`);
+      output.push(`<span class="term-green font-bold">${line}</span>`);
     }
 
-    output.push('<span class="term-dim">|</span>' + ' '.repeat(boxWidth) + '<span class="term-dim">|</span>');
-    output.push('<span class="term-dim">+' + '-'.repeat(boxWidth) + '+</span>');
-    output.push('');
-
     // System info section
-    output.push('  <span class="term-cyan font-bold">' + context.user + '@' + context.hostname + '</span>');
+    output.push('');
     output.push('  <span class="term-dim">' + '-'.repeat(44) + '</span>');
     output.push('');
     output.push(`  <span class="term-cyan">Name</span>       <span class="term-white">${name}</span>`);
