@@ -90,14 +90,52 @@ body {
   animation: glitch 0.3s ease-in-out infinite;
 }
 
-/* Scan line animation */
+/* Scan line animation (for absolute positioning) */
 @keyframes scan {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+  0% { top: -10px; }
+  100% { top: 100%; }
 }
 
 .animate-scan {
   animation: scan 8s linear infinite;
+}
+
+/* CRT scan line animation */
+.crt-scanline {
+  animation: scan 6s linear infinite;
+}
+
+/* CRT flicker animation */
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.9; }
+  94% { opacity: 1; }
+  97% { opacity: 0.95; }
+  98% { opacity: 1; }
+}
+
+.crt-flicker {
+  animation: crt-flicker 4s infinite;
+}
+
+/* CRT glitch animation */
+@keyframes crt-glitch {
+  0% { transform: translate(0); filter: hue-rotate(0deg); }
+  10% { transform: translate(-2px, 2px); filter: hue-rotate(90deg); }
+  20% { transform: translate(2px, -2px); filter: hue-rotate(180deg); }
+  30% { transform: translate(-2px, 0); filter: hue-rotate(270deg); }
+  40% { transform: translate(2px, 0); filter: hue-rotate(0deg); }
+  50% { transform: translate(0, 2px); }
+  60% { transform: translate(0, -2px); }
+  70% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  90% { transform: translate(-2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.crt-glitch {
+  animation: crt-glitch 0.15s infinite;
 }
 
 /* Typing animation */
@@ -258,6 +296,46 @@ pre {
 .no-select {
   user-select: none;
   -webkit-user-select: none;
+}
+
+/* CRT power off animation */
+@keyframes crt-power-off {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scaleY(0.005) scaleX(0.8);
+    filter: brightness(3);
+  }
+  100% {
+    transform: scale(0);
+    filter: brightness(0);
+  }
+}
+
+/* CRT power on animation */
+@keyframes crt-power-on {
+  0% {
+    transform: scale(0);
+    filter: brightness(3);
+  }
+  30% {
+    transform: scaleY(0.005) scaleX(0.5);
+    filter: brightness(2);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+.animate-crt-off {
+  animation: crt-power-off 0.5s ease-in forwards;
+}
+
+.animate-crt-on {
+  animation: crt-power-on 0.4s ease-out forwards;
 }
 
 /* Print styles */

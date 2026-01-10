@@ -34,8 +34,13 @@ export function MatrixRain({ opacity = 0.05, speed = 1, density = 1 }: MatrixRai
     let drops: number[] = [];
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      // Use parent container size if available, otherwise fall back to window
+      const parent = canvas.parentElement;
+      const width = parent?.clientWidth ?? window.innerWidth;
+      const height = parent?.clientHeight ?? window.innerHeight;
+
+      canvas.width = width;
+      canvas.height = height;
 
       const fontSize = 14;
       const columns = Math.floor(canvas.width / fontSize) * density;
@@ -91,7 +96,7 @@ export function MatrixRain({ opacity = 0.05, speed = 1, density = 1 }: MatrixRai
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 -z-10"
+      className="pointer-events-none absolute inset-0 -z-10"
       style={{ opacity }}
       aria-hidden="true"
     />
@@ -115,7 +120,7 @@ export function MatrixBackground() {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden opacity-[0.03]">
+    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden opacity-[0.03]">
       {columns.map((col) => (
         <div
           key={col.id}

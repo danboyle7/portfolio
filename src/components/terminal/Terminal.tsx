@@ -53,6 +53,7 @@ export function Terminal() {
   const [matrixIntense, setMatrixIntense] = useState(false);
   const [interactiveMode, setInteractiveMode] = useState<InteractiveMode | null>(null);
   const [crtEnabled, setCrtEnabled] = useState(true);
+  const [showWelcome, setShowWelcome] = useState(true);
   const [env, setEnv] = useState<Record<string, string>>({
     USER,
     HOME: HOME_PATH,
@@ -318,9 +319,10 @@ export function Terminal() {
         setHistory((prev) => [...prev, entry]);
       }
 
-      // Handle clear screen - also clear history
+      // Handle clear screen - also clear history and hide welcome
       if (result.clearScreen) {
         setHistory([]);
+        setShowWelcome(false);
       }
 
       // Handle entering interactive mode
@@ -437,20 +439,24 @@ export function Terminal() {
   if (isBooting) {
     return (
       <ComputerBackground>
-        {crtEnabled && <CRTEffect />}
-        {crtEnabled && <MatrixRain opacity={0.03} />}
-        <BootSequence onComplete={handleBootComplete} />
+        <div className="relative h-full w-full overflow-hidden">
+          {crtEnabled && <CRTEffect />}
+          {crtEnabled && <MatrixRain opacity={0.03} />}
+          <BootSequence onComplete={handleBootComplete} />
+        </div>
       </ComputerBackground>
     );
   }
 
   return (
     <ComputerBackground>
-      {crtEnabled && <CRTEffect />}
-      {crtEnabled && <GlitchEffect active={glitchActive} />}
-      {crtEnabled && <MatrixRain opacity={matrixIntense ? 0.15 : 0.03} speed={matrixIntense ? 2 : 1} />}
+      {/* Relative container for CRT effects - they use absolute positioning */}
+      <div className="relative h-full w-full overflow-hidden">
+        {crtEnabled && <CRTEffect />}
+        {crtEnabled && <GlitchEffect active={glitchActive} />}
+        {crtEnabled && <MatrixRain opacity={matrixIntense ? 0.15 : 0.03} speed={matrixIntense ? 2 : 1} />}
 
-      <div className="h-full bg-black text-green-500 font-mono overflow-hidden">
+        <div className="h-full bg-black text-green-500 font-mono overflow-hidden">
         <TerminalHeader
           hostname={HOSTNAME}
           user={USER}
@@ -461,8 +467,8 @@ export function Terminal() {
           ref={terminalRef}
           className="px-2 md:px-4 py-1 md:py-2 h-[calc(100%-28px)] overflow-y-auto text-xs md:text-sm"
         >
-          {/* Initial welcome message - responsive */}
-          <WelcomeMessage />
+          {/* Initial welcome message - responsive (hidden after clear) */}
+          {showWelcome && <WelcomeMessage />}
 
           {/* Command history */}
           {history.map((entry) => (
@@ -545,6 +551,7 @@ export function Terminal() {
           {/* Scroll anchor - this is what we scroll to, positioned just below input with small gap */}
           <div ref={scrollAnchorRef} className="h-4" aria-hidden="true" />
         </main>
+      </div>
       </div>
     </ComputerBackground>
   );
