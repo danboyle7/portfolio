@@ -44,59 +44,30 @@ export function TerminalHeader({ hostname, user, currentPath }: TerminalHeaderPr
 
   return (
     <header className="sticky top-0 z-30 bg-black/95 backdrop-blur border-b border-green-900/50">
-      {/* Top bar with window controls and system info */}
-      <div className="flex items-center justify-between px-4 py-2 text-xs border-b border-green-900/30">
-        {/* Window controls */}
-        <div className="flex items-center gap-4">
-          <div className="flex gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-400 cursor-pointer transition-colors" />
-            <span className="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-400 cursor-pointer transition-colors" />
-            <span className="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-400 cursor-pointer transition-colors" />
+      {/* Compact single-line header */}
+      <div className="flex items-center justify-between px-2 md:px-4 py-1 md:py-1.5 text-xs">
+        {/* Left: Window controls + path */}
+        <div className="flex items-center gap-2 md:gap-3">
+          <div className="flex gap-1">
+            <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-red-500/80" />
+            <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-yellow-500/80" />
+            <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-500/80" />
           </div>
-          <span className="text-green-600 hidden sm:inline">
-            {user}@{hostname}: {displayPath}
+          <span className="text-green-500">&gt;</span>
+          <span className="text-green-300 font-bold text-[10px] md:text-xs">PORTFOLIO</span>
+          <span className="text-green-600 hidden sm:inline text-[10px] md:text-xs">
+            {user}@{hostname}:{displayPath}
           </span>
         </div>
 
-        {/* System stats */}
-        <div className="flex items-center gap-4 md:gap-6 text-green-700">
+        {/* Right: Time + uptime */}
+        <div className="flex items-center gap-2 md:gap-4 text-green-700 text-[10px] md:text-xs">
           <span className="hidden md:inline">
-            PID: <span className="text-green-500">1337</span>
-          </span>
-          <span className="hidden lg:inline">
-            MEM: <span className="text-green-500">42.0MB</span>
-          </span>
-          <span className="hidden lg:inline">
-            UPTIME: <span className="text-green-500">{formatUptime(uptime)}</span>
+            <span className="text-green-500">{formatUptime(uptime)}</span>
           </span>
           <span className="text-green-400 font-mono">{currentTime}</span>
         </div>
       </div>
-
-      {/* Navigation bar */}
-      <nav className="flex items-center justify-between px-4 py-2">
-        {/* Logo/Title */}
-        <div className="flex items-center gap-2 text-sm">
-          <span className="text-green-500">&gt;</span>
-          <span className="text-green-300 font-bold">PORTFOLIO</span>
-          <span className="text-green-700">//</span>
-          <span className="text-green-600">TERMINAL</span>
-          <span className="text-green-800 hidden sm:inline ml-2">v1.0.0</span>
-        </div>
-
-        {/* Quick navigation hints */}
-        <div className="flex items-center gap-2 text-xs text-green-700">
-          <span className="hidden md:inline px-2 py-1 border border-green-900/50 rounded">
-            <kbd className="text-green-500">↑↓</kbd> history
-          </span>
-          <span className="hidden md:inline px-2 py-1 border border-green-900/50 rounded">
-            <kbd className="text-green-500">Tab</kbd> complete
-          </span>
-          <span className="px-2 py-1 border border-green-900/50 rounded">
-            <kbd className="text-green-500">help</kbd>
-          </span>
-        </div>
-      </nav>
     </header>
   );
 }

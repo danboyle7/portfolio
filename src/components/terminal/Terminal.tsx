@@ -19,6 +19,7 @@ import { InteractiveEcho } from './InteractiveEcho';
 import { InteractivePortfolio } from './InteractivePortfolio';
 import { PortfolioHub } from './PortfolioHub';
 import { WelcomeMessage } from './WelcomeMessage';
+import { ComputerBackground } from './ComputerBackground';
 import type { InteractiveMode } from '@/lib/terminal/types';
 
 // Initialize content on module load
@@ -435,21 +436,21 @@ export function Terminal() {
 
   if (isBooting) {
     return (
-      <>
+      <ComputerBackground>
         {crtEnabled && <CRTEffect />}
         {crtEnabled && <MatrixRain opacity={0.03} />}
         <BootSequence onComplete={handleBootComplete} />
-      </>
+      </ComputerBackground>
     );
   }
 
   return (
-    <>
+    <ComputerBackground>
       {crtEnabled && <CRTEffect />}
       {crtEnabled && <GlitchEffect active={glitchActive} />}
       {crtEnabled && <MatrixRain opacity={matrixIntense ? 0.15 : 0.03} speed={matrixIntense ? 2 : 1} />}
 
-      <div className="min-h-screen bg-black text-green-500 font-mono">
+      <div className="h-full bg-black text-green-500 font-mono overflow-hidden">
         <TerminalHeader
           hostname={HOSTNAME}
           user={USER}
@@ -458,7 +459,7 @@ export function Terminal() {
 
         <main
           ref={terminalRef}
-          className="px-4 md:px-8 lg:px-12 py-4 md:py-6 h-[calc(100vh-60px)] overflow-y-auto"
+          className="px-2 md:px-4 py-1 md:py-2 h-[calc(100%-28px)] overflow-y-auto text-xs md:text-sm"
         >
           {/* Initial welcome message - responsive */}
           <WelcomeMessage />
@@ -545,6 +546,6 @@ export function Terminal() {
           <div ref={scrollAnchorRef} className="h-4" aria-hidden="true" />
         </main>
       </div>
-    </>
+    </ComputerBackground>
   );
 }
