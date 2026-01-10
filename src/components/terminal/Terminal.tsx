@@ -20,6 +20,7 @@ import { InteractivePortfolio } from './InteractivePortfolio';
 import { PortfolioHub } from './PortfolioHub';
 import { WelcomeMessage } from './WelcomeMessage';
 import { ComputerBackground } from './ComputerBackground';
+import { useZoom } from './ZoomContext';
 import type { InteractiveMode } from '@/lib/terminal/types';
 
 // Initialize content on module load
@@ -37,6 +38,7 @@ interface HistoryEntry {
 }
 
 export function Terminal() {
+  const { zoomScale } = useZoom();
   const [isBooting, setIsBooting] = useState(true);
   const [state, setState] = useState<TerminalState>({
     lines: [],
@@ -70,6 +72,12 @@ export function Terminal() {
   const inputLineRef = useRef<HTMLDivElement>(null);
   const scrollAnchorRef = useRef<HTMLDivElement>(null);
   const lastHistoryLengthRef = useRef(0);
+  const zoomScaleRef = useRef(zoomScale);
+
+  // Keep ref in sync with context value
+  useEffect(() => {
+    zoomScaleRef.current = zoomScale;
+  }, [zoomScale]);
 
   const handleBootComplete = useCallback(() => {
     setIsBooting(false);
@@ -395,6 +403,14 @@ export function Terminal() {
   useEffect(() => {
     // Only scroll if history grew (new command was added by user)
     if (history.length > lastHistoryLengthRef.current) {
+      lastHistoryLengthRef.current = history.length;
+
+      // Skip ALL scrolling when zoomed - prevents transform container shift
+      const currentZoomScale = zoomScaleRef.current;
+      if (currentZoomScale > 1) {
+        return;
+      }
+
       // Use setTimeout to ensure DOM has fully updated after React render
       const timer = setTimeout(() => {
         if (!scrollAnchorRef.current || !terminalRef.current) return;
@@ -405,21 +421,18 @@ export function Terminal() {
         // Check if container is scrollable at all
         const isScrollable = container.scrollHeight > container.clientHeight;
         if (!isScrollable) {
-          // Not scrollable = all content fits on screen, nothing to do
           return;
         }
 
         const anchorRect = anchor.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
 
-        // Check if anchor is below visible area - need to scroll
         if (anchorRect.bottom > containerRect.bottom) {
           const scrollNeeded = anchorRect.bottom - containerRect.bottom + 8;
           container.scrollTop += scrollNeeded;
         }
       }, 16);
 
-      lastHistoryLengthRef.current = history.length;
       return () => clearTimeout(timer);
     }
 

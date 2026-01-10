@@ -40,7 +40,7 @@ export function PortfolioHub({ onSelect, onExit }: PortfolioHubProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    containerRef.current?.focus();
+    containerRef.current?.focus({ preventScroll: true });
   }, []);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {

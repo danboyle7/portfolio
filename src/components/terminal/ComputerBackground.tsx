@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { ZoomProvider } from './ZoomContext';
 
 interface ComputerBackgroundProps {
   children: React.ReactNode;
@@ -20,11 +21,11 @@ const SCREEN_BOUNDS = {
   right: 68.5,
 };
 
-// ZOOM SETTINGS
+// ZOOM SETTINGS - Zooms the whole monitor for better UX
 const ZOOM_CONFIG = {
-  scale: 1.8,           // How much to zoom in (1 = no zoom, 2 = 2x)
-  translateY: 14.5,     // Vertical shift when zoomed (negative = up) (%)
-  translateX: 0,        // Horizontal shift when zoomed (%)
+  scale: 1.8,
+  translateY: 14.5,
+  translateX: 0,
 };
 
 // POWER BUTTON - Position on the monitor (% of image)
@@ -94,13 +95,11 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
     let offsetY: number;
 
     if (containerAspect > imgAspect) {
-      // Container is wider - image is height-constrained
       renderedHeight = containerRect.height;
       renderedWidth = renderedHeight * imgAspect;
       offsetX = (containerRect.width - renderedWidth) / 2;
       offsetY = 0;
     } else {
-      // Container is taller - image is width-constrained
       renderedWidth = containerRect.width;
       renderedHeight = renderedWidth / imgAspect;
       offsetX = 0;
@@ -176,7 +175,11 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
 
   // On mobile or when disabled, just render children normally
   if (!enabled || isMobile) {
-    return <>{children}</>;
+    return (
+      <ZoomProvider isZoomed={false} zoomScale={1}>
+        {children}
+      </ZoomProvider>
+    );
   }
 
   // CRT animation styles
@@ -232,7 +235,6 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
   // Calculate position style from bounds (percentage of image)
   const getPositionStyle = (bounds: { top: number; left: number; width?: number; height?: number; bottom?: number; right?: number }): React.CSSProperties => {
     if (bounds.width !== undefined && bounds.height !== undefined) {
-      // Button style (has width/height)
       return {
         top: `${bounds.top}%`,
         left: `${bounds.left}%`,
@@ -240,7 +242,6 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
         height: `${bounds.height}%`,
       };
     } else {
-      // Screen style (has bottom/right)
       return {
         top: `${bounds.top}%`,
         left: `${bounds.left}%`,
@@ -250,6 +251,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
     }
   };
 
+  // Zoom transform - scales the whole monitor
   const zoomTransform = isZoomed
     ? `scale(${ZOOM_CONFIG.scale}) translate(${ZOOM_CONFIG.translateX}%, ${ZOOM_CONFIG.translateY}%)`
     : 'scale(1) translate(0%, 0%)';
@@ -294,7 +296,9 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
                 visibility: crtPhase === 'off' ? 'hidden' : 'visible',
               }}
             >
-              {children}
+              <ZoomProvider isZoomed={isZoomed} zoomScale={isZoomed ? ZOOM_CONFIG.scale : 1}>
+                {children}
+              </ZoomProvider>
             </div>
 
             {/* Screen glare */}
@@ -307,7 +311,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
           </div>
         )}
 
-        {/* Power button - positioned relative to image */}
+        {/* Power button */}
         {imageLoaded && (
           <button
             onClick={handlePowerClick}
@@ -318,13 +322,13 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
           />
         )}
 
-        {/* Zoom button - positioned relative to image */}
+        {/* Zoom button */}
         {imageLoaded && (
           <button
             onClick={handleZoomToggle}
             className="absolute cursor-pointer rounded transition-colors border border-transparent hover:border-blue-500/50 hover:bg-blue-500/10"
             style={getPositionStyle(ZOOM_BUTTON)}
-            title={isZoomed ? "Zoom out" : "Zoom in"}
+            title={isZoomed ? "Zoom out (ESC)" : "Zoom in"}
             aria-label={isZoomed ? "Zoom out" : "Zoom in"}
           />
         )}

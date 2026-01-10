@@ -68,7 +68,7 @@ export function InteractivePortfolio({ section, onExit, onBack }: InteractivePor
 
   // Focus container for keyboard events
   useEffect(() => {
-    containerRef.current?.focus();
+    containerRef.current?.focus({ preventScroll: true });
   }, [data]);
 
   const getItems = useCallback((): unknown[] => {

@@ -48,11 +48,12 @@ export function TerminalHeader({ hostname, user, currentPath }: TerminalHeaderPr
       <div className="flex items-center justify-between px-2 md:px-4 py-1 md:py-1.5 text-xs">
         {/* Left: Window controls + path */}
         <div className="flex items-center gap-2 md:gap-3">
-          <div className="flex gap-1">
+          {/* Mac-OS style window controls */}
+          {/* <div className="flex gap-1">
             <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-red-500/80" />
             <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-yellow-500/80" />
             <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-500/80" />
-          </div>
+          </div> */}
           <span className="text-green-500">&gt;</span>
           <span className="text-green-300 font-bold text-[10px] md:text-xs">PORTFOLIO</span>
           <span className="text-green-600 hidden sm:inline text-[10px] md:text-xs">

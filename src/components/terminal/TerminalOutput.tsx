@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import type { TerminalLine } from '@/lib/terminal/types';
 
 interface TerminalOutputProps {
@@ -9,11 +9,10 @@ interface TerminalOutputProps {
 }
 
 export function TerminalOutput({ lines, onScrollToBottom }: TerminalOutputProps) {
-  const bottomRef = useRef<HTMLDivElement>(null);
+  // Removed auto-scroll - it causes issues with CSS-transformed containers
+  // Scrolling is now handled by the parent Terminal component
 
-  // Auto-scroll to bottom on new lines
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     onScrollToBottom?.();
   }, [lines, onScrollToBottom]);
 
@@ -22,7 +21,6 @@ export function TerminalOutput({ lines, onScrollToBottom }: TerminalOutputProps)
       {lines.map((line) => (
         <TerminalLineComponent key={line.id} line={line} />
       ))}
-      <div ref={bottomRef} />
     </div>
   );
 }

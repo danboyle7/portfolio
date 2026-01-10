@@ -36,7 +36,7 @@ export function InteractiveBlog({ onExit, onSelectPost }: InteractiveBlogProps) 
 
   // Focus input on mount
   useEffect(() => {
-    inputRef.current?.focus();
+    inputRef.current?.focus({ preventScroll: true });
   }, []);
 
   const handleKeyDown = useCallback(
