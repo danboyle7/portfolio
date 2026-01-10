@@ -17,6 +17,8 @@ import { InteractiveBlog } from './InteractiveBlog';
 import { SnakeGame } from './SnakeGame';
 import { InteractiveEcho } from './InteractiveEcho';
 import { InteractivePortfolio } from './InteractivePortfolio';
+import { PortfolioHub } from './PortfolioHub';
+import { WelcomeMessage } from './WelcomeMessage';
 import type { InteractiveMode } from '@/lib/terminal/types';
 
 // Initialize content on module load
@@ -25,38 +27,6 @@ initializeContent();
 const HOSTNAME = 'portfolio';
 const USER = 'guest';
 const HOME_PATH = '/home/guest';
-
-// Grand welcome message with ASCII art
-const welcomeLines: TerminalLine[] = [
-  createLine('', 'output'),
-  createLine('<span class="term-green">  ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗ </span>', 'output', { isHtml: true }),
-  createLine('<span class="term-green">  ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-green">  ██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-green">  ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-green">  ██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-green">  ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ </span>', 'output', { isHtml: true }),
-  createLine('', 'output'),
-  createLine('<span class="term-cyan">  ┌───────────────────────────────────────────────────────────────────────┐</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  │</span>     <span class="term-white font-bold">Welcome to Daniel Boyle\'s Interactive Portfolio Terminal</span>          <span class="term-cyan">│</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  │</span>     <span class="term-dim">Full-Stack Developer | Open Source Enthusiast | Problem Solver</span>   <span class="term-cyan"> │</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-cyan">  └───────────────────────────────────────────────────────────────────────┘</span>', 'output', { isHtml: true }),
-  createLine('', 'output'),
-  createLine('<span class="term-dim">  Navigate this terminal like you would any Unix system.</span>', 'output', { isHtml: true }),
-  createLine('<span class="term-dim">  Explore the filesystem and run commands.</span>', 'output', { isHtml: true }),
-  createLine('', 'output'),
-  createLine('  <span class="term-yellow">[Quick Start]</span>', 'output', { isHtml: true }),
-  createLine('    <span class="term-green">help</span>        <span class="term-dim">-</span> List available commands', 'output', { isHtml: true }),
-  createLine('    <span class="term-green">profile</span>     <span class="term-dim">-</span> View my profile', 'output', { isHtml: true }),
-  createLine('    <span class="term-green">skills</span>      <span class="term-dim">-</span> See my technical skills', 'output', { isHtml: true }),
-  createLine('    <span class="term-green">experience</span>  <span class="term-dim">-</span> Work history', 'output', { isHtml: true }),
-  createLine('    <span class="term-green">education</span>   <span class="term-dim">-</span> Education background', 'output', { isHtml: true }),
-  createLine('    <span class="term-green">projects</span>    <span class="term-dim">-</span> Browse my portfolio', 'output', { isHtml: true }),
-  createLine('    <span class="term-green">blog</span>        <span class="term-dim">-</span> Read my articles', 'output', { isHtml: true }),
-  createLine('    <span class="term-green">contact</span>     <span class="term-dim">-</span> Get in touch', 'output', { isHtml: true }),
-  createLine('', 'output'),
-  createLine('<span class="term-dim">  Hint: Try</span> <span class="term-green">ls</span><span class="term-dim">,</span> <span class="term-green">cd</span><span class="term-dim">, and</span> <span class="term-green">cat</span> <span class="term-dim">to explore - there might be secrets...</span>', 'output', { isHtml: true }),
-  createLine('', 'output'),
-];
 
 interface HistoryEntry {
   id: string;
@@ -106,7 +76,7 @@ export function Terminal() {
     setState((prev) => ({
       ...prev,
       isBooting: false,
-      lines: welcomeLines,
+      lines: [],
       commandHistory: [],
     }));
   }, []);
@@ -488,12 +458,10 @@ export function Terminal() {
 
         <main
           ref={terminalRef}
-          className={`mx-auto p-4 md:p-6 h-[calc(100vh-60px)] overflow-y-auto ${
-            interactiveMode?.type === 'snake' ? 'max-w-none px-2' : 'max-w-5xl'
-          }`}
+          className="px-4 md:px-8 lg:px-12 py-4 md:py-6 h-[calc(100vh-60px)] overflow-y-auto"
         >
-          {/* Initial welcome message */}
-          <TerminalOutput lines={state.lines} />
+          {/* Initial welcome message - responsive */}
+          <WelcomeMessage />
 
           {/* Command history */}
           {history.map((entry) => (
@@ -539,11 +507,21 @@ export function Terminal() {
             </div>
           )}
 
+          {interactiveMode?.type === 'hub' && (
+            <div className="fixed inset-0 z-50 bg-black">
+              <PortfolioHub
+                onSelect={(section) => setInteractiveMode({ type: 'portfolio', section })}
+                onExit={handleExitInteractive}
+              />
+            </div>
+          )}
+
           {interactiveMode?.type === 'portfolio' && interactiveMode.section && (
             <div className="fixed inset-0 z-50 bg-black">
               <InteractivePortfolio
                 section={interactiveMode.section}
                 onExit={handleExitInteractive}
+                onBack={() => setInteractiveMode({ type: 'hub' })}
               />
             </div>
           )}

@@ -24,6 +24,7 @@ import { blogCommand } from './blog';
 import { projectsCommand } from './projects';
 import { messageCommand } from './message';
 import { envCommand } from './env';
+import { portfolioHubCommand } from './portfolio-hub';
 
 // Easter egg commands
 import { cowsayCommand } from './easter-eggs/cowsay';
@@ -61,6 +62,7 @@ const allCommands: Command[] = [
   projectsCommand,
   messageCommand,
   envCommand,
+  portfolioHubCommand,
   exitCommand,
   rebootCommand,
   // Easter eggs

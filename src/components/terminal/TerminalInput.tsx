@@ -178,37 +178,34 @@ export function TerminalInput({
   );
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-0 text-sm outline-none" tabIndex={-1}>
-      {/* Prompt */}
-      <span className="text-green-400 font-bold shrink-0">{user}@{hostname}</span>
-      <span className="text-green-600 shrink-0">:</span>
-      <span className="text-blue-400 font-bold shrink-0">{displayPath}</span>
-      <span className="text-green-600 shrink-0">$</span>
-      <div className="ml-2 flex-1 relative">
-        {/* Visible text with cursor */}
-        <div className="flex items-center">
-          <span className="text-green-300 whitespace-pre">{input}</span>
-          <span className="inline-block w-2 h-5 bg-green-400 animate-blink" />
-        </div>
-        {/* Hidden input for capturing keystrokes */}
-        <input
-          ref={inputRef}
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          disabled={disabled}
-          className="terminal-input absolute inset-0 w-full h-full opacity-0 cursor-text outline-none border-none focus:outline-none focus:ring-0 focus:border-none"
-          style={{
-            WebkitAppearance: 'none',
-            boxShadow: 'none',
-          }}
-          spellCheck={false}
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="off"
-        />
+    <form onSubmit={handleSubmit} className="text-sm outline-none relative" tabIndex={-1}>
+      {/* Text that wraps to the left edge */}
+      <div className="break-all">
+        <span className="text-green-400 font-bold">{user}@{hostname}</span>
+        <span className="text-green-600">:</span>
+        <span className="text-blue-400 font-bold">{displayPath}</span>
+        <span className="text-green-600">$ </span>
+        <span className="text-green-300">{input}</span>
+        <span className="inline-block w-2 h-5 bg-green-400 animate-blink align-middle" />
       </div>
+      {/* Hidden input for capturing keystrokes */}
+      <input
+        ref={inputRef}
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyDown={handleKeyDown}
+        disabled={disabled}
+        className="terminal-input absolute inset-0 w-full h-full opacity-0 cursor-text outline-none border-none focus:outline-none focus:ring-0 focus:border-none"
+        style={{
+          WebkitAppearance: 'none',
+          boxShadow: 'none',
+        }}
+        spellCheck={false}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+      />
     </form>
   );
 }
