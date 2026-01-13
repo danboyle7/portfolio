@@ -99,7 +99,7 @@ pnpm run generate-content
 
 ## Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/)
+- **Framework**: [Next.js 16](https://nextjs.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Language**: TypeScript
 - **Content**: YAML + Markdown

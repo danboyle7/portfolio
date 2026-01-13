@@ -1,5 +1,6 @@
 import type { Command, CommandResult } from '../types';
 import { createLine } from '../utils';
+import { VERSION } from '../../version';
 
 export const helpCommand: Command = {
   name: 'help',
@@ -34,7 +35,7 @@ export const helpCommand: Command = {
       output: [
         createLine('', 'output'),
         createLine('+------------------------------------------------------------------+', 'system'),
-        createLine('|                    PORTFOLIO TERMINAL v1.0.0                     |', 'system'),
+        createLine(`|                    PORTFOLIO TERMINAL v${VERSION}                     |`, 'system'),
         createLine('+------------------------------------------------------------------+', 'system'),
         createLine('', 'output'),
         createLine('  NAVIGATION', 'success'),

@@ -1,6 +1,7 @@
 // Virtual file system for terminal navigation
 
 import type { FileSystemNode, ContentData } from './types';
+import { VERSION } from '../version';
 
 // Content data loaders - these will be populated from YAML files
 let contentCache: Record<string, unknown> = {};
@@ -89,7 +90,7 @@ export PATH="$HOME/bin:$PATH"
 export EDITOR=vim
 
 # Portfolio version
-export PORTFOLIO_VERSION="1.0.0"
+export PORTFOLIO_VERSION="${VERSION}"
 `,
               },
               about: {

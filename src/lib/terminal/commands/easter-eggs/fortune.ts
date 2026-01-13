@@ -35,7 +35,7 @@ export const fortuneCommand: Command = {
     const lines: string[] = [];
     lines.push('');
     lines.push('+------------------------------------------------------------------+');
-    lines.push('|  <span class="term-yellow">[*] FORTUNE COOKIE</span>                                             |');
+    lines.push('|  <span class="term-yellow">[*] FORTUNE COOKIE</span>                                              |');
     lines.push('+------------------------------------------------------------------+');
 
     // Word wrap the fortune
@@ -45,13 +45,13 @@ export const fortuneCommand: Command = {
 
     for (const word of words) {
       if ((currentLine + word).length > maxWidth) {
-        lines.push(currentLine.padEnd(66) + '|');
+        lines.push(currentLine.padEnd(66) + ' |');
         currentLine = '|  ' + word + ' ';
       } else {
         currentLine += word + ' ';
       }
     }
-    lines.push(currentLine.padEnd(66) + '|');
+    lines.push(currentLine.padEnd(66) + ' |');
 
     lines.push('+------------------------------------------------------------------+');
     lines.push('');
