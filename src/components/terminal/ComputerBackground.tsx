@@ -15,33 +15,33 @@ interface ComputerBackgroundProps {
 
 // TERMINAL SCREEN - Position on monitor (% of image)
 const SCREEN_BOUNDS = {
-  top: 15,
-  left: 31.4,
-  bottom: 53.8,
-  right: 68.5,
+  top: 11.9,
+  left: 31.6,
+  bottom: 56.8,
+  right: 68.4,
 };
 
 // ZOOM SETTINGS - Zooms the whole monitor for better UX
 const ZOOM_CONFIG = {
-  scale: 1.8,
+  scale: 1.6,
   translateY: 14.5,
   translateX: 0,
 };
 
 // POWER BUTTON - Position on the monitor (% of image)
 const POWER_BUTTON = {
-  top: 58,
-  left: 32.5,
-  width: 3,
-  height: 3.1,
+  top: 62.6,
+  left: 32.6,
+  width: 2.8,
+  height: 3.5,
 };
 
 // ZOOM BUTTON - Position on monitor (% of image)
 const ZOOM_BUTTON = {
-  top: 58.2,
-  left: 63.9,
-  width: 2,
-  height: 2.2,
+  top: 63.3,
+  left: 64,
+  width: 1.8,
+  height: 2.1,
 };
 
 // CRT ANIMATION TIMING (milliseconds)
@@ -122,8 +122,10 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
     if (isMobile) return;
 
     const img = new window.Image();
-    img.src = '/computer.png';
+    // Cache-bust to ensure we get fresh dimensions
+    img.src = '/computer2.png?' + Date.now();
     img.onload = () => {
+      console.log('Image loaded:', img.naturalWidth, 'x', img.naturalHeight);
       setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
       setImageLoaded(true);
     };
@@ -273,7 +275,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
         {/* Computer image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/computer.png"
+          src="/computer2.png"
           alt="Vintage computer monitor"
           className="absolute inset-0 w-full h-full"
         />
@@ -315,9 +317,9 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
         {imageLoaded && (
           <button
             onClick={handlePowerClick}
-            className="absolute cursor-pointer rounded transition-colors border border-transparent hover:border-red-500/50 hover:bg-red-500/10"
+            className="absolute cursor-pointer rounded transition-colors border border-transparent hover:border-gray-800/50 hover:bg-gray-800/10"
             style={getPositionStyle(POWER_BUTTON)}
-            title="Power (click to test CRT effect)"
+            title="Power (click to turn off display)"
             aria-label="Power button"
           />
         )}
@@ -326,7 +328,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
         {imageLoaded && (
           <button
             onClick={handleZoomToggle}
-            className="absolute cursor-pointer rounded transition-colors border border-transparent hover:border-blue-500/50 hover:bg-blue-500/10"
+            className="absolute cursor-pointer rounded transition-colors border border-transparent hover:border-gray-800/50 hover:bg-gray-800/10"
             style={getPositionStyle(ZOOM_BUTTON)}
             title={isZoomed ? "Zoom out (ESC)" : "Zoom in"}
             aria-label={isZoomed ? "Zoom out" : "Zoom in"}

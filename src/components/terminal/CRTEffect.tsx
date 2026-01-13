@@ -29,6 +29,16 @@ export function CRTEffect() {
         aria-hidden="true"
       />
 
+      {/* Vignette - subtle darkening at edges only */}
+      {/* TODO: Make this better  */}
+      {/* <div
+        className="pointer-events-none absolute inset-0 z-40"
+        style={{
+          boxShadow: 'inset 0 0 150px 60px rgba(0, 0, 0, 0.5)',
+        }}
+        aria-hidden="true"
+      /> */}
+
       {/* Screen flicker overlay */}
       <div
         className="pointer-events-none absolute inset-0 z-30 crt-flicker"
