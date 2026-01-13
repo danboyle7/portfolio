@@ -21,6 +21,7 @@ import { PortfolioHub } from './PortfolioHub';
 import { WelcomeMessage } from './WelcomeMessage';
 import { ComputerBackground } from './ComputerBackground';
 import { useZoom } from './ZoomContext';
+import { VERSION } from '@/lib/version';
 import type { InteractiveMode } from '@/lib/terminal/types';
 
 // Initialize content on module load
@@ -37,9 +38,12 @@ interface HistoryEntry {
   output: TerminalLine[];
 }
 
+// Track if boot has completed this session (persists across mobile/desktop switches)
+const hasBootedRef = { current: false };
+
 export function Terminal() {
   const { zoomScale } = useZoom();
-  const [isBooting, setIsBooting] = useState(true);
+  const [isBooting, setIsBooting] = useState(() => !hasBootedRef.current);
   const [state, setState] = useState<TerminalState>({
     lines: [],
     currentPath: HOME_PATH,
@@ -63,7 +67,7 @@ export function Terminal() {
     PATH: '/usr/bin:/bin',
     SHELL: '/bin/zsh',
     TERM: 'xterm-256color',
-    PORTFOLIO_VERSION: '1.0.0',
+    PORTFOLIO_VERSION: VERSION,
     '0': 'zsh',
     '?': '0',
     '$': '1337', // Fake PID
@@ -80,6 +84,7 @@ export function Terminal() {
   }, [zoomScale]);
 
   const handleBootComplete = useCallback(() => {
+    hasBootedRef.current = true;
     setIsBooting(false);
     // Clear history on reboot
     setHistory([]);
@@ -264,7 +269,9 @@ export function Terminal() {
             break;
           case 'reboot':
             setTimeout(() => {
+              hasBootedRef.current = false; // Reset boot state for reboot
               setIsBooting(true);
+              setShowWelcome(true); // Show welcome message again after reboot
               setState((prev) => ({
                 ...prev,
                 lines: [],
@@ -469,7 +476,7 @@ export function Terminal() {
         {crtEnabled && <GlitchEffect active={glitchActive} />}
         {crtEnabled && <MatrixRain opacity={matrixIntense ? 0.15 : 0.03} speed={matrixIntense ? 2 : 1} />}
 
-        <div className="h-full bg-black text-green-500 font-mono overflow-hidden">
+        <div className="h-full bg-black text-green-500 font-mono overflow-hidden terminal-text">
         <TerminalHeader
           hostname={HOSTNAME}
           user={USER}
@@ -478,7 +485,7 @@ export function Terminal() {
 
         <main
           ref={terminalRef}
-          className="px-2 md:px-4 py-1 md:py-2 h-[calc(100%-28px)] overflow-y-auto text-xs md:text-sm"
+          className="px-2 md:px-4 py-1 md:py-2 h-[calc(100%-28px)] overflow-y-auto"
         >
           {/* Initial welcome message - responsive (hidden after clear) */}
           {showWelcome && <WelcomeMessage />}
@@ -511,7 +518,7 @@ export function Terminal() {
           )}
 
           {interactiveMode?.type === 'snake' && (
-            <div className="mt-4 mb-4 flex justify-center">
+            <div className="absolute inset-0 z-50">
               <SnakeGame
                 onExit={handleExitInteractive}
                 onGameOver={handleSnakeGameOver}

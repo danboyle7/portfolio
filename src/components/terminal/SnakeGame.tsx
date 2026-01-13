@@ -26,12 +26,13 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
     const updateDimensions = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        // Account for padding, borders, header, footer
-        const availableWidth = rect.width - 48; // padding + borders
+        // Account for padding, borders, header, footer - generous padding to ensure boundaries visible
+        const availableWidth = rect.width - 80; // More padding for visible boundaries
         const availableHeight = rect.height - 120; // header + footer + padding
 
-        const gridWidth = Math.max(20, Math.floor(availableWidth / (CHAR_WIDTH * CELL_CHAR_WIDTH)));
-        const gridHeight = Math.max(10, Math.floor(availableHeight / CHAR_HEIGHT));
+        // Clamp grid dimensions to reasonable ranges
+        const gridWidth = Math.min(45, Math.max(15, Math.floor(availableWidth / (CHAR_WIDTH * CELL_CHAR_WIDTH))));
+        const gridHeight = Math.min(20, Math.max(6, Math.floor(availableHeight / CHAR_HEIGHT)));
 
         setDimensions({ width: gridWidth, height: gridHeight });
       }
@@ -256,7 +257,7 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
   return (
     <div
       ref={containerRef}
-      className="h-full w-full bg-black flex flex-col font-mono"
+      className="h-full w-full bg-black flex flex-col font-mono terminal-text"
     >
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-2 border-b border-green-700 text-green-400">

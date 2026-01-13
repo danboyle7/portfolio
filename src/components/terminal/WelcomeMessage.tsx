@@ -75,7 +75,7 @@ export function WelcomeMessage() {
   const navInfo = isSmall ? NAV_INFO_SMALL : NAV_INFO_LARGE;
 
   return (
-    <div className="font-mono text-sm whitespace-pre-wrap">
+    <div className="font-mono whitespace-pre-wrap">
       {ascii && <div dangerouslySetInnerHTML={{ __html: ascii }} />}
       <div dangerouslySetInnerHTML={{ __html: box }} />
       <br />

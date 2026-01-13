@@ -109,7 +109,7 @@ export function InteractiveEcho({ onExit }: InteractiveEchoProps) {
   };
 
   return (
-    <div className="font-mono text-sm">
+    <div className="font-mono">
       {/* Chat history */}
       <div
         ref={containerRef}

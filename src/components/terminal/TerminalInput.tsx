@@ -179,7 +179,7 @@ export function TerminalInput({
   );
 
   return (
-    <form onSubmit={handleSubmit} className="text-xs md:text-sm outline-none relative" tabIndex={-1}>
+    <form onSubmit={handleSubmit} className="outline-none relative" tabIndex={-1}>
       {/* Text that wraps to the left edge */}
       <div className="break-all">
         <span className="text-green-400 font-bold">{user}@{hostname}</span>

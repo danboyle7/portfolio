@@ -72,7 +72,8 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 900 || window.innerHeight < 600);
+      // Only switch to terminal-only mode on actual mobile devices
+      setIsMobile(window.innerWidth < 640 || window.innerHeight < 480);
     };
 
     checkMobile();

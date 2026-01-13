@@ -45,24 +45,18 @@ export function TerminalHeader({ hostname, user, currentPath }: TerminalHeaderPr
   return (
     <header className="sticky top-0 z-30 bg-black/95 backdrop-blur border-b border-green-900/50">
       {/* Compact single-line header */}
-      <div className="flex items-center justify-between px-2 md:px-4 py-1 md:py-1.5 text-xs">
+      <div className="flex items-center justify-between px-2 md:px-4 py-1 md:py-1.5">
         {/* Left: Window controls + path */}
         <div className="flex items-center gap-2 md:gap-3">
-          {/* Mac-OS style window controls */}
-          {/* <div className="flex gap-1">
-            <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-red-500/80" />
-            <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-yellow-500/80" />
-            <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-500/80" />
-          </div> */}
           <span className="text-green-500">&gt;</span>
-          <span className="text-green-300 font-bold text-[10px] md:text-xs">PORTFOLIO</span>
-          <span className="text-green-600 hidden sm:inline text-[10px] md:text-xs">
+          <span className="text-green-300 font-bold">PORTFOLIO</span>
+          <span className="text-green-600 hidden sm:inline">
             {user}@{hostname}:{displayPath}
           </span>
         </div>
 
         {/* Right: Time + uptime */}
-        <div className="flex items-center gap-2 md:gap-4 text-green-700 text-[10px] md:text-xs">
+        <div className="flex items-center gap-2 md:gap-4 text-green-700">
           <span className="hidden md:inline">
             <span className="text-green-500">{formatUptime(uptime)}</span>
           </span>

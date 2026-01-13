@@ -18,7 +18,7 @@ export interface AnimatedLine {
 export interface InteractiveMode {
   type: 'blog' | 'search' | 'snake' | 'echo' | 'portfolio' | 'hub' | null;
   data?: unknown;
-  section?: 'skills' | 'experience' | 'education' | 'projects';
+  section?: 'skills' | 'experience' | 'education' | 'projects' | 'hobbies';
 }
 
 export interface CommandResult {
@@ -158,7 +158,7 @@ export interface TerminalState {
 export interface BootStep {
   text: string;
   delay: number;
-  type: 'info' | 'success' | 'warning' | 'loading' | 'complete';
+  type: 'info' | 'success' | 'warning' | 'loading' | 'complete' | 'ascii';
   progress?: number;
 }
 

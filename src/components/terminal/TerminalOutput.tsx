@@ -82,7 +82,7 @@ export function CommandLine({
     : path;
 
   return (
-    <div className="flex items-center gap-0 text-sm">
+    <div className="flex items-center gap-0">
       <span className="text-green-400 font-bold">{user}@{hostname}</span>
       <span className="text-green-600">:</span>
       <span className="text-blue-400 font-bold">{displayPath}</span>

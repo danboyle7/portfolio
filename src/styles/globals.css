@@ -10,6 +10,31 @@
   --font-mono: "Fira Code", "JetBrains Mono", ui-monospace, monospace;
 }
 
+/* ============================================
+   TERMINAL TEXT SCALING
+   Adjust --terminal-scale to scale all text:
+   0.7 = 70%, 0.8 = 80%, 0.9 = 90%, 1 = 100%
+   ============================================ */
+:root {
+  --terminal-scale: 0.7;
+  --terminal-base-size: 14px;
+  --terminal-font-size: calc(var(--terminal-base-size) * var(--terminal-scale));
+  --terminal-line-height: 1.4;
+}
+
+/* Slightly larger on smaller screens for readability */
+@media (max-width: 1024px) {
+  :root {
+    --terminal-scale: 0.75;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --terminal-scale: 0.9;
+  }
+}
+
 /* Base terminal styles */
 html {
   background-color: #000;
@@ -23,6 +48,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Apply terminal scaling to terminal elements */
+.terminal-text {
+  font-size: var(--terminal-font-size);
+  line-height: var(--terminal-line-height);
+}
+
 /* Terminal color classes */
 .term-green { color: #00ff41; }
 .term-blue { color: #00bfff; }
@@ -32,7 +63,7 @@ body {
 .term-red { color: #ff4444; }
 .term-magenta { color: #ff00ff; }
 .term-white { color: #ffffff; }
-.term-dim { color: #4a5568; }
+.term-dim { color: #9ca3af; }
 .term-gray { color: #718096; }
 
 /* Background color variants */

@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 
-type PortfolioSection = 'skills' | 'experience' | 'education' | 'projects';
+type PortfolioSection = 'skills' | 'experience' | 'education' | 'projects' | 'hobbies';
 
 interface PortfolioHubProps {
   onSelect: (section: PortfolioSection) => void;
@@ -12,32 +12,39 @@ interface PortfolioHubProps {
 const sections: { id: PortfolioSection; title: string; description: string; shortcut: string }[] = [
   {
     id: 'experience',
-    title: 'Work Experience',
-    description: 'Professional history, roles, achievements, and technologies used',
+    title: 'Experience',
+    description: 'Work history & roles',
     shortcut: '1',
   },
   {
     id: 'skills',
-    title: 'Technical Skills',
-    description: 'Programming languages, frameworks, tools, and proficiency levels',
+    title: 'Skills',
+    description: 'Languages & tools',
     shortcut: '2',
   },
   {
     id: 'projects',
     title: 'Projects',
-    description: 'Portfolio of personal and professional projects',
+    description: 'Portfolio work',
     shortcut: '3',
   },
   {
     id: 'education',
     title: 'Education',
-    description: 'Academic background, degrees, and certifications',
+    description: 'Academic background',
     shortcut: '4',
+  },
+  {
+    id: 'hobbies',
+    title: 'Hobbies',
+    description: 'Interests & passions',
+    shortcut: '5',
   },
 ];
 
 export function PortfolioHub({ onSelect, onExit }: PortfolioHubProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
     containerRef.current?.focus({ preventScroll: true });
@@ -57,71 +64,107 @@ export function PortfolioHub({ onSelect, onExit }: PortfolioHubProps) {
       case '4':
         onSelect('education');
         break;
-      case 'Escape':
+      case '5':
+        onSelect('hobbies');
+        break;
+      case 'ArrowUp':
+      case 'w':
+      case 'W':
+        e.preventDefault();
+        setSelectedIndex(i => (i - 1 + sections.length) % sections.length);
+        break;
+      case 'ArrowDown':
+      case 's':
+      case 'S':
+        e.preventDefault();
+        setSelectedIndex(i => (i + 1) % sections.length);
+        break;
+      case 'Enter':
+        e.preventDefault();
+        onSelect(sections[selectedIndex]!.id);
+        break;
       case 'q':
         e.preventDefault();
         onExit();
         break;
     }
-  }, [onSelect, onExit]);
+  }, [onSelect, onExit, selectedIndex]);
 
   return (
     <div
       ref={containerRef}
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      className="h-full flex flex-col outline-none bg-black"
+      className="h-full flex flex-col outline-none bg-black terminal-text font-mono"
     >
-      {/* Header */}
-      <div className="border border-green-700 mx-4 mt-4 px-6 py-4 bg-green-950/30">
-        <div className="flex items-center justify-between">
+      {/* Header with ASCII art */}
+      <div className="px-3 py-3 border-b border-green-800">
+        <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-2xl text-green-400 tracking-wide">Portfolio</h1>
-            <p className="text-gray-500 text-sm mt-1">Select a section to explore</p>
+            <pre className="text-green-500 leading-none text-xs md:text-sm">
+{`██████╗  █████╗ ███╗   ██╗██╗███████╗██╗
+██╔══██╗██╔══██╗████╗  ██║██║██╔════╝██║
+██║  ██║███████║██╔██╗ ██║██║█████╗  ██║
+██║  ██║██╔══██║██║╚██╗██║██║██╔══╝  ██║
+██████╔╝██║  ██║██║ ╚████║██║███████╗███████╗
+╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚══════╝`}
+            </pre>
+            <div className="mt-2 text-gray-500">
+              Software Developer • Problem Solver
+            </div>
           </div>
           <button
             onClick={onExit}
-            className="px-3 py-1 text-sm border border-green-700 text-green-500 hover:bg-green-900/50 hover:text-green-300 transition-colors"
+            className="text-gray-500 hover:text-green-400 transition-colors shrink-0 ml-4 cursor-pointer"
           >
-            × Close
+            [q] exit
           </button>
         </div>
       </div>
 
-      {/* Cards */}
-      <div className="flex-1 border-x border-green-700 mx-4 p-6 overflow-y-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => onSelect(section.id)}
-              className="group text-left p-5 border border-green-800 bg-black hover:bg-green-950/40 hover:border-green-600 transition-all"
-            >
-              <div className="flex items-start justify-between mb-2">
-                <h2 className="text-lg text-green-400 group-hover:text-green-300">
-                  {section.title}
-                </h2>
-                <span className="text-xs text-gray-600 border border-gray-700 px-1.5 py-0.5 font-mono">
-                  {section.shortcut}
+      {/* Menu list - simple terminal style */}
+      <div className="flex-1 overflow-y-auto px-3 py-3">
+        <div className="text-gray-500 mb-2">
+          Select a section:
+        </div>
+
+        <div className="space-y-0">
+          {sections.map((section, index) => {
+            const isSelected = index === selectedIndex;
+            return (
+              <button
+                key={section.id}
+                onClick={() => onSelect(section.id)}
+                onMouseEnter={() => setSelectedIndex(index)}
+                className={`w-full text-left px-2 py-1.5 transition-colors flex items-center gap-3 cursor-pointer ${
+                  isSelected
+                    ? 'bg-green-900/40 text-green-300'
+                    : 'text-gray-400 hover:text-green-400'
+                }`}
+              >
+                <span className={`${isSelected ? 'text-green-400' : 'text-gray-600'}`}>
+                  {isSelected ? '▸' : ' '}
                 </span>
-              </div>
-              <p className="text-sm text-gray-500 group-hover:text-gray-400">
-                {section.description}
-              </p>
-              <div className="mt-3 text-xs text-green-600 group-hover:text-green-500">
-                Press {section.shortcut} or click to open →
-              </div>
-            </button>
-          ))}
+                <span className={`${isSelected ? 'text-green-500' : 'text-gray-600'}`}>
+                  [{section.shortcut}]
+                </span>
+                <span className="flex-1">{section.title}</span>
+                <span className={`text-xs ${isSelected ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {section.description}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="border border-green-700 mx-4 mb-4 px-4 py-2 text-xs text-gray-500 flex justify-between bg-green-950/30">
-        <span>Press 1-4 to select section • Click to open</span>
-        <span>ESC or q to close</span>
+      {/* Footer with controls */}
+      <div className="px-3 py-2 border-t border-green-800 text-gray-500 flex flex-wrap gap-x-4 gap-y-1">
+        <span><span className="text-green-600">[1-5]</span> select</span>
+        <span><span className="text-green-600">[↑↓]</span> navigate</span>
+        <span><span className="text-green-600">[enter]</span> open</span>
+        <span><span className="text-green-600">[q]</span> exit</span>
       </div>
     </div>
   );
 }
-

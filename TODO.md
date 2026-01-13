@@ -1,8 +1,10 @@
 # TODO - Features to add
 
 FIXES:
-1. Zooming in glitch now. I like how the zooming in feature on the screen ONLY zoomed in the terminal. It was working well til one or two things ago, Id like that work again if possible. It somewhat works, but its "glitchy" when it happens! Its nice to be able to scale text inside the monitor tho cause it can be twoo big dependingo n montior
+1. Less padding on left side of boot sequence longer realistic part of the linux kernel boot (it can go quick tho)
+2. Add more of a header to the hub, i removed the old ascii art that was in there cause it was stupid, but we should have one that is like "Daniel" with maybe a description under it as a header
+3. And I actually meant to redesign the InteractivePortfolio, which it doesnt look like you touched... that is what all my comments were referring to in the last edit request
 
-AFTER GOOD WITH TERMINAL
-1. For non mobile, the terminal should be INSIDE of a retro poc displayed on the site possible.
 
+Next Fixes:
+1. But a `[b] back`  button up by the exit ibn upper right.

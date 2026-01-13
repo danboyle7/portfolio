@@ -74,7 +74,7 @@ export function InteractiveBlog({ onExit, onSelectPost }: InteractiveBlogProps) 
   // Handle case when no posts are available
   if (allPosts.length === 0) {
     return (
-      <div className="bg-black border border-green-900 rounded-lg p-4 font-mono text-sm">
+      <div className="bg-black border border-green-900 rounded-lg p-4 font-mono">
         <div className="border-b border-green-900 pb-2 mb-3">
           <div className="flex items-center justify-between">
             <span className="text-green-400 font-bold">BLOG - Interactive Mode</span>
@@ -94,7 +94,7 @@ export function InteractiveBlog({ onExit, onSelectPost }: InteractiveBlogProps) 
   }
 
   return (
-    <div className="bg-black border border-green-900 rounded-lg p-4 font-mono text-sm">
+    <div className="bg-black border border-green-900 rounded-lg p-4 font-mono">
       {/* Header */}
       <div className="border-b border-green-900 pb-2 mb-3">
         <div className="flex items-center justify-between">
