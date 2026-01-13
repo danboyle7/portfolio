@@ -1,6 +1,6 @@
-import type { Command, CommandResult, FileSystemNode } from '../types';
-import { createLine, resolvePath } from '../utils';
-import { navigateToPath } from '../file-system';
+import type { Command, CommandResult, FileSystemNode } from '@/lib/terminal/types';
+import { createLine, resolvePath } from '@/lib/terminal/utils';
+import { navigateToPath } from '@/lib/terminal/file-system';
 
 export const treeCommand: Command = {
   name: 'tree',

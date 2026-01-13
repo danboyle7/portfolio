@@ -179,7 +179,7 @@ export function TerminalInput({
   );
 
   return (
-    <form onSubmit={handleSubmit} className="outline-none relative" tabIndex={-1}>
+    <form onSubmit={handleSubmit} className="outline-none" tabIndex={-1}>
       {/* Text that wraps to the left edge */}
       <div className="break-all">
         <span className="text-green-400 font-bold">{user}@{hostname}</span>
@@ -187,7 +187,7 @@ export function TerminalInput({
         <span className="text-blue-400 font-bold">{displayPath}</span>
         <span className="text-green-600">$ </span>
         <span className="text-green-300">{input}</span>
-        <span className="inline-block w-2 h-5 bg-green-400 animate-blink align-middle" />
+        <span className="relative"><span className="absolute top-0 left-0 w-[0.6em] h-[1.1em] bg-green-400 animate-blink" /></span>
       </div>
       {/* Hidden input for capturing keystrokes */}
       <input

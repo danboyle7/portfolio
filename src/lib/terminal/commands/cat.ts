@@ -1,7 +1,7 @@
-import type { Command, CommandResult, ContentData } from '../types';
-import { createLine, resolvePath, escapeHtml } from '../utils';
-import { navigateToPath, getFileContent } from '../file-system';
-import { renderContentData } from '../content-renderer';
+import type { Command, CommandResult, ContentData } from '@/lib/terminal/types';
+import { createLine, resolvePath, escapeHtml } from '@/lib/terminal/utils';
+import { navigateToPath, getFileContent } from '@/lib/terminal/file-system';
+import { renderContentData } from '@/lib/terminal/content-renderer';
 
 export const catCommand: Command = {
   name: 'cat',

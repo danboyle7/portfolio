@@ -1,5 +1,5 @@
-import type { Command, CommandResult } from '../types';
-import { createLine } from '../utils';
+import type { Command, CommandResult } from '@/lib/terminal/types';
+import { createLine } from '@/lib/terminal/utils';
 
 export const historyCommand: Command = {
   name: 'history',

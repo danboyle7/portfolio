@@ -1,6 +1,6 @@
-import type { Command, CommandResult } from '../types';
-import { createLine } from '../utils';
-import { VERSION } from '../../version';
+import type { Command, CommandResult } from '@/lib/terminal/types';
+import { createLine } from '@/lib/terminal/utils';
+import { VERSION } from '@/lib/version';
 
 export const sysinfoCommand: Command = {
   name: 'sysinfo',

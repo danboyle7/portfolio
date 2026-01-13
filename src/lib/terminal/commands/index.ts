@@ -1,7 +1,7 @@
 // Command registry and execution
 
-import type { Command, CommandContext, CommandResult } from '../types';
-import { createLine } from '../utils';
+import type { Command, CommandContext, CommandResult } from '@/lib/terminal/types';
+import { createLine } from '@/lib/terminal/utils';
 
 // Import all commands
 import { helpCommand } from './help';

@@ -1,6 +1,6 @@
-import type { Command, CommandResult, SkillCategory } from '../types';
-import { createLine, createProgressBar } from '../utils';
-import { getContentData } from '../file-system';
+import type { Command, CommandResult, SkillCategory } from '@/lib/terminal/types';
+import { createLine, createProgressBar } from '@/lib/terminal/utils';
+import { getContentData } from '@/lib/terminal/file-system';
 
 export const skillsCommand: Command = {
   name: 'skills',

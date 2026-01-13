@@ -1,7 +1,7 @@
 // Virtual file system for terminal navigation
 
-import type { FileSystemNode, ContentData } from './types';
-import { VERSION } from '../version';
+import type { FileSystemNode, ContentData } from '@/lib/terminal/types';
+import { VERSION } from '@/lib/version';
 
 // Content data loaders - these will be populated from YAML files
 let contentCache: Record<string, unknown> = {};
@@ -1027,6 +1027,24 @@ The year it came from. The state it represents.
                 modified: dateStr,
                 target: '/usr/bin/profile',
               },
+              'sysinfo': {
+                name: 'sysinfo',
+                type: 'executable',
+                permissions: '-rwxr-xr-x',
+                owner: 'root',
+                size: '28K',
+                modified: dateStr,
+                content: '#!/bin/bash\n# display system information (neofetch style)\n# Usage: sysinfo',
+              },
+              'neofetch': {
+                name: 'neofetch',
+                type: 'symlink',
+                permissions: 'lrwxrwxrwx',
+                owner: 'root',
+                size: '7',
+                modified: dateStr,
+                target: '/usr/bin/sysinfo',
+              },
               'info': {
                 name: 'info',
                 type: 'symlink',
@@ -1034,7 +1052,7 @@ The year it came from. The state it represents.
                 owner: 'root',
                 size: '7',
                 modified: dateStr,
-                target: '/usr/bin/profile',
+                target: '/usr/bin/sysinfo',
               },
               // ============ PORTFOLIO COMMANDS ============
               'portfolio': {

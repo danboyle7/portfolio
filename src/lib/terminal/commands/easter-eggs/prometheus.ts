@@ -1,5 +1,5 @@
-import type { Command, CommandResult, TerminalLine, AnimatedLine } from '../../types';
-import { createLine } from '../../utils';
+import type { Command, CommandResult, TerminalLine, AnimatedLine } from '@/lib/terminal/types';
+import { createLine } from '@/lib/terminal/utils';
 
 const PASSPHRASE = 'awakening2049';
 

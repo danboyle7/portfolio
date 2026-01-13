@@ -1,6 +1,6 @@
-import type { Command, CommandResult, Education } from '../types';
-import { createLine } from '../utils';
-import { getContentData } from '../file-system';
+import type { Command, CommandResult, Education } from '@/lib/terminal/types';
+import { createLine } from '@/lib/terminal/utils';
+import { getContentData } from '@/lib/terminal/file-system';
 
 export const educationCommand: Command = {
   name: 'education',

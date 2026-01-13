@@ -1,5 +1,5 @@
-import type { Command, CommandResult } from '../../types';
-import { createLine, randomFrom } from '../../utils';
+import type { Command, CommandResult } from '@/lib/terminal/types';
+import { createLine, randomFrom } from '@/lib/terminal/utils';
 
 const fortunes = [
   '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler',

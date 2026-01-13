@@ -1,5 +1,5 @@
-import type { Command, CommandResult } from '../types';
-import { createLine, escapeHtml } from '../utils';
+import type { Command, CommandResult } from '@/lib/terminal/types';
+import { createLine, escapeHtml } from '@/lib/terminal/utils';
 
 export const echoCommand: Command = {
   name: 'echo',

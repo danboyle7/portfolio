@@ -521,9 +521,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
                 hostname={HOSTNAME}
               />
               {entry.output.length > 0 && (
-                <div className="mt-1">
-                  <TerminalOutput lines={entry.output} />
-                </div>
+                <TerminalOutput lines={entry.output} />
               )}
             </div>
           ))}
@@ -618,7 +616,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
 
           {/* Input line - only show when not in interactive mode */}
           {!interactiveMode && (
-            <div ref={inputLineRef} className="mt-2">
+            <div ref={inputLineRef}>
               <TerminalInput
                 currentPath={state.currentPath}
                 hostname={HOSTNAME}

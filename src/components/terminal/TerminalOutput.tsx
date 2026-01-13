@@ -17,7 +17,7 @@ export function TerminalOutput({ lines, onScrollToBottom }: TerminalOutputProps)
   }, [lines, onScrollToBottom]);
 
   return (
-    <div className="space-y-0.5 pb-4">
+    <div className="space-y-0.5">
       {lines.map((line) => (
         <TerminalLineComponent key={line.id} line={line} />
       ))}
@@ -82,12 +82,12 @@ export function CommandLine({
     : path;
 
   return (
-    <div className="flex items-center gap-0">
+    <div className="break-all">
       <span className="text-green-400 font-bold">{user}@{hostname}</span>
       <span className="text-green-600">:</span>
       <span className="text-blue-400 font-bold">{displayPath}</span>
-      <span className="text-green-600">$</span>
-      <span className="ml-2 text-green-300">{command}</span>
+      <span className="text-green-600">$ </span>
+      <span className="text-green-300">{command}</span>
     </div>
   );
 }

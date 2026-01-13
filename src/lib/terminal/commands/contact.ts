@@ -1,4 +1,4 @@
-import type { Command, CommandResult } from '../types';
+import type { Command, CommandResult } from '@/lib/terminal/types';
 
 export const contactCommand: Command = {
   name: 'contact',

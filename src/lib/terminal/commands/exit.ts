@@ -1,5 +1,5 @@
-import type { Command, CommandResult, AnimatedLine } from '../types';
-import { createLine } from '../utils';
+import type { Command, CommandResult, AnimatedLine } from '@/lib/terminal/types';
+import { createLine } from '@/lib/terminal/utils';
 
 // Exit with farewell message - goes back to main menu
 export const exitCommand: Command = {

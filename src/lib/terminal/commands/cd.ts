@@ -1,6 +1,6 @@
-import type { Command, CommandResult } from '../types';
-import { createLine, resolvePath } from '../utils';
-import { navigateToPath, isDirectory } from '../file-system';
+import type { Command, CommandResult } from '@/lib/terminal/types';
+import { createLine, resolvePath } from '@/lib/terminal/utils';
+import { navigateToPath, isDirectory } from '@/lib/terminal/file-system';
 
 export const cdCommand: Command = {
   name: 'cd',
