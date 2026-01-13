@@ -25,7 +25,7 @@ export interface CommandResult {
   output: TerminalLine[];
   clearScreen?: boolean;
   changeDirectory?: string;
-  triggerEffect?: 'matrix' | 'glitch' | 'reboot' | 'hacker' | 'destroy' | 'cowsay';
+  triggerEffect?: 'matrix' | 'glitch' | 'reboot' | 'hacker' | 'destroy' | 'cowsay' | 'exit';
   animatedOutput?: AnimatedLine[]; // For step-by-step animation
   enterInteractiveMode?: InteractiveMode; // Enter an interactive TUI mode
 }

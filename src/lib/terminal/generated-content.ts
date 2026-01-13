@@ -14,7 +14,7 @@
 export const generatedContent: Record<string, any> = {
   "about": {
     "name": "Daniel Boyle",
-    "title": "Full-Stack Developer",
+    "title": "Software Developer",
     "tagline": "Building the future, one commit at a time",
     "bio": [
       "Passionate software engineer with 6+ years of experience building web applications and scalable systems.",

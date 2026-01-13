@@ -24,6 +24,7 @@ import { ContactApp } from './ContactApp';
 import { SkillsSection } from './SkillsSection';
 import { EducationSection } from './EducationSection';
 import { HobbiesSection } from './HobbiesSection';
+import { TerminalMenu } from './TerminalMenu';
 import { useZoom } from './ZoomContext';
 import { VERSION } from '@/lib/version';
 import type { InteractiveMode } from '@/lib/terminal/types';
@@ -35,6 +36,10 @@ const HOSTNAME = 'portfolio';
 const USER = 'guest';
 const HOME_PATH = '/home/guest';
 
+interface TerminalProps {
+  onBackToSplash?: () => void;
+}
+
 interface HistoryEntry {
   id: string;
   command: string;
@@ -45,9 +50,10 @@ interface HistoryEntry {
 // Track if boot has completed this session (persists across mobile/desktop switches)
 const hasBootedRef = { current: false };
 
-export function Terminal() {
+export function Terminal({ onBackToSplash }: TerminalProps) {
   const { zoomScale } = useZoom();
   const [isBooting, setIsBooting] = useState(() => !hasBootedRef.current);
+  const [showMenu, setShowMenu] = useState(false);
   const [state, setState] = useState<TerminalState>({
     lines: [],
     currentPath: HOME_PATH,
@@ -285,6 +291,12 @@ export function Terminal() {
               setHistory([]);
             }, 1500);
             break;
+          case 'exit':
+            // Go back to main menu instead of rebooting
+            setTimeout(() => {
+              onBackToSplash?.();
+            }, 1500);
+            break;
         }
       }
 
@@ -452,8 +464,12 @@ export function Terminal() {
 
   // Keyboard shortcuts
   useEffect(() => {
-    const handleKeyDown = (_e: KeyboardEvent) => {
-      // Konami code detection could go here
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Open menu with 'h' key when not in interactive mode and not typing
+      if ((e.key === 'h' || e.key === 'H') && e.ctrlKey) {
+        e.preventDefault();
+        setShowMenu(prev => !prev);
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -473,6 +489,7 @@ export function Terminal() {
   }
 
   return (
+    <>
     <ComputerBackground>
       {/* Relative container for CRT effects - they use absolute positioning */}
       <div className="relative h-full w-full overflow-hidden">
@@ -620,5 +637,26 @@ export function Terminal() {
       </div>
       </div>
     </ComputerBackground>
+
+    {/* Menu button - OUTSIDE computer, fixed to browser window, hidden on mobile */}
+    <button
+      onClick={() => setShowMenu(true)}
+      className="hidden sm:block fixed top-4 right-4 z-200 px-4 py-2 text-sm font-mono text-green-500 hover:text-green-400 border-2 border-green-700 hover:border-green-500 bg-black/90 hover:bg-black transition-all cursor-pointer shadow-lg shadow-green-900/30 hover:shadow-green-500/20"
+      title="Help Menu (Ctrl+H)"
+    >
+      Menu
+    </button>
+
+    {/* Help Menu overlay - OUTSIDE computer, covers entire browser window */}
+    {showMenu && (
+      <TerminalMenu
+        onClose={() => setShowMenu(false)}
+        onBackToSplash={() => {
+          setShowMenu(false);
+          onBackToSplash?.();
+        }}
+      />
+    )}
+  </>
   );
 }

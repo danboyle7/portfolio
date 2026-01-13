@@ -1,10 +1,10 @@
 import type { Command, CommandResult, AnimatedLine } from '../types';
 import { createLine } from '../utils';
 
-// Exit with farewell message
+// Exit with farewell message - goes back to main menu
 export const exitCommand: Command = {
   name: 'exit',
-  description: 'Exit terminal session',
+  description: 'Exit terminal and return to main menu',
   usage: 'exit',
   aliases: ['logout', 'quit'],
   execute: (): CommandResult => {
@@ -13,14 +13,14 @@ export const exitCommand: Command = {
         createLine('', 'output'),
         createLine('+------------------------------------------------+', 'system'),
         createLine('|                                                |', 'system'),
-        createLine('|   Thanks for visiting my portfolio!            |', 'system'),
+        createLine('|   Thanks for visiting the terminal!            |', 'system'),
         createLine('|                                                |', 'system'),
-        createLine('|   The terminal is eternal... refreshing...     |', 'system'),
+        createLine('|   Returning to main menu...                    |', 'system'),
         createLine('|                                                |', 'system'),
         createLine('+------------------------------------------------+', 'system'),
         createLine('', 'output'),
       ],
-      triggerEffect: 'reboot',
+      triggerEffect: 'exit',
     };
   },
 };

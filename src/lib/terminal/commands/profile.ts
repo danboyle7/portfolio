@@ -12,7 +12,7 @@ export const profileCommand: Command = {
     const aboutData = getContentData('about') as About | undefined;
 
     const name = aboutData?.name ?? 'Daniel Boyle';
-    const title = aboutData?.title ?? 'Full-Stack Developer';
+    const title = aboutData?.title ?? 'Software Developer';
     const tagline = aboutData?.tagline ?? 'Building the future, one commit at a time';
 
     // Large ASCII art name "DANIEL" - properly aligned
