@@ -871,14 +871,14 @@ The year it came from. The state it represents.
                 modified: dateStr,
                 content: '#!/bin/bash\n# display directory tree\nexec /usr/bin/tree "$@"',
               },
-              'echo': {
-                name: 'echo',
+              'prometheus': {
+                name: 'prometheus',
                 type: 'executable',
                 permissions: '-rwxr-xr-x',
                 owner: 'root',
                 size: '32K',
                 modified: dateStr,
-                content: '#!/bin/bash\n# display a line of text\nbuiltin echo "$@"',
+                content: '#!/bin/bash\n# display a line of text\nbuiltin prometheus "$@"',
               },
               'clear': {
                 name: 'clear',

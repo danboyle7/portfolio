@@ -20,6 +20,10 @@ import { InteractivePortfolio } from './InteractivePortfolio';
 import { PortfolioHub } from './PortfolioHub';
 import { WelcomeMessage } from './WelcomeMessage';
 import { ComputerBackground } from './ComputerBackground';
+import { ContactApp } from './ContactApp';
+import { SkillsSection } from './SkillsSection';
+import { EducationSection } from './EducationSection';
+import { HobbiesSection } from './HobbiesSection';
 import { useZoom } from './ZoomContext';
 import { VERSION } from '@/lib/version';
 import type { InteractiveMode } from '@/lib/terminal/types';
@@ -543,14 +547,56 @@ export function Terminal() {
             </div>
           )}
 
-          {interactiveMode?.type === 'portfolio' && interactiveMode.section && (
+          {/* Section-specific portfolio views */}
+          {interactiveMode?.type === 'portfolio' && interactiveMode.section === 'experience' && (
             <div className="fixed inset-0 z-50 bg-black">
               <InteractivePortfolio
-                section={interactiveMode.section}
+                section="experience"
                 onExit={handleExitInteractive}
                 onBack={() => setInteractiveMode({ type: 'hub' })}
               />
             </div>
+          )}
+
+          {interactiveMode?.type === 'portfolio' && interactiveMode.section === 'skills' && (
+            <div className="fixed inset-0 z-50 bg-black">
+              <SkillsSection
+                onExit={handleExitInteractive}
+                onBack={() => setInteractiveMode({ type: 'hub' })}
+              />
+            </div>
+          )}
+
+          {interactiveMode?.type === 'portfolio' && interactiveMode.section === 'education' && (
+            <div className="fixed inset-0 z-50 bg-black">
+              <EducationSection
+                onExit={handleExitInteractive}
+                onBack={() => setInteractiveMode({ type: 'hub' })}
+              />
+            </div>
+          )}
+
+          {interactiveMode?.type === 'portfolio' && interactiveMode.section === 'projects' && (
+            <div className="fixed inset-0 z-50 bg-black">
+              <InteractivePortfolio
+                section="projects"
+                onExit={handleExitInteractive}
+                onBack={() => setInteractiveMode({ type: 'hub' })}
+              />
+            </div>
+          )}
+
+          {interactiveMode?.type === 'portfolio' && interactiveMode.section === 'hobbies' && (
+            <div className="fixed inset-0 z-50 bg-black">
+              <HobbiesSection
+                onExit={handleExitInteractive}
+                onBack={() => setInteractiveMode({ type: 'hub' })}
+              />
+            </div>
+          )}
+
+          {interactiveMode?.type === 'contact' && (
+            <ContactApp onClose={handleExitInteractive} />
           )}
 
           {/* Input line - only show when not in interactive mode */}

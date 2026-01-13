@@ -5,7 +5,7 @@ import { getContentData } from '../file-system';
 export const blogCommand: Command = {
   name: 'blog',
   description: 'Display blog posts',
-  usage: 'blog [post-slug] | blog -i (interactive)',
+  usage: 'blog [&lt;slug&gt;] | blog -i (interactive)',
   aliases: ['posts', 'articles'],
   execute: (args): CommandResult => {
     const posts = getContentData('blog') as BlogPost[] | undefined;
@@ -72,7 +72,7 @@ export const blogCommand: Command = {
     lines.push('  -------------------------------------------------------------------');
     lines.push('');
     lines.push('  <span class="term-dim">Commands:</span>');
-    lines.push('    blog <slug>     Read a specific post');
+    lines.push('    blog [slug]     Read a specific post');
     lines.push('    blog -i         Interactive mode (TUI)');
     lines.push('');
 

@@ -1,26 +1,36 @@
 # Education History
+# Daniel W. Boyle
 
 education:
-  - institution: "University of Technology"
+  - institution: "University of Colorado, Colorado Springs"
+    degree: "Master of Science"
+    field: "Computer Science - Artificial Intelligence / Machine Learning"
+    period: "2020 - Dec 2022"
+    location: "Colorado Springs, CO"
+    gpa: "4.0"
+    highlights:
+      - "Focus on Deep Reinforcement Learning and Neural Network Architectures"
+      - "Research in Transformers, CNNs, RNNs/LSTMs, and VAEs"
+      - "Applied ML projects in the financial domain"
+
+  - institution: "University of Colorado, Colorado Springs"
     degree: "Bachelor of Science"
     field: "Computer Science"
-    period: "2014 - 2018"
-    location: "San Francisco, CA"
+    period: "2013 - Dec 2017"
+    location: "Colorado Springs, CO"
+    gpa: "3.9"
+    highlights:
+      - "Strong foundation in algorithms, data structures, and systems programming"
+      - "Emphasis on embedded systems and real-time computing"
+      - "Worked at Lockheed Martin while completing degree"
+
+  - institution: "University of Colorado, Colorado Springs"
+    degree: "Bachelor of Arts"
+    field: "Mathematics"
+    period: "2013 - Dec 2017"
+    location: "Colorado Springs, CO"
     gpa: "3.8"
     highlights:
-      - "Dean's List all semesters"
-      - "Senior capstone: Distributed systems project"
-      - "Teaching assistant for Data Structures course"
-      - "Member of ACM student chapter"
-
-  - institution: "Professional Certifications"
-    degree: "Industry Certifications"
-    field: "Cloud & DevOps"
-    period: "2018 - Present"
-    location: "Online"
-    highlights:
-      - "AWS Solutions Architect Associate"
-      - "Google Cloud Professional Developer"
-      - "Kubernetes Administrator (CKA)"
-      - "Terraform Associate"
-
+      - "Strong foundation in linear algebra, calculus, and statistics"
+      - "Theoretical and applied mathematics coursework supporting ML/AI studies"
+      - "Dual degree completed alongside Computer Science"

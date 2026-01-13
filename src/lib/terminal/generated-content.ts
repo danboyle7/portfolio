@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-09T22:09:48.363Z
+ * Generated at: 2026-01-13T18:56:20.309Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,239 +26,487 @@ export const generatedContent: Record<string, any> = {
   },
   "experience": [
     {
-      "company": "Tech Innovations Inc.",
-      "role": "Senior Full-Stack Developer",
-      "period": "2022 - Present",
-      "location": "San Francisco, CA",
-      "description": "Leading development of cloud-native applications, designing scalable architectures, and mentoring junior developers. Responsible for technical decisions across the full stack, from database schema design to frontend performance optimization. Work closely with product and design teams to deliver features that delight users while maintaining code quality and system reliability.",
+      "company": "Alpha Omega Group LLC",
+      "role": "Full Stack Developer",
+      "period": "Oct 2023 - Present",
+      "location": "Full Remote",
+      "description": "Developing enterprise applications for government clients, leading AI/ML initiatives, and building data science solutions for the United States Space Force.",
       "highlights": [
-        "Architected microservices handling 1M+ requests/day with 99.99% uptime",
-        "Reduced deployment time by 60% through CI/CD pipeline improvements and automated testing",
-        "Led team of 5 developers on flagship product rewrite, delivering 3 months ahead of schedule",
-        "Implemented real-time data synchronization using event-driven architecture",
-        "Designed and built internal developer tools that increased team productivity by 40%",
-        "Established coding standards and review processes adopted company-wide",
-        "Reduced infrastructure costs by 35% through optimization and right-sizing",
-        "Mentored 4 junior developers, with 2 promoted to mid-level within a year",
-        "Presented technical talks at 3 company-wide engineering meetings",
-        "Contributed to open-source projects used by the team, fixing critical bugs"
+        "Developed CAPS-5 training platform for the VA using Next.js, TailwindCSS, and Drizzle ORM",
+        "Primary Data Scientist for USSF S1A division, analyzing military and civilian personnel datasets",
+        "Led summer internship engineering team building LLM-powered automated customer report tool",
+        "Integrated LangChain and OpenAI models for streamlined reporting processes",
+        "Collaborated on business process design for software idea submission and management"
       ],
       "technologies": [
-        "TypeScript",
-        "React",
         "Next.js",
-        "Node.js",
-        "AWS",
-        "PostgreSQL",
-        "Docker",
-        "Kubernetes",
-        "Redis",
-        "GraphQL",
-        "Terraform"
-      ]
-    },
-    {
-      "company": "StartupXYZ",
-      "role": "Full-Stack Developer",
-      "period": "2020 - 2022",
-      "location": "Remote",
-      "description": "Built and scaled a SaaS platform from 0 to 50,000 users.",
-      "highlights": [
-        "Implemented real-time collaboration features using WebSockets",
-        "Built payment integration handling $500K+ MRR",
-        "Optimized database queries reducing load times by 40%"
-      ],
-      "technologies": [
-        "JavaScript",
-        "Vue.js",
+        "TailwindCSS",
+        "Drizzle ORM",
+        "LangChain",
+        "OpenAI",
         "Python",
-        "Django",
-        "MongoDB",
-        "Redis"
+        "Data Science"
       ]
     },
     {
-      "company": "Digital Agency Co.",
-      "role": "Frontend Developer",
-      "period": "2018 - 2020",
-      "location": "New York, NY",
-      "description": "Developed responsive web applications for enterprise clients.",
+      "company": "Intel",
+      "role": "AI Framework Engineer",
+      "period": "July 2022 - Oct 2023",
+      "location": "Remote (Hillsboro, Oregon)",
+      "description": "Contributed to Intel's Neural Processing Unit development, building C++17 firmware and automation tools in a large-scale multi-team production environment.",
       "highlights": [
-        "Delivered 20+ client projects on time and within budget",
-        "Introduced component library reducing dev time by 30%",
-        "Mentored 3 junior developers"
+        "Developed C++17 firmware for next-gen NPU hardware focusing on neural network scheduling and execution",
+        "Used JTAG debugging to diagnose and resolve firmware issues for model loading and inference",
+        "Created automation tools: build systems, remote debugging setups, driver installation scripts",
+        "Built Python-based machine reservation system to enhance team productivity",
+        "Facilitated unification of software baselines across multiple firmware products"
       ],
       "technologies": [
-        "React",
-        "TypeScript",
-        "CSS/SASS",
-        "Node.js",
-        "GraphQL"
+        "C++17",
+        "Python",
+        "JTAG",
+        "Neural Networks",
+        "Firmware",
+        "Automation"
+      ]
+    },
+    {
+      "company": "Lockheed Martin - Space",
+      "role": "Senior Software Engineer",
+      "period": "Apr 2021 - July 2022",
+      "location": "Littleton, CO",
+      "description": "Embedded C++ development for the OPIR satellite communication module, including hardware interface design and comprehensive testing frameworks.",
+      "highlights": [
+        "Embedded C++ development on communication module for OPIR satellite using NXP LS1043 processor",
+        "Designed communication interfaces for GR718B SpaceWire Router and Radnet-1848-PS Serial RapidIO Switch",
+        "Extensive unit testing using Google Test framework",
+        "Developed Python CI framework with pytest for remote hardware validation and regression testing"
+      ],
+      "technologies": [
+        "C++",
+        "Python",
+        "pytest",
+        "Google Test",
+        "SpaceWire",
+        "Embedded Systems"
+      ]
+    },
+    {
+      "company": "Lockheed Martin - RMS",
+      "role": "A/AI Machine Learning Engineer",
+      "period": "Dec 2019 - Apr 2021",
+      "location": "Colorado Springs, CO",
+      "description": "Developed deep reinforcement learning models for ballistic missile defense simulations and built full-stack recommendation systems for warfighters.",
+      "highlights": [
+        "Built Policy-Gradient Deep RL model for Red vs Blue Ballistic Missile Defense simulation",
+        "Implemented custom PPO and TD3 models in PyTorch for simulation optimization",
+        "Managed ML lifecycle with MLFlow for experiment tracking and model management",
+        "Created OpenAI Gym environment wrappers for AFSIM simulator",
+        "Developed backend microservices architecture using Java and Spring Boot",
+        "Built frontend interface using Vue.js for warfighter recommendation systems",
+        "Established containerized development environments with Docker",
+        "Maintained GitLab CI/CD pipelines across multiple repositories"
+      ],
+      "technologies": [
+        "PyTorch",
+        "Python",
+        "Deep RL",
+        "MLFlow",
+        "Java",
+        "Spring Boot",
+        "Vue.js",
+        "Docker",
+        "GitLab CI/CD"
+      ]
+    },
+    {
+      "company": "Lockheed Martin - Space",
+      "role": "Embedded Software Engineer",
+      "period": "Sept 2018 - Dec 2019",
+      "location": "Colorado Springs, CO",
+      "description": "Green Hills Integrity RTOS development for DO-178B certifiable applications, including NC3 nuclear surety prototype systems.",
+      "highlights": [
+        "Green Hills Integrity 178B RTOS configuration on Curtiss Wright VPX6-187 boards",
+        "Designed generic kernel and application infrastructure for DO-178B certifiable real-time applications",
+        "Driver development for USB, Serial (RS232/RS422), and Ethernet communication",
+        "Embedded GUI development with GLStudio using Safety-Critical Embedded C++",
+        "NC3 system prototype development with multi-board architecture for Nuclear Surety",
+        "Guided multiple customer-facing demonstrations on prototype capabilities",
+        "GitLab server management including configuration and user administration"
+      ],
+      "technologies": [
+        "C++",
+        "Green Hills Integrity",
+        "RTOS",
+        "GLStudio",
+        "DO-178B",
+        "VxWorks"
+      ]
+    },
+    {
+      "company": "Lockheed Martin - MFC",
+      "role": "Software Engineer Associate",
+      "period": "Dec 2017 - Sept 2018",
+      "location": "Orlando, FL",
+      "description": "Embedded and application-level C/C++ programming with Linux kernel driver development and hardware interfacing.",
+      "highlights": [
+        "Linux kernel driver development for DMA, CMA and PCIe communication",
+        "Inter-process communication library design using TCP, UDP, Serial and DDS",
+        "Hardware interfacing through PCIe and RS422 serial communication",
+        "OS configuration with Yocto/Petalinux for Xilinx Zynq-7000 series SoCs"
+      ],
+      "technologies": [
+        "C",
+        "C++",
+        "Linux Kernel",
+        "Yocto",
+        "Petalinux",
+        "PCIe",
+        "DMA"
+      ]
+    },
+    {
+      "company": "Lockheed Martin - Space",
+      "role": "Software Engineer Aide / Associate",
+      "period": "May 2016 - Dec 2017",
+      "location": "Colorado Springs, CO",
+      "description": "Re-hosted legacy ICBM systems and developed multi-threaded C++ libraries, receiving Individual Excellence award for ahead-of-schedule delivery.",
+      "highlights": [
+        "Re-hosted embedded legacy VAX/ELN ICBM code to Linux using Ada and C/C++",
+        "Received Individual Excellence reward for completing far ahead of schedule",
+        "Developed C++ libraries for multi-threading, TCP communication, and lock-free IPC message brokering",
+        "Led multiple inter-company technical interchange meetings on component design",
+        "Created Software Design Documents for preliminary and complex design program phases",
+        "Software requirements tracking and management via DOORS",
+        "C#/.NET MVVM application and UI design for data processing tools"
+      ],
+      "technologies": [
+        "C++",
+        "Ada",
+        "C#",
+        ".NET",
+        "DOORS",
+        "Linux",
+        "TCP/IPC"
       ]
     }
   ],
   "skills": [
     {
-      "name": "Languages",
+      "name": "Programming Languages",
       "icon": "💻",
       "skills": [
         {
-          "name": "TypeScript",
-          "level": 95,
-          "years": 6
-        },
-        {
-          "name": "JavaScript",
+          "name": "Python",
           "level": 95,
           "years": 8
         },
         {
-          "name": "Python",
-          "level": 85,
+          "name": "C++",
+          "level": 95,
+          "years": 10
+        },
+        {
+          "name": "C",
+          "level": 90,
+          "years": 10
+        },
+        {
+          "name": "TypeScript",
+          "level": 90,
+          "years": 4
+        },
+        {
+          "name": "Java",
+          "level": 80,
           "years": 5
         },
         {
-          "name": "Rust",
-          "level": 70,
-          "years": 2
+          "name": "Ada",
+          "level": 75,
+          "years": 3
         },
         {
-          "name": "Go",
-          "level": 65,
-          "years": 2
+          "name": "C#",
+          "level": 75,
+          "years": 3
+        },
+        {
+          "name": "Bash",
+          "level": 85,
+          "years": 8
         },
         {
           "name": "SQL",
           "level": 85,
           "years": 6
+        },
+        {
+          "name": "Matlab",
+          "level": 70,
+          "years": 4
+        },
+        {
+          "name": "LaTeX",
+          "level": 70,
+          "years": 5
         }
       ]
     },
     {
-      "name": "Frameworks",
+      "name": "AI/ML Frameworks",
+      "icon": "🤖",
+      "skills": [
+        {
+          "name": "PyTorch",
+          "level": 95,
+          "years": 5
+        },
+        {
+          "name": "TensorFlow/Keras",
+          "level": 85,
+          "years": 4
+        },
+        {
+          "name": "NumPy",
+          "level": 95,
+          "years": 6
+        },
+        {
+          "name": "Pandas",
+          "level": 90,
+          "years": 6
+        },
+        {
+          "name": "SciPy",
+          "level": 85,
+          "years": 5
+        },
+        {
+          "name": "Scikit-learn",
+          "level": 90,
+          "years": 5
+        },
+        {
+          "name": "Ray",
+          "level": 75,
+          "years": 2
+        },
+        {
+          "name": "MLFlow",
+          "level": 80,
+          "years": 3
+        },
+        {
+          "name": "LangChain",
+          "level": 85,
+          "years": 2
+        }
+      ]
+    },
+    {
+      "name": "Full Stack Frameworks",
       "icon": "🚀",
       "skills": [
         {
-          "name": "React",
-          "level": 95,
-          "years": 6
+          "name": "Next.js",
+          "level": 90,
+          "years": 3
         },
         {
-          "name": "Next.js",
-          "level": 95,
+          "name": "React",
+          "level": 90,
           "years": 4
         },
         {
-          "name": "Node.js",
-          "level": 90,
-          "years": 6
-        },
-        {
-          "name": "Express",
+          "name": "Vue.js",
           "level": 85,
-          "years": 5
+          "years": 3
         },
         {
           "name": "FastAPI",
-          "level": 75,
+          "level": 85,
+          "years": 3
+        },
+        {
+          "name": "Flask",
+          "level": 80,
+          "years": 4
+        },
+        {
+          "name": "SQLAlchemy",
+          "level": 80,
+          "years": 4
+        },
+        {
+          "name": "Drizzle",
+          "level": 85,
           "years": 2
         },
         {
-          "name": "Tailwind CSS",
+          "name": "TailwindCSS",
           "level": 90,
           "years": 3
+        },
+        {
+          "name": "Spring Boot",
+          "level": 70,
+          "years": 2
         }
       ]
     },
     {
-      "name": "Tools & DevOps",
+      "name": "DevOps & Tools",
       "icon": "🔧",
       "skills": [
         {
-          "name": "Git",
+          "name": "Git/GitLab/GitHub",
           "level": 95,
-          "years": 8
+          "years": 10
         },
         {
           "name": "Docker",
-          "level": 85,
-          "years": 4
+          "level": 90,
+          "years": 5
         },
         {
-          "name": "Kubernetes",
-          "level": 70,
-          "years": 2
-        },
-        {
-          "name": "AWS",
+          "name": "Jenkins",
           "level": 80,
           "years": 4
         },
         {
-          "name": "CI/CD",
+          "name": "GDB/PDB",
+          "level": 90,
+          "years": 8
+        },
+        {
+          "name": "Valgrind",
           "level": 85,
-          "years": 5
+          "years": 6
+        },
+        {
+          "name": "Jira",
+          "level": 85,
+          "years": 6
         },
         {
           "name": "Linux",
+          "level": 95,
+          "years": 10
+        },
+        {
+          "name": "CI/CD Pipelines",
+          "level": 90,
+          "years": 6
+        }
+      ]
+    },
+    {
+      "name": "Operating Systems",
+      "icon": "🖥️",
+      "skills": [
+        {
+          "name": "Linux",
+          "level": 95,
+          "years": 10
+        },
+        {
+          "name": "Green Hills Integrity",
           "level": 85,
+          "years": 3
+        },
+        {
+          "name": "VxWorks",
+          "level": 75,
+          "years": 2
+        },
+        {
+          "name": "Windows",
+          "level": 85,
+          "years": 15
+        },
+        {
+          "name": "macOS",
+          "level": 90,
           "years": 8
         }
       ]
     },
     {
-      "name": "Databases",
-      "icon": "🗄️",
+      "name": "AI Specializations",
+      "icon": "🧠",
       "skills": [
         {
-          "name": "PostgreSQL",
+          "name": "Deep Reinforcement Learning",
           "level": 90,
-          "years": 5
-        },
-        {
-          "name": "MongoDB",
-          "level": 80,
           "years": 4
         },
         {
-          "name": "Redis",
-          "level": 75,
+          "name": "Natural Language Processing",
+          "level": 85,
           "years": 3
         },
         {
-          "name": "SQLite",
+          "name": "Time Series Forecasting",
           "level": 85,
-          "years": 6
+          "years": 3
+        },
+        {
+          "name": "Representation Learning",
+          "level": 80,
+          "years": 3
+        },
+        {
+          "name": "LLM Integration",
+          "level": 90,
+          "years": 2
+        },
+        {
+          "name": "Prompt Engineering",
+          "level": 90,
+          "years": 2
         }
       ]
     }
   ],
   "education": [
     {
-      "institution": "University of Technology",
-      "degree": "Bachelor of Science",
-      "field": "Computer Science",
-      "period": "2014 - 2018",
-      "location": "San Francisco, CA",
-      "gpa": "3.8",
+      "institution": "University of Colorado, Colorado Springs",
+      "degree": "Master of Science",
+      "field": "Computer Science - Artificial Intelligence / Machine Learning",
+      "period": "2020 - Dec 2022",
+      "location": "Colorado Springs, CO",
+      "gpa": "4.0",
       "highlights": [
-        "Dean's List all semesters",
-        "Senior capstone: Distributed systems project",
-        "Teaching assistant for Data Structures course",
-        "Member of ACM student chapter"
+        "Focus on Deep Reinforcement Learning and Neural Network Architectures",
+        "Research in Transformers, CNNs, RNNs/LSTMs, and VAEs",
+        "Applied ML projects in defense and aerospace domains"
       ]
     },
     {
-      "institution": "Professional Certifications",
-      "degree": "Industry Certifications",
-      "field": "Cloud & DevOps",
-      "period": "2018 - Present",
-      "location": "Online",
+      "institution": "University of Colorado, Colorado Springs",
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "period": "2013 - Dec 2017",
+      "location": "Colorado Springs, CO",
+      "gpa": "3.9",
       "highlights": [
-        "AWS Solutions Architect Associate",
-        "Google Cloud Professional Developer",
-        "Kubernetes Administrator (CKA)",
-        "Terraform Associate"
+        "Strong foundation in algorithms, data structures, and systems programming",
+        "Emphasis on embedded systems and real-time computing",
+        "Worked at Lockheed Martin while completing degree"
+      ]
+    },
+    {
+      "institution": "University of Colorado, Colorado Springs",
+      "degree": "Bachelor of Arts",
+      "field": "Mathematics",
+      "period": "2013 - Dec 2017",
+      "location": "Colorado Springs, CO",
+      "gpa": "3.8",
+      "highlights": [
+        "Strong foundation in linear algebra, calculus, and statistics",
+        "Applied mathematics coursework supporting ML/AI studies",
+        "Dual degree completed alongside Computer Science"
       ]
     }
   ],
@@ -302,11 +550,10 @@ export const generatedContent: Record<string, any> = {
   ],
   "contact": {
     "email": "dan.boyle7@gmail.com",
+    "phone": "(719) 650-6222",
     "github": "github.com/danboyle7",
     "linkedin": "linkedin.com/in/daniel-w-boyle",
-    "twitter": "twitter.com/danboyle7",
-    "website": "daniel-boyle.com",
-    "location": "Elizabeth City, NC",
+    "location": "Colorado Springs, CO / Remote",
     "availability": "Open to opportunities"
   },
   "blog": [

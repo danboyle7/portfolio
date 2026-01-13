@@ -65,6 +65,7 @@ interface Project {
 export function InteractivePortfolio({ section, onExit, onBack }: InteractivePortfolioProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [data, setData] = useState<unknown>(null);
+  const [reversed, setReversed] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const detailRef = useRef<HTMLDivElement>(null);
 
@@ -131,10 +132,17 @@ export function InteractivePortfolio({ section, onExit, onBack }: InteractivePor
           onBack();
         }
         break;
+      case 'r':
+      case 'R':
+        e.preventDefault();
+        setReversed(prev => !prev);
+        setSelectedIndex(0);
+        break;
     }
   }, [getItems, onExit, onBack]);
 
-  const items = getItems();
+  const rawItems = getItems();
+  const items = reversed ? [...rawItems].reverse() : rawItems;
   const selectedItem = items[selectedIndex];
 
   const getSectionTitle = () => {
@@ -186,13 +194,30 @@ export function InteractivePortfolio({ section, onExit, onBack }: InteractivePor
           <span className="text-green-400 font-bold">{getSectionTitle()}</span>
           <span className="text-green-500">─┐</span>
           <span className="text-gray-600 text-xs">({items.length} items)</span>
+          <button
+            onClick={() => { setReversed(r => !r); setSelectedIndex(0); }}
+            className={`text-xs cursor-pointer transition-colors ${reversed ? 'text-green-400' : 'text-gray-600 hover:text-green-400'}`}
+            title="Reverse order"
+          >
+            [r] {reversed ? '↑' : '↓'}
+          </button>
         </div>
-        <button
-          onClick={onExit}
-          className="text-gray-500 hover:text-green-400"
-        >
-          [q] exit
-        </button>
+        <div className="flex items-center gap-3">
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="text-gray-500 hover:text-green-400 cursor-pointer"
+            >
+              [b] back
+            </button>
+          )}
+          <button
+            onClick={onExit}
+            className="text-gray-500 hover:text-green-400 cursor-pointer"
+          >
+            [q] exit
+          </button>
+        </div>
       </div>
 
       {/* Main TUI content */}

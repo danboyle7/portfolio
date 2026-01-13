@@ -16,7 +16,7 @@ const bootSteps: BootStep[] = [
   { text: 'CPU: Intel(R) Core(TM) i7-13700K @ 5.40GHz', delay: 200, type: 'info' },
   { text: 'Memory Test: 32768 MB OK', delay: 400, type: 'success' },
   { text: 'Detecting drives...', delay: 500, type: 'loading' },
-  { text: 'SATA0: Samsung SSD 980 PRO 2TB', delay: 600, type: 'info' },
+  { text: 'IDE0: Western Digital Caviar WD400BB 40GB', delay: 600, type: 'info' },
   { text: 'Press DEL to enter SETUP, F12 for Boot Menu', delay: 800, type: 'info' },
   { text: '', delay: 1000, type: 'info' },
   // GRUB-like bootloader
@@ -126,7 +126,7 @@ export function BootSequence({ onComplete, skipable = true }: BootSequenceProps)
   if (skipped) return null;
 
   return (
-    <div className="fixed inset-0 z-200 bg-black p-4 overflow-auto">
+    <div className="fixed inset-0 z-200 bg-black p-2 overflow-auto">
       <div className="w-full font-mono terminal-text">
         {/* Boot lines */}
         <div className="space-y-0.5">

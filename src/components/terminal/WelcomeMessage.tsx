@@ -78,13 +78,9 @@ export function WelcomeMessage() {
     <div className="font-mono whitespace-pre-wrap">
       {ascii && <div dangerouslySetInnerHTML={{ __html: ascii }} />}
       <div dangerouslySetInnerHTML={{ __html: box }} />
-      <br />
       <div dangerouslySetInnerHTML={{ __html: navInfo }} />
-      <br />
       <div dangerouslySetInnerHTML={{ __html: quickStart }} />
-      <br />
       <div dangerouslySetInnerHTML={{ __html: hint }} />
-      <br />
     </div>
   );
 }

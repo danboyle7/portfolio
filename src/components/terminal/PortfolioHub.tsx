@@ -17,9 +17,9 @@ const sections: { id: PortfolioSection; title: string; description: string; shor
     shortcut: '1',
   },
   {
-    id: 'skills',
-    title: 'Skills',
-    description: 'Languages & tools',
+    id: 'education',
+    title: 'Education',
+    description: 'Academic background',
     shortcut: '2',
   },
   {
@@ -29,9 +29,9 @@ const sections: { id: PortfolioSection; title: string; description: string; shor
     shortcut: '3',
   },
   {
-    id: 'education',
-    title: 'Education',
-    description: 'Academic background',
+    id: 'skills',
+    title: 'Skills',
+    description: 'Languages & tools',
     shortcut: '4',
   },
   {
@@ -56,13 +56,13 @@ export function PortfolioHub({ onSelect, onExit }: PortfolioHubProps) {
         onSelect('experience');
         break;
       case '2':
-        onSelect('skills');
+        onSelect('education');
         break;
       case '3':
         onSelect('projects');
         break;
       case '4':
-        onSelect('education');
+        onSelect('skills');
         break;
       case '5':
         onSelect('hobbies');
@@ -97,28 +97,28 @@ export function PortfolioHub({ onSelect, onExit }: PortfolioHubProps) {
       onKeyDown={handleKeyDown}
       className="h-full flex flex-col outline-none bg-black terminal-text font-mono"
     >
-      {/* Header with ASCII art */}
-      <div className="px-3 py-3 border-b border-green-800">
-        <div className="flex items-start justify-between">
-          <div>
-            <pre className="text-green-500 leading-none text-xs md:text-sm">
+      {/* Header with ASCII art - centered */}
+      <div className="px-3 py-1.5 border-b border-green-800">
+        <div className="flex justify-end">
+          <button
+            onClick={onExit}
+            className="text-gray-500 hover:text-green-400 transition-colors cursor-pointer text-xs"
+          >
+            [q] exit
+          </button>
+        </div>
+        <div className="text-center">
+          <pre className="text-green-500 leading-none text-xs md:text-sm inline-block text-left">
 {`██████╗  █████╗ ███╗   ██╗██╗███████╗██╗
 ██╔══██╗██╔══██╗████╗  ██║██║██╔════╝██║
 ██║  ██║███████║██╔██╗ ██║██║█████╗  ██║
 ██║  ██║██╔══██║██║╚██╗██║██║██╔══╝  ██║
 ██████╔╝██║  ██║██║ ╚████║██║███████╗███████╗
 ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚══════╝`}
-            </pre>
-            <div className="mt-2 text-gray-500">
-              Software Developer • Problem Solver
-            </div>
+          </pre>
+          <div className="text-gray-500 text-xs">
+            AI / ML Software Engineer
           </div>
-          <button
-            onClick={onExit}
-            className="text-gray-500 hover:text-green-400 transition-colors shrink-0 ml-4 cursor-pointer"
-          >
-            [q] exit
-          </button>
         </div>
       </div>
 
