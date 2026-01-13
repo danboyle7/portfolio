@@ -25,8 +25,18 @@ export function TerminalMenu({ onClose, onBackToSplash }: TerminalMenuProps) {
     }
   }, [onClose, onBackToSplash]);
 
+  const handleBackdropClick = useCallback((e: React.MouseEvent) => {
+    // Only close if clicking the backdrop itself, not the modal content
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  }, [onClose]);
+
   return (
-    <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+    <div
+      className="fixed inset-0 z-100 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+      onClick={handleBackdropClick}
+    >
       <div
         ref={menuRef}
         tabIndex={0}

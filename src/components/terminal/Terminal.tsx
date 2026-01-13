@@ -638,7 +638,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
 
     {/* Menu button - OUTSIDE computer, fixed to browser window, hidden on mobile */}
     <button
-      onClick={() => setShowMenu(true)}
+      onClick={() => setShowMenu((prev) => !prev)}
       className="hidden sm:block fixed top-4 right-4 z-200 px-4 py-2 text-sm font-mono text-green-500 hover:text-green-400 border-2 border-green-700 hover:border-green-500 bg-black/90 hover:bg-black transition-all cursor-pointer shadow-lg shadow-green-900/30 hover:shadow-green-500/20"
       title="Help Menu (Ctrl+H)"
     >
