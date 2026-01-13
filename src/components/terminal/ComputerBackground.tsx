@@ -81,30 +81,21 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
   }, []);
 
   // Calculate the rendered image layout (size and position within container)
+  // Uses "cover" behavior: fill height, crop sides if needed (keeps monitor centered)
   const calculateImageLayout = useCallback(() => {
     const container = containerRef.current;
     if (!container || !imageLoaded || imageDimensions.width === 0) return;
 
     const containerRect = container.getBoundingClientRect();
     const imgAspect = imageDimensions.width / imageDimensions.height;
-    const containerAspect = containerRect.width / containerRect.height;
 
-    let renderedWidth: number;
-    let renderedHeight: number;
-    let offsetX: number;
-    let offsetY: number;
+    // Always fill the height, let width extend beyond container if needed
+    const renderedHeight = containerRect.height;
+    const renderedWidth = renderedHeight * imgAspect;
 
-    if (containerAspect > imgAspect) {
-      renderedHeight = containerRect.height;
-      renderedWidth = renderedHeight * imgAspect;
-      offsetX = (containerRect.width - renderedWidth) / 2;
-      offsetY = 0;
-    } else {
-      renderedWidth = containerRect.width;
-      renderedHeight = renderedWidth / imgAspect;
-      offsetX = 0;
-      offsetY = (containerRect.height - renderedHeight) / 2;
-    }
+    // Center horizontally (will be negative if image is wider than container, causing crop)
+    const offsetX = (containerRect.width - renderedWidth) / 2;
+    const offsetY = 0;
 
     setImageLayout({ width: renderedWidth, height: renderedHeight, offsetX, offsetY });
   }, [imageLoaded, imageDimensions]);
@@ -122,10 +113,8 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
     if (isMobile) return;
 
     const img = new window.Image();
-    // Cache-bust to ensure we get fresh dimensions
-    img.src = '/computer2.png?' + Date.now();
+    img.src = '/computer2.png';
     img.onload = () => {
-      console.log('Image loaded:', img.naturalWidth, 'x', img.naturalHeight);
       setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
       setImageLoaded(true);
     };

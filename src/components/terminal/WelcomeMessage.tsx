@@ -16,10 +16,10 @@ const LARGE_ASCII = `
 
 // Full welcome box for large screens
 const LARGE_BOX = `
-<span class="term-cyan">  ┌───────────────────────────────────────────────────────────────────────┐</span>
-<span class="term-cyan">  │</span>     <span class="term-white font-bold">Welcome to Daniel Boyle's Interactive Portfolio Terminal</span>          <span class="term-cyan">│</span>
-<span class="term-cyan">  │</span>     <span class="term-dim"> Software Developer | Programming Enthusiast | Problem Solver</span>     <span class="term-cyan">│</span>
-<span class="term-cyan">  └───────────────────────────────────────────────────────────────────────┘</span>
+<span class="term-cyan">  ┌───────────────────────────────────────────────────────────────────┐</span>
+<span class="term-cyan">  │</span>      <span class="term-white font-bold">Welcome to Daniel Boyle's Interactive Portfolio Terminal</span>     <span class="term-cyan">│</span>
+<span class="term-cyan">  │</span>   <span class="term-dim"> Software Developer | Programming Enthusiast | Problem Solver</span>   <span class="term-cyan">│</span>
+<span class="term-cyan">  └───────────────────────────────────────────────────────────────────┘</span>
 `;
 
 // Compact welcome box for small screens
