@@ -11,46 +11,44 @@ interface BootSequenceProps {
 
 const bootSteps: BootStep[] = [
   // BIOS POST sequence
-  { text: 'AMIBIOS (C) 2024 American Megatrends, Inc.', delay: 0, type: 'info' },
-  { text: 'BIOS Date: 01/13/26  Ver: 08.00.15', delay: 100, type: 'info' },
-  { text: 'CPU: Intel(R) Core(TM) i7-13700K @ 5.40GHz', delay: 200, type: 'info' },
-  { text: 'Memory Test: 32768 MB OK', delay: 400, type: 'success' },
-  { text: 'Detecting drives...', delay: 500, type: 'loading' },
-  { text: 'IDE0: Western Digital Caviar WD400BB 40GB', delay: 600, type: 'info' },
-  { text: 'Press DEL to enter SETUP, F12 for Boot Menu', delay: 800, type: 'info' },
+  { text: 'AMIBIOS (C) 1991 American Megatrends, Inc.', delay: 0, type: 'info' },
+  { text: 'BIOS Date: 08/12/92  Ver: 1.00', delay: 100, type: 'info' },
+  { text: 'CPU: Intel 486DX2-66', delay: 200, type: 'info' },
+  { text: 'Memory Test: 4096 KB OK', delay: 400, type: 'success' },
+  { text: 'Detecting IDE drives...', delay: 500, type: 'loading' },
+  { text: 'IDE0: Conner CP30104 104MB', delay: 600, type: 'info' },
+  { text: 'Press DEL to enter SETUP', delay: 800, type: 'info' },
   { text: '', delay: 1000, type: 'info' },
   // GRUB-like bootloader
   { text: 'Loading Portfolio OS...', delay: 1100, type: 'loading' },
   { text: '', delay: 1250, type: 'info' },
-  // ASCII art - "SHELL"
-  { text: '    ███████╗██╗  ██╗███████╗██╗     ██╗     ', delay: 1350, type: 'ascii' },
-  { text: '    ██╔════╝██║  ██║██╔════╝██║     ██║     ', delay: 1380, type: 'ascii' },
-  { text: '    ███████╗███████║█████╗  ██║     ██║     ', delay: 1410, type: 'ascii' },
-  { text: '    ╚════██║██╔══██║██╔══╝  ██║     ██║     ', delay: 1440, type: 'ascii' },
-  { text: '    ███████║██║  ██║███████╗███████╗███████╗', delay: 1470, type: 'ascii' },
-  { text: '    ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝', delay: 1500, type: 'ascii' },
+  // ASCII art - "NEXT.JS"
+  { text: '    ███╗   ██╗███████╗██╗  ██╗████████╗     ██╗███████╗', delay: 1350, type: 'ascii' },
+  { text: '    ████╗  ██║██╔════╝╚██╗██╔╝╚══██╔══╝     ██║██╔════╝', delay: 1380, type: 'ascii' },
+  { text: '    ██╔██╗ ██║█████╗   ╚███╔╝    ██║        ██║███████╗', delay: 1410, type: 'ascii' },
+  { text: '    ██║╚██╗██║██╔══╝   ██╔██╗    ██║   ██   ██║╚════██║', delay: 1440, type: 'ascii' },
+  { text: '    ██║ ╚████║███████╗██╔╝ ██╗   ██║██╗╚█████╔╝███████║', delay: 1470, type: 'ascii' },
+  { text: '    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝   ╚═╝╚═╝ ╚════╝ ╚══════╝', delay: 1500, type: 'ascii' },
   { text: '', delay: 1600, type: 'info' },
   // Linux-style kernel boot messages (quick scrolling)
-  { text: '[    0.000000] Linux version 6.1.0-portfolio (gcc 12.2.0)', delay: 1650, type: 'info' },
-  { text: '[    0.000000] Command line: BOOT_IMAGE=/boot/vmlinuz root=/dev/sda1', delay: 1680, type: 'info' },
-  { text: '[    0.000012] x86/fpu: Supporting XSAVE feature 0x001', delay: 1710, type: 'info' },
-  { text: '[    0.000012] x86/fpu: Supporting XSAVE feature 0x002', delay: 1730, type: 'info' },
-  { text: '[    0.000021] BIOS-provided physical RAM map:', delay: 1750, type: 'info' },
-  { text: '[    0.000023] BIOS-e820: [mem 0x0000000000000000-0x000000000009ffff] usable', delay: 1770, type: 'info' },
-  { text: '[    0.000024] BIOS-e820: [mem 0x0000000100000000-0x00000007ffffffff] usable', delay: 1790, type: 'info' },
-  { text: '[    0.004523] ACPI: Early table checksum verification disabled', delay: 1810, type: 'info' },
-  { text: '[    0.004891] ACPI: RSDP 0x00000000000F0490 000024 (v02 PTLTD )', delay: 1830, type: 'info' },
-  { text: '[    0.012834] Zone ranges:', delay: 1850, type: 'info' },
-  { text: '[    0.012835]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]', delay: 1865, type: 'info' },
-  { text: '[    0.012836]   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]', delay: 1880, type: 'info' },
-  { text: '[    0.012837]   Normal   [mem 0x0000000100000000-0x00000007ffffffff]', delay: 1895, type: 'info' },
-  { text: '[    0.052891] Initializing cgroup subsys cpuset', delay: 1910, type: 'info' },
-  { text: '[    0.052893] Initializing cgroup subsys cpu', delay: 1925, type: 'info' },
-  { text: '[    0.089234] PCI: Using configuration type 1 for base access', delay: 1940, type: 'info' },
-  { text: '[    0.123456] Freeing SMP alternatives memory: 40K', delay: 1955, type: 'info' },
-  { text: '[    0.234567] smpboot: CPU0: Intel(R) Core(TM) i7-13700K', delay: 1970, type: 'info' },
-  { text: '[    0.345678] Performance Events: PEBS fmt4+-baseline', delay: 1985, type: 'info' },
-  { text: '[    0.456789] NMI watchdog: Enabled. Paranoid=1, x86_watchdog', delay: 2000, type: 'info' },
+  { text: '[    0.000000] Linux version 0.99pl14 (gcc 2.3.3)', delay: 1650, type: 'info' },
+  { text: '[    0.000432] CPU: Intel 486DX2-66', delay: 1680, type: 'info' },
+  { text: '[    0.001028] Checking 386/486 paging... OK', delay: 1710, type: 'info' },
+  { text: '[    0.002314] Calibrating delay loop... 49.15 BogoMIPS', delay: 1740, type: 'info' },
+  { text: '[    0.004876] Memory: 4096k available', delay: 1780, type: 'info' },
+  { text: '[    0.006241] Buffer cache: 256k', delay: 1810, type: 'info' },
+  { text: '[    0.007903] Real-time clock detected', delay: 1840, type: 'info' },
+  { text: '[    0.010214] IDE driver v0.9 initialized', delay: 1870, type: 'info' },
+  { text: '[    0.011892] hda: Conner CP30104, 104MB, CHS=203/16/63', delay: 1900, type: 'info' },
+  { text: '[    0.013477] hda1: ext filesystem', delay: 1930, type: 'info' },
+  { text: '[    0.015902] Floppy drive(s): fd0 is 1.44MB', delay: 1960, type: 'info' },
+  { text: '[    0.017364] Serial driver version 3.94', delay: 1990, type: 'info' },
+  { text: '[    0.018921] tty00 at 0x03f8 (irq = 4)', delay: 2020, type: 'info' },
+  { text: '[    0.021338] ISA bus initialized', delay: 2050, type: 'info' },
+  { text: '[    0.023775] Sound Blaster at 0x220 irq 5 dma 1', delay: 2080, type: 'info' },
+  { text: '[    0.026491] VFS: Mounted root (ext) filesystem readonly', delay: 2110, type: 'info' },
+  { text: '[    0.028834] Freeing unused kernel memory: 128k freed', delay: 2140, type: 'info' },
+  { text: '[    0.031502] INIT: version 1.3 booting', delay: 2170, type: 'info' },
   { text: '', delay: 2050, type: 'info' },
   // systemd-style service startup
   { text: `Starting Portfolio OS v${VERSION}...`, delay: 2100, type: 'loading' },
@@ -208,7 +206,7 @@ function BootLine({ step }: { step: BootStep }) {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center">
       <span className="w-4 text-center">{getIcon()}</span>
       <span className={getTextClass()}>{step.text}</span>
     </div>

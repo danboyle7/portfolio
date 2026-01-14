@@ -13,7 +13,7 @@ interface ContactInfo {
   github?: string;
   linkedin?: string;
   website?: string;
-  location?: string;
+  locations?: string[];
   availability?: string;
 }
 
@@ -201,9 +201,9 @@ export function ContactApp({ onClose }: ContactAppProps) {
               </div>
             )}
 
-            {contact?.location && (
+            {contact?.locations && contact.locations.length > 0 && (
               <div className="text-gray-400">
-                Location: <span className="text-green-500">{contact.location}</span>
+                Location: <span className="text-green-500">{contact.locations.join(' | ')}</span>
               </div>
             )}
 

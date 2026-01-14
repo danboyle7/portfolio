@@ -238,7 +238,7 @@ export function PortfolioSplash({ onSelectTerminal, onSelectModern }: PortfolioS
               TERMINAL PORTFOLIO
             </div>
             <div className="text-green-700 text-xs sm:text-sm max-w-xs">
-              Interactive command-line experience with retro aesthetics
+              Interactive command-line portfolio with retro aesthetics
             </div>
           </div>
 
@@ -283,8 +283,8 @@ export function PortfolioSplash({ onSelectTerminal, onSelectModern }: PortfolioS
         onMouseLeave={() => setHoveredSide(null)}
         onClick={onSelectModern}
       >
-        {/* Modern gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        {/* Modern gradient background - matches modern portfolio */}
+        <div className="absolute inset-0 bg-slate-950">
           {/* Subtle grid pattern */}
           <div
             className="absolute inset-0 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500"
@@ -297,19 +297,24 @@ export function PortfolioSplash({ onSelectTerminal, onSelectModern }: PortfolioS
             }}
           />
 
-          {/* Floating orbs */}
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-colors duration-700" />
-          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-colors duration-700" />
-          <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl group-hover:bg-cyan-500/15 transition-colors duration-700" />
+          {/* Floating orbs - same colors as modern portfolio */}
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl group-hover:bg-blue-600/30 transition-colors duration-700" />
+          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-indigo-600/15 rounded-full blur-3xl group-hover:bg-indigo-600/25 transition-colors duration-700" />
+          <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-cyan-600/10 rounded-full blur-2xl group-hover:bg-cyan-600/20 transition-colors duration-700" />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-linear-to-br from-blue-950/20 via-transparent to-indigo-950/20" />
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-center p-8 pt-24">
+        {/* Content - using modern portfolio font */}
+        <div
+          className="relative z-10 h-full flex flex-col items-center justify-center p-8 pt-24"
+          style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
+        >
           {/* Modern icon/logo */}
           <div className="mb-6 relative">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 border-2 border-white/20 rounded-2xl flex items-center justify-center group-hover:border-white/40 transition-colors duration-300 group-hover:scale-105 transform">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 border-2 border-slate-700/50 rounded-2xl flex items-center justify-center group-hover:border-blue-500/40 transition-colors duration-300 group-hover:scale-105 transform bg-slate-900/50">
               <svg
-                className="w-8 h-8 sm:w-10 sm:h-10 text-white/70 group-hover:text-white transition-colors duration-300"
+                className="w-8 h-8 sm:w-10 sm:h-10 text-blue-400/70 group-hover:text-blue-400 transition-colors duration-300"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -318,16 +323,18 @@ export function PortfolioSplash({ onSelectTerminal, onSelectModern }: PortfolioS
               </svg>
             </div>
             {/* Glow effect */}
-            <div className="absolute inset-0 w-16 h-16 sm:w-20 sm:h-20 bg-white/5 rounded-2xl blur-xl group-hover:bg-white/10 transition-colors duration-500" />
+            <div className="absolute -inset-2 bg-blue-500/10 rounded-2xl blur-xl group-hover:bg-blue-500/20 transition-colors duration-500" />
           </div>
 
           <div className="text-center space-y-3">
-            <div className="text-white/90 text-lg sm:text-xl md:text-2xl font-light tracking-wide group-hover:text-white transition-colors">
-              Modern Portfolio
-            </div>
-            <div className="text-white/40 text-xs sm:text-sm max-w-xs font-light">
-              Clean, modern design for easy navigation and quick overview
-            </div>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
+              <span className="bg-linear-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent font-thin tracking-wide">
+                Modern Portfolio
+              </span>
+            </h2>
+            <p className="text-slate-400 text-xs sm:text-sm max-w-xs">
+              Clean, modern design with smooth animations and easy navigation
+            </p>
           </div>
 
           {/* Features pills */}
@@ -335,7 +342,7 @@ export function PortfolioSplash({ onSelectTerminal, onSelectModern }: PortfolioS
             {['Clean Design', 'Fast Loading', 'Easy Navigation', 'Mobile First'].map((feature) => (
               <span
                 key={feature}
-                className="px-3 py-1 text-[10px] sm:text-xs text-white/50 border border-white/10 rounded-full group-hover:border-white/20 group-hover:text-white/70 transition-colors duration-300"
+                className="px-3 py-1 text-[10px] sm:text-xs text-slate-400 border border-slate-700/50 rounded-full group-hover:border-blue-500/30 group-hover:text-slate-300 transition-colors duration-300"
               >
                 {feature}
               </span>
@@ -343,7 +350,7 @@ export function PortfolioSplash({ onSelectTerminal, onSelectModern }: PortfolioS
           </div>
 
           {/* Hover instruction */}
-          <div className={`mt-8 text-white/70 text-sm font-light transition-opacity duration-300 ${
+          <div className={`mt-8 text-blue-400 text-sm font-medium transition-opacity duration-300 ${
             hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'
           }`}>
             Click to enter →

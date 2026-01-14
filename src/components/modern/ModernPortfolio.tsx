@@ -73,8 +73,15 @@ export function ModernPortfolio({ onBack }: { onBack: () => void }) {
       className={`modern-portfolio modern-scrollbar min-h-screen bg-slate-950 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
       style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
     >
-      {/* Subtle global gradient overlay */}
-      <div className="fixed inset-0 bg-gradient-to-br from-blue-950/20 via-transparent to-indigo-950/20 pointer-events-none" />
+      {/* Fixed background that stays in place while content scrolls */}
+      <div className="fixed inset-0 bg-slate-950 pointer-events-none">
+        {/* Animated gradient orbs */}
+        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[128px] animate-pulse" />
+        <div className="absolute bottom-1/4 -right-32 w-[400px] h-[400px] bg-indigo-600/15 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[120px]" />
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-linear-to-br from-blue-950/20 via-transparent to-indigo-950/20" />
+      </div>
 
       <Navigation
         activeSection={activeSection}

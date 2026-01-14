@@ -56,6 +56,38 @@ body {
 .modern-portfolio {
   color: #e2e8f0; /* slate-200 */
   font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Modern portfolio typography hierarchy */
+.modern-portfolio h1,
+.modern-portfolio h2,
+.modern-portfolio h3 {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.modern-portfolio p {
+  letter-spacing: 0.01em;
+}
+
+.modern-portfolio .tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+.modern-portfolio .tracking-wide {
+  letter-spacing: 0.025em;
+}
+
+.modern-portfolio .tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+.modern-portfolio .tracking-widest {
+  letter-spacing: 0.1em;
 }
 
 /* Apply terminal scaling to terminal elements */

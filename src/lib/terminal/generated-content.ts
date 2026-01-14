@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-14T02:50:48.915Z
+ * Generated at: 2026-01-14T15:00:40.009Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,11 +16,7 @@ export const generatedContent: Record<string, any> = {
     "name": "Daniel Boyle",
     "title": "Software Developer",
     "tagline": "Building the future, one commit at a time",
-    "bio": [
-      "Passionate software engineer with 6+ years of experience building web applications and scalable systems.",
-      "I love creating elegant solutions to complex problems, contributing to open source, and mentoring other developers.",
-      "When I'm not coding, you'll find me exploring new technologies, hiking in the mountains, or working on side projects."
-    ],
+    "bio": "Passionate software engineer with 10+ years of experience building web applications and scalable systems. I love creating elegant solutions to complex problems, contributing to open source, and mentoring other developers. When I'm not coding, you'll find me exploring new technologies, hiking in the mountains, or working on side projects.\n",
     "avatar": "/images/avatar.png",
     "resumeUrl": "/resume.pdf"
   },
@@ -553,7 +549,11 @@ export const generatedContent: Record<string, any> = {
     "phone": "(719) 650-6222",
     "github": "github.com/danboyle7",
     "linkedin": "linkedin.com/in/daniel-w-boyle",
-    "location": "Colorado Springs, CO / Remote",
+    "locations": [
+      "Elizabeth City, NC",
+      "Norfolk, VA",
+      "Remote"
+    ],
     "availability": "Open to opportunities"
   },
   "blog": [

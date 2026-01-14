@@ -32,14 +32,6 @@ export function HeroSection({ about, contact, onScrollDown }: HeroSectionProps) 
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-slate-950" />
-
-      {/* Subtle animated gradient orbs */}
-      <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[128px] animate-pulse" />
-      <div className="absolute bottom-1/4 -right-32 w-[400px] h-[400px] bg-indigo-600/15 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[120px]" />
-
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         {/* Greeting */}
@@ -48,50 +40,58 @@ export function HeroSection({ about, contact, onScrollDown }: HeroSectionProps) 
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="inline-block px-4 py-1.5 text-sm font-medium text-blue-300 bg-blue-500/10 rounded-full border border-blue-500/20 mb-8 backdrop-blur-sm">
-            {contact.availability}
-          </span>
+          <div className="flex justify-center mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              <span className="text-blue-300 text-sm font-medium">
+                {contact.availability}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* Name */}
+        {/* Name - consistent scaling */}
         <h1
-          className={`text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-6 transition-all duration-700 delay-200 ${
+          className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 sm:mb-6 transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent drop-shadow-sm tracking-wide">
             {about.name}
           </span>
         </h1>
 
-        {/* Title */}
+        {/* Title - proportional to name */}
         <h2
-          className={`text-xl sm:text-2xl md:text-3xl font-light text-slate-400 mb-8 transition-all duration-700 delay-300 ${
+          className={`text-xl sm:text-xl md:text-2xl lg:text-3xl tracking-tight text-slate-400 mb-6 sm:mb-8 transition-all duration-700 delay-300 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           {about.title}
         </h2>
 
-        {/* Tagline with typing effect */}
+        {/* Tagline with typing effect - proportional sizing */}
         <p
-          className={`text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-12 h-8 transition-all duration-700 delay-400 ${
+          className={`text-sm sm:text-base md:text-lg text-slate-500 max-w-2xl mx-auto mb-10 sm:mb-12 min-h-7 sm:min-h-8 transition-all duration-700 delay-400 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="text-slate-400">{about.tagline.slice(0, titleIndex)}</span>
-          <span className="inline-block w-0.5 h-5 bg-blue-400 ml-1 animate-pulse" />
+          <span className="text-slate-400 tracking-wide">{about.tagline.slice(0, titleIndex)}</span>
+          <span className="inline-block w-0.5 h-4 sm:h-5 bg-blue-400 ml-1 animate-pulse align-text-bottom translate-y-0.5" />
         </p>
 
         {/* CTA Buttons */}
         <div
-          className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 delay-500 ${
+          className={`flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 transition-all duration-700 delay-500 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           <button
             onClick={onScrollDown}
-            className="group px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-0.5"
+            className="group px-6 sm:px-8 py-3 sm:py-3.5 bg-linear-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm sm:text-base font-semibold tracking-wide rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-0.5"
           >
             View My Work
             <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">
@@ -101,7 +101,7 @@ export function HeroSection({ about, contact, onScrollDown }: HeroSectionProps) 
 
           <a
             href={about.resumeUrl ?? '#'}
-            className="px-8 py-3.5 border border-slate-700 hover:border-blue-500/50 text-slate-300 hover:text-white font-medium rounded-xl transition-all duration-300 hover:bg-blue-500/5"
+            className="px-6 sm:px-8 py-3 sm:py-3.5 border border-slate-700 hover:border-blue-500/50 text-slate-300 hover:text-white text-sm sm:text-base font-medium tracking-wide rounded-xl transition-all duration-300 hover:bg-blue-500/5"
           >
             Download Resume
           </a>

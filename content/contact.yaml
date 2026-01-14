@@ -6,5 +6,8 @@ contact:
   phone: "(719) 650-6222"
   github: "github.com/danboyle7"
   linkedin: "linkedin.com/in/daniel-w-boyle"
-  location: "Colorado Springs, CO / Remote"
+  locations:
+    - "Elizabeth City, NC"
+    - "Norfolk, VA"
+    - "Remote"
   availability: "Open to opportunities"

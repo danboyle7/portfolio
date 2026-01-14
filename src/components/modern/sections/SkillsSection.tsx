@@ -96,12 +96,12 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <div className="flex lg:flex-col gap-2 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide">
+            <div className="flex flex-wrap lg:flex-col gap-2 pb-4 lg:pb-0">
               {skills.map((category, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveCategory(index)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left whitespace-nowrap transition-all duration-300 cursor-pointer ${
+                  className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl text-left text-sm sm:text-base transition-all duration-300 cursor-pointer ${
                     activeCategory === index
                       ? 'bg-blue-500/10 text-blue-400 border border-blue-500/30 shadow-lg shadow-blue-500/5'
                       : 'text-slate-400 hover:text-white hover:bg-slate-800/50 border border-transparent'
@@ -120,20 +120,20 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <div className="bg-slate-900/30 rounded-2xl border border-slate-800/50 p-6 sm:p-8 backdrop-blur-sm">
-              <div className="grid gap-5">
+            <div className="bg-slate-900/30 rounded-2xl border border-slate-800/50 p-4 sm:p-6 md:p-8 backdrop-blur-sm">
+              <div className="grid gap-4 sm:gap-5">
                 {skills[activeCategory]?.skills.map((skill, index) => (
                   <div key={skill.name} className="group">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-3">
-                        <span className="text-slate-200 font-medium">{skill.name}</span>
+                    <div className="flex items-center justify-between mb-2 gap-2">
+                      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                        <span className="text-slate-200 font-medium text-sm sm:text-base truncate">{skill.name}</span>
                         {skill.years && (
-                          <span className="text-xs text-slate-500 bg-slate-800/50 px-2 py-0.5 rounded">
+                          <span className="text-[10px] sm:text-xs text-slate-500 bg-slate-800/50 px-1.5 sm:px-2 py-0.5 rounded flex-shrink-0">
                             {skill.years}+ yrs
                           </span>
                         )}
                       </div>
-                      <span className="text-sm text-slate-500">
+                      <span className="text-xs sm:text-sm text-slate-500 flex-shrink-0">
                         {skill.level}%
                       </span>
                     </div>

@@ -229,7 +229,7 @@ function renderContact(): CommandResult {
   if (contact.twitter) {
     lines.push(`<span class="term-cyan">Twitter:</span>  ${contact.twitter}`);
   }
-  lines.push(`<span class="term-cyan">Location:</span> ${contact.location}`);
+  lines.push(`<span class="term-cyan">Location:</span> ${contact.locations.join(' | ')}`);
   lines.push(`<span class="term-cyan">Status:</span>   <span class="term-green">${contact.availability}</span>`);
   lines.push('');
   lines.push('<span class="term-dim">Run `contact` for more details</span>');

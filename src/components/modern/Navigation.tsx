@@ -38,11 +38,11 @@ export function Navigation({ activeSection, onNavigate, onBack }: NavigationProp
           : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo / Back button */}
+      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center">
+        {/* Back button - far left */}
         <button
           onClick={onBack}
-          className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group cursor-pointer"
+          className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group cursor-pointer absolute left-6"
         >
           <svg
             className="w-5 h-5 transition-transform group-hover:-translate-x-1"
@@ -57,11 +57,11 @@ export function Navigation({ activeSection, onNavigate, onBack }: NavigationProp
               d="M10 19l-7-7m0 0l7-7m-7 7h18"
             />
           </svg>
-          <span className="text-sm font-medium">Back</span>
+          <span className="text-sm font-medium hidden sm:inline">Back</span>
         </button>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1">
+        {/* Desktop Navigation - centered */}
+        <div className="hidden md:flex items-center gap-1 mx-auto">
           {navItems.map((item) => (
             <button
               key={item.id}
@@ -77,10 +77,10 @@ export function Navigation({ activeSection, onNavigate, onBack }: NavigationProp
           ))}
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile menu button - far right */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden p-2 text-slate-400 hover:text-white transition-colors cursor-pointer"
+          className="md:hidden p-2 text-slate-400 hover:text-white transition-colors cursor-pointer absolute right-6"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {isMobileMenuOpen ? (

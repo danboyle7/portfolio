@@ -282,7 +282,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
           >
             {/* Screen content */}
             <div
-              className="absolute inset-0 overflow-hidden"
+              className="absolute inset-0"
               style={{
                 opacity: crtPhase === 'off' ? 0 : 1,
                 visibility: crtPhase === 'off' ? 'hidden' : 'visible',

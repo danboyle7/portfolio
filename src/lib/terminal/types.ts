@@ -121,7 +121,7 @@ export interface ContactInfo {
   linkedin: string;
   twitter?: string;
   website?: string;
-  location: string;
+  locations: string[];
   availability: string;
 }
 

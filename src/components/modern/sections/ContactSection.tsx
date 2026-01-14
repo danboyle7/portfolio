@@ -60,8 +60,8 @@ export function ContactSection({ contact }: ContactSectionProps) {
       ),
     },
     {
-      label: 'Location',
-      value: contact.location,
+      label: 'Locations',
+      value: contact.locations.join(' · '),
       href: null,
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
