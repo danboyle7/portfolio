@@ -8,6 +8,9 @@ Bugs/fixes:
 6. BAD: The reboot requence doesnt track the last line, it just runs off the bottom.
 7. Need to come up with a way to make the user more aware of the zoom feature in the terminal portfolio when they first load in...
 
+MEXT TODO:
+- weird white border under the top nav bar that shows up when moving to / away from the bar (only initially, doesnt happen when scrolling lower on the screen)
+
 Features:
 1. ChatGPT interface for prometheus (if we can make this secure) - limit token to 5 bucks
 2. Make SHELL ascii art in boot be something else?

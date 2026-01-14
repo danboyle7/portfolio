@@ -14,6 +14,23 @@ export function TerminalMenu({ onClose, onBackToSplash }: TerminalMenuProps) {
     menuRef.current?.focus({ preventScroll: true });
   }, []);
 
+  // Global keyboard listener for ESC (works even when not focused)
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === 'h' || e.key === 'H') {
+        e.preventDefault();
+        onClose();
+      }
+      if (e.key === 'b' || e.key === 'B') {
+        e.preventDefault();
+        onBackToSplash();
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [onClose, onBackToSplash]);
+
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Escape' || e.key === 'h' || e.key === 'H') {
       e.preventDefault();
@@ -41,7 +58,7 @@ export function TerminalMenu({ onClose, onBackToSplash }: TerminalMenuProps) {
         ref={menuRef}
         tabIndex={0}
         onKeyDown={handleKeyDown}
-        className="w-full max-w-2xl mx-4 bg-black border border-green-500 outline-none font-mono"
+        className="w-full max-w-2xl mx-4 bg-black border border-green-500 outline-none font-mono max-h-[90vh] overflow-y-auto terminal-scrollbar"
       >
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-green-600">
@@ -100,7 +117,7 @@ export function TerminalMenu({ onClose, onBackToSplash }: TerminalMenuProps) {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between gap-2">
                   <span className="text-cyan-400 font-mono">help</span>
-                  <span className="text-gray-400">List Common commands</span>
+                  <span className="text-gray-400">List common commands</span>
                 </div>
                 <div className="flex justify-between gap-2">
                   <span className="text-cyan-400 font-mono">portfolio</span>
@@ -114,6 +131,9 @@ export function TerminalMenu({ onClose, onBackToSplash }: TerminalMenuProps) {
                   <span className="text-cyan-400 font-mono">ls / cd / cat</span>
                   <span className="text-gray-400">Browse files</span>
                 </div>
+              </div>
+              <div className="mt-3 pt-3 border-t border-green-900/30 text-xs text-gray-500">
+                <span className="text-green-600">[Tab]</span> Auto-complete commands & paths
               </div>
             </div>
 

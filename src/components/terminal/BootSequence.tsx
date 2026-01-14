@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import type { BootStep } from '@/lib/terminal/types';
 import { VERSION } from '@/lib/version';
 
@@ -71,6 +71,7 @@ export function BootSequence({ onComplete, skipable = true }: BootSequenceProps)
   const [visibleSteps, setVisibleSteps] = useState<number>(0);
   const [currentProgress, setCurrentProgress] = useState<number>(0);
   const [skipped, setSkipped] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const skip = useCallback(() => {
     if (skipable && !skipped) {
@@ -78,6 +79,13 @@ export function BootSequence({ onComplete, skipable = true }: BootSequenceProps)
       onComplete();
     }
   }, [skipable, skipped, onComplete]);
+
+  // Auto-scroll to bottom when new steps appear
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [visibleSteps]);
 
   useEffect(() => {
     if (skipped) return;
@@ -124,7 +132,10 @@ export function BootSequence({ onComplete, skipable = true }: BootSequenceProps)
   if (skipped) return null;
 
   return (
-    <div className="fixed inset-0 z-200 bg-black p-2 overflow-hidden">
+    <div
+      ref={scrollRef}
+      className="fixed inset-0 z-200 bg-black p-2 overflow-y-auto terminal-scrollbar"
+    >
       <div className="w-full font-mono terminal-text text-green-500">
         {/* Boot lines */}
         <div className="space-y-0.5">

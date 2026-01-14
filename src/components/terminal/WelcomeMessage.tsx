@@ -48,8 +48,16 @@ const QUICK_START_LARGE = `
     <span class="term-green">contact</span>     <span class="term-dim">-</span> Get in touch
 `;
 
-const HINT_SMALL = '<span class="term-dim">  Try</span> <span class="term-green">ls</span><span class="term-dim">,</span> <span class="term-green">cd</span><span class="term-dim">, and</span> <span class="term-green">cat</span> <span class="term-dim">to <a href="/explore">explore</a>. Many secrets await...</span>';
-const HINT_LARGE = '<span class="term-dim">  Hint: Try</span> <span class="term-green">ls</span><span class="term-dim">,</span> <span class="term-green">cd</span><span class="term-dim">, and</span> <span class="term-green">cat</span> <span class="term-dim">to  - there might be secrets...<explore/span>';
+const HINT_SMALL = `
+<span class="term-dim">  Try</span> <span class="term-green">ls</span><span class="term-dim">,</span> <span class="term-green">cd</span><span class="term-dim">, and</span> <span class="term-green">cat</span> <span class="term-dim">to explore. Many secrets await...</span>
+`;
+const HINT_LARGE = `
+<span class="term-dim">  Hint: Try</span> <span class="term-green">ls</span><span class="term-dim">,</span> <span class="term-green">cd</span><span class="term-dim">, and</span> <span class="term-green">cat</span> <span class="term-dim">to explore - there might be secrets...</span>
+`;
+
+const ZOOM_HINT = `
+<span class="term-yellow">  Tip:</span> <span class="term-dim">Click the</span> <span class="term-cyan">[⊕]</span> <span class="term-dim">button (bottom-right of monitor) to zoom in for a better view!</span>
+`;
 
 const NAV_INFO_LARGE = `
 <span class="term-dim">  Navigate this terminal like you would any Unix system.</span>
@@ -82,6 +90,7 @@ export function WelcomeMessage() {
       <div dangerouslySetInnerHTML={{ __html: navInfo }} />
       <div dangerouslySetInnerHTML={{ __html: quickStart }} />
       <div dangerouslySetInnerHTML={{ __html: hint }} />
+      {!isSmall && <div dangerouslySetInnerHTML={{ __html: ZOOM_HINT }} />}
     </div>
   );
 }
