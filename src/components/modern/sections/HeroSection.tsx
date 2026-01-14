@@ -17,8 +17,12 @@ export function HeroSection({
   const [isVisible, setIsVisible] = useState(false);
   const [titleIndex, setTitleIndex] = useState(0);
 
+  // Use requestAnimationFrame for mount animation to avoid React Compiler warning
   useEffect(() => {
-    setIsVisible(true);
+    const frame = requestAnimationFrame(() => {
+      setIsVisible(true);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   // Typing animation for tagline

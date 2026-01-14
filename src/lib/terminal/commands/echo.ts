@@ -10,11 +10,11 @@ export const echoCommand: Command = {
 
     // Handle special shell variables ($?, $$, $0, etc.)
     text = text.replace(/\$\?/g, context.env["?"] ?? "0");
-    text = text.replace(/\$\$/g, context.env["$"] ?? "1337");
+    text = text.replace(/\$\$/g, context.env.$ ?? "1337");
     text = text.replace(/\$0/g, context.env["0"] ?? "zsh");
 
     // Handle regular environment variables
-    text = text.replace(/\$(\w+)/g, (_, varName) => {
+    text = text.replace(/\$(\w+)/g, (_, varName: string) => {
       return context.env[varName] ?? "";
     });
 

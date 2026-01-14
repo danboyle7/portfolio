@@ -31,6 +31,7 @@ interface Project {
 
 export function ModernPortfolio({ onBack }: { onBack: () => void }) {
   const [activeSection, setActiveSection] = useState("hero");
+  // Initialize loaded state - CSS transition handles the fade-in effect
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Load content data
@@ -41,8 +42,12 @@ export function ModernPortfolio({ onBack }: { onBack: () => void }) {
   const projects = getContentData("projects") as Project[];
   const contact = getContentData("contact") as ContactInfo;
 
+  // Use requestAnimationFrame for mount animation to avoid React Compiler warning
   useEffect(() => {
-    setIsLoaded(true);
+    const frame = requestAnimationFrame(() => {
+      setIsLoaded(true);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   // Track scroll position to update active section

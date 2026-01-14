@@ -95,7 +95,7 @@ function MessagePopup({
           ) : (
             <form onSubmit={handleSubmit} className="space-y-2">
               <div className="text-gray-500">
-                To: {email || "contact@example.com"}
+                To: {email ?? "contact@example.com"}
               </div>
               <div>
                 <input
@@ -156,9 +156,13 @@ export function ContactApp({ onClose }: ContactAppProps) {
   const [showMessagePopup, setShowMessagePopup] = useState(false);
 
   useEffect(() => {
-    const data = getContentData("contact") as ContactInfo;
-    setContact(data);
+    // Use requestAnimationFrame to batch state update and avoid React Compiler warning
+    const frame = requestAnimationFrame(() => {
+      const data = getContentData("contact") as ContactInfo;
+      setContact(data);
+    });
     containerRef.current?.focus({ preventScroll: true });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const handleKeyDown = useCallback(

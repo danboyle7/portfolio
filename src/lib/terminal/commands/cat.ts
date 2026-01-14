@@ -1,4 +1,4 @@
-import type { Command, CommandResult, ContentData } from "@/lib/terminal/types";
+import type { Command, CommandResult } from "@/lib/terminal/types";
 import { createLine, resolvePath, escapeHtml } from "@/lib/terminal/utils";
 import { navigateToPath, getFileContent } from "@/lib/terminal/file-system";
 import { renderContentData } from "@/lib/terminal/content-renderer";
@@ -102,7 +102,7 @@ export const catCommand: Command = {
 
     // Check if it's dynamic content
     if (typeof content === "object" && "type" in content) {
-      return renderContentData(content as ContentData);
+      return renderContentData(content);
     }
 
     // Check for binary files
@@ -113,7 +113,7 @@ export const catCommand: Command = {
     }
 
     // Regular text file
-    const lines = (content as string).split("\n");
+    const lines = (content).split("\n");
     return {
       output: lines.map((line) =>
         createLine(escapeHtml(line), "output", { isHtml: true }),

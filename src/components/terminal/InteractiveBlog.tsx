@@ -34,7 +34,11 @@ export function InteractiveBlog({
 
   // Reset selection when filter changes
   useEffect(() => {
-    setSelectedIndex(0);
+    // Use requestAnimationFrame to batch state update and avoid React Compiler warning
+    const frame = requestAnimationFrame(() => {
+      setSelectedIndex(0);
+    });
+    return () => cancelAnimationFrame(frame);
   }, [searchQuery]);
 
   // Focus input on mount
@@ -58,7 +62,7 @@ export function InteractiveBlog({
         case "Enter":
           e.preventDefault();
           if (filteredPosts[selectedIndex]) {
-            onSelectPost(filteredPosts[selectedIndex]!.slug);
+            onSelectPost(filteredPosts[selectedIndex].slug);
           }
           break;
         case "Escape":

@@ -88,9 +88,7 @@ export function parseCommand(input: string): {
   let inQuotes = false;
   let quoteChar = "";
 
-  for (let i = 0; i < trimmed.length; i++) {
-    const char = trimmed[i];
-
+  for (const char of trimmed) {
     if ((char === '"' || char === "'") && !inQuotes) {
       inQuotes = true;
       quoteChar = char;
@@ -174,9 +172,9 @@ export function formatPath(path: string): string {
  */
 export function createProgressBar(
   percent: number,
-  width: number = 30,
-  filled: string = "█",
-  empty: string = "░",
+  width = 30 as number,
+  filled = "█" as string,
+  empty = "░" as string,
 ): string {
   const filledCount = Math.round((percent / 100) * width);
   const emptyCount = width - filledCount;
@@ -189,7 +187,7 @@ export function createProgressBar(
 export function createSkillBar(
   name: string,
   level: number,
-  width: number = 20,
+  width = 20 as number,
 ): string {
   const bar = createProgressBar(level, width, "▓", "░");
   const levelStr = `${level}%`.padStart(4);
@@ -229,7 +227,7 @@ export function centerText(text: string, width: number): string {
 /**
  * Create a box around text
  */
-export function createBox(lines: string[], padding: number = 1): string[] {
+export function createBox(lines: string[], padding = 1 as number): string[] {
   const maxLength = Math.max(...lines.map((l) => l.length));
   const width = maxLength + padding * 2;
 
@@ -252,7 +250,7 @@ export function createBox(lines: string[], padding: number = 1): string[] {
  */
 export function getTypewriterDelay(
   text: string,
-  baseDelay: number = 30,
+  baseDelay = 30 as number,
 ): number {
   return text.length * baseDelay;
 }

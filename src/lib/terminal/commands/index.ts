@@ -43,7 +43,7 @@ import { prometheusCommand } from "./easter-eggs/prometheus";
 import { exitCommand, rebootCommand } from "./exit";
 
 // Command registry
-const commands: Map<string, Command> = new Map();
+const commands = new Map<string, Command>();
 
 // Register all commands
 const allCommands: Command[] = [

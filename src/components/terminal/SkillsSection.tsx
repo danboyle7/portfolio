@@ -37,14 +37,18 @@ export function SkillsSection({ onExit, onBack }: SkillsSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const data = getContentData("skills") as
-      | { categories?: SkillCategory[] }
-      | SkillCategory[];
-    if (Array.isArray(data)) {
-      setCategories(data);
-    } else if (data?.categories) {
-      setCategories(data.categories);
-    }
+    // Use requestAnimationFrame to batch state update and avoid React Compiler warning
+    const frame = requestAnimationFrame(() => {
+      const data = getContentData("skills") as
+        | { categories?: SkillCategory[] }
+        | SkillCategory[];
+      if (Array.isArray(data)) {
+        setCategories(data);
+      } else if (data?.categories) {
+        setCategories(data.categories);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -89,7 +93,7 @@ export function SkillsSection({ onExit, onBack }: SkillsSectionProps) {
   // Get all skills or filtered by category, then sort
   const displayedSkills = useMemo(() => {
     let skills = selectedCategory
-      ? categories.find((c) => c.name === selectedCategory)?.skills || []
+      ? categories.find((c) => c.name === selectedCategory)?.skills ?? []
       : categories.flatMap((c) =>
           c.skills.map((s) => ({ ...s, category: c.name })),
         );

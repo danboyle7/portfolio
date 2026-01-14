@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useRef, useMemo, useState } from "react";
 
 interface MatrixRainProps {
   opacity?: number;
@@ -114,8 +114,9 @@ export function MatrixRain({
  * Static matrix background (CSS-based, lighter weight)
  */
 export function MatrixBackground() {
-  const columns = useMemo(() => {
-    return Array.from({ length: 30 }).map((_, i) => ({
+  // Use lazy state initialization to generate random values once on mount (avoids React Compiler purity warning)
+  const [columns] = useState(() =>
+    Array.from({ length: 30 }).map((_, i) => ({
       id: i,
       delay: Math.random() * 5,
       duration: 10 + Math.random() * 10,
@@ -123,8 +124,8 @@ export function MatrixBackground() {
       chars: Array.from({ length: 50 }).map(() =>
         String.fromCharCode(0x30a0 + Math.random() * 96),
       ),
-    }));
-  }, []);
+    })),
+  );
 
   return (
     <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden opacity-[0.03]">

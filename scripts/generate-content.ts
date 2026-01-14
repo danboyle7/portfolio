@@ -101,8 +101,8 @@ function main() {
         const dataObj = data as Record<string, unknown>;
         if (dataObj[key] !== undefined) {
           content[key] = dataObj[key];
-        } else if (key === "contact" && dataObj["contact"] !== undefined) {
-          content[key] = dataObj["contact"];
+        } else if (key === "contact" && dataObj.contact !== undefined) {
+          content[key] = dataObj.contact;
         } else {
           content[key] = data;
         }

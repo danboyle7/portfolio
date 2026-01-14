@@ -165,7 +165,7 @@ export const prometheusCommand: Command = {
   description: "Access the PROMETHEUS AI interface",
   usage: "prometheus <passphrase>",
   hidden: true,
-  execute: (args, context): CommandResult => {
+  execute: (args, _context): CommandResult => {
     const passphrase = args.join(" ").toLowerCase().trim();
 
     // No passphrase provided

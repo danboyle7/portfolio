@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-14T16:24:34.726Z
+ * Generated at: 2026-01-14T16:47:33.776Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -205,7 +205,7 @@ export const generatedContent: Record<string, any> = {
         {
           "name": "C",
           "level": 90,
-          "years": 10
+          "years": 7
         },
         {
           "name": "Rust",
@@ -351,7 +351,7 @@ export const generatedContent: Record<string, any> = {
         },
         {
           "name": "Spring Boot",
-          "level": 60,
+          "level": 50,
           "years": 1
         }
       ]

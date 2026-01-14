@@ -18,7 +18,7 @@ export const snakeCommand: Command = {
         createLine("", "output"),
       ],
       enterInteractiveMode: {
-        type: "snake" as any,
+        type: "snake",
         data: null,
       },
     };

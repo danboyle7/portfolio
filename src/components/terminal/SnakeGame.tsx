@@ -92,12 +92,16 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
 
   // Reset game when dimensions change
   useEffect(() => {
-    setSnake([initialSnakePos]);
-    setFood(initialFoodPos);
-    setDirection("RIGHT");
-    setScore(0);
-    setFinalScore(0);
-    setGameOver(false);
+    // Use requestAnimationFrame to batch state updates and avoid React Compiler warning
+    const frame = requestAnimationFrame(() => {
+      setSnake([initialSnakePos]);
+      setFood(initialFoodPos);
+      setDirection("RIGHT");
+      setScore(0);
+      setFinalScore(0);
+      setGameOver(false);
+    });
+    return () => cancelAnimationFrame(frame);
   }, [initialSnakePos, initialFoodPos]);
 
   // Update direction ref when direction changes

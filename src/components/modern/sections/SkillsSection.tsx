@@ -7,7 +7,7 @@ interface SkillsSectionProps {
   skills: SkillCategory[];
 }
 
-function SkillIcon({ name }: { name: string }) {
+function SkillIcon({ name }: { name: string }): JSX.Element {
   const iconMap: Record<string, JSX.Element> = {
     code: (
       <svg
@@ -108,7 +108,7 @@ function SkillIcon({ name }: { name: string }) {
   };
 
   return (
-    iconMap[name] || (
+    iconMap[name] ?? (
       <span className="flex h-5 w-5 items-center justify-center text-xs">
         {name}
       </span>

@@ -1514,7 +1514,7 @@ exec /usr/games/snake
 export function navigateToPath(
   fileSystem: FileSystemNode,
   path: string,
-  followSymlinks: boolean = true,
+  followSymlinks = true as boolean,
 ): FileSystemNode | null {
   if (path === "/") return fileSystem;
 
@@ -1526,7 +1526,7 @@ export function navigateToPath(
       // Handle symlinks that point to directories
       if (current.type === "symlink" && current.target && followSymlinks) {
         const resolved = navigateToPath(fileSystem, current.target, false);
-        if (resolved && resolved.type === "directory" && resolved.children) {
+        if (resolved?.type === "directory" && resolved?.children) {
           const next = resolved.children[segment];
           if (!next) return null;
           current = next;
@@ -1559,7 +1559,7 @@ export function listDirectory(
   path: string,
 ): FileSystemNode[] | null {
   const node = navigateToPath(fileSystem, path);
-  if (!node || node.type !== "directory" || !node.children) {
+  if (node?.type !== "directory" || !node?.children) {
     return null;
   }
   return Object.values(node.children);

@@ -79,8 +79,12 @@ export function InteractivePortfolio({
   const detailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const content = getContentData(section);
-    setData(content);
+    // Use requestAnimationFrame to batch state update and avoid React Compiler warning
+    const frame = requestAnimationFrame(() => {
+      const content = getContentData(section);
+      setData(content);
+    });
+    return () => cancelAnimationFrame(frame);
   }, [section]);
 
   useEffect(() => {
@@ -100,15 +104,15 @@ export function InteractivePortfolio({
 
     switch (section) {
       case "skills":
-        return (data as { categories?: SkillCategory[] })?.categories || [];
+        return (data as { categories?: SkillCategory[] })?.categories ?? [];
       case "experience":
-        return (data as { positions?: Experience[] })?.positions || [];
+        return (data as { positions?: Experience[] })?.positions ?? [];
       case "education":
-        return (data as { schools?: Education[] })?.schools || [];
+        return (data as { schools?: Education[] })?.schools ?? [];
       case "projects":
-        return (data as { items?: Project[] })?.items || [];
+        return (data as { items?: Project[] })?.items ?? [];
       case "hobbies":
-        return (data as { items?: Hobby[] })?.items || [];
+        return (data as { items?: Hobby[] })?.items ?? [];
       default:
         return [];
     }
@@ -177,7 +181,7 @@ export function InteractivePortfolio({
       case "skills":
         return (item as SkillCategory).name;
       case "experience":
-        return (item as Experience).role || (item as Experience).position || "";
+        return (item as Experience).role ?? (item as Experience).position ?? "";
       case "education":
         return (item as Education).degree;
       case "projects":
@@ -362,12 +366,12 @@ function SkillsView({ skill }: { skill: SkillCategory }) {
 }
 
 function ExperienceView({ exp }: { exp: Experience }) {
-  const achievements = exp.highlights || exp.achievements || [];
+  const achievements = exp.highlights ?? exp.achievements ?? [];
 
   return (
     <div className="space-y-3">
       <div>
-        <div className="text-green-400">{exp.role || exp.position}</div>
+        <div className="text-green-400">{exp.role ?? exp.position}</div>
         <div className="text-cyan-500">{exp.company}</div>
         <div className="text-xs text-gray-600">
           {exp.period} {exp.location && `• ${exp.location}`}
@@ -449,7 +453,7 @@ function EducationView({ edu }: { edu: Education }) {
 }
 
 function ProjectView({ project }: { project: Project }) {
-  const liveUrl = project.url || project.live;
+  const liveUrl = project.url ?? project.live;
 
   return (
     <div className="space-y-3">
@@ -461,7 +465,7 @@ function ProjectView({ project }: { project: Project }) {
         {project.description}
       </div>
 
-      {(liveUrl || project.github) && (
+      {(liveUrl ?? project.github) && (
         <div className="flex gap-3">
           {liveUrl && (
             <a

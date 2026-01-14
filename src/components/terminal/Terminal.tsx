@@ -184,7 +184,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
         const execPath = resolvePath(state.currentPath, execName ?? "");
         const node = navigateToPath(fileSystem, execPath);
 
-        if (node && node.type === "executable") {
+        if (node?.type === "executable") {
           const mappedCmd = execMap[execName ?? ""];
           if (mappedCmd) {
             actualCommand = execArgs ? `${mappedCmd} ${execArgs}` : mappedCmd;
@@ -198,7 +198,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
         const execPath = resolvePath(state.currentPath, cmdName ?? "");
         const node = navigateToPath(fileSystem, execPath);
 
-        if (node && node.type === "executable") {
+        if (node?.type === "executable") {
           const mappedCmd = execMap[cmdName ?? ""];
           if (mappedCmd) {
             actualCommand = cmdArgs ? `${mappedCmd} ${cmdArgs}` : mappedCmd;
@@ -210,11 +210,11 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       const newCommandHistory = [...state.commandHistory, trimmedCommand];
 
       // Check for variable assignment (VAR=value or export VAR=value)
-      const exportMatch = actualCommand.match(/^export\s+(\w+)=(.*)$/);
-      const assignMatch = actualCommand.match(/^(\w+)=(.*)$/);
+      const exportMatch = /^export\s+(\w+)=(.*)$/.exec(actualCommand);
+      const assignMatch = /^(\w+)=(.*)$/.exec(actualCommand);
 
-      if (exportMatch || assignMatch) {
-        const [, varName, varValue] = (exportMatch || assignMatch)!;
+      if (exportMatch ?? assignMatch) {
+        const [, varName, varValue] = (exportMatch ?? assignMatch)!;
         setEnv((prev) => ({ ...prev, [varName!]: varValue ?? "" }));
         const entry: HistoryEntry = {
           id: generateId(),
@@ -231,7 +231,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       }
 
       // Check for unset command
-      const unsetMatch = actualCommand.match(/^unset\s+(\w+)$/);
+      const unsetMatch = /^unset\s+(\w+)$/.exec(actualCommand);
       if (unsetMatch) {
         const [, varName] = unsetMatch;
         setEnv((prev) => {
@@ -387,7 +387,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
         };
       });
     },
-    [state.currentPath, state.commandHistory, fileSystem, env],
+    [state.currentPath, state.commandHistory, fileSystem, env, crtEnabled, onBackToSplash],
   );
 
   // Handle exiting interactive mode

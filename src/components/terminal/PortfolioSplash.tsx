@@ -52,16 +52,20 @@ export function PortfolioSplash({
 
   // Initialize matrix
   useEffect(() => {
-    const initialStreams: MatrixStream[] = [];
-    const numStreams = 60; // Denser rain
+    // Use requestAnimationFrame to batch state update and avoid React Compiler warning
+    const frame = requestAnimationFrame(() => {
+      const initialStreams: MatrixStream[] = [];
+      const numStreams = 60; // Denser rain
 
-    for (let i = 0; i < numStreams; i++) {
-      const stream = createStream();
-      // Stagger initial positions so rain is already falling when page loads
-      stream.y = Math.random() * 70; // Spread across the screen
-      initialStreams.push(stream);
-    }
-    setStreams(initialStreams);
+      for (let i = 0; i < numStreams; i++) {
+        const stream = createStream();
+        // Stagger initial positions so rain is already falling when page loads
+        stream.y = Math.random() * 70; // Spread across the screen
+        initialStreams.push(stream);
+      }
+      setStreams(initialStreams);
+    });
+    return () => cancelAnimationFrame(frame);
   }, [createStream]);
 
   // Animation loop
@@ -69,7 +73,7 @@ export function PortfolioSplash({
     const interval = setInterval(() => {
       setStreams((prevStreams) => {
         return prevStreams.map((stream) => {
-          let newY = stream.y + stream.speed;
+          const newY = stream.y + stream.speed;
           let newChars = stream.chars;
 
           // Mutate characters randomly if enabled
@@ -374,7 +378,7 @@ export function PortfolioSplash({
               "Clean Design",
               "Fast Loading",
               "Easy Navigation",
-              "Mobile First",
+              "CTA Layout",
             ].map((feature) => (
               <span
                 key={feature}

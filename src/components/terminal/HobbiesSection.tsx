@@ -20,12 +20,16 @@ export function HobbiesSection({ onExit, onBack }: HobbiesSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const data = getContentData("hobbies") as { items?: Hobby[] } | Hobby[];
-    if (Array.isArray(data)) {
-      setHobbies(data);
-    } else if (data?.items) {
-      setHobbies(data.items);
-    }
+    // Use requestAnimationFrame to batch state update and avoid React Compiler warning
+    const frame = requestAnimationFrame(() => {
+      const data = getContentData("hobbies") as { items?: Hobby[] } | Hobby[];
+      if (Array.isArray(data)) {
+        setHobbies(data);
+      } else if (data?.items) {
+        setHobbies(data.items);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {

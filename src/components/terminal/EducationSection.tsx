@@ -23,14 +23,18 @@ export function EducationSection({ onExit, onBack }: EducationSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const data = getContentData("education") as
-      | { schools?: Education[] }
-      | Education[];
-    if (Array.isArray(data)) {
-      setSchools(data);
-    } else if (data?.schools) {
-      setSchools(data.schools);
-    }
+    // Use requestAnimationFrame to batch state update and avoid React Compiler warning
+    const frame = requestAnimationFrame(() => {
+      const data = getContentData("education") as
+        | { schools?: Education[] }
+        | Education[];
+      if (Array.isArray(data)) {
+        setSchools(data);
+      } else if (data?.schools) {
+        setSchools(data.schools);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {

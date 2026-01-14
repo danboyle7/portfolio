@@ -13,7 +13,7 @@ skills:
         years: 10
       - name: "C"
         level: 90
-        years: 10
+        years: 7
       - name: "Rust"
         level: 80
         years: 3
@@ -101,7 +101,7 @@ skills:
         level: 80
         years: 4
       - name: "Spring Boot"
-        level: 60
+        level: 50
         years: 1
 
   - name: "DevOps & Tools"
