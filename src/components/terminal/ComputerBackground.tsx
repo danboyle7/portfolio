@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ZoomProvider } from './ZoomContext';
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { ZoomProvider } from "./ZoomContext";
 
 interface ComputerBackgroundProps {
   children: React.ReactNode;
@@ -56,17 +56,25 @@ const CRT_TIMING = {
    COMPONENT
    ============================================ */
 
-export function ComputerBackground({ children, enabled = true }: ComputerBackgroundProps) {
+export function ComputerBackground({
+  children,
+  enabled = true,
+}: ComputerBackgroundProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageLayout, setImageLayout] = useState({
     width: 0,
     height: 0,
     offsetX: 0,
-    offsetY: 0
+    offsetY: 0,
   });
-  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
-  const [crtPhase, setCrtPhase] = useState<'on' | 'shrinking' | 'line' | 'dot' | 'off' | 'expanding'>('on');
+  const [imageDimensions, setImageDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
+  const [crtPhase, setCrtPhase] = useState<
+    "on" | "shrinking" | "line" | "dot" | "off" | "expanding"
+  >("on");
   const [isZoomed, setIsZoomed] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -77,8 +85,8 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Calculate the rendered image layout (size and position within container)
@@ -98,15 +106,20 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
     const offsetX = (containerRect.width - renderedWidth) / 2;
     const offsetY = 0;
 
-    setImageLayout({ width: renderedWidth, height: renderedHeight, offsetX, offsetY });
+    setImageLayout({
+      width: renderedWidth,
+      height: renderedHeight,
+      offsetX,
+      offsetY,
+    });
   }, [imageLoaded, imageDimensions]);
 
   useEffect(() => {
     if (!imageLoaded || isMobile) return;
 
     calculateImageLayout();
-    window.addEventListener('resize', calculateImageLayout);
-    return () => window.removeEventListener('resize', calculateImageLayout);
+    window.addEventListener("resize", calculateImageLayout);
+    return () => window.removeEventListener("resize", calculateImageLayout);
   }, [imageLoaded, isMobile, calculateImageLayout]);
 
   // Load image and get dimensions
@@ -114,55 +127,74 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
     if (isMobile) return;
 
     const img = new window.Image();
-    img.src = '/computer2.png';
+    img.src = "/computer2.png";
     img.onload = () => {
-      setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+      setImageDimensions({
+        width: img.naturalWidth,
+        height: img.naturalHeight,
+      });
       setImageLoaded(true);
     };
   }, [isMobile]);
 
   // Handle power button click - CRT off/on effect
   const handlePowerClick = () => {
-    if (crtPhase !== 'on') return;
+    if (crtPhase !== "on") return;
 
-    setCrtPhase('shrinking');
+    setCrtPhase("shrinking");
 
     setTimeout(() => {
-      setCrtPhase('line');
+      setCrtPhase("line");
     }, CRT_TIMING.shrinkDuration);
 
     setTimeout(() => {
-      setCrtPhase('dot');
+      setCrtPhase("dot");
     }, CRT_TIMING.shrinkDuration + CRT_TIMING.lineDuration);
 
-    setTimeout(() => {
-      setCrtPhase('off');
-    }, CRT_TIMING.shrinkDuration + CRT_TIMING.lineDuration + 50);
+    setTimeout(
+      () => {
+        setCrtPhase("off");
+      },
+      CRT_TIMING.shrinkDuration + CRT_TIMING.lineDuration + 50,
+    );
 
-    setTimeout(() => {
-      setCrtPhase('expanding');
-    }, CRT_TIMING.shrinkDuration + CRT_TIMING.lineDuration + 50 + CRT_TIMING.offDuration);
+    setTimeout(
+      () => {
+        setCrtPhase("expanding");
+      },
+      CRT_TIMING.shrinkDuration +
+        CRT_TIMING.lineDuration +
+        50 +
+        CRT_TIMING.offDuration,
+    );
 
-    setTimeout(() => {
-      setCrtPhase('on');
-    }, CRT_TIMING.shrinkDuration + CRT_TIMING.lineDuration + 50 + CRT_TIMING.offDuration + CRT_TIMING.onDuration);
+    setTimeout(
+      () => {
+        setCrtPhase("on");
+      },
+      CRT_TIMING.shrinkDuration +
+        CRT_TIMING.lineDuration +
+        50 +
+        CRT_TIMING.offDuration +
+        CRT_TIMING.onDuration,
+    );
   };
 
   // Handle zoom toggle
   const handleZoomToggle = useCallback(() => {
-    setIsZoomed(prev => !prev);
+    setIsZoomed((prev) => !prev);
   }, []);
 
   // ESC key to zoom out
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isZoomed) {
+      if (e.key === "Escape" && isZoomed) {
         setIsZoomed(false);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isZoomed]);
 
   // On mobile or when disabled, just render children normally
@@ -177,55 +209,62 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
   // CRT animation styles
   const getCrtStyle = (): React.CSSProperties => {
     const base: React.CSSProperties = {
-      transformOrigin: 'center center',
+      transformOrigin: "center center",
     };
 
     switch (crtPhase) {
-      case 'shrinking':
+      case "shrinking":
         return {
           ...base,
-          transform: 'scaleY(0.008)',
+          transform: "scaleY(0.008)",
           transition: `transform ${CRT_TIMING.shrinkDuration}ms ease-in`,
-          filter: 'brightness(1.8)',
+          filter: "brightness(1.8)",
         };
-      case 'line':
+      case "line":
         return {
           ...base,
-          transform: 'scaleY(0.008) scaleX(0)',
+          transform: "scaleY(0.008) scaleX(0)",
           transition: `transform ${CRT_TIMING.lineDuration}ms ease-in`,
-          filter: 'brightness(2.5)',
+          filter: "brightness(2.5)",
         };
-      case 'dot':
+      case "dot":
         return {
           ...base,
-          transform: 'scale(0)',
-          transition: 'transform 30ms ease-in',
-          filter: 'brightness(4)',
+          transform: "scale(0)",
+          transition: "transform 30ms ease-in",
+          filter: "brightness(4)",
         };
-      case 'off':
+      case "off":
         return {
           ...base,
-          transform: 'scale(0)',
+          transform: "scale(0)",
           opacity: 0,
         };
-      case 'expanding':
+      case "expanding":
         return {
           ...base,
-          transform: 'scale(1)',
+          transform: "scale(1)",
           transition: `transform ${CRT_TIMING.onDuration}ms ease-out`,
-          filter: 'brightness(1.2)',
+          filter: "brightness(1.2)",
         };
       default:
         return {
           ...base,
-          transform: 'scale(1)',
-          transition: 'filter 200ms ease-out',
+          transform: "scale(1)",
+          transition: "filter 200ms ease-out",
         };
     }
   };
 
   // Calculate position style from bounds (percentage of image)
-  const getPositionStyle = (bounds: { top: number; left: number; width?: number; height?: number; bottom?: number; right?: number }): React.CSSProperties => {
+  const getPositionStyle = (bounds: {
+    top: number;
+    left: number;
+    width?: number;
+    height?: number;
+    bottom?: number;
+    right?: number;
+  }): React.CSSProperties => {
     if (bounds.width !== undefined && bounds.height !== undefined) {
       return {
         top: `${bounds.top}%`,
@@ -246,7 +285,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
   // Zoom transform - scales the whole monitor
   const zoomTransform = isZoomed
     ? `scale(${ZOOM_CONFIG.scale}) translate(${ZOOM_CONFIG.translateX}%, ${ZOOM_CONFIG.translateY}%)`
-    : 'scale(1) translate(0%, 0%)';
+    : "scale(1) translate(0%, 0%)";
 
   return (
     <div ref={containerRef} className="fixed inset-0 overflow-hidden bg-black">
@@ -259,7 +298,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
           width: `${imageLayout.width}px`,
           height: `${imageLayout.height}px`,
           transform: zoomTransform,
-          transformOrigin: 'center center',
+          transformOrigin: "center center",
         }}
       >
         {/* Computer image */}
@@ -267,7 +306,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
         <img
           src="/computer2.png"
           alt="Vintage computer monitor"
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 h-full w-full"
         />
 
         {/* Terminal screen - positioned relative to image */}
@@ -276,7 +315,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
             className="absolute overflow-hidden bg-black"
             style={{
               ...getPositionStyle(SCREEN_BOUNDS),
-              borderRadius: isZoomed ? '12px' : '6px',
+              borderRadius: isZoomed ? "12px" : "6px",
               ...getCrtStyle(),
             }}
           >
@@ -284,20 +323,24 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
             <div
               className="absolute inset-0"
               style={{
-                opacity: crtPhase === 'off' ? 0 : 1,
-                visibility: crtPhase === 'off' ? 'hidden' : 'visible',
+                opacity: crtPhase === "off" ? 0 : 1,
+                visibility: crtPhase === "off" ? "hidden" : "visible",
               }}
             >
-              <ZoomProvider isZoomed={isZoomed} zoomScale={isZoomed ? ZOOM_CONFIG.scale : 1}>
+              <ZoomProvider
+                isZoomed={isZoomed}
+                zoomScale={isZoomed ? ZOOM_CONFIG.scale : 1}
+              >
                 {children}
               </ZoomProvider>
             </div>
 
             {/* Screen glare */}
             <div
-              className="absolute inset-0 pointer-events-none opacity-[0.03]"
+              className="pointer-events-none absolute inset-0 opacity-[0.03]"
               style={{
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%)',
+                background:
+                  "linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%)",
               }}
             />
           </div>
@@ -307,7 +350,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
         {imageLoaded && (
           <button
             onClick={handlePowerClick}
-            className="absolute cursor-pointer rounded transition-colors border border-transparent hover:border-gray-800/50 hover:bg-gray-800/10"
+            className="absolute cursor-pointer rounded border border-transparent transition-colors hover:border-gray-800/50 hover:bg-gray-800/10"
             style={getPositionStyle(POWER_BUTTON)}
             title="Power (click to turn off display)"
             aria-label="Power button"
@@ -318,7 +361,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
         {imageLoaded && (
           <button
             onClick={handleZoomToggle}
-            className="absolute cursor-pointer rounded transition-colors border border-transparent hover:border-gray-800/50 hover:bg-gray-800/10"
+            className="absolute cursor-pointer rounded border border-transparent transition-colors hover:border-gray-800/50 hover:bg-gray-800/10"
             style={getPositionStyle(ZOOM_BUTTON)}
             title={isZoomed ? "Zoom out (ESC)" : "Zoom in"}
             aria-label={isZoomed ? "Zoom out" : "Zoom in"}
@@ -330,7 +373,7 @@ export function ComputerBackground({ children, enabled = true }: ComputerBackgro
       {isZoomed && (
         <button
           onClick={handleZoomToggle}
-          className="fixed bottom-4 right-4 z-50 px-4 py-2 bg-black/80 border border-green-500/50 text-green-500 rounded hover:bg-green-500/10 transition-colors text-sm font-mono"
+          className="fixed right-4 bottom-4 z-50 rounded border border-green-500/50 bg-black/80 px-4 py-2 font-mono text-sm text-green-500 transition-colors hover:bg-green-500/10"
         >
           [ESC] Zoom Out
         </button>

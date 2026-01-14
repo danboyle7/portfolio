@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import type { Education } from '@/lib/terminal/types';
+import { useEffect, useRef, useState } from "react";
+import type { Education } from "@/lib/terminal/types";
 
 interface EducationSectionProps {
   education: Education[];
@@ -18,7 +18,7 @@ export function EducationSection({ education }: EducationSectionProps) {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (sectionRef.current) {
@@ -29,41 +29,42 @@ export function EducationSection({ education }: EducationSectionProps) {
   }, []);
 
   return (
-    <section
-      id="education"
-      ref={sectionRef}
-      className="py-24 sm:py-32"
-    >
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="education" ref={sectionRef} className="py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl px-6">
         {/* Section Header */}
         <div
           className={`mb-16 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
         >
-          <span className="text-blue-400 text-sm font-semibold tracking-wider uppercase">
+          <span className="text-sm font-semibold tracking-wider text-blue-400 uppercase">
             Education
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2">
+          <h2 className="mt-2 text-3xl font-bold text-white sm:text-4xl">
             Academic
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"> background</span>
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              {" "}
+              background
+            </span>
           </h2>
         </div>
 
         {/* Education cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {education.map((edu, index) => (
             <div
               key={index}
-              className={`group bg-slate-900/30 rounded-xl border border-slate-800/50 p-6 transition-all duration-500 hover:border-blue-500/30 hover:bg-slate-900/50 hover:shadow-lg hover:shadow-blue-500/5 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              className={`group rounded-xl border border-slate-800/50 bg-slate-900/30 p-6 transition-all duration-500 hover:border-blue-500/30 hover:bg-slate-900/50 hover:shadow-lg hover:shadow-blue-500/5 ${
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               {/* Degree icon */}
-              <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 transition-colors group-hover:bg-blue-500/20">
                 <svg
-                  className="w-6 h-6 text-blue-400"
+                  className="h-6 w-6 text-blue-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -80,17 +81,19 @@ export function EducationSection({ education }: EducationSectionProps) {
               </div>
 
               {/* Degree info */}
-              <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">
+              <h3 className="mb-1 text-lg font-semibold text-white transition-colors group-hover:text-blue-400">
                 {edu.degree}
               </h3>
-              <p className="text-blue-400 text-sm font-medium mb-2">{edu.field}</p>
-              <p className="text-slate-400 text-sm mb-4">{edu.institution}</p>
+              <p className="mb-2 text-sm font-medium text-blue-400">
+                {edu.field}
+              </p>
+              <p className="mb-4 text-sm text-slate-400">{edu.institution}</p>
 
               {/* Period and GPA */}
-              <div className="flex items-center justify-between text-sm mb-4 pb-4 border-b border-slate-800/50">
+              <div className="mb-4 flex items-center justify-between border-b border-slate-800/50 pb-4 text-sm">
                 <span className="text-slate-500">{edu.period}</span>
                 {edu.gpa && (
-                  <span className="text-blue-400 font-semibold">
+                  <span className="font-semibold text-blue-400">
                     GPA: {edu.gpa}
                   </span>
                 )}
@@ -100,9 +103,12 @@ export function EducationSection({ education }: EducationSectionProps) {
               {edu.highlights && edu.highlights.length > 0 && (
                 <ul className="space-y-2">
                   {edu.highlights.slice(0, 2).map((highlight, hIndex) => (
-                    <li key={hIndex} className="flex items-start gap-2 text-slate-500 text-sm">
+                    <li
+                      key={hIndex}
+                      className="flex items-start gap-2 text-sm text-slate-500"
+                    >
                       <svg
-                        className="w-4 h-4 text-blue-500/50 mt-0.5 flex-shrink-0"
+                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-500/50"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >

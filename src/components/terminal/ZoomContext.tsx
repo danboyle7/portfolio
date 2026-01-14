@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext } from "react";
 
 interface ZoomContextType {
   isZoomed: boolean;
@@ -15,7 +15,7 @@ const ZoomContext = createContext<ZoomContextType>({
 export function ZoomProvider({
   children,
   isZoomed,
-  zoomScale
+  zoomScale,
 }: {
   children: React.ReactNode;
   isZoomed: boolean;
@@ -31,4 +31,3 @@ export function ZoomProvider({
 export function useZoom() {
   return useContext(ZoomContext);
 }
-

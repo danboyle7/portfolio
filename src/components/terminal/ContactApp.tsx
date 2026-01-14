@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { getContentData } from '@/lib/terminal/file-system';
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { getContentData } from "@/lib/terminal/file-system";
 
 interface ContactAppProps {
   onClose: () => void;
@@ -17,11 +17,17 @@ interface ContactInfo {
   availability?: string;
 }
 
-function MessagePopup({ onClose, email }: { onClose: () => void; email?: string }) {
+function MessagePopup({
+  onClose,
+  email,
+}: {
+  onClose: () => void;
+  email?: string;
+}) {
   const [messageForm, setMessageForm] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -31,38 +37,41 @@ function MessagePopup({ onClose, email }: { onClose: () => void; email?: string 
     popupRef.current?.focus({ preventScroll: true });
   }, []);
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      e.stopPropagation();
-      onClose();
-    }
-  }, [onClose]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+      }
+    },
+    [onClose],
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!messageForm.name || !messageForm.email || !messageForm.message) return;
 
     setSending(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     setSending(false);
     setSent(true);
   };
 
   return (
-    <div className="absolute inset-0 z-10 flex items-center justify-center p-4 pointer-events-none">
+    <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center p-4">
       <div
         ref={popupRef}
         tabIndex={0}
         onKeyDown={handleKeyDown}
-        className="w-full max-w-sm bg-black border-2 border-green-500 shadow-[0_0_20px_rgba(34,197,94,0.3),_4px_4px_0_rgba(0,0,0,0.8)] outline-none terminal-text font-mono pointer-events-auto"
+        className="terminal-text pointer-events-auto w-full max-w-sm border-2 border-green-500 bg-black font-mono shadow-[0_0_20px_rgba(34,197,94,0.3),_4px_4px_0_rgba(0,0,0,0.8)] outline-none"
       >
         {/* Popup title bar */}
-        <div className="flex items-center justify-between px-3 py-1.5 bg-green-900/60 border-b border-green-600">
-          <span className="text-green-400 font-bold">SEND MESSAGE</span>
+        <div className="flex items-center justify-between border-b border-green-600 bg-green-900/60 px-3 py-1.5">
+          <span className="font-bold text-green-400">SEND MESSAGE</span>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-green-400 cursor-pointer"
+            className="cursor-pointer text-gray-400 hover:text-green-400"
           >
             [esc]
           </button>
@@ -70,13 +79,15 @@ function MessagePopup({ onClose, email }: { onClose: () => void; email?: string 
 
         <div className="p-3">
           {sent ? (
-            <div className="text-green-400 py-4 text-center">
-              <div className="text-green-400 mb-1">[OK]</div>
+            <div className="py-4 text-center text-green-400">
+              <div className="mb-1 text-green-400">[OK]</div>
               <div>Message sent!</div>
-              <div className="text-gray-500 mt-1">I&apos;ll get back to you soon.</div>
+              <div className="mt-1 text-gray-500">
+                I&apos;ll get back to you soon.
+              </div>
               <button
                 onClick={onClose}
-                className="mt-3 text-gray-500 hover:text-green-400 cursor-pointer"
+                className="mt-3 cursor-pointer text-gray-500 hover:text-green-400"
               >
                 [close]
               </button>
@@ -84,14 +95,16 @@ function MessagePopup({ onClose, email }: { onClose: () => void; email?: string 
           ) : (
             <form onSubmit={handleSubmit} className="space-y-2">
               <div className="text-gray-500">
-                To: {email || 'contact@example.com'}
+                To: {email || "contact@example.com"}
               </div>
               <div>
                 <input
                   type="text"
                   value={messageForm.name}
-                  onChange={e => setMessageForm(f => ({ ...f, name: e.target.value }))}
-                  className="w-full bg-black border border-green-900 px-2 py-1 text-green-300 focus:border-green-600 focus:outline-none"
+                  onChange={(e) =>
+                    setMessageForm((f) => ({ ...f, name: e.target.value }))
+                  }
+                  className="w-full border border-green-900 bg-black px-2 py-1 text-green-300 focus:border-green-600 focus:outline-none"
                   placeholder="Your name"
                 />
               </div>
@@ -99,26 +112,35 @@ function MessagePopup({ onClose, email }: { onClose: () => void; email?: string 
                 <input
                   type="email"
                   value={messageForm.email}
-                  onChange={e => setMessageForm(f => ({ ...f, email: e.target.value }))}
-                  className="w-full bg-black border border-green-900 px-2 py-1 text-green-300 focus:border-green-600 focus:outline-none"
+                  onChange={(e) =>
+                    setMessageForm((f) => ({ ...f, email: e.target.value }))
+                  }
+                  className="w-full border border-green-900 bg-black px-2 py-1 text-green-300 focus:border-green-600 focus:outline-none"
                   placeholder="your@email.com"
                 />
               </div>
               <div>
                 <textarea
                   value={messageForm.message}
-                  onChange={e => setMessageForm(f => ({ ...f, message: e.target.value }))}
+                  onChange={(e) =>
+                    setMessageForm((f) => ({ ...f, message: e.target.value }))
+                  }
                   rows={4}
-                  className="w-full bg-black border border-green-900 px-2 py-1 text-green-300 focus:border-green-600 focus:outline-none resize-none"
+                  className="w-full resize-none border border-green-900 bg-black px-2 py-1 text-green-300 focus:border-green-600 focus:outline-none"
                   placeholder="Your message..."
                 />
               </div>
               <button
                 type="submit"
-                disabled={sending || !messageForm.name || !messageForm.email || !messageForm.message}
-                className="w-full py-1.5 border border-green-700 text-green-400 hover:bg-green-900/30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                disabled={
+                  sending ||
+                  !messageForm.name ||
+                  !messageForm.email ||
+                  !messageForm.message
+                }
+                className="w-full cursor-pointer border border-green-700 py-1.5 text-green-400 transition-colors hover:bg-green-900/30 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {sending ? '[ Sending... ]' : '[ Send ]'}
+                {sending ? "[ Sending... ]" : "[ Send ]"}
               </button>
             </form>
           )}
@@ -134,30 +156,60 @@ export function ContactApp({ onClose }: ContactAppProps) {
   const [showMessagePopup, setShowMessagePopup] = useState(false);
 
   useEffect(() => {
-    const data = getContentData('contact') as ContactInfo;
+    const data = getContentData("contact") as ContactInfo;
     setContact(data);
     containerRef.current?.focus({ preventScroll: true });
   }, []);
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (showMessagePopup) return;
-    if (e.key === 'q') {
-      e.preventDefault();
-      onClose();
-    }
-    if (e.key === 'm' || e.key === 'M') {
-      e.preventDefault();
-      setShowMessagePopup(true);
-    }
-  }, [onClose, showMessagePopup]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (showMessagePopup) return;
+      if (e.key === "q") {
+        e.preventDefault();
+        onClose();
+      }
+      if (e.key === "m" || e.key === "M") {
+        e.preventDefault();
+        setShowMessagePopup(true);
+      }
+    },
+    [onClose, showMessagePopup],
+  );
 
   const contactLinks = [
-    { key: 'email', label: 'Email', value: contact?.email, href: contact?.email ? `mailto:${contact.email}` : undefined },
-    { key: 'phone', label: 'Phone', value: contact?.phone, href: contact?.phone ? `tel:${contact.phone.replace(/[^0-9+]/g, '')}` : undefined },
-    { key: 'github', label: 'GitHub', value: contact?.github, href: contact?.github ? `https://${contact.github}` : undefined },
-    { key: 'linkedin', label: 'LinkedIn', value: contact?.linkedin, href: contact?.linkedin ? `https://${contact.linkedin}` : undefined },
-    { key: 'website', label: 'Website', value: contact?.website, href: contact?.website ? `https://${contact.website}` : undefined },
-  ].filter(link => link.value);
+    {
+      key: "email",
+      label: "Email",
+      value: contact?.email,
+      href: contact?.email ? `mailto:${contact.email}` : undefined,
+    },
+    {
+      key: "phone",
+      label: "Phone",
+      value: contact?.phone,
+      href: contact?.phone
+        ? `tel:${contact.phone.replace(/[^0-9+]/g, "")}`
+        : undefined,
+    },
+    {
+      key: "github",
+      label: "GitHub",
+      value: contact?.github,
+      href: contact?.github ? `https://${contact.github}` : undefined,
+    },
+    {
+      key: "linkedin",
+      label: "LinkedIn",
+      value: contact?.linkedin,
+      href: contact?.linkedin ? `https://${contact.linkedin}` : undefined,
+    },
+    {
+      key: "website",
+      label: "Website",
+      value: contact?.website,
+      href: contact?.website ? `https://${contact.website}` : undefined,
+    },
+  ].filter((link) => link.value);
 
   return (
     <div className="fixed inset-0 z-50 bg-black">
@@ -165,25 +217,25 @@ export function ContactApp({ onClose }: ContactAppProps) {
         ref={containerRef}
         tabIndex={0}
         onKeyDown={handleKeyDown}
-        className="relative h-full flex flex-col outline-none bg-black terminal-text font-mono"
+        className="terminal-text relative flex h-full flex-col bg-black font-mono outline-none"
       >
         {/* Header */}
-        <div className="shrink-0 px-3 py-1.5 flex items-center justify-between border-b border-green-800">
+        <div className="flex shrink-0 items-center justify-between border-b border-green-800 px-3 py-1.5">
           <div className="flex items-center gap-2">
             <span className="text-green-500">┌─</span>
-            <span className="text-green-400 font-bold">CONTACT</span>
+            <span className="font-bold text-green-400">CONTACT</span>
             <span className="text-green-500">─┐</span>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowMessagePopup(true)}
-              className="px-2 py-0.5 border border-green-700 text-green-400 hover:bg-green-900/30 hover:border-green-500 transition-colors cursor-pointer"
+              className="cursor-pointer border border-green-700 px-2 py-0.5 text-green-400 transition-colors hover:border-green-500 hover:bg-green-900/30"
             >
               [m] Send Message
             </button>
             <button
               onClick={onClose}
-              className="text-gray-500 hover:text-green-400 cursor-pointer"
+              className="cursor-pointer text-gray-500 hover:text-green-400"
             >
               [q] exit
             </button>
@@ -191,52 +243,68 @@ export function ContactApp({ onClose }: ContactAppProps) {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-auto p-4 flex flex-col justify-center">
-          <div className="max-w-lg mx-auto w-full space-y-4">
+        <div className="flex flex-1 flex-col justify-center overflow-auto p-4">
+          <div className="mx-auto w-full max-w-lg space-y-4">
             {/* Status */}
             {contact?.availability && (
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
                 <span className="text-green-400">{contact.availability}</span>
               </div>
             )}
 
             {contact?.locations && contact.locations.length > 0 && (
               <div className="text-gray-400">
-                Location: <span className="text-green-500">{contact.locations.join(' | ')}</span>
+                Location:{" "}
+                <span className="text-green-500">
+                  {contact.locations.join(" | ")}
+                </span>
               </div>
             )}
 
             {/* Contact links */}
             <div className="border border-green-800 p-4">
-              <div className="text-green-600 mb-3 border-b border-green-900 pb-2">Contact Information</div>
+              <div className="mb-3 border-b border-green-900 pb-2 text-green-600">
+                Contact Information
+              </div>
               <div className="space-y-2">
-                {contactLinks.map(link => (
+                {contactLinks.map((link) => (
                   <a
                     key={link.key}
                     href={link.href}
-                    target={link.key !== 'email' && link.key !== 'phone' ? '_blank' : undefined}
+                    target={
+                      link.key !== "email" && link.key !== "phone"
+                        ? "_blank"
+                        : undefined
+                    }
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-gray-400 hover:text-green-400 transition-colors group"
+                    className="group flex items-center gap-3 text-gray-400 transition-colors hover:text-green-400"
                   >
-                    <span className="text-gray-500 w-20">{link.label}:</span>
-                    <span className="group-hover:underline text-green-500">{link.value}</span>
+                    <span className="w-20 text-gray-500">{link.label}:</span>
+                    <span className="text-green-500 group-hover:underline">
+                      {link.value}
+                    </span>
                   </a>
                 ))}
               </div>
             </div>
 
             {/* Hint text */}
-            <div className="text-gray-600 text-center">
-              Press <span className="text-green-700">[m]</span> or click the button above to send a message
+            <div className="text-center text-gray-600">
+              Press <span className="text-green-700">[m]</span> or click the
+              button above to send a message
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="shrink-0 px-3 py-1.5 border-t border-green-800 text-gray-600 flex gap-4">
-          <span><span className="text-green-700">[m]</span> message</span>
-          <span><span className="text-green-700">[q]</span> exit</span>
+        <div className="flex shrink-0 gap-4 border-t border-green-800 px-3 py-1.5 text-gray-600">
+          <span>
+            <span className="text-green-700">[m]</span> message
+          </span>
+          <span>
+            <span className="text-green-700">[q]</span> exit
+          </span>
         </div>
 
         {/* Message popup overlay */}

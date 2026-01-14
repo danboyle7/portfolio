@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { formatPath, resolvePath } from '@/lib/terminal/utils';
-import { getCommandSuggestions } from '@/lib/terminal/commands';
-import { listDirectory } from '@/lib/terminal/file-system';
-import type { FileSystemNode } from '@/lib/terminal/types';
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { formatPath, resolvePath } from "@/lib/terminal/utils";
+import { getCommandSuggestions } from "@/lib/terminal/commands";
+import { listDirectory } from "@/lib/terminal/file-system";
+import type { FileSystemNode } from "@/lib/terminal/types";
 
 interface TerminalInputProps {
   currentPath: string;
@@ -25,9 +25,9 @@ export function TerminalInput({
   fileSystem,
   disabled = false,
 }: TerminalInputProps) {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const [savedInput, setSavedInput] = useState('');
+  const [savedInput, setSavedInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const displayPath = formatPath(currentPath);
@@ -45,14 +45,18 @@ export function TerminalInput({
     };
 
     focusInput();
-    window.addEventListener('click', focusInput);
+    window.addEventListener("click", focusInput);
 
-    return () => window.removeEventListener('click', focusInput);
+    return () => window.removeEventListener("click", focusInput);
   }, [disabled]);
 
   // Re-focus when input value changes (for backspace to work properly)
   useEffect(() => {
-    if (!disabled && inputRef.current && document.activeElement !== inputRef.current) {
+    if (
+      !disabled &&
+      inputRef.current &&
+      document.activeElement !== inputRef.current
+    ) {
       inputRef.current.focus({ preventScroll: true });
     }
   }, [input, disabled]);
@@ -63,18 +67,18 @@ export function TerminalInput({
       if (!disabled) {
         // Submit even if empty (for new line behavior)
         onSubmit(input);
-        setInput('');
+        setInput("");
         setHistoryIndex(-1);
-        setSavedInput('');
+        setSavedInput("");
       }
     },
-    [input, disabled, onSubmit]
+    [input, disabled, onSubmit],
   );
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       // History navigation
-      if (e.key === 'ArrowUp') {
+      if (e.key === "ArrowUp") {
         e.preventDefault();
         if (commandHistory.length === 0) return;
 
@@ -84,10 +88,10 @@ export function TerminalInput({
 
         const newIndex = Math.min(historyIndex + 1, commandHistory.length - 1);
         setHistoryIndex(newIndex);
-        setInput(commandHistory[commandHistory.length - 1 - newIndex] ?? '');
+        setInput(commandHistory[commandHistory.length - 1 - newIndex] ?? "");
       }
 
-      if (e.key === 'ArrowDown') {
+      if (e.key === "ArrowDown") {
         e.preventDefault();
         if (historyIndex <= 0) {
           setHistoryIndex(-1);
@@ -97,20 +101,24 @@ export function TerminalInput({
 
         const newIndex = historyIndex - 1;
         setHistoryIndex(newIndex);
-        setInput(commandHistory[commandHistory.length - 1 - newIndex] ?? '');
+        setInput(commandHistory[commandHistory.length - 1 - newIndex] ?? "");
       }
 
       // Tab completion
-      if (e.key === 'Tab') {
+      if (e.key === "Tab") {
         e.preventDefault();
-        const parts = input.split(' ');
-        const lastPart = parts[parts.length - 1] ?? '';
+        const parts = input.split(" ");
+        const lastPart = parts[parts.length - 1] ?? "";
 
-        if (parts.length === 1 && !lastPart.includes('/') && !lastPart.startsWith('.')) {
+        if (
+          parts.length === 1 &&
+          !lastPart.includes("/") &&
+          !lastPart.startsWith(".")
+        ) {
           // Command completion
           const suggestions = getCommandSuggestions(lastPart);
           if (suggestions.length === 1) {
-            setInput(suggestions[0]! + ' ');
+            setInput(suggestions[0]! + " ");
           } else if (suggestions.length > 1) {
             const commonPrefix = findCommonPrefix(suggestions);
             if (commonPrefix.length > lastPart.length) {
@@ -120,31 +128,33 @@ export function TerminalInput({
         } else {
           // Path completion
           const pathToComplete = lastPart;
-          const basePath = pathToComplete.includes('/')
-            ? pathToComplete.substring(0, pathToComplete.lastIndexOf('/') + 1)
-            : '';
-          const partial = pathToComplete.includes('/')
-            ? pathToComplete.substring(pathToComplete.lastIndexOf('/') + 1)
-            : pathToComplete.replace('./', '');
+          const basePath = pathToComplete.includes("/")
+            ? pathToComplete.substring(0, pathToComplete.lastIndexOf("/") + 1)
+            : "";
+          const partial = pathToComplete.includes("/")
+            ? pathToComplete.substring(pathToComplete.lastIndexOf("/") + 1)
+            : pathToComplete.replace("./", "");
 
-          const searchPath = resolvePath(currentPath, basePath || '.');
+          const searchPath = resolvePath(currentPath, basePath || ".");
           const entries = listDirectory(fileSystem, searchPath);
 
           if (entries) {
             const matches = entries
-              .filter(e => e.name.toLowerCase().startsWith(partial.toLowerCase()))
-              .map(e => e.type === 'directory' ? e.name + '/' : e.name);
+              .filter((e) =>
+                e.name.toLowerCase().startsWith(partial.toLowerCase()),
+              )
+              .map((e) => (e.type === "directory" ? e.name + "/" : e.name));
 
             if (matches.length === 1) {
-              const prefix = parts.slice(0, -1).join(' ');
+              const prefix = parts.slice(0, -1).join(" ");
               const newPath = basePath + matches[0];
-              setInput(prefix ? prefix + ' ' + newPath : newPath);
+              setInput(prefix ? prefix + " " + newPath : newPath);
             } else if (matches.length > 1) {
               const commonPrefix = findCommonPrefix(matches);
               if (commonPrefix.length > partial.length) {
-                const prefix = parts.slice(0, -1).join(' ');
+                const prefix = parts.slice(0, -1).join(" ");
                 const newPath = basePath + commonPrefix;
-                setInput(prefix ? prefix + ' ' + newPath : newPath);
+                setInput(prefix ? prefix + " " + newPath : newPath);
               }
             }
           }
@@ -152,42 +162,54 @@ export function TerminalInput({
       }
 
       // Clear line with Ctrl+U
-      if (e.key === 'u' && e.ctrlKey) {
+      if (e.key === "u" && e.ctrlKey) {
         e.preventDefault();
-        setInput('');
+        setInput("");
       }
 
       // Clear screen with Ctrl+L
-      if (e.key === 'l' && e.ctrlKey) {
+      if (e.key === "l" && e.ctrlKey) {
         e.preventDefault();
-        onSubmit('clear');
-        setInput('');
+        onSubmit("clear");
+        setInput("");
       }
 
       // Cancel current line with Ctrl+C or Cmd+C
-      if (e.key === 'c' && (e.ctrlKey || e.metaKey)) {
+      if (e.key === "c" && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         // Submit current text + ^C indicator, then clear
-        const cancelledLine = input + '^C';
-        setInput('');
+        const cancelledLine = input + "^C";
+        setInput("");
         setHistoryIndex(-1);
-        setSavedInput('');
+        setSavedInput("");
         onSubmit(cancelledLine);
       }
     },
-    [input, commandHistory, historyIndex, savedInput, onSubmit, currentPath, fileSystem]
+    [
+      input,
+      commandHistory,
+      historyIndex,
+      savedInput,
+      onSubmit,
+      currentPath,
+      fileSystem,
+    ],
   );
 
   return (
     <form onSubmit={handleSubmit} className="outline-none" tabIndex={-1}>
       {/* Text that wraps to the left edge */}
       <div className="break-all">
-        <span className="text-green-400 font-bold">{user}@{hostname}</span>
+        <span className="font-bold text-green-400">
+          {user}@{hostname}
+        </span>
         <span className="text-green-600">:</span>
-        <span className="text-blue-400 font-bold">{displayPath}</span>
+        <span className="font-bold text-blue-400">{displayPath}</span>
         <span className="text-green-600">$ </span>
         <span className="text-green-300">{input}</span>
-        <span className="relative"><span className="absolute top-0 left-0 w-[0.6em] h-[1.1em] bg-green-400 animate-blink" /></span>
+        <span className="relative">
+          <span className="animate-blink absolute top-0 left-0 h-[1.1em] w-[0.6em] bg-green-400" />
+        </span>
       </div>
       {/* Hidden input for capturing keystrokes */}
       <input
@@ -197,10 +219,10 @@ export function TerminalInput({
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
         disabled={disabled}
-        className="terminal-input absolute inset-0 w-full h-full opacity-0 cursor-text outline-none border-none focus:outline-none focus:ring-0 focus:border-none"
+        className="terminal-input absolute inset-0 h-full w-full cursor-text border-none opacity-0 outline-none focus:border-none focus:ring-0 focus:outline-none"
         style={{
-          WebkitAppearance: 'none',
-          boxShadow: 'none',
+          WebkitAppearance: "none",
+          boxShadow: "none",
         }}
         spellCheck={false}
         autoComplete="off"
@@ -212,14 +234,14 @@ export function TerminalInput({
 }
 
 function findCommonPrefix(strings: string[]): string {
-  if (strings.length === 0) return '';
+  if (strings.length === 0) return "";
   if (strings.length === 1) return strings[0]!;
 
   let prefix = strings[0]!;
   for (let i = 1; i < strings.length; i++) {
     while (!strings[i]!.startsWith(prefix)) {
       prefix = prefix.slice(0, -1);
-      if (prefix === '') return '';
+      if (prefix === "") return "";
     }
   }
   return prefix;

@@ -9,16 +9,19 @@
  * Usage: pnpm run generate-content
  */
 
-import fs from 'fs';
-import path from 'path';
-import yaml from 'js-yaml';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import yaml from "js-yaml";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const CONTENT_DIR = path.join(__dirname, '../content');
-const OUTPUT_FILE = path.join(__dirname, '../src/lib/terminal/generated-content.ts');
+const CONTENT_DIR = path.join(__dirname, "../content");
+const OUTPUT_FILE = path.join(
+  __dirname,
+  "../src/lib/terminal/generated-content.ts",
+);
 
 interface ContentMap {
   about: unknown;
@@ -33,7 +36,7 @@ interface ContentMap {
 
 function loadYamlFile(filePath: string): unknown {
   try {
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(filePath, "utf8");
     return yaml.load(content);
   } catch (error) {
     console.error(`Error loading ${filePath}:`, error);
@@ -42,15 +45,15 @@ function loadYamlFile(filePath: string): unknown {
 }
 
 function loadBlogPosts(): unknown[] {
-  const blogDir = path.join(CONTENT_DIR, 'blog');
+  const blogDir = path.join(CONTENT_DIR, "blog");
   const posts: unknown[] = [];
 
   if (!fs.existsSync(blogDir)) {
-    console.warn('Blog directory not found');
+    console.warn("Blog directory not found");
     return posts;
   }
 
-  const files = fs.readdirSync(blogDir).filter((f) => f.endsWith('.yaml'));
+  const files = fs.readdirSync(blogDir).filter((f) => f.endsWith(".yaml"));
 
   for (const file of files) {
     const content = loadYamlFile(path.join(blogDir, file));
@@ -63,7 +66,7 @@ function loadBlogPosts(): unknown[] {
 }
 
 function main() {
-  console.log('Generating content from YAML files...');
+  console.log("Generating content from YAML files...");
   console.log(`Content directory: ${CONTENT_DIR}`);
 
   const content: ContentMap = {
@@ -79,27 +82,27 @@ function main() {
 
   // Load single-file content
   const singleFiles: (keyof ContentMap)[] = [
-    'about',
-    'experience',
-    'skills',
-    'education',
-    'hobbies',
-    'contact',
-    'projects',
+    "about",
+    "experience",
+    "skills",
+    "education",
+    "hobbies",
+    "contact",
+    "projects",
   ];
 
   for (const key of singleFiles) {
     const filePath = path.join(CONTENT_DIR, `${key}.yaml`);
     if (fs.existsSync(filePath)) {
       const data = loadYamlFile(filePath);
-      if (data && typeof data === 'object') {
+      if (data && typeof data === "object") {
         // Some YAML files wrap content in a key (e.g., { experience: [...] })
         // Extract the inner content if it exists
         const dataObj = data as Record<string, unknown>;
         if (dataObj[key] !== undefined) {
           content[key] = dataObj[key];
-        } else if (key === 'contact' && dataObj['contact'] !== undefined) {
-          content[key] = dataObj['contact'];
+        } else if (key === "contact" && dataObj["contact"] !== undefined) {
+          content[key] = dataObj["contact"];
         } else {
           content[key] = data;
         }
@@ -139,8 +142,7 @@ export const generatedContent: Record<string, any> = ${JSON.stringify(content, n
 
   fs.writeFileSync(OUTPUT_FILE, output);
   console.log(`\nGenerated: ${OUTPUT_FILE}`);
-  console.log('Content generation complete!');
+  console.log("Content generation complete!");
 }
 
 main();
-

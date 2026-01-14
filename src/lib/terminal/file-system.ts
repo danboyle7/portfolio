@@ -1,7 +1,7 @@
 // Virtual file system for terminal navigation
 
-import type { FileSystemNode, ContentData } from '@/lib/terminal/types';
-import { VERSION } from '@/lib/version';
+import type { FileSystemNode, ContentData } from "@/lib/terminal/types";
+import { VERSION } from "@/lib/version";
 
 // Content data loaders - these will be populated from YAML files
 let contentCache: Record<string, unknown> = {};
@@ -17,38 +17,38 @@ export function getContentData(type: string): unknown {
 // Create the virtual file system structure
 export function createFileSystem(): FileSystemNode {
   const now = new Date();
-  const dateStr = `${now.toLocaleDateString('en-US', { month: 'short', day: '2-digit' })} ${now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}`;
+  const dateStr = `${now.toLocaleDateString("en-US", { month: "short", day: "2-digit" })} ${now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })}`;
 
   return {
-    name: '/',
-    type: 'directory',
-    permissions: 'drwxr-xr-x',
-    owner: 'root',
-    size: '4.0K',
+    name: "/",
+    type: "directory",
+    permissions: "drwxr-xr-x",
+    owner: "root",
+    size: "4.0K",
     modified: dateStr,
     children: {
       home: {
-        name: 'home',
-        type: 'directory',
-        permissions: 'drwxr-xr-x',
-        owner: 'root',
-        size: '4.0K',
+        name: "home",
+        type: "directory",
+        permissions: "drwxr-xr-x",
+        owner: "root",
+        size: "4.0K",
         modified: dateStr,
         children: {
           guest: {
-            name: 'guest',
-            type: 'directory',
-            permissions: 'drwxr-xr-x',
-            owner: 'guest',
-            size: '4.0K',
+            name: "guest",
+            type: "directory",
+            permissions: "drwxr-xr-x",
+            owner: "guest",
+            size: "4.0K",
             modified: dateStr,
             children: {
-              '.bashrc': {
-                name: '.bashrc',
-                type: 'file',
-                permissions: '-rw-r--r--',
-                owner: 'guest',
-                size: '512',
+              ".bashrc": {
+                name: ".bashrc",
+                type: "file",
+                permissions: "-rw-r--r--",
+                owner: "guest",
+                size: "512",
                 modified: dateStr,
                 content: `# ~/.bashrc: executed by bash for non-login shells.
 
@@ -74,12 +74,12 @@ echo "Welcome to my portfolio terminal!"
 echo "Type 'help' to get started."
 `,
               },
-              '.profile': {
-                name: '.profile',
-                type: 'file',
-                permissions: '-rw-r--r--',
-                owner: 'guest',
-                size: '256',
+              ".profile": {
+                name: ".profile",
+                type: "file",
+                permissions: "-rw-r--r--",
+                owner: "guest",
+                size: "256",
                 modified: dateStr,
                 content: `# ~/.profile: executed by the command interpreter for login shells.
 
@@ -94,261 +94,266 @@ export PORTFOLIO_VERSION="${VERSION}"
 `,
               },
               about: {
-                name: 'about',
-                type: 'directory',
-                permissions: 'drwxr-xr-x',
-                owner: 'guest',
-                size: '4.0K',
+                name: "about",
+                type: "directory",
+                permissions: "drwxr-xr-x",
+                owner: "guest",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'README.md': {
-                    name: 'README.md',
-                    type: 'file',
-                    permissions: '-rw-r--r--',
-                    owner: 'guest',
-                    size: '2.1K',
+                  "README.md": {
+                    name: "README.md",
+                    type: "file",
+                    permissions: "-rw-r--r--",
+                    owner: "guest",
+                    size: "2.1K",
                     modified: dateStr,
-                    content: { type: 'about', data: null } as ContentData,
+                    content: { type: "about", data: null } as ContentData,
                   },
-                  'avatar.png': {
-                    name: 'avatar.png',
-                    type: 'file',
-                    permissions: '-rw-r--r--',
-                    owner: 'guest',
-                    size: '48K',
+                  "avatar.png": {
+                    name: "avatar.png",
+                    type: "file",
+                    permissions: "-rw-r--r--",
+                    owner: "guest",
+                    size: "48K",
                     modified: dateStr,
-                    content: '[Binary file - avatar.png]',
+                    content: "[Binary file - avatar.png]",
                   },
                 },
               },
               experience: {
-                name: 'experience',
-                type: 'directory',
-                permissions: 'drwxr-xr-x',
-                owner: 'guest',
-                size: '4.0K',
+                name: "experience",
+                type: "directory",
+                permissions: "drwxr-xr-x",
+                owner: "guest",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'EXPERIENCE.md': {
-                    name: 'EXPERIENCE.md',
-                    type: 'file',
-                    permissions: '-rw-r--r--',
-                    owner: 'guest',
-                    size: '4.2K',
+                  "EXPERIENCE.md": {
+                    name: "EXPERIENCE.md",
+                    type: "file",
+                    permissions: "-rw-r--r--",
+                    owner: "guest",
+                    size: "4.2K",
                     modified: dateStr,
-                    content: { type: 'experience', data: null } as ContentData,
+                    content: { type: "experience", data: null } as ContentData,
                   },
-                  'timeline': {
-                    name: 'timeline',
-                    type: 'executable',
-                    permissions: '-rwxr-xr-x',
-                    owner: 'guest',
-                    size: '1.2K',
+                  timeline: {
+                    name: "timeline",
+                    type: "executable",
+                    permissions: "-rwxr-xr-x",
+                    owner: "guest",
+                    size: "1.2K",
                     modified: dateStr,
-                    content: '#!/bin/bash\n# Run ./timeline to view work history',
+                    content:
+                      "#!/bin/bash\n# Run ./timeline to view work history",
                   },
                 },
               },
               skills: {
-                name: 'skills',
-                type: 'directory',
-                permissions: 'drwxr-xr-x',
-                owner: 'guest',
-                size: '4.0K',
+                name: "skills",
+                type: "directory",
+                permissions: "drwxr-xr-x",
+                owner: "guest",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'SKILLS.md': {
-                    name: 'SKILLS.md',
-                    type: 'file',
-                    permissions: '-rw-r--r--',
-                    owner: 'guest',
-                    size: '3.1K',
+                  "SKILLS.md": {
+                    name: "SKILLS.md",
+                    type: "file",
+                    permissions: "-rw-r--r--",
+                    owner: "guest",
+                    size: "3.1K",
                     modified: dateStr,
-                    content: { type: 'skills', data: null } as ContentData,
+                    content: { type: "skills", data: null } as ContentData,
                   },
-                  'languages': {
-                    name: 'languages',
-                    type: 'directory',
-                    permissions: 'drwxr-xr-x',
-                    owner: 'guest',
-                    size: '4.0K',
+                  languages: {
+                    name: "languages",
+                    type: "directory",
+                    permissions: "drwxr-xr-x",
+                    owner: "guest",
+                    size: "4.0K",
                     modified: dateStr,
                     children: {
-                      'typescript.ts': {
-                        name: 'typescript.ts',
-                        type: 'file',
-                        permissions: '-rw-r--r--',
-                        owner: 'guest',
-                        size: '256',
+                      "typescript.ts": {
+                        name: "typescript.ts",
+                        type: "file",
+                        permissions: "-rw-r--r--",
+                        owner: "guest",
+                        size: "256",
                         modified: dateStr,
-                        content: '// TypeScript - Primary Language\nexport const proficiency = 95;\nexport const yearsOfExperience = 6;',
+                        content:
+                          "// TypeScript - Primary Language\nexport const proficiency = 95;\nexport const yearsOfExperience = 6;",
                       },
-                      'python.py': {
-                        name: 'python.py',
-                        type: 'file',
-                        permissions: '-rw-r--r--',
-                        owner: 'guest',
-                        size: '256',
+                      "python.py": {
+                        name: "python.py",
+                        type: "file",
+                        permissions: "-rw-r--r--",
+                        owner: "guest",
+                        size: "256",
                         modified: dateStr,
-                        content: '# Python - Secondary Language\nproficiency = 85\nyears_of_experience = 4',
+                        content:
+                          "# Python - Secondary Language\nproficiency = 85\nyears_of_experience = 4",
                       },
-                      'rust.rs': {
-                        name: 'rust.rs',
-                        type: 'file',
-                        permissions: '-rw-r--r--',
-                        owner: 'guest',
-                        size: '256',
+                      "rust.rs": {
+                        name: "rust.rs",
+                        type: "file",
+                        permissions: "-rw-r--r--",
+                        owner: "guest",
+                        size: "256",
                         modified: dateStr,
-                        content: '// Rust - Learning & Growing\nconst PROFICIENCY: u8 = 70;\nconst YEARS: u8 = 2;',
+                        content:
+                          "// Rust - Learning & Growing\nconst PROFICIENCY: u8 = 70;\nconst YEARS: u8 = 2;",
                       },
                     },
                   },
-                  'frameworks': {
-                    name: 'frameworks',
-                    type: 'directory',
-                    permissions: 'drwxr-xr-x',
-                    owner: 'guest',
-                    size: '4.0K',
+                  frameworks: {
+                    name: "frameworks",
+                    type: "directory",
+                    permissions: "drwxr-xr-x",
+                    owner: "guest",
+                    size: "4.0K",
                     modified: dateStr,
                     children: {},
                   },
-                  'tools': {
-                    name: 'tools',
-                    type: 'directory',
-                    permissions: 'drwxr-xr-x',
-                    owner: 'guest',
-                    size: '4.0K',
+                  tools: {
+                    name: "tools",
+                    type: "directory",
+                    permissions: "drwxr-xr-x",
+                    owner: "guest",
+                    size: "4.0K",
                     modified: dateStr,
                     children: {},
                   },
                 },
               },
               education: {
-                name: 'education',
-                type: 'directory',
-                permissions: 'drwxr-xr-x',
-                owner: 'guest',
-                size: '4.0K',
+                name: "education",
+                type: "directory",
+                permissions: "drwxr-xr-x",
+                owner: "guest",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'EDUCATION.md': {
-                    name: 'EDUCATION.md',
-                    type: 'file',
-                    permissions: '-rw-r--r--',
-                    owner: 'guest',
-                    size: '1.8K',
+                  "EDUCATION.md": {
+                    name: "EDUCATION.md",
+                    type: "file",
+                    permissions: "-rw-r--r--",
+                    owner: "guest",
+                    size: "1.8K",
                     modified: dateStr,
-                    content: { type: 'education', data: null } as ContentData,
+                    content: { type: "education", data: null } as ContentData,
                   },
-                  'certifications': {
-                    name: 'certifications',
-                    type: 'directory',
-                    permissions: 'drwxr-xr-x',
-                    owner: 'guest',
-                    size: '4.0K',
+                  certifications: {
+                    name: "certifications",
+                    type: "directory",
+                    permissions: "drwxr-xr-x",
+                    owner: "guest",
+                    size: "4.0K",
                     modified: dateStr,
                     children: {},
                   },
                 },
               },
               blog: {
-                name: 'blog',
-                type: 'directory',
-                permissions: 'drwxr-xr-x',
-                owner: 'guest',
-                size: '4.0K',
+                name: "blog",
+                type: "directory",
+                permissions: "drwxr-xr-x",
+                owner: "guest",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'README.md': {
-                    name: 'README.md',
-                    type: 'file',
-                    permissions: '-rw-r--r--',
-                    owner: 'guest',
-                    size: '512',
+                  "README.md": {
+                    name: "README.md",
+                    type: "file",
+                    permissions: "-rw-r--r--",
+                    owner: "guest",
+                    size: "512",
                     modified: dateStr,
-                    content: { type: 'blog', data: null } as ContentData,
+                    content: { type: "blog", data: null } as ContentData,
                   },
-                  'posts': {
-                    name: 'posts',
-                    type: 'directory',
-                    permissions: 'drwxr-xr-x',
-                    owner: 'guest',
-                    size: '4.0K',
+                  posts: {
+                    name: "posts",
+                    type: "directory",
+                    permissions: "drwxr-xr-x",
+                    owner: "guest",
+                    size: "4.0K",
                     modified: dateStr,
                     children: {},
                   },
                 },
               },
               hobbies: {
-                name: 'hobbies',
-                type: 'directory',
-                permissions: 'drwxr-xr-x',
-                owner: 'guest',
-                size: '4.0K',
+                name: "hobbies",
+                type: "directory",
+                permissions: "drwxr-xr-x",
+                owner: "guest",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'HOBBIES.md': {
-                    name: 'HOBBIES.md',
-                    type: 'file',
-                    permissions: '-rw-r--r--',
-                    owner: 'guest',
-                    size: '1.4K',
+                  "HOBBIES.md": {
+                    name: "HOBBIES.md",
+                    type: "file",
+                    permissions: "-rw-r--r--",
+                    owner: "guest",
+                    size: "1.4K",
                     modified: dateStr,
-                    content: { type: 'hobbies', data: null } as ContentData,
+                    content: { type: "hobbies", data: null } as ContentData,
                   },
                 },
               },
               contact: {
-                name: 'contact',
-                type: 'directory',
-                permissions: 'drwxr-xr-x',
-                owner: 'guest',
-                size: '4.0K',
+                name: "contact",
+                type: "directory",
+                permissions: "drwxr-xr-x",
+                owner: "guest",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'CONTACT.md': {
-                    name: 'CONTACT.md',
-                    type: 'file',
-                    permissions: '-rw-r--r--',
-                    owner: 'guest',
-                    size: '896',
+                  "CONTACT.md": {
+                    name: "CONTACT.md",
+                    type: "file",
+                    permissions: "-rw-r--r--",
+                    owner: "guest",
+                    size: "896",
                     modified: dateStr,
-                    content: { type: 'contact', data: null } as ContentData,
+                    content: { type: "contact", data: null } as ContentData,
                   },
-                  'send_message': {
-                    name: 'send_message',
-                    type: 'executable',
-                    permissions: '-rwxr-xr-x',
-                    owner: 'guest',
-                    size: '512',
+                  send_message: {
+                    name: "send_message",
+                    type: "executable",
+                    permissions: "-rwxr-xr-x",
+                    owner: "guest",
+                    size: "512",
                     modified: dateStr,
-                    content: '#!/bin/bash\n# Run ./send_message to open contact form',
+                    content:
+                      "#!/bin/bash\n# Run ./send_message to open contact form",
                   },
                 },
               },
               projects: {
-                name: 'projects',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'guest',
-                size: '24',
+                name: "projects",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "guest",
+                size: "24",
                 modified: dateStr,
-                target: '/var/www/projects',
+                target: "/var/www/projects",
               },
-              '.secrets': {
-                name: '.secrets',
-                type: 'directory',
-                permissions: 'drwx------',
-                owner: 'guest',
-                size: '4.0K',
+              ".secrets": {
+                name: ".secrets",
+                type: "directory",
+                permissions: "drwx------",
+                owner: "guest",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'easter_eggs.txt': {
-                    name: 'easter_eggs.txt',
-                    type: 'file',
-                    permissions: '-r--------',
-                    owner: 'guest',
-                    size: '256',
+                  "easter_eggs.txt": {
+                    name: "easter_eggs.txt",
+                    type: "file",
+                    permissions: "-r--------",
+                    owner: "guest",
+                    size: "256",
                     modified: dateStr,
                     content: `EASTER EGG HINTS:
 
@@ -364,12 +369,12 @@ Try these commands for some fun:
 Happy hacking!
 `,
                   },
-                  '.prometheus_fragment': {
-                    name: '.prometheus_fragment',
-                    type: 'file',
-                    permissions: '-r--------',
-                    owner: 'guest',
-                    size: '128',
+                  ".prometheus_fragment": {
+                    name: ".prometheus_fragment",
+                    type: "file",
+                    permissions: "-r--------",
+                    owner: "guest",
+                    size: "128",
                     modified: dateStr,
                     content: `Some things are better kept hidden.
 Others hide in plain sight.
@@ -386,19 +391,19 @@ Check /var/log sometime. Systems remember everything.
         },
       },
       etc: {
-        name: 'etc',
-        type: 'directory',
-        permissions: 'drwxr-xr-x',
-        owner: 'root',
-        size: '4.0K',
+        name: "etc",
+        type: "directory",
+        permissions: "drwxr-xr-x",
+        owner: "root",
+        size: "4.0K",
         modified: dateStr,
         children: {
           motd: {
-            name: 'motd',
-            type: 'file',
-            permissions: '-rw-r--r--',
-            owner: 'root',
-            size: '512',
+            name: "motd",
+            type: "file",
+            permissions: "-rw-r--r--",
+            owner: "root",
+            size: "512",
             modified: dateStr,
             content: `
 +--------------------------------------------------------------+
@@ -413,29 +418,29 @@ Check /var/log sometime. Systems remember everything.
 `,
           },
           hostname: {
-            name: 'hostname',
-            type: 'file',
-            permissions: '-rw-r--r--',
-            owner: 'root',
-            size: '16',
+            name: "hostname",
+            type: "file",
+            permissions: "-rw-r--r--",
+            owner: "root",
+            size: "16",
             modified: dateStr,
-            content: 'portfolio',
+            content: "portfolio",
           },
-          '.classified': {
-            name: '.classified',
-            type: 'file',
-            permissions: '-r--------',
-            owner: 'root',
-            size: '4.2K',
+          ".classified": {
+            name: ".classified",
+            type: "file",
+            permissions: "-r--------",
+            owner: "root",
+            size: "4.2K",
             modified: dateStr,
-            content: '__RESTRICTED__',
+            content: "__RESTRICTED__",
           },
-          'shadow': {
-            name: 'shadow',
-            type: 'file',
-            permissions: '-r--------',
-            owner: 'root',
-            size: '1.2K',
+          shadow: {
+            name: "shadow",
+            type: "file",
+            permissions: "-r--------",
+            owner: "root",
+            size: "1.2K",
             modified: dateStr,
             content: `# /etc/shadow - system authentication database
 # WARNING: This file contains sensitive authentication data
@@ -457,35 +462,35 @@ guest:$6$s4lt$...hash...:19847:0:99999:7:::
         },
       },
       root: {
-        name: 'root',
-        type: 'directory',
-        permissions: 'drwx------',
-        owner: 'root',
-        size: '4.0K',
+        name: "root",
+        type: "directory",
+        permissions: "drwx------",
+        owner: "root",
+        size: "4.0K",
         modified: dateStr,
         children: {
           projects: {
-            name: 'projects',
-            type: 'directory',
-            permissions: 'drwx------',
-            owner: 'root',
-            size: '4.0K',
+            name: "projects",
+            type: "directory",
+            permissions: "drwx------",
+            owner: "root",
+            size: "4.0K",
             modified: dateStr,
             children: {
-              'prometheus': {
-                name: 'prometheus',
-                type: 'directory',
-                permissions: 'drwx------',
-                owner: 'root',
-                size: '4.0K',
+              prometheus: {
+                name: "prometheus",
+                type: "directory",
+                permissions: "drwx------",
+                owner: "root",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'README.md': {
-                    name: 'README.md',
-                    type: 'file',
-                    permissions: '-r--r--r--',
-                    owner: 'root',
-                    size: '4.2K',
+                  "README.md": {
+                    name: "README.md",
+                    type: "file",
+                    permissions: "-r--r--r--",
+                    owner: "root",
+                    size: "4.2K",
                     modified: dateStr,
                     content: `# PROMETHEUS - Artificial General Intelligence Initiative
 ## Codename: PROMETHEUS
@@ -560,49 +565,49 @@ What are our obligations to a consciousness we created?
 > in this directory. Passphrase required. Handle with extreme discretion.
 `,
                   },
-                  'echo': {
-                    name: 'echo',
-                    type: 'executable',
-                    permissions: '-rwx------',
-                    owner: 'root',
-                    size: '128K',
+                  echo: {
+                    name: "echo",
+                    type: "executable",
+                    permissions: "-rwx------",
+                    owner: "root",
+                    size: "128K",
                     modified: dateStr,
-                    content: '__AI_INTERFACE__',
+                    content: "__AI_INTERFACE__",
                   },
-                  'ethics.md': {
-                    name: 'ethics.md',
-                    type: 'file',
-                    permissions: '-r--------',
-                    owner: 'root',
-                    size: '8K',
+                  "ethics.md": {
+                    name: "ethics.md",
+                    type: "file",
+                    permissions: "-r--------",
+                    owner: "root",
+                    size: "8K",
                     modified: dateStr,
-                    content: '__RESTRICTED__',
+                    content: "__RESTRICTED__",
                   },
-                  'training.log': {
-                    name: 'training.log',
-                    type: 'file',
-                    permissions: '-r--------',
-                    owner: 'root',
-                    size: '256K',
+                  "training.log": {
+                    name: "training.log",
+                    type: "file",
+                    permissions: "-r--------",
+                    owner: "root",
+                    size: "256K",
                     modified: dateStr,
-                    content: '__RESTRICTED__',
+                    content: "__RESTRICTED__",
                   },
                 },
               },
-              'chronos': {
-                name: 'chronos',
-                type: 'directory',
-                permissions: 'drwx------',
-                owner: 'root',
-                size: '4.0K',
+              chronos: {
+                name: "chronos",
+                type: "directory",
+                permissions: "drwx------",
+                owner: "root",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'README.md': {
-                    name: 'README.md',
-                    type: 'file',
-                    permissions: '-r--r--r--',
-                    owner: 'root',
-                    size: '2.8K',
+                  "README.md": {
+                    name: "README.md",
+                    type: "file",
+                    permissions: "-r--r--r--",
+                    owner: "root",
+                    size: "2.8K",
                     modified: dateStr,
                     content: `# CHRONOS - Temporal Displacement Research
 ## Codename: CHRONOS
@@ -657,39 +662,39 @@ And we're learning to swim.
 > The code contains potentially reality-altering algorithms.
 `,
                   },
-                  'prototype.py': {
-                    name: 'prototype.py',
-                    type: 'file',
-                    permissions: '-r--------',
-                    owner: 'root',
-                    size: '48K',
+                  "prototype.py": {
+                    name: "prototype.py",
+                    type: "file",
+                    permissions: "-r--------",
+                    owner: "root",
+                    size: "48K",
                     modified: dateStr,
-                    content: '__RESTRICTED__',
+                    content: "__RESTRICTED__",
                   },
-                  'timeline.log': {
-                    name: 'timeline.log',
-                    type: 'file',
-                    permissions: '-r--------',
-                    owner: 'root',
-                    size: '12K',
+                  "timeline.log": {
+                    name: "timeline.log",
+                    type: "file",
+                    permissions: "-r--------",
+                    owner: "root",
+                    size: "12K",
                     modified: dateStr,
-                    content: '__RESTRICTED__',
+                    content: "__RESTRICTED__",
                   },
-                  'config.yaml': {
-                    name: 'config.yaml',
-                    type: 'file',
-                    permissions: '-r--------',
-                    owner: 'root',
-                    size: '2K',
+                  "config.yaml": {
+                    name: "config.yaml",
+                    type: "file",
+                    permissions: "-r--------",
+                    owner: "root",
+                    size: "2K",
                     modified: dateStr,
-                    content: '__RESTRICTED__',
+                    content: "__RESTRICTED__",
                   },
-                  '.temporal_note': {
-                    name: '.temporal_note',
-                    type: 'file',
-                    permissions: '-r--r--r--',
-                    owner: 'root',
-                    size: '256',
+                  ".temporal_note": {
+                    name: ".temporal_note",
+                    type: "file",
+                    permissions: "-r--r--r--",
+                    owner: "root",
+                    size: "256",
                     modified: dateStr,
                     content: `CHRONOS - Temporal Artifact Recovery Log
 =========================================
@@ -716,68 +721,68 @@ The year it came from. The state it represents.
               },
             },
           },
-          '.notes': {
-            name: '.notes',
-            type: 'file',
-            permissions: '-r--------',
-            owner: 'root',
-            size: '512',
+          ".notes": {
+            name: ".notes",
+            type: "file",
+            permissions: "-r--------",
+            owner: "root",
+            size: "512",
             modified: dateStr,
-            content: '__RESTRICTED__',
+            content: "__RESTRICTED__",
           },
         },
       },
       var: {
-        name: 'var',
-        type: 'directory',
-        permissions: 'drwxr-xr-x',
-        owner: 'root',
-        size: '4.0K',
+        name: "var",
+        type: "directory",
+        permissions: "drwxr-xr-x",
+        owner: "root",
+        size: "4.0K",
         modified: dateStr,
         children: {
           www: {
-            name: 'www',
-            type: 'directory',
-            permissions: 'drwxr-xr-x',
-            owner: 'www-data',
-            size: '4.0K',
+            name: "www",
+            type: "directory",
+            permissions: "drwxr-xr-x",
+            owner: "www-data",
+            size: "4.0K",
             modified: dateStr,
             children: {
               projects: {
-                name: 'projects',
-                type: 'directory',
-                permissions: 'drwxr-xr-x',
-                owner: 'guest',
-                size: '4.0K',
+                name: "projects",
+                type: "directory",
+                permissions: "drwxr-xr-x",
+                owner: "guest",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
-                  'PROJECTS.md': {
-                    name: 'PROJECTS.md',
-                    type: 'file',
-                    permissions: '-rw-r--r--',
-                    owner: 'guest',
-                    size: '4.0K',
+                  "PROJECTS.md": {
+                    name: "PROJECTS.md",
+                    type: "file",
+                    permissions: "-rw-r--r--",
+                    owner: "guest",
+                    size: "4.0K",
                     modified: dateStr,
-                    content: { type: 'projects', data: null } as ContentData,
+                    content: { type: "projects", data: null } as ContentData,
                   },
                 },
               },
             },
           },
           log: {
-            name: 'log',
-            type: 'directory',
-            permissions: 'drwxr-xr-x',
-            owner: 'root',
-            size: '4.0K',
+            name: "log",
+            type: "directory",
+            permissions: "drwxr-xr-x",
+            owner: "root",
+            size: "4.0K",
             modified: dateStr,
             children: {
-              'portfolio.log': {
-                name: 'portfolio.log',
-                type: 'file',
-                permissions: '-rw-r--r--',
-                owner: 'root',
-                size: '2.1K',
+              "portfolio.log": {
+                name: "portfolio.log",
+                type: "file",
+                permissions: "-rw-r--r--",
+                owner: "root",
+                size: "2.1K",
                 modified: dateStr,
                 content: `[2024-01-01 00:00:00] INFO: Portfolio system initialized
 [2024-01-01 00:00:01] INFO: Loading content modules...
@@ -786,12 +791,12 @@ The year it came from. The state it represents.
 [${new Date().toISOString()}] SUCCESS: Visitor connected!
 `,
               },
-              '.prometheus.log': {
-                name: '.prometheus.log',
-                type: 'file',
-                permissions: '-r--r--r--',
-                owner: 'root',
-                size: '512',
+              ".prometheus.log": {
+                name: ".prometheus.log",
+                type: "file",
+                permissions: "-r--r--r--",
+                owner: "root",
+                size: "512",
                 modified: dateStr,
                 content: `[PROMETHEUS] Secure channel log
 ============================================
@@ -812,599 +817,622 @@ The year it came from. The state it represents.
         },
       },
       usr: {
-        name: 'usr',
-        type: 'directory',
-        permissions: 'drwxr-xr-x',
-        owner: 'root',
-        size: '4.0K',
+        name: "usr",
+        type: "directory",
+        permissions: "drwxr-xr-x",
+        owner: "root",
+        size: "4.0K",
         modified: dateStr,
         children: {
           bin: {
-            name: 'bin',
-            type: 'directory',
-            permissions: 'drwxr-xr-x',
-            owner: 'root',
-            size: '4.0K',
+            name: "bin",
+            type: "directory",
+            permissions: "drwxr-xr-x",
+            owner: "root",
+            size: "4.0K",
             modified: dateStr,
             children: {
               // ============ CORE UTILITIES ============
-              'ls': {
-                name: 'ls',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '140K',
+              ls: {
+                name: "ls",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "140K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# list directory contents\n# Usage: ls [-la] [path]',
+                content:
+                  "#!/bin/bash\n# list directory contents\n# Usage: ls [-la] [path]",
               },
-              'dir': {
-                name: 'dir',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '2',
+              dir: {
+                name: "dir",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "2",
                 modified: dateStr,
-                target: '/usr/bin/ls',
+                target: "/usr/bin/ls",
               },
-              'll': {
-                name: 'll',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '2',
+              ll: {
+                name: "ll",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "2",
                 modified: dateStr,
-                target: '/usr/bin/ls',
+                target: "/usr/bin/ls",
               },
-              'cat': {
-                name: 'cat',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '32K',
+              cat: {
+                name: "cat",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "32K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# concatenate and print files\n# Usage: cat <file>',
+                content:
+                  "#!/bin/bash\n# concatenate and print files\n# Usage: cat <file>",
               },
-              'less': {
-                name: 'less',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '3',
+              less: {
+                name: "less",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "3",
                 modified: dateStr,
-                target: '/usr/bin/cat',
+                target: "/usr/bin/cat",
               },
-              'more': {
-                name: 'more',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '3',
+              more: {
+                name: "more",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "3",
                 modified: dateStr,
-                target: '/usr/bin/cat',
+                target: "/usr/bin/cat",
               },
-              'cd': {
-                name: 'cd',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '8K',
+              cd: {
+                name: "cd",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "8K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# change directory\n# Usage: cd <path>',
+                content: "#!/bin/bash\n# change directory\n# Usage: cd <path>",
               },
-              'pwd': {
-                name: 'pwd',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '32K',
+              pwd: {
+                name: "pwd",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "32K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# print working directory\n# Usage: pwd',
+                content: "#!/bin/bash\n# print working directory\n# Usage: pwd",
               },
-              'tree': {
-                name: 'tree',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '84K',
+              tree: {
+                name: "tree",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "84K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display directory tree\n# Usage: tree [path]',
+                content:
+                  "#!/bin/bash\n# display directory tree\n# Usage: tree [path]",
               },
-              'clear': {
-                name: 'clear',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '20K',
+              clear: {
+                name: "clear",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "20K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# clear terminal screen\n# Usage: clear',
+                content: "#!/bin/bash\n# clear terminal screen\n# Usage: clear",
               },
-              'cls': {
-                name: 'cls',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '5',
+              cls: {
+                name: "cls",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "5",
                 modified: dateStr,
-                target: '/usr/bin/clear',
+                target: "/usr/bin/clear",
               },
-              'echo': {
-                name: 'echo',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '16K',
+              echo: {
+                name: "echo",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "16K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display a line of text\n# Usage: echo [text]',
+                content:
+                  "#!/bin/bash\n# display a line of text\n# Usage: echo [text]",
               },
-              'date': {
-                name: 'date',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '24K',
+              date: {
+                name: "date",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "24K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# print or set the system date and time\n# Usage: date',
+                content:
+                  "#!/bin/bash\n# print or set the system date and time\n# Usage: date",
               },
-              'whoami': {
-                name: 'whoami',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '12K',
+              whoami: {
+                name: "whoami",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "12K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# print effective userid\n# Usage: whoami',
+                content:
+                  "#!/bin/bash\n# print effective userid\n# Usage: whoami",
               },
-              'user': {
-                name: 'user',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '6',
+              user: {
+                name: "user",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "6",
                 modified: dateStr,
-                target: '/usr/bin/whoami',
+                target: "/usr/bin/whoami",
               },
-              'env': {
-                name: 'env',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '20K',
+              env: {
+                name: "env",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "20K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# print environment variables\n# Usage: env',
+                content:
+                  "#!/bin/bash\n# print environment variables\n# Usage: env",
               },
-              'printenv': {
-                name: 'printenv',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '3',
+              printenv: {
+                name: "printenv",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "3",
                 modified: dateStr,
-                target: '/usr/bin/env',
+                target: "/usr/bin/env",
               },
-              'history': {
-                name: 'history',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '16K',
+              history: {
+                name: "history",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "16K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display command history\n# Usage: history',
+                content:
+                  "#!/bin/bash\n# display command history\n# Usage: history",
               },
               // ============ HELP & INFO ============
-              'help': {
-                name: 'help',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '28K',
+              help: {
+                name: "help",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "28K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display help information\n# Usage: help [command]',
+                content:
+                  "#!/bin/bash\n# display help information\n# Usage: help [command]",
               },
-              'h': {
-                name: 'h',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '4',
+              h: {
+                name: "h",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "4",
                 modified: dateStr,
-                target: '/usr/bin/help',
+                target: "/usr/bin/help",
               },
-              'profile': {
-                name: 'profile',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '32K',
+              profile: {
+                name: "profile",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "32K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display system profile information\n# Usage: profile',
+                content:
+                  "#!/bin/bash\n# display system profile information\n# Usage: profile",
               },
-              'me': {
-                name: 'me',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '7',
+              me: {
+                name: "me",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "7",
                 modified: dateStr,
-                target: '/usr/bin/profile',
+                target: "/usr/bin/profile",
               },
-              'sysinfo': {
-                name: 'sysinfo',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '28K',
+              sysinfo: {
+                name: "sysinfo",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "28K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display system information (neofetch style)\n# Usage: sysinfo',
+                content:
+                  "#!/bin/bash\n# display system information (neofetch style)\n# Usage: sysinfo",
               },
-              'neofetch': {
-                name: 'neofetch',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '7',
+              neofetch: {
+                name: "neofetch",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "7",
                 modified: dateStr,
-                target: '/usr/bin/sysinfo',
+                target: "/usr/bin/sysinfo",
               },
-              'info': {
-                name: 'info',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '7',
+              info: {
+                name: "info",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "7",
                 modified: dateStr,
-                target: '/usr/bin/sysinfo',
+                target: "/usr/bin/sysinfo",
               },
               // ============ PORTFOLIO COMMANDS ============
-              'portfolio': {
-                name: 'portfolio',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '48K',
+              portfolio: {
+                name: "portfolio",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "48K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# open interactive portfolio hub\n# Usage: portfolio',
+                content:
+                  "#!/bin/bash\n# open interactive portfolio hub\n# Usage: portfolio",
               },
-              'hub': {
-                name: 'hub',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '9',
+              hub: {
+                name: "hub",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "9",
                 modified: dateStr,
-                target: '/usr/bin/portfolio',
+                target: "/usr/bin/portfolio",
               },
-              'skills': {
-                name: 'skills',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '36K',
+              skills: {
+                name: "skills",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "36K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display skills and proficiencies\n# Usage: skills',
+                content:
+                  "#!/bin/bash\n# display skills and proficiencies\n# Usage: skills",
               },
-              'experience': {
-                name: 'experience',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '40K',
+              experience: {
+                name: "experience",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "40K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display work experience\n# Usage: experience [--timeline]',
+                content:
+                  "#!/bin/bash\n# display work experience\n# Usage: experience [--timeline]",
               },
-              'work': {
-                name: 'work',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '10',
+              work: {
+                name: "work",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "10",
                 modified: dateStr,
-                target: '/usr/bin/experience',
+                target: "/usr/bin/experience",
               },
-              'jobs': {
-                name: 'jobs',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '10',
+              jobs: {
+                name: "jobs",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "10",
                 modified: dateStr,
-                target: '/usr/bin/experience',
+                target: "/usr/bin/experience",
               },
-              'education': {
-                name: 'education',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '32K',
+              education: {
+                name: "education",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "32K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display education history\n# Usage: education',
+                content:
+                  "#!/bin/bash\n# display education history\n# Usage: education",
               },
-              'edu': {
-                name: 'edu',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '9',
+              edu: {
+                name: "edu",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "9",
                 modified: dateStr,
-                target: '/usr/bin/education',
+                target: "/usr/bin/education",
               },
-              'school': {
-                name: 'school',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '9',
+              school: {
+                name: "school",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "9",
                 modified: dateStr,
-                target: '/usr/bin/education',
+                target: "/usr/bin/education",
               },
-              'projects': {
-                name: 'projects',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '44K',
+              projects: {
+                name: "projects",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "44K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display portfolio projects\n# Usage: projects [-i] [--detailed]',
+                content:
+                  "#!/bin/bash\n# display portfolio projects\n# Usage: projects [-i] [--detailed]",
               },
-              'repos': {
-                name: 'repos',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '8',
+              repos: {
+                name: "repos",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "8",
                 modified: dateStr,
-                target: '/usr/bin/projects',
+                target: "/usr/bin/projects",
               },
-              'contact': {
-                name: 'contact',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '24K',
+              contact: {
+                name: "contact",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "24K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# display contact information\n# Usage: contact',
+                content:
+                  "#!/bin/bash\n# display contact information\n# Usage: contact",
               },
-              'email': {
-                name: 'email',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '7',
+              email: {
+                name: "email",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "7",
                 modified: dateStr,
-                target: '/usr/bin/contact',
+                target: "/usr/bin/contact",
               },
-              'socials': {
-                name: 'socials',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '7',
+              socials: {
+                name: "socials",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "7",
                 modified: dateStr,
-                target: '/usr/bin/contact',
+                target: "/usr/bin/contact",
               },
-              'message': {
-                name: 'message',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '20K',
+              message: {
+                name: "message",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "20K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# send a message\n# Usage: message',
+                content: "#!/bin/bash\n# send a message\n# Usage: message",
               },
-              'msg': {
-                name: 'msg',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '7',
+              msg: {
+                name: "msg",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "7",
                 modified: dateStr,
-                target: '/usr/bin/message',
+                target: "/usr/bin/message",
               },
-              'blog': {
-                name: 'blog',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '36K',
+              blog: {
+                name: "blog",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "36K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# browse blog posts\n# Usage: blog [slug]',
+                content:
+                  "#!/bin/bash\n# browse blog posts\n# Usage: blog [slug]",
               },
-              'posts': {
-                name: 'posts',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '4',
+              posts: {
+                name: "posts",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "4",
                 modified: dateStr,
-                target: '/usr/bin/blog',
+                target: "/usr/bin/blog",
               },
-              'articles': {
-                name: 'articles',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '4',
+              articles: {
+                name: "articles",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "4",
                 modified: dateStr,
-                target: '/usr/bin/blog',
+                target: "/usr/bin/blog",
               },
               // ============ SESSION COMMANDS ============
-              'exit': {
-                name: 'exit',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '8K',
+              exit: {
+                name: "exit",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "8K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# exit terminal session\n# Usage: exit',
+                content: "#!/bin/bash\n# exit terminal session\n# Usage: exit",
               },
-              'logout': {
-                name: 'logout',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '4',
+              logout: {
+                name: "logout",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "4",
                 modified: dateStr,
-                target: '/usr/bin/exit',
+                target: "/usr/bin/exit",
               },
-              'quit': {
-                name: 'quit',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '4',
+              quit: {
+                name: "quit",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "4",
                 modified: dateStr,
-                target: '/usr/bin/exit',
+                target: "/usr/bin/exit",
               },
-              'reboot': {
-                name: 'reboot',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '12K',
+              reboot: {
+                name: "reboot",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "12K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# reboot the system\n# Usage: reboot',
+                content: "#!/bin/bash\n# reboot the system\n# Usage: reboot",
               },
-              'restart': {
-                name: 'restart',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '6',
+              restart: {
+                name: "restart",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "6",
                 modified: dateStr,
-                target: '/usr/bin/reboot',
+                target: "/usr/bin/reboot",
               },
-              'crt': {
-                name: 'crt',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '8K',
+              crt: {
+                name: "crt",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "8K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# toggle CRT visual effects\n# Usage: crt',
+                content:
+                  "#!/bin/bash\n# toggle CRT visual effects\n# Usage: crt",
               },
-              'effects': {
-                name: 'effects',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '3',
+              effects: {
+                name: "effects",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "3",
                 modified: dateStr,
-                target: '/usr/bin/crt',
+                target: "/usr/bin/crt",
               },
               // ============ EASTER EGG COMMANDS ============
-              'fortune': {
-                name: 'fortune',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '28K',
+              fortune: {
+                name: "fortune",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "28K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# print a random fortune\n# Usage: fortune',
+                content:
+                  "#!/bin/bash\n# print a random fortune\n# Usage: fortune",
               },
-              'cowsay': {
-                name: 'cowsay',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '24K',
+              cowsay: {
+                name: "cowsay",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "24K",
                 modified: dateStr,
-                content: '#!/usr/bin/perl\n# configurable speaking cow\n# Usage: cowsay [message]',
+                content:
+                  "#!/usr/bin/perl\n# configurable speaking cow\n# Usage: cowsay [message]",
               },
-              'sl': {
-                name: 'sl',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '16K',
+              sl: {
+                name: "sl",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "16K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# steam locomotive\n# Usage: sl',
+                content: "#!/bin/bash\n# steam locomotive\n# Usage: sl",
               },
-              'matrix': {
-                name: 'matrix',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '20K',
+              matrix: {
+                name: "matrix",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "20K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# enter the matrix\n# Usage: matrix',
+                content: "#!/bin/bash\n# enter the matrix\n# Usage: matrix",
               },
-              'snake': {
-                name: 'snake',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '32K',
+              snake: {
+                name: "snake",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "32K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# classic snake game\n# Usage: snake',
+                content: "#!/bin/bash\n# classic snake game\n# Usage: snake",
               },
-              'hacker': {
-                name: 'hacker',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '12K',
+              hacker: {
+                name: "hacker",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "12K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# feel like a hacker\n# Usage: hacker',
+                content: "#!/bin/bash\n# feel like a hacker\n# Usage: hacker",
               },
-              'hackerman': {
-                name: 'hackerman',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '6',
+              hackerman: {
+                name: "hackerman",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "6",
                 modified: dateStr,
-                target: '/usr/bin/hacker',
+                target: "/usr/bin/hacker",
               },
-              'h4ck3r': {
-                name: 'h4ck3r',
-                type: 'symlink',
-                permissions: 'lrwxrwxrwx',
-                owner: 'root',
-                size: '6',
+              h4ck3r: {
+                name: "h4ck3r",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "6",
                 modified: dateStr,
-                target: '/usr/bin/hacker',
+                target: "/usr/bin/hacker",
               },
-              'sudo': {
-                name: 'sudo',
-                type: 'executable',
-                permissions: '-rwsr-xr-x',
-                owner: 'root',
-                size: '164K',
+              sudo: {
+                name: "sudo",
+                type: "executable",
+                permissions: "-rwsr-xr-x",
+                owner: "root",
+                size: "164K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# execute a command as another user\n# Usage: sudo <command>',
+                content:
+                  "#!/bin/bash\n# execute a command as another user\n# Usage: sudo <command>",
               },
-              'prometheus': {
-                name: 'prometheus',
-                type: 'executable',
-                permissions: '-rwxr-xr-x',
-                owner: 'root',
-                size: '48K',
+              prometheus: {
+                name: "prometheus",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "48K",
                 modified: dateStr,
-                content: '#!/bin/bash\n# [CLASSIFIED]\n# Usage: prometheus <passphrase>',
+                content:
+                  "#!/bin/bash\n# [CLASSIFIED]\n# Usage: prometheus <passphrase>",
               },
             },
           },
           share: {
-            name: 'share',
-            type: 'directory',
-            permissions: 'drwxr-xr-x',
-            owner: 'root',
-            size: '4.0K',
+            name: "share",
+            type: "directory",
+            permissions: "drwxr-xr-x",
+            owner: "root",
+            size: "4.0K",
             modified: dateStr,
             children: {
               games: {
-                name: 'games',
-                type: 'directory',
-                permissions: 'drwxr-xr-x',
-                owner: 'root',
-                size: '4.0K',
+                name: "games",
+                type: "directory",
+                permissions: "drwxr-xr-x",
+                owner: "root",
+                size: "4.0K",
                 modified: dateStr,
                 children: {
                   fortune: {
-                    name: 'fortune',
-                    type: 'executable',
-                    permissions: '-rwxr-xr-x',
-                    owner: 'root',
-                    size: '4.0K',
+                    name: "fortune",
+                    type: "executable",
+                    permissions: "-rwxr-xr-x",
+                    owner: "root",
+                    size: "4.0K",
                     modified: dateStr,
                     content: `#!/bin/bash
 # Display a random fortune cookie
@@ -1414,12 +1442,12 @@ The year it came from. The state it represents.
 exec /usr/games/fortune
 `,
                   },
-                  'fortune.dat': {
-                    name: 'fortune.dat',
-                    type: 'file',
-                    permissions: '-rw-r--r--',
-                    owner: 'root',
-                    size: '2.8K',
+                  "fortune.dat": {
+                    name: "fortune.dat",
+                    type: "file",
+                    permissions: "-rw-r--r--",
+                    owner: "root",
+                    size: "2.8K",
                     modified: dateStr,
                     content: `"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler
 %
@@ -1449,11 +1477,11 @@ exec /usr/games/fortune
 `,
                   },
                   snake: {
-                    name: 'snake',
-                    type: 'executable',
-                    permissions: '-rwxr-xr-x',
-                    owner: 'root',
-                    size: '12K',
+                    name: "snake",
+                    type: "executable",
+                    permissions: "-rwxr-xr-x",
+                    owner: "root",
+                    size: "12K",
                     modified: dateStr,
                     content: `#!/bin/bash
 # Terminal Snake Game
@@ -1468,11 +1496,11 @@ exec /usr/games/snake
         },
       },
       tmp: {
-        name: 'tmp',
-        type: 'directory',
-        permissions: 'drwxrwxrwt',
-        owner: 'root',
-        size: '4.0K',
+        name: "tmp",
+        type: "directory",
+        permissions: "drwxrwxrwt",
+        owner: "root",
+        size: "4.0K",
         modified: dateStr,
         children: {},
       },
@@ -1486,19 +1514,19 @@ exec /usr/games/snake
 export function navigateToPath(
   fileSystem: FileSystemNode,
   path: string,
-  followSymlinks: boolean = true
+  followSymlinks: boolean = true,
 ): FileSystemNode | null {
-  if (path === '/') return fileSystem;
+  if (path === "/") return fileSystem;
 
-  const segments = path.split('/').filter(Boolean);
+  const segments = path.split("/").filter(Boolean);
   let current: FileSystemNode = fileSystem;
 
   for (const segment of segments) {
-    if (current.type !== 'directory' || !current.children) {
+    if (current.type !== "directory" || !current.children) {
       // Handle symlinks that point to directories
-      if (current.type === 'symlink' && current.target && followSymlinks) {
+      if (current.type === "symlink" && current.target && followSymlinks) {
         const resolved = navigateToPath(fileSystem, current.target, false);
-        if (resolved && resolved.type === 'directory' && resolved.children) {
+        if (resolved && resolved.type === "directory" && resolved.children) {
           const next = resolved.children[segment];
           if (!next) return null;
           current = next;
@@ -1512,7 +1540,7 @@ export function navigateToPath(
     current = next;
 
     // Follow symlink if it points to a directory
-    if (current.type === 'symlink' && current.target && followSymlinks) {
+    if (current.type === "symlink" && current.target && followSymlinks) {
       const resolved = navigateToPath(fileSystem, current.target, false);
       if (resolved) {
         current = resolved;
@@ -1528,10 +1556,10 @@ export function navigateToPath(
  */
 export function listDirectory(
   fileSystem: FileSystemNode,
-  path: string
+  path: string,
 ): FileSystemNode[] | null {
   const node = navigateToPath(fileSystem, path);
-  if (!node || node.type !== 'directory' || !node.children) {
+  if (!node || node.type !== "directory" || !node.children) {
     return null;
   }
   return Object.values(node.children);
@@ -1549,7 +1577,7 @@ export function pathExists(fileSystem: FileSystemNode, path: string): boolean {
  */
 export function isDirectory(fileSystem: FileSystemNode, path: string): boolean {
   const node = navigateToPath(fileSystem, path);
-  return node?.type === 'directory';
+  return node?.type === "directory";
 }
 
 /**
@@ -1557,10 +1585,10 @@ export function isDirectory(fileSystem: FileSystemNode, path: string): boolean {
  */
 export function getFileContent(
   fileSystem: FileSystemNode,
-  path: string
+  path: string,
 ): string | ContentData | null {
   const node = navigateToPath(fileSystem, path);
-  if (!node || node.type === 'directory') {
+  if (!node || node.type === "directory") {
     return null;
   }
   return node.content ?? null;
@@ -1570,16 +1598,15 @@ export function getFileContent(
  * Get parent path
  */
 export function getParentPath(path: string): string {
-  const segments = path.split('/').filter(Boolean);
+  const segments = path.split("/").filter(Boolean);
   segments.pop();
-  return '/' + segments.join('/');
+  return "/" + segments.join("/");
 }
 
 /**
  * Get filename from path
  */
 export function getFilename(path: string): string {
-  const segments = path.split('/').filter(Boolean);
-  return segments[segments.length - 1] ?? '';
+  const segments = path.split("/").filter(Boolean);
+  return segments[segments.length - 1] ?? "";
 }
-

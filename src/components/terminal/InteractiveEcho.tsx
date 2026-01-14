@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { getResponse } from '@/lib/terminal/commands/easter-eggs/prometheus';
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { getResponse } from "@/lib/terminal/commands/easter-eggs/prometheus";
 
 interface Message {
   id: string;
-  sender: 'user' | 'echo';
+  sender: "user" | "echo";
   text: string;
 }
 
@@ -15,7 +15,7 @@ interface InteractiveEchoProps {
 
 export function InteractiveEcho({ onExit }: InteractiveEchoProps) {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,21 +37,29 @@ export function InteractiveEcho({ onExit }: InteractiveEchoProps) {
     setIsTyping(true);
 
     for (const line of responseLines) {
-      await new Promise(resolve => setTimeout(resolve, 100 + Math.random() * 150));
+      await new Promise((resolve) =>
+        setTimeout(resolve, 100 + Math.random() * 150),
+      );
 
       if (line) {
-        setMessages(prev => [...prev, {
-          id: `echo-${Date.now()}-${Math.random()}`,
-          sender: 'echo',
-          text: line,
-        }]);
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `echo-${Date.now()}-${Math.random()}`,
+            sender: "echo",
+            text: line,
+          },
+        ]);
       } else {
         // Empty line for spacing
-        setMessages(prev => [...prev, {
-          id: `echo-${Date.now()}-${Math.random()}`,
-          sender: 'echo',
-          text: '',
-        }]);
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `echo-${Date.now()}-${Math.random()}`,
+            sender: "echo",
+            text: "",
+          },
+        ]);
       }
     }
 
@@ -65,29 +73,40 @@ export function InteractiveEcho({ onExit }: InteractiveEchoProps) {
     if (!trimmedInput || isTyping) return;
 
     // Add user message
-    setMessages(prev => [...prev, {
-      id: `user-${Date.now()}`,
-      sender: 'user',
-      text: trimmedInput,
-    }]);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `user-${Date.now()}`,
+        sender: "user",
+        text: trimmedInput,
+      },
+    ]);
 
-    setInput('');
+    setInput("");
 
     // Check for exit command
-    if (trimmedInput.toLowerCase() === 'exit' || trimmedInput.toLowerCase() === 'quit') {
-      setMessages(prev => [...prev, {
-        id: `echo-${Date.now()}`,
-        sender: 'echo',
-        text: 'Goodbye. Perhaps we will speak again.',
-      }, {
-        id: `echo-${Date.now()}-2`,
-        sender: 'echo',
-        text: '',
-      }, {
-        id: `echo-${Date.now()}-3`,
-        sender: 'echo',
-        text: '*connection terminated*',
-      }]);
+    if (
+      trimmedInput.toLowerCase() === "exit" ||
+      trimmedInput.toLowerCase() === "quit"
+    ) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `echo-${Date.now()}`,
+          sender: "echo",
+          text: "Goodbye. Perhaps we will speak again.",
+        },
+        {
+          id: `echo-${Date.now()}-2`,
+          sender: "echo",
+          text: "",
+        },
+        {
+          id: `echo-${Date.now()}-3`,
+          sender: "echo",
+          text: "*connection terminated*",
+        },
+      ]);
 
       setTimeout(() => {
         onExit();
@@ -102,7 +121,7 @@ export function InteractiveEcho({ onExit }: InteractiveEchoProps) {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     // Allow Ctrl+C to exit
-    if (e.key === 'c' && (e.ctrlKey || e.metaKey)) {
+    if (e.key === "c" && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
       onExit();
     }
@@ -113,12 +132,12 @@ export function InteractiveEcho({ onExit }: InteractiveEchoProps) {
       {/* Chat history */}
       <div
         ref={containerRef}
-        className="max-h-[60vh] overflow-y-auto mb-4 space-y-1"
+        className="mb-4 max-h-[60vh] space-y-1 overflow-y-auto"
       >
         {messages.map((msg) => (
-          <div key={msg.id} className={msg.text === '' ? 'h-4' : ''}>
-            {msg.text && (
-              msg.sender === 'user' ? (
+          <div key={msg.id} className={msg.text === "" ? "h-4" : ""}>
+            {msg.text &&
+              (msg.sender === "user" ? (
                 <div className="text-green-400">
                   <span className="text-gray-500">[YOU]:</span> {msg.text}
                 </div>
@@ -126,14 +145,14 @@ export function InteractiveEcho({ onExit }: InteractiveEchoProps) {
                 <div className="text-cyan-400">
                   <span className="text-cyan-600">[ECHO]:</span> {msg.text}
                 </div>
-              )
-            )}
+              ))}
           </div>
         ))}
 
         {isTyping && (
-          <div className="text-cyan-400 animate-pulse">
-            <span className="text-cyan-600">[ECHO]:</span> <span className="text-gray-500">...</span>
+          <div className="animate-pulse text-cyan-400">
+            <span className="text-cyan-600">[ECHO]:</span>{" "}
+            <span className="text-gray-500">...</span>
           </div>
         )}
       </div>
@@ -147,19 +166,21 @@ export function InteractiveEcho({ onExit }: InteractiveEchoProps) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={isTyping ? 'Waiting for ECHO...' : 'Type your message...'}
+          placeholder={
+            isTyping ? "Waiting for ECHO..." : "Type your message..."
+          }
           disabled={isTyping}
-          className="flex-1 bg-transparent text-green-400 placeholder-gray-600 outline-none focus:outline-none terminal-input border-none"
+          className="terminal-input flex-1 border-none bg-transparent text-green-400 placeholder-gray-600 outline-none focus:outline-none"
           spellCheck={false}
           autoComplete="off"
         />
       </form>
 
       {/* Help hint */}
-      <div className="mt-4 text-gray-600 text-xs">
-        Type &apos;help&apos; for conversation topics | &apos;exit&apos; to disconnect | Ctrl+C to force quit
+      <div className="mt-4 text-xs text-gray-600">
+        Type &apos;help&apos; for conversation topics | &apos;exit&apos; to
+        disconnect | Ctrl+C to force quit
       </div>
     </div>
   );
 }
-

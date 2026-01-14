@@ -1,42 +1,46 @@
 // Command registry and execution
 
-import type { Command, CommandContext, CommandResult } from '@/lib/terminal/types';
-import { createLine } from '@/lib/terminal/utils';
+import type {
+  Command,
+  CommandContext,
+  CommandResult,
+} from "@/lib/terminal/types";
+import { createLine } from "@/lib/terminal/utils";
 
 // Import all commands
-import { helpCommand } from './help';
-import { lsCommand } from './ls';
-import { cdCommand } from './cd';
-import { catCommand } from './cat';
-import { pwdCommand } from './pwd';
-import { clearCommand } from './clear';
-import { profileCommand } from './profile';
-import { treeCommand } from './tree';
-import { whoamiCommand } from './whoami';
-import { echoCommand } from './echo';
-import { dateCommand } from './date';
-import { historyCommand } from './history';
-import { skillsCommand } from './skills';
-import { contactCommand } from './contact';
-import { experienceCommand } from './experience';
-import { educationCommand } from './education';
-import { blogCommand } from './blog';
-import { projectsCommand } from './projects';
-import { messageCommand } from './message';
-import { envCommand } from './env';
-import { portfolioHubCommand } from './portfolio-hub';
-import { sysinfoCommand } from './sysinfo';
+import { helpCommand } from "./help";
+import { lsCommand } from "./ls";
+import { cdCommand } from "./cd";
+import { catCommand } from "./cat";
+import { pwdCommand } from "./pwd";
+import { clearCommand } from "./clear";
+import { profileCommand } from "./profile";
+import { treeCommand } from "./tree";
+import { whoamiCommand } from "./whoami";
+import { echoCommand } from "./echo";
+import { dateCommand } from "./date";
+import { historyCommand } from "./history";
+import { skillsCommand } from "./skills";
+import { contactCommand } from "./contact";
+import { experienceCommand } from "./experience";
+import { educationCommand } from "./education";
+import { blogCommand } from "./blog";
+import { projectsCommand } from "./projects";
+import { messageCommand } from "./message";
+import { envCommand } from "./env";
+import { portfolioHubCommand } from "./portfolio-hub";
+import { sysinfoCommand } from "./sysinfo";
 
 // Easter egg commands
-import { cowsayCommand } from './easter-eggs/cowsay';
-import { slCommand } from './easter-eggs/sl';
-import { fortuneCommand } from './easter-eggs/fortune';
-import { matrixCommand } from './easter-eggs/matrix';
-import { hackerCommand } from './easter-eggs/hacker';
-import { sudoCommand } from './easter-eggs/sudo';
-import { snakeCommand } from './easter-eggs/snake';
-import { prometheusCommand } from './easter-eggs/prometheus';
-import { exitCommand, rebootCommand } from './exit';
+import { cowsayCommand } from "./easter-eggs/cowsay";
+import { slCommand } from "./easter-eggs/sl";
+import { fortuneCommand } from "./easter-eggs/fortune";
+import { matrixCommand } from "./easter-eggs/matrix";
+import { hackerCommand } from "./easter-eggs/hacker";
+import { sudoCommand } from "./easter-eggs/sudo";
+import { snakeCommand } from "./easter-eggs/snake";
+import { prometheusCommand } from "./easter-eggs/prometheus";
+import { exitCommand, rebootCommand } from "./exit";
 
 // Command registry
 const commands: Map<string, Command> = new Map();
@@ -118,7 +122,7 @@ export function getAllCommands(): Command[] {
  */
 export async function executeCommand(
   commandStr: string,
-  context: CommandContext
+  context: CommandContext,
 ): Promise<CommandResult> {
   const trimmed = commandStr.trim();
 
@@ -132,8 +136,8 @@ export async function executeCommand(
   const args = parts.slice(1);
 
   // Check for special commands first
-  if (commandName === 'sudo' && args.join(' ').includes('rm -rf /')) {
-    const cmd = getCommand('sudo');
+  if (commandName === "sudo" && args.join(" ").includes("rm -rf /")) {
+    const cmd = getCommand("sudo");
     if (cmd) {
       return cmd.execute(args, context);
     }
@@ -145,14 +149,8 @@ export async function executeCommand(
   if (!command) {
     return {
       output: [
-        createLine(
-          `zsh: command not found: ${commandName}`,
-          'error'
-        ),
-        createLine(
-          `Type 'help' to see available commands.`,
-          'system'
-        ),
+        createLine(`zsh: command not found: ${commandName}`, "error"),
+        createLine(`Type 'help' to see available commands.`, "system"),
       ],
     };
   }
@@ -163,8 +161,8 @@ export async function executeCommand(
     return {
       output: [
         createLine(
-          `Error executing command: ${error instanceof Error ? error.message : 'Unknown error'}`,
-          'error'
+          `Error executing command: ${error instanceof Error ? error.message : "Unknown error"}`,
+          "error",
         ),
       ],
     };
@@ -200,4 +198,3 @@ export function getCommandSuggestions(partial: string): string[] {
 }
 
 export { allCommands };
-

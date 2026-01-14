@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 /**
  * CRT screen effects - scanlines, vignette, and subtle flicker
@@ -13,18 +13,20 @@ export function CRTEffect() {
       <div
         className="pointer-events-none absolute inset-0 z-50"
         style={{
-          backgroundImage: 'linear-gradient(transparent 50%, rgba(0, 0, 0, 0.25) 50%)',
-          backgroundSize: '100% 4px',
+          backgroundImage:
+            "linear-gradient(transparent 50%, rgba(0, 0, 0, 0.25) 50%)",
+          backgroundSize: "100% 4px",
         }}
         aria-hidden="true"
       />
 
       {/* Horizontal scan line that moves down the screen */}
       <div
-        className="pointer-events-none absolute left-0 right-0 h-[3px] z-50 crt-scanline"
+        className="crt-scanline pointer-events-none absolute right-0 left-0 z-50 h-[3px]"
         style={{
-          background: 'linear-gradient(90deg, transparent 5%, rgba(0, 255, 65, 0.15) 20%, rgba(0, 255, 65, 0.3) 50%, rgba(0, 255, 65, 0.15) 80%, transparent 95%)',
-          boxShadow: '0 0 10px rgba(0, 255, 65, 0.5)',
+          background:
+            "linear-gradient(90deg, transparent 5%, rgba(0, 255, 65, 0.15) 20%, rgba(0, 255, 65, 0.3) 50%, rgba(0, 255, 65, 0.15) 80%, transparent 95%)",
+          boxShadow: "0 0 10px rgba(0, 255, 65, 0.5)",
         }}
         aria-hidden="true"
       />
@@ -41,9 +43,9 @@ export function CRTEffect() {
 
       {/* Screen flicker overlay */}
       <div
-        className="pointer-events-none absolute inset-0 z-30 crt-flicker"
+        className="crt-flicker pointer-events-none absolute inset-0 z-30"
         style={{
-          background: 'transparent',
+          background: "transparent",
         }}
         aria-hidden="true"
       />
@@ -52,7 +54,8 @@ export function CRTEffect() {
       <div
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(0, 255, 65, 0.08) 0%, transparent 70%)',
+          background:
+            "radial-gradient(ellipse at center, rgba(0, 255, 65, 0.08) 0%, transparent 70%)",
         }}
         aria-hidden="true"
       />
@@ -69,10 +72,11 @@ export function GlitchEffect({ active }: { active: boolean }) {
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-100 crt-glitch"
+      className="crt-glitch pointer-events-none absolute inset-0 z-100"
       style={{
-        background: 'repeating-linear-gradient(90deg, rgba(255, 0, 0, 0.15) 0px, rgba(0, 255, 0, 0.15) 1px, rgba(0, 0, 255, 0.15) 2px)',
-        mixBlendMode: 'screen',
+        background:
+          "repeating-linear-gradient(90deg, rgba(255, 0, 0, 0.15) 0px, rgba(0, 255, 0, 0.15) 1px, rgba(0, 0, 255, 0.15) 2px)",
+        mixBlendMode: "screen",
       }}
       aria-hidden="true"
     />

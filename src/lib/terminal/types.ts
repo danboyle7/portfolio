@@ -2,7 +2,14 @@
 
 export interface TerminalLine {
   id: string;
-  type: 'input' | 'output' | 'error' | 'system' | 'ascii' | 'success' | 'warning';
+  type:
+    | "input"
+    | "output"
+    | "error"
+    | "system"
+    | "ascii"
+    | "success"
+    | "warning";
   content: string;
   timestamp: Date;
   isHtml?: boolean;
@@ -16,16 +23,31 @@ export interface AnimatedLine {
 }
 
 export interface InteractiveMode {
-  type: 'blog' | 'search' | 'snake' | 'echo' | 'portfolio' | 'hub' | 'contact' | null;
+  type:
+    | "blog"
+    | "search"
+    | "snake"
+    | "echo"
+    | "portfolio"
+    | "hub"
+    | "contact"
+    | null;
   data?: unknown;
-  section?: 'skills' | 'experience' | 'education' | 'projects' | 'hobbies';
+  section?: "skills" | "experience" | "education" | "projects" | "hobbies";
 }
 
 export interface CommandResult {
   output: TerminalLine[];
   clearScreen?: boolean;
   changeDirectory?: string;
-  triggerEffect?: 'matrix' | 'glitch' | 'reboot' | 'hacker' | 'destroy' | 'cowsay' | 'exit';
+  triggerEffect?:
+    | "matrix"
+    | "glitch"
+    | "reboot"
+    | "hacker"
+    | "destroy"
+    | "cowsay"
+    | "exit";
   animatedOutput?: AnimatedLine[]; // For step-by-step animation
   enterInteractiveMode?: InteractiveMode; // Enter an interactive TUI mode
 }
@@ -36,7 +58,10 @@ export interface Command {
   usage: string;
   aliases?: string[];
   hidden?: boolean;
-  execute: (args: string[], context: CommandContext) => Promise<CommandResult> | CommandResult;
+  execute: (
+    args: string[],
+    context: CommandContext,
+  ) => Promise<CommandResult> | CommandResult;
 }
 
 export interface CommandContext {
@@ -50,7 +75,7 @@ export interface CommandContext {
 
 export interface FileSystemNode {
   name: string;
-  type: 'directory' | 'file' | 'executable' | 'symlink';
+  type: "directory" | "file" | "executable" | "symlink";
   permissions: string;
   owner: string;
   size: string;
@@ -61,7 +86,15 @@ export interface FileSystemNode {
 }
 
 export interface ContentData {
-  type: 'experience' | 'skills' | 'education' | 'hobbies' | 'blog' | 'contact' | 'about' | 'projects';
+  type:
+    | "experience"
+    | "skills"
+    | "education"
+    | "hobbies"
+    | "blog"
+    | "contact"
+    | "about"
+    | "projects";
   data: unknown;
 }
 
@@ -158,7 +191,6 @@ export interface TerminalState {
 export interface BootStep {
   text: string;
   delay: number;
-  type: 'info' | 'success' | 'warning' | 'loading' | 'complete' | 'ascii';
+  type: "info" | "success" | "warning" | "loading" | "complete" | "ascii";
   progress?: number;
 }
-

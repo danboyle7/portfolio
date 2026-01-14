@@ -1,22 +1,26 @@
-import type { Command, CommandResult, FileSystemNode } from '@/lib/terminal/types';
-import { createLine, resolvePath } from '@/lib/terminal/utils';
-import { navigateToPath } from '@/lib/terminal/file-system';
+import type {
+  Command,
+  CommandResult,
+  FileSystemNode,
+} from "@/lib/terminal/types";
+import { createLine, resolvePath } from "@/lib/terminal/utils";
+import { navigateToPath } from "@/lib/terminal/file-system";
 
 export const treeCommand: Command = {
-  name: 'tree',
-  description: 'Display directory structure',
-  usage: 'tree [directory]',
+  name: "tree",
+  description: "Display directory structure",
+  usage: "tree [directory]",
   execute: (args, context): CommandResult => {
     let targetPath = context.currentPath;
     let maxDepth = 3;
     let showHidden = false;
 
     for (const arg of args) {
-      if (arg === '-a') {
+      if (arg === "-a") {
         showHidden = true;
-      } else if (arg.startsWith('-L')) {
+      } else if (arg.startsWith("-L")) {
         maxDepth = parseInt(arg.slice(2)) || 3;
-      } else if (!arg.startsWith('-')) {
+      } else if (!arg.startsWith("-")) {
         targetPath = resolvePath(context.currentPath, arg);
       }
     }
@@ -25,18 +29,23 @@ export const treeCommand: Command = {
 
     if (!node) {
       return {
-        output: [createLine(`tree: '${targetPath}': No such file or directory`, 'error')],
+        output: [
+          createLine(
+            `tree: '${targetPath}': No such file or directory`,
+            "error",
+          ),
+        ],
       };
     }
 
-    if (node.type !== 'directory') {
+    if (node.type !== "directory") {
       return {
-        output: [createLine(colorizeNode(node), 'output', { isHtml: true })],
+        output: [createLine(colorizeNode(node), "output", { isHtml: true })],
       };
     }
 
     const lines: string[] = [];
-    const displayPath = targetPath === '/home/guest' ? '~' : targetPath;
+    const displayPath = targetPath === "/home/guest" ? "~" : targetPath;
     lines.push(`<span class="term-blue font-bold">${displayPath}</span>`);
 
     let dirCount = 0;
@@ -46,7 +55,7 @@ export const treeCommand: Command = {
       node: FileSystemNode,
       prefix: string,
       isLast: boolean,
-      depth: number
+      depth: number,
     ): void {
       if (depth > maxDepth) return;
 
@@ -54,23 +63,23 @@ export const treeCommand: Command = {
       let entries = Object.values(children);
 
       if (!showHidden) {
-        entries = entries.filter((e) => !e.name.startsWith('.'));
+        entries = entries.filter((e) => !e.name.startsWith("."));
       }
 
       entries.sort((a, b) => {
-        if (a.type === 'directory' && b.type !== 'directory') return -1;
-        if (a.type !== 'directory' && b.type === 'directory') return 1;
+        if (a.type === "directory" && b.type !== "directory") return -1;
+        if (a.type !== "directory" && b.type === "directory") return 1;
         return a.name.localeCompare(b.name);
       });
 
       entries.forEach((entry, index) => {
         const isLastEntry = index === entries.length - 1;
-        const connector = isLastEntry ? '└── ' : '├── ';
-        const newPrefix = prefix + (isLastEntry ? '    ' : '│   ');
+        const connector = isLastEntry ? "└── " : "├── ";
+        const newPrefix = prefix + (isLastEntry ? "    " : "│   ");
 
         lines.push(prefix + connector + colorizeNode(entry));
 
-        if (entry.type === 'directory') {
+        if (entry.type === "directory") {
           dirCount++;
           if (depth < maxDepth) {
             traverse(entry, newPrefix, isLastEntry, depth + 1);
@@ -81,35 +90,36 @@ export const treeCommand: Command = {
       });
     }
 
-    traverse(node, '', true, 1);
-    lines.push('');
-    lines.push(`<span class="term-dim">${dirCount} directories, ${fileCount} files</span>`);
+    traverse(node, "", true, 1);
+    lines.push("");
+    lines.push(
+      `<span class="term-dim">${dirCount} directories, ${fileCount} files</span>`,
+    );
 
     return {
-      output: lines.map((line) => createLine(line, 'output', { isHtml: true })),
+      output: lines.map((line) => createLine(line, "output", { isHtml: true })),
     };
   },
 };
 
 function colorizeNode(node: FileSystemNode): string {
   switch (node.type) {
-    case 'directory':
+    case "directory":
       return `<span class="term-blue font-bold">${node.name}/</span>`;
-    case 'executable':
+    case "executable":
       return `<span class="term-green font-bold">${node.name}*</span>`;
-    case 'symlink':
-      return `<span class="term-cyan">${node.name}</span> -> ${node.target ?? '?'}`;
+    case "symlink":
+      return `<span class="term-cyan">${node.name}</span> -> ${node.target ?? "?"}`;
     default:
-      if (node.name.endsWith('.md')) {
+      if (node.name.endsWith(".md")) {
         return `<span class="term-yellow">${node.name}</span>`;
       }
-      if (node.name.endsWith('.ts') || node.name.endsWith('.tsx')) {
+      if (node.name.endsWith(".ts") || node.name.endsWith(".tsx")) {
         return `<span class="term-green">${node.name}</span>`;
       }
-      if (node.name.startsWith('.')) {
+      if (node.name.startsWith(".")) {
         return `<span class="term-dim">${node.name}</span>`;
       }
       return node.name;
   }
 }
-

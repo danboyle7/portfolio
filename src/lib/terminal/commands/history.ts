@@ -1,10 +1,10 @@
-import type { Command, CommandResult } from '@/lib/terminal/types';
-import { createLine } from '@/lib/terminal/utils';
+import type { Command, CommandResult } from "@/lib/terminal/types";
+import { createLine } from "@/lib/terminal/utils";
 
 export const historyCommand: Command = {
-  name: 'history',
-  description: 'Show command history',
-  usage: 'history [n]',
+  name: "history",
+  description: "Show command history",
+  usage: "history [n]",
   execute: (args, context): CommandResult => {
     let limit = context.history.length;
 
@@ -20,10 +20,9 @@ export const historyCommand: Command = {
 
     const lines = historySlice.map((cmd, idx) => {
       const lineNum = (startIndex + idx).toString().padStart(4);
-      return createLine(`${lineNum}  ${cmd}`, 'output');
+      return createLine(`${lineNum}  ${cmd}`, "output");
     });
 
     return { output: lines };
   },
 };
-

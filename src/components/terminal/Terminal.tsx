@@ -1,40 +1,40 @@
-'use client';
+"use client";
 
-import React, { useState, useCallback, useRef, useEffect } from 'react';
-import type { TerminalLine, TerminalState } from '@/lib/terminal/types';
-import { createFileSystem } from '@/lib/terminal/file-system';
-import { executeCommand } from '@/lib/terminal/commands';
-import { createLine, generateId, resolvePath } from '@/lib/terminal/utils';
-import { navigateToPath } from '@/lib/terminal/file-system';
-import { initializeContent } from '@/lib/terminal/content-loader';
-import { TerminalInput } from './TerminalInput';
-import { TerminalOutput, CommandLine } from './TerminalOutput';
-import { BootSequence } from './BootSequence';
-import { CRTEffect, GlitchEffect } from './CRTEffect';
-import { MatrixRain } from './MatrixRain';
-import { TerminalHeader } from './TerminalHeader';
-import { InteractiveBlog } from './InteractiveBlog';
-import { SnakeGame } from './SnakeGame';
-import { InteractiveEcho } from './InteractiveEcho';
-import { InteractivePortfolio } from './InteractivePortfolio';
-import { PortfolioHub } from './PortfolioHub';
-import { WelcomeMessage } from './WelcomeMessage';
-import { ComputerBackground } from './ComputerBackground';
-import { ContactApp } from './ContactApp';
-import { SkillsSection } from './SkillsSection';
-import { EducationSection } from './EducationSection';
-import { HobbiesSection } from './HobbiesSection';
-import { TerminalMenu } from './TerminalMenu';
-import { useZoom } from './ZoomContext';
-import { VERSION } from '@/lib/version';
-import type { InteractiveMode } from '@/lib/terminal/types';
+import React, { useState, useCallback, useRef, useEffect } from "react";
+import type { TerminalLine, TerminalState } from "@/lib/terminal/types";
+import { createFileSystem } from "@/lib/terminal/file-system";
+import { executeCommand } from "@/lib/terminal/commands";
+import { createLine, generateId, resolvePath } from "@/lib/terminal/utils";
+import { navigateToPath } from "@/lib/terminal/file-system";
+import { initializeContent } from "@/lib/terminal/content-loader";
+import { TerminalInput } from "./TerminalInput";
+import { TerminalOutput, CommandLine } from "./TerminalOutput";
+import { BootSequence } from "./BootSequence";
+import { CRTEffect, GlitchEffect } from "./CRTEffect";
+import { MatrixRain } from "./MatrixRain";
+import { TerminalHeader } from "./TerminalHeader";
+import { InteractiveBlog } from "./InteractiveBlog";
+import { SnakeGame } from "./SnakeGame";
+import { InteractiveEcho } from "./InteractiveEcho";
+import { InteractivePortfolio } from "./InteractivePortfolio";
+import { PortfolioHub } from "./PortfolioHub";
+import { WelcomeMessage } from "./WelcomeMessage";
+import { ComputerBackground } from "./ComputerBackground";
+import { ContactApp } from "./ContactApp";
+import { SkillsSection } from "./SkillsSection";
+import { EducationSection } from "./EducationSection";
+import { HobbiesSection } from "./HobbiesSection";
+import { TerminalMenu } from "./TerminalMenu";
+import { useZoom } from "./ZoomContext";
+import { VERSION } from "@/lib/version";
+import type { InteractiveMode } from "@/lib/terminal/types";
 
 // Initialize content on module load
 initializeContent();
 
-const HOSTNAME = 'portfolio';
-const USER = 'guest';
-const HOME_PATH = '/home/guest';
+const HOSTNAME = "portfolio";
+const USER = "guest";
+const HOME_PATH = "/home/guest";
 
 interface TerminalProps {
   onBackToSplash?: () => void;
@@ -67,20 +67,21 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
   const [fileSystem] = useState(() => createFileSystem());
   const [glitchActive, setGlitchActive] = useState(false);
   const [matrixIntense, setMatrixIntense] = useState(false);
-  const [interactiveMode, setInteractiveMode] = useState<InteractiveMode | null>(null);
+  const [interactiveMode, setInteractiveMode] =
+    useState<InteractiveMode | null>(null);
   const [crtEnabled, setCrtEnabled] = useState(true);
   const [showWelcome, setShowWelcome] = useState(true);
   const [env, setEnv] = useState<Record<string, string>>({
     USER,
     HOME: HOME_PATH,
     HOSTNAME,
-    PATH: '/usr/bin:/bin',
-    SHELL: '/bin/zsh',
-    TERM: 'xterm-256color',
+    PATH: "/usr/bin:/bin",
+    SHELL: "/bin/zsh",
+    TERM: "xterm-256color",
     PORTFOLIO_VERSION: VERSION,
-    '0': 'zsh',
-    '?': '0',
-    '$': '1337', // Fake PID
+    "0": "zsh",
+    "?": "0",
+    $: "1337", // Fake PID
   });
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputLineRef = useRef<HTMLDivElement>(null);
@@ -111,7 +112,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       const trimmedCommand = command.trim();
 
       // Handle Ctrl+C - show whatever was typed + ^C and create new prompt
-      if (trimmedCommand.endsWith('^C')) {
+      if (trimmedCommand.endsWith("^C")) {
         const entry: HistoryEntry = {
           id: generateId(),
           command: trimmedCommand, // Shows "sometext^C"
@@ -126,7 +127,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       if (!trimmedCommand) {
         const entry: HistoryEntry = {
           id: generateId(),
-          command: '',
+          command: "",
           path: state.currentPath,
           output: [],
         };
@@ -135,7 +136,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       }
 
       // Handle CRT toggle command
-      if (trimmedCommand === 'crt' || trimmedCommand === 'effects') {
+      if (trimmedCommand === "crt" || trimmedCommand === "effects") {
         const newState = !crtEnabled;
         setCrtEnabled(newState);
         const entry: HistoryEntry = {
@@ -143,55 +144,62 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
           command: trimmedCommand,
           path: state.currentPath,
           output: [
-            createLine('', 'output'),
+            createLine("", "output"),
             createLine(
               `<span class="term-cyan">CRT effects ${newState ? '<span class="term-green">enabled</span>' : '<span class="term-red">disabled</span>'}</span>`,
-              'output',
-              { isHtml: true }
+              "output",
+              { isHtml: true },
             ),
-            createLine('<span class="term-dim">Toggle with: crt | effects</span>', 'output', { isHtml: true }),
-            createLine('', 'output'),
+            createLine(
+              '<span class="term-dim">Toggle with: crt | effects</span>',
+              "output",
+              { isHtml: true },
+            ),
+            createLine("", "output"),
           ],
         };
         setHistory((prev) => [...prev, entry]);
-        setState((prev) => ({ ...prev, commandHistory: [...prev.commandHistory, trimmedCommand] }));
+        setState((prev) => ({
+          ...prev,
+          commandHistory: [...prev.commandHistory, trimmedCommand],
+        }));
         return;
       }
 
       // Map executable names to commands
       const execMap: Record<string, string> = {
-        'send_message': 'message',
-        'timeline': 'experience --timeline',
-        'fortune': 'fortune',
-        'snake': 'snake',
-        'cowsay': 'cowsay',
+        send_message: "message",
+        timeline: "experience --timeline",
+        fortune: "fortune",
+        snake: "snake",
+        cowsay: "cowsay",
       };
 
       // Handle ./command syntax for executables in current directory
       let actualCommand = trimmedCommand;
-      if (trimmedCommand.startsWith('./')) {
-        const parts = trimmedCommand.slice(2).split(' ');
+      if (trimmedCommand.startsWith("./")) {
+        const parts = trimmedCommand.slice(2).split(" ");
         const execName = parts[0];
-        const execArgs = parts.slice(1).join(' ');
-        const execPath = resolvePath(state.currentPath, execName ?? '');
+        const execArgs = parts.slice(1).join(" ");
+        const execPath = resolvePath(state.currentPath, execName ?? "");
         const node = navigateToPath(fileSystem, execPath);
 
-        if (node && node.type === 'executable') {
-          const mappedCmd = execMap[execName ?? ''];
+        if (node && node.type === "executable") {
+          const mappedCmd = execMap[execName ?? ""];
           if (mappedCmd) {
             actualCommand = execArgs ? `${mappedCmd} ${execArgs}` : mappedCmd;
           }
         }
       } else {
         // Check if command matches an executable in current directory
-        const parts = trimmedCommand.split(' ');
+        const parts = trimmedCommand.split(" ");
         const cmdName = parts[0];
-        const cmdArgs = parts.slice(1).join(' ');
-        const execPath = resolvePath(state.currentPath, cmdName ?? '');
+        const cmdArgs = parts.slice(1).join(" ");
+        const execPath = resolvePath(state.currentPath, cmdName ?? "");
         const node = navigateToPath(fileSystem, execPath);
 
-        if (node && node.type === 'executable') {
-          const mappedCmd = execMap[cmdName ?? ''];
+        if (node && node.type === "executable") {
+          const mappedCmd = execMap[cmdName ?? ""];
           if (mappedCmd) {
             actualCommand = cmdArgs ? `${mappedCmd} ${cmdArgs}` : mappedCmd;
           }
@@ -207,7 +215,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
 
       if (exportMatch || assignMatch) {
         const [, varName, varValue] = (exportMatch || assignMatch)!;
-        setEnv(prev => ({ ...prev, [varName!]: varValue ?? '' }));
+        setEnv((prev) => ({ ...prev, [varName!]: varValue ?? "" }));
         const entry: HistoryEntry = {
           id: generateId(),
           command: trimmedCommand,
@@ -226,7 +234,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       const unsetMatch = actualCommand.match(/^unset\s+(\w+)$/);
       if (unsetMatch) {
         const [, varName] = unsetMatch;
-        setEnv(prev => {
+        setEnv((prev) => {
           const newEnv = { ...prev };
           delete newEnv[varName!];
           return newEnv;
@@ -258,26 +266,28 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       const result = await executeCommand(actualCommand, context);
 
       // Update $? based on command result (0 for success, 1 for error)
-      const exitCode = result.output.some(line => line.type === 'error') ? '1' : '0';
-      setEnv(prev => ({ ...prev, '?': exitCode }));
+      const exitCode = result.output.some((line) => line.type === "error")
+        ? "1"
+        : "0";
+      setEnv((prev) => ({ ...prev, "?": exitCode }));
 
       // Handle effects
       if (result.triggerEffect) {
         switch (result.triggerEffect) {
-          case 'matrix':
+          case "matrix":
             setMatrixIntense(true);
             setTimeout(() => setMatrixIntense(false), 5000);
             break;
-          case 'glitch':
-          case 'destroy':
+          case "glitch":
+          case "destroy":
             setGlitchActive(true);
             setTimeout(() => setGlitchActive(false), 2000);
             break;
-          case 'hacker':
+          case "hacker":
             setGlitchActive(true);
             setTimeout(() => setGlitchActive(false), 500);
             break;
-          case 'reboot':
+          case "reboot":
             setTimeout(() => {
               hasBootedRef.current = false; // Reset boot state for reboot
               setIsBooting(true);
@@ -291,7 +301,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
               setHistory([]);
             }, 1500);
             break;
-          case 'exit':
+          case "exit":
             // Go back to main menu instead of rebooting
             setTimeout(() => {
               onBackToSplash?.();
@@ -322,11 +332,14 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
           setTimeout(() => {
             setHistory((prev) => {
               const newHistory = [...prev];
-              const entryIndex = newHistory.findIndex(e => e.id === entryId);
+              const entryIndex = newHistory.findIndex((e) => e.id === entryId);
               if (entryIndex !== -1) {
                 newHistory[entryIndex] = {
                   ...newHistory[entryIndex]!,
-                  output: [...newHistory[entryIndex]!.output, animatedLine.line],
+                  output: [
+                    ...newHistory[entryIndex]!.output,
+                    animatedLine.line,
+                  ],
                 };
               }
               return newHistory;
@@ -374,7 +387,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
         };
       });
     },
-    [state.currentPath, state.commandHistory, fileSystem, env]
+    [state.currentPath, state.commandHistory, fileSystem, env],
   );
 
   // Handle exiting interactive mode
@@ -383,19 +396,26 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
   }, []);
 
   // Handle snake game over
-  const handleSnakeGameOver = useCallback((score: number) => {
-    const entry: HistoryEntry = {
-      id: generateId(),
-      command: '',
-      path: state.currentPath,
-      output: [
-        createLine('', 'output'),
-        createLine(`<span class="term-yellow">Game Over! Final Score: ${score}</span>`, 'output', { isHtml: true }),
-        createLine('', 'output'),
-      ],
-    };
-    setHistory((prev) => [...prev, entry]);
-  }, [state.currentPath]);
+  const handleSnakeGameOver = useCallback(
+    (score: number) => {
+      const entry: HistoryEntry = {
+        id: generateId(),
+        command: "",
+        path: state.currentPath,
+        output: [
+          createLine("", "output"),
+          createLine(
+            `<span class="term-yellow">Game Over! Final Score: ${score}</span>`,
+            "output",
+            { isHtml: true },
+          ),
+          createLine("", "output"),
+        ],
+      };
+      setHistory((prev) => [...prev, entry]);
+    },
+    [state.currentPath],
+  );
 
   // Handle blog post selection
   const handleBlogSelect = useCallback(
@@ -419,7 +439,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       };
       setHistory((prev) => [...prev, entry]);
     },
-    [state.currentPath, state.commandHistory, fileSystem, env]
+    [state.currentPath, state.commandHistory, fileSystem, env],
   );
 
   // Scroll input into view when NEW history entries are added
@@ -466,14 +486,14 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Open menu with 'h' key when not in interactive mode and not typing
-      if ((e.key === 'h' || e.key === 'H') && e.ctrlKey) {
+      if ((e.key === "h" || e.key === "H") && e.ctrlKey) {
         e.preventDefault();
-        setShowMenu(prev => !prev);
+        setShowMenu((prev) => !prev);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   if (isBooting) {
@@ -490,7 +510,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
         {/* Back button - OUTSIDE computer, visible during boot */}
         <button
           onClick={() => onBackToSplash?.()}
-          className="hidden sm:block fixed top-4 left-4 z-200 px-4 py-2 text-sm font-mono text-green-500 hover:text-green-400 border-2 border-green-700 hover:border-green-500 bg-black/90 hover:bg-black transition-all cursor-pointer shadow-lg shadow-green-900/30 hover:shadow-green-500/20"
+          className="fixed top-4 left-4 z-200 hidden cursor-pointer border-2 border-green-700 bg-black/90 px-4 py-2 font-mono text-sm text-green-500 shadow-lg shadow-green-900/30 transition-all hover:border-green-500 hover:bg-black hover:text-green-400 hover:shadow-green-500/20 sm:block"
           title="Back to Main Menu"
         >
           ← Back
@@ -499,7 +519,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
         {/* Help button - OUTSIDE computer, visible during boot */}
         <button
           onClick={() => setShowMenu((prev) => !prev)}
-          className="hidden sm:block fixed top-4 right-4 z-200 px-4 py-2 text-sm font-mono text-green-500 hover:text-green-400 border-2 border-green-700 hover:border-green-500 bg-black/90 hover:bg-black transition-all cursor-pointer shadow-lg shadow-green-900/30 hover:shadow-green-500/20"
+          className="fixed top-4 right-4 z-200 hidden cursor-pointer border-2 border-green-700 bg-black/90 px-4 py-2 font-mono text-sm text-green-500 shadow-lg shadow-green-900/30 transition-all hover:border-green-500 hover:bg-black hover:text-green-400 hover:shadow-green-500/20 sm:block"
           title="Help Menu (Ctrl+H)"
         >
           Help
@@ -521,179 +541,189 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
 
   return (
     <>
-    <ComputerBackground>
-      {/* Main terminal container - flex column to allow scrollable content */}
-      <div className="relative h-full w-full flex flex-col bg-black text-green-500 font-mono terminal-text">
-        {/* CRT effects layer - absolute positioned, doesn't affect layout */}
-        {crtEnabled && <CRTEffect />}
-        {crtEnabled && <GlitchEffect active={glitchActive} />}
-        {crtEnabled && <MatrixRain opacity={matrixIntense ? 0.15 : 0.03} speed={matrixIntense ? 2 : 1} />}
+      <ComputerBackground>
+        {/* Main terminal container - flex column to allow scrollable content */}
+        <div className="terminal-text relative flex h-full w-full flex-col bg-black font-mono text-green-500">
+          {/* CRT effects layer - absolute positioned, doesn't affect layout */}
+          {crtEnabled && <CRTEffect />}
+          {crtEnabled && <GlitchEffect active={glitchActive} />}
+          {crtEnabled && (
+            <MatrixRain
+              opacity={matrixIntense ? 0.15 : 0.03}
+              speed={matrixIntense ? 2 : 1}
+            />
+          )}
 
-        <TerminalHeader
-          hostname={HOSTNAME}
-          user={USER}
-          currentPath={state.currentPath}
-        />
+          <TerminalHeader
+            hostname={HOSTNAME}
+            user={USER}
+            currentPath={state.currentPath}
+          />
 
-        <main
-          ref={terminalRef}
-          className="px-2 md:px-4 py-1 md:py-2 flex-1 overflow-y-auto terminal-scrollbar relative"
-        >
-          {/* Initial welcome message - responsive (hidden after clear) */}
-          {showWelcome && <WelcomeMessage />}
+          <main
+            ref={terminalRef}
+            className="terminal-scrollbar relative flex-1 overflow-y-auto px-2 py-1 md:px-4 md:py-2"
+          >
+            {/* Initial welcome message - responsive (hidden after clear) */}
+            {showWelcome && <WelcomeMessage />}
 
-          {/* Command history */}
-          {history.map((entry) => (
-            <div key={entry.id} className="mb-2">
-              <CommandLine
-                command={entry.command}
-                path={entry.path}
-                user={USER}
-                hostname={HOSTNAME}
-              />
-              {entry.output.length > 0 && (
-                <TerminalOutput lines={entry.output} />
+            {/* Command history */}
+            {history.map((entry) => (
+              <div key={entry.id} className="mb-2">
+                <CommandLine
+                  command={entry.command}
+                  path={entry.path}
+                  user={USER}
+                  hostname={HOSTNAME}
+                />
+                {entry.output.length > 0 && (
+                  <TerminalOutput lines={entry.output} />
+                )}
+              </div>
+            ))}
+
+            {/* Interactive mode components */}
+            {interactiveMode?.type === "blog" && (
+              <div className="mt-4 mb-4">
+                <InteractiveBlog
+                  onExit={handleExitInteractive}
+                  onSelectPost={handleBlogSelect}
+                />
+              </div>
+            )}
+
+            {interactiveMode?.type === "snake" && (
+              <div className="absolute inset-0 z-50">
+                <SnakeGame
+                  onExit={handleExitInteractive}
+                  onGameOver={handleSnakeGameOver}
+                />
+              </div>
+            )}
+
+            {interactiveMode?.type === "echo" && (
+              <div className="mt-4 mb-4">
+                <InteractiveEcho onExit={handleExitInteractive} />
+              </div>
+            )}
+
+            {interactiveMode?.type === "hub" && (
+              <div className="fixed inset-0 z-50 bg-black">
+                <PortfolioHub
+                  onSelect={(section) =>
+                    setInteractiveMode({ type: "portfolio", section })
+                  }
+                  onExit={handleExitInteractive}
+                />
+              </div>
+            )}
+
+            {/* Section-specific portfolio views */}
+            {interactiveMode?.type === "portfolio" &&
+              interactiveMode.section === "experience" && (
+                <div className="fixed inset-0 z-50 bg-black">
+                  <InteractivePortfolio
+                    section="experience"
+                    onExit={handleExitInteractive}
+                    onBack={() => setInteractiveMode({ type: "hub" })}
+                  />
+                </div>
               )}
-            </div>
-          ))}
 
-          {/* Interactive mode components */}
-          {interactiveMode?.type === 'blog' && (
-            <div className="mt-4 mb-4">
-              <InteractiveBlog
-                onExit={handleExitInteractive}
-                onSelectPost={handleBlogSelect}
-              />
-            </div>
-          )}
+            {interactiveMode?.type === "portfolio" &&
+              interactiveMode.section === "skills" && (
+                <div className="fixed inset-0 z-50 bg-black">
+                  <SkillsSection
+                    onExit={handleExitInteractive}
+                    onBack={() => setInteractiveMode({ type: "hub" })}
+                  />
+                </div>
+              )}
 
-          {interactiveMode?.type === 'snake' && (
-            <div className="absolute inset-0 z-50">
-              <SnakeGame
-                onExit={handleExitInteractive}
-                onGameOver={handleSnakeGameOver}
-              />
-            </div>
-          )}
+            {interactiveMode?.type === "portfolio" &&
+              interactiveMode.section === "education" && (
+                <div className="fixed inset-0 z-50 bg-black">
+                  <EducationSection
+                    onExit={handleExitInteractive}
+                    onBack={() => setInteractiveMode({ type: "hub" })}
+                  />
+                </div>
+              )}
 
-          {interactiveMode?.type === 'echo' && (
-            <div className="mt-4 mb-4">
-              <InteractiveEcho
-                onExit={handleExitInteractive}
-              />
-            </div>
-          )}
+            {interactiveMode?.type === "portfolio" &&
+              interactiveMode.section === "projects" && (
+                <div className="fixed inset-0 z-50 bg-black">
+                  <InteractivePortfolio
+                    section="projects"
+                    onExit={handleExitInteractive}
+                    onBack={() => setInteractiveMode({ type: "hub" })}
+                  />
+                </div>
+              )}
 
-          {interactiveMode?.type === 'hub' && (
-            <div className="fixed inset-0 z-50 bg-black">
-              <PortfolioHub
-                onSelect={(section) => setInteractiveMode({ type: 'portfolio', section })}
-                onExit={handleExitInteractive}
-              />
-            </div>
-          )}
+            {interactiveMode?.type === "portfolio" &&
+              interactiveMode.section === "hobbies" && (
+                <div className="fixed inset-0 z-50 bg-black">
+                  <HobbiesSection
+                    onExit={handleExitInteractive}
+                    onBack={() => setInteractiveMode({ type: "hub" })}
+                  />
+                </div>
+              )}
 
-          {/* Section-specific portfolio views */}
-          {interactiveMode?.type === 'portfolio' && interactiveMode.section === 'experience' && (
-            <div className="fixed inset-0 z-50 bg-black">
-              <InteractivePortfolio
-                section="experience"
-                onExit={handleExitInteractive}
-                onBack={() => setInteractiveMode({ type: 'hub' })}
-              />
-            </div>
-          )}
+            {interactiveMode?.type === "contact" && (
+              <ContactApp onClose={handleExitInteractive} />
+            )}
 
-          {interactiveMode?.type === 'portfolio' && interactiveMode.section === 'skills' && (
-            <div className="fixed inset-0 z-50 bg-black">
-              <SkillsSection
-                onExit={handleExitInteractive}
-                onBack={() => setInteractiveMode({ type: 'hub' })}
-              />
-            </div>
-          )}
+            {/* Input line - only show when not in interactive mode */}
+            {!interactiveMode && (
+              <div ref={inputLineRef}>
+                <TerminalInput
+                  currentPath={state.currentPath}
+                  hostname={HOSTNAME}
+                  user={USER}
+                  onSubmit={handleCommand}
+                  commandHistory={state.commandHistory}
+                  fileSystem={fileSystem}
+                  disabled={!state.inputEnabled}
+                />
+              </div>
+            )}
 
-          {interactiveMode?.type === 'portfolio' && interactiveMode.section === 'education' && (
-            <div className="fixed inset-0 z-50 bg-black">
-              <EducationSection
-                onExit={handleExitInteractive}
-                onBack={() => setInteractiveMode({ type: 'hub' })}
-              />
-            </div>
-          )}
+            {/* Scroll anchor - this is what we scroll to, positioned just below input with small gap */}
+            <div ref={scrollAnchorRef} className="h-4" aria-hidden="true" />
+          </main>
+        </div>
+      </ComputerBackground>
 
-          {interactiveMode?.type === 'portfolio' && interactiveMode.section === 'projects' && (
-            <div className="fixed inset-0 z-50 bg-black">
-              <InteractivePortfolio
-                section="projects"
-                onExit={handleExitInteractive}
-                onBack={() => setInteractiveMode({ type: 'hub' })}
-              />
-            </div>
-          )}
+      {/* Back button - OUTSIDE computer, fixed to browser window, hidden on mobile */}
+      <button
+        onClick={() => onBackToSplash?.()}
+        className="fixed top-4 left-4 z-200 hidden cursor-pointer border-2 border-green-700 bg-black/90 px-4 py-2 font-mono text-sm text-green-500 shadow-lg shadow-green-900/30 transition-all hover:border-green-500 hover:bg-black hover:text-green-400 hover:shadow-green-500/20 sm:block"
+        title="Back to Main Menu"
+      >
+        ← Back
+      </button>
 
-          {interactiveMode?.type === 'portfolio' && interactiveMode.section === 'hobbies' && (
-            <div className="fixed inset-0 z-50 bg-black">
-              <HobbiesSection
-                onExit={handleExitInteractive}
-                onBack={() => setInteractiveMode({ type: 'hub' })}
-              />
-            </div>
-          )}
+      {/* Menu button - OUTSIDE computer, fixed to browser window, hidden on mobile */}
+      <button
+        onClick={() => setShowMenu((prev) => !prev)}
+        className="fixed top-4 right-4 z-200 hidden cursor-pointer border-2 border-green-700 bg-black/90 px-4 py-2 font-mono text-sm text-green-500 shadow-lg shadow-green-900/30 transition-all hover:border-green-500 hover:bg-black hover:text-green-400 hover:shadow-green-500/20 sm:block"
+        title="Help Menu (Ctrl+H)"
+      >
+        Help
+      </button>
 
-          {interactiveMode?.type === 'contact' && (
-            <ContactApp onClose={handleExitInteractive} />
-          )}
-
-          {/* Input line - only show when not in interactive mode */}
-          {!interactiveMode && (
-            <div ref={inputLineRef}>
-              <TerminalInput
-                currentPath={state.currentPath}
-                hostname={HOSTNAME}
-                user={USER}
-                onSubmit={handleCommand}
-                commandHistory={state.commandHistory}
-                fileSystem={fileSystem}
-                disabled={!state.inputEnabled}
-              />
-            </div>
-          )}
-
-          {/* Scroll anchor - this is what we scroll to, positioned just below input with small gap */}
-          <div ref={scrollAnchorRef} className="h-4" aria-hidden="true" />
-        </main>
-      </div>
-    </ComputerBackground>
-
-    {/* Back button - OUTSIDE computer, fixed to browser window, hidden on mobile */}
-    <button
-      onClick={() => onBackToSplash?.()}
-      className="hidden sm:block fixed top-4 left-4 z-200 px-4 py-2 text-sm font-mono text-green-500 hover:text-green-400 border-2 border-green-700 hover:border-green-500 bg-black/90 hover:bg-black transition-all cursor-pointer shadow-lg shadow-green-900/30 hover:shadow-green-500/20"
-      title="Back to Main Menu"
-    >
-      ← Back
-    </button>
-
-    {/* Menu button - OUTSIDE computer, fixed to browser window, hidden on mobile */}
-    <button
-      onClick={() => setShowMenu((prev) => !prev)}
-      className="hidden sm:block fixed top-4 right-4 z-200 px-4 py-2 text-sm font-mono text-green-500 hover:text-green-400 border-2 border-green-700 hover:border-green-500 bg-black/90 hover:bg-black transition-all cursor-pointer shadow-lg shadow-green-900/30 hover:shadow-green-500/20"
-      title="Help Menu (Ctrl+H)"
-    >
-      Help
-    </button>
-
-    {/* Help Menu overlay - OUTSIDE computer, covers entire browser window */}
-    {showMenu && (
-      <TerminalMenu
-        onClose={() => setShowMenu(false)}
-        onBackToSplash={() => {
-          setShowMenu(false);
-          onBackToSplash?.();
-        }}
-      />
-    )}
-  </>
+      {/* Help Menu overlay - OUTSIDE computer, covers entire browser window */}
+      {showMenu && (
+        <TerminalMenu
+          onClose={() => setShowMenu(false)}
+          onBackToSplash={() => {
+            setShowMenu(false);
+            onBackToSplash?.();
+          }}
+        />
+      )}
+    </>
   );
 }

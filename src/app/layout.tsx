@@ -4,8 +4,17 @@ import { type Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Daniel Boyle | Portfolio Terminal",
-  description: "A terminal-style portfolio for a software developer. Navigate through my experience, skills, and projects using familiar terminal commands.",
-  keywords: ["portfolio", "developer", "software engineer", "terminal", "react", "typescript", "next.js"],
+  description:
+    "A terminal-style portfolio for a software developer. Navigate through my experience, skills, and projects using familiar terminal commands.",
+  keywords: [
+    "portfolio",
+    "developer",
+    "software engineer",
+    "terminal",
+    "react",
+    "typescript",
+    "next.js",
+  ],
   authors: [{ name: "Daniel Boyle" }],
   openGraph: {
     title: "Daniel Boyle | Portfolio Terminal",
@@ -26,7 +35,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-black text-green-500 antialiased overflow-x-hidden">
+      <body className="overflow-x-hidden bg-black text-green-500 antialiased">
         {children}
       </body>
     </html>

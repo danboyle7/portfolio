@@ -1,12 +1,16 @@
-import type { Command, CommandResult, FileSystemNode } from '@/lib/terminal/types';
-import { createLine, resolvePath } from '@/lib/terminal/utils';
-import { navigateToPath } from '@/lib/terminal/file-system';
+import type {
+  Command,
+  CommandResult,
+  FileSystemNode,
+} from "@/lib/terminal/types";
+import { createLine, resolvePath } from "@/lib/terminal/utils";
+import { navigateToPath } from "@/lib/terminal/file-system";
 
 export const lsCommand: Command = {
-  name: 'ls',
-  description: 'List directory contents',
-  usage: 'ls [-la] [directory]',
-  aliases: ['dir', 'll'],
+  name: "ls",
+  description: "List directory contents",
+  usage: "ls [-la] [directory]",
+  aliases: ["dir", "ll"],
   execute: (args, context): CommandResult => {
     // Parse flags
     let showHidden = false;
@@ -14,16 +18,16 @@ export const lsCommand: Command = {
     let targetPath = context.currentPath;
 
     for (const arg of args) {
-      if (arg.startsWith('-')) {
-        if (arg.includes('a')) showHidden = true;
-        if (arg.includes('l')) longFormat = true;
+      if (arg.startsWith("-")) {
+        if (arg.includes("a")) showHidden = true;
+        if (arg.includes("l")) longFormat = true;
       } else {
         targetPath = resolvePath(context.currentPath, arg);
       }
     }
 
     // If command is 'll', use long format
-    if (context.history[context.history.length - 1]?.startsWith('ll')) {
+    if (context.history[context.history.length - 1]?.startsWith("ll")) {
       longFormat = true;
     }
 
@@ -31,19 +35,26 @@ export const lsCommand: Command = {
 
     if (!node) {
       return {
-        output: [createLine(`ls: cannot access '${targetPath}': No such file or directory`, 'error')],
+        output: [
+          createLine(
+            `ls: cannot access '${targetPath}': No such file or directory`,
+            "error",
+          ),
+        ],
       };
     }
 
-    if (node.type !== 'directory') {
+    if (node.type !== "directory") {
       // It's a file, just show its info
       if (longFormat) {
         return {
-          output: [createLine(formatLongEntry(node), 'output', { isHtml: true })],
+          output: [
+            createLine(formatLongEntry(node), "output", { isHtml: true }),
+          ],
         };
       }
       return {
-        output: [createLine(colorizeEntry(node), 'output', { isHtml: true })],
+        output: [createLine(colorizeEntry(node), "output", { isHtml: true })],
       };
     }
 
@@ -52,18 +63,18 @@ export const lsCommand: Command = {
 
     // Filter hidden files
     if (!showHidden) {
-      entries = entries.filter((e) => !e.name.startsWith('.'));
+      entries = entries.filter((e) => !e.name.startsWith("."));
     }
 
     // Filter symlinks in short format (only show in long format)
     if (!longFormat) {
-      entries = entries.filter((e) => e.type !== 'symlink');
+      entries = entries.filter((e) => e.type !== "symlink");
     }
 
     // Sort: directories first, then alphabetically
     entries.sort((a, b) => {
-      if (a.type === 'directory' && b.type !== 'directory') return -1;
-      if (a.type !== 'directory' && b.type === 'directory') return 1;
+      if (a.type === "directory" && b.type !== "directory") return -1;
+      if (a.type !== "directory" && b.type === "directory") return 1;
       return a.name.localeCompare(b.name);
     });
 
@@ -74,8 +85,10 @@ export const lsCommand: Command = {
     if (longFormat) {
       const totalBlocks = entries.length * 4;
       const lines = [
-        createLine(`total ${totalBlocks}`, 'system'),
-        ...entries.map((e) => createLine(formatLongEntry(e), 'output', { isHtml: true })),
+        createLine(`total ${totalBlocks}`, "system"),
+        ...entries.map((e) =>
+          createLine(formatLongEntry(e), "output", { isHtml: true }),
+        ),
       ];
       return { output: lines };
     }
@@ -86,7 +99,7 @@ export const lsCommand: Command = {
     const output = formatColumns(coloredNames, plainNames);
 
     return {
-      output: [createLine(output, 'output', { isHtml: true })],
+      output: [createLine(output, "output", { isHtml: true })],
     };
   },
 };
@@ -103,26 +116,30 @@ function formatLongEntry(node: FileSystemNode): string {
 
 function colorizeEntry(node: FileSystemNode): string {
   switch (node.type) {
-    case 'directory':
+    case "directory":
       return `<span class="term-blue font-bold">${node.name}/</span>`;
-    case 'executable':
+    case "executable":
       return `<span class="term-green font-bold">${node.name}*</span>`;
-    case 'symlink':
-      return `<span class="term-cyan">${node.name}</span> -> <span class="term-dim">${node.target ?? '?'}</span>`;
+    case "symlink":
+      return `<span class="term-cyan">${node.name}</span> -> <span class="term-dim">${node.target ?? "?"}</span>`;
     default:
-      if (node.name.endsWith('.md')) {
+      if (node.name.endsWith(".md")) {
         return `<span class="term-yellow">${node.name}</span>`;
       }
-      if (node.name.endsWith('.ts') || node.name.endsWith('.tsx') || node.name.endsWith('.js')) {
+      if (
+        node.name.endsWith(".ts") ||
+        node.name.endsWith(".tsx") ||
+        node.name.endsWith(".js")
+      ) {
         return `<span class="term-green">${node.name}</span>`;
       }
-      if (node.name.endsWith('.py')) {
+      if (node.name.endsWith(".py")) {
         return `<span class="term-blue">${node.name}</span>`;
       }
-      if (node.name.endsWith('.rs')) {
+      if (node.name.endsWith(".rs")) {
         return `<span class="term-orange">${node.name}</span>`;
       }
-      if (node.name.startsWith('.')) {
+      if (node.name.startsWith(".")) {
         return `<span class="term-dim">${node.name}</span>`;
       }
       return node.name;
@@ -132,24 +149,28 @@ function colorizeEntry(node: FileSystemNode): string {
 // Short format colorization (no symlink arrow, just the name with suffix)
 function colorizeEntryShort(node: FileSystemNode): string {
   switch (node.type) {
-    case 'directory':
+    case "directory":
       return `<span class="term-blue font-bold">${node.name}/</span>`;
-    case 'executable':
+    case "executable":
       return `<span class="term-green font-bold">${node.name}*</span>`;
     default:
-      if (node.name.endsWith('.md')) {
+      if (node.name.endsWith(".md")) {
         return `<span class="term-yellow">${node.name}</span>`;
       }
-      if (node.name.endsWith('.ts') || node.name.endsWith('.tsx') || node.name.endsWith('.js')) {
+      if (
+        node.name.endsWith(".ts") ||
+        node.name.endsWith(".tsx") ||
+        node.name.endsWith(".js")
+      ) {
         return `<span class="term-green">${node.name}</span>`;
       }
-      if (node.name.endsWith('.py')) {
+      if (node.name.endsWith(".py")) {
         return `<span class="term-blue">${node.name}</span>`;
       }
-      if (node.name.endsWith('.rs')) {
+      if (node.name.endsWith(".rs")) {
         return `<span class="term-orange">${node.name}</span>`;
       }
-      if (node.name.startsWith('.')) {
+      if (node.name.startsWith(".")) {
         return `<span class="term-dim">${node.name}</span>`;
       }
       return node.name;
@@ -159,17 +180,17 @@ function colorizeEntryShort(node: FileSystemNode): string {
 // Get the plain text name with any suffix (/, *) for width calculation
 function getPlainName(node: FileSystemNode): string {
   switch (node.type) {
-    case 'directory':
-      return node.name + '/';
-    case 'executable':
-      return node.name + '*';
+    case "directory":
+      return node.name + "/";
+    case "executable":
+      return node.name + "*";
     default:
       return node.name;
   }
 }
 
 function formatColumns(coloredItems: string[], plainItems: string[]): string {
-  if (plainItems.length === 0) return '';
+  if (plainItems.length === 0) return "";
 
   const terminalWidth = 80;
   const minGap = 2; // Minimum gap between columns
@@ -198,15 +219,14 @@ function formatColumns(coloredItems: string[], plainItems: string[]): string {
         // Pad to column width (except for last column)
         if (col < numCols - 1) {
           const padding = colWidth - plainItem.length;
-          rowParts.push(coloredItem + ' '.repeat(Math.max(0, padding)));
+          rowParts.push(coloredItem + " ".repeat(Math.max(0, padding)));
         } else {
           rowParts.push(coloredItem);
         }
       }
     }
-    rows.push(rowParts.join(''));
+    rows.push(rowParts.join(""));
   }
 
-  return rows.join('\n');
+  return rows.join("\n");
 }
-

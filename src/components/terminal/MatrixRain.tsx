@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo } from "react";
 
 interface MatrixRainProps {
   opacity?: number;
@@ -11,23 +11,28 @@ interface MatrixRainProps {
 /**
  * Matrix-style digital rain background effect
  */
-export function MatrixRain({ opacity = 0.05, speed = 1, density = 1 }: MatrixRainProps) {
+export function MatrixRain({
+  opacity = 0.05,
+  speed = 1,
+  density = 1,
+}: MatrixRainProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const characters = useMemo(() => {
     // Mix of katakana, numbers, and symbols
-    const katakana = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const numbers = '0123456789';
-    const symbols = '@#$%^&*()_+-=[]{}|;:,.<>?';
-    return (katakana + latin + numbers + symbols).split('');
+    const katakana =
+      "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+    const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numbers = "0123456789";
+    const symbols = "@#$%^&*()_+-=[]{}|;:,.<>?";
+    return (katakana + latin + numbers + symbols).split("");
   }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationId: number;
@@ -44,17 +49,19 @@ export function MatrixRain({ opacity = 0.05, speed = 1, density = 1 }: MatrixRai
 
       const fontSize = 14;
       const columns = Math.floor(canvas.width / fontSize) * density;
-      drops = Array(Math.floor(columns)).fill(1).map(() => Math.random() * -100);
+      drops = Array(Math.floor(columns))
+        .fill(1)
+        .map(() => Math.random() * -100);
     };
 
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener("resize", resize);
 
     const fontSize = 14;
 
     const draw = () => {
       // Fade effect
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = `rgba(0, 255, 65, ${opacity * 3})`;
@@ -88,7 +95,7 @@ export function MatrixRain({ opacity = 0.05, speed = 1, density = 1 }: MatrixRai
     draw();
 
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
       cancelAnimationFrame(animationId);
     };
   }, [characters, opacity, speed, density]);
@@ -114,7 +121,7 @@ export function MatrixBackground() {
       duration: 10 + Math.random() * 10,
       left: `${(i / 30) * 100}%`,
       chars: Array.from({ length: 50 }).map(() =>
-        String.fromCharCode(0x30a0 + Math.random() * 96)
+        String.fromCharCode(0x30a0 + Math.random() * 96),
       ),
     }));
   }, []);
@@ -124,7 +131,7 @@ export function MatrixBackground() {
       {columns.map((col) => (
         <div
           key={col.id}
-          className="absolute top-0 text-[10px] leading-3 text-green-500 whitespace-pre"
+          className="absolute top-0 text-[10px] leading-3 whitespace-pre text-green-500"
           style={{
             left: col.left,
             animation: `matrix-fall ${col.duration}s linear infinite`,
@@ -141,4 +148,3 @@ export function MatrixBackground() {
     </div>
   );
 }
-

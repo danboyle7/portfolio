@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 // Full ASCII art for large screens (>= 768px)
 const LARGE_ASCII = `
@@ -19,8 +19,6 @@ const SMALL_ASCII = `
 <span class="term-green">    ▐▛▀▘ ▐▌ ▐▌▐▛▀▚▖ █  ▐▛▀▀▘▐▌ ▐▌▐▌     █  ▐▌ ▐▌</span>
 <span class="term-green">    ▐▌   ▝▚▄▞▘▐▌ ▐▌ █  ▐▌   ▝▚▄▞▘▐▙▄▄▖▗▄█▄▖▝▚▄▞▘</span>
 `;
-
-
 
 // No ASCII art for small screens - just the welcome box
 
@@ -57,6 +55,7 @@ const HINT_LARGE = `
 
 const ZOOM_HINT = `
 <span class="term-yellow">  Tip:</span> <span class="term-dim">Click the</span> <span class="term-cyan">[⊕]</span> <span class="term-dim">button (bottom-right of monitor) to zoom in for a better view!</span>
+
 `;
 
 const NAV_INFO_LARGE = `
@@ -73,8 +72,8 @@ export function WelcomeMessage() {
     };
 
     checkSize();
-    window.addEventListener('resize', checkSize);
-    return () => window.removeEventListener('resize', checkSize);
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
   }, []);
 
   const ascii = isSmall ? SMALL_ASCII : LARGE_ASCII;
@@ -94,4 +93,3 @@ export function WelcomeMessage() {
     </div>
   );
 }
-

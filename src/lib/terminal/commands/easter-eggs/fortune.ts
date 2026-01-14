@@ -1,5 +1,5 @@
-import type { Command, CommandResult } from '@/lib/terminal/types';
-import { createLine, randomFrom } from '@/lib/terminal/utils';
+import type { Command, CommandResult } from "@/lib/terminal/types";
+import { createLine, randomFrom } from "@/lib/terminal/utils";
 
 const fortunes = [
   '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler',
@@ -8,10 +8,10 @@ const fortunes = [
   '"Simplicity is the soul of efficiency." - Austin Freeman',
   '"Make it work, make it right, make it fast." - Kent Beck',
   '"The best error message is the one that never shows up." - Thomas Fuchs',
-  '"Programming isn\'t about what you know; it\'s about what you can figure out." - Chris Pine',
+  "\"Programming isn't about what you know; it's about what you can figure out.\" - Chris Pine",
   '"The only way to learn a new programming language is by writing programs in it." - Dennis Ritchie',
   '"Deleted code is debugged code." - Jeff Sickel',
-  '"It\'s not a bug - it\'s an undocumented feature." - Anonymous',
+  "\"It's not a bug - it's an undocumented feature.\" - Anonymous",
   '"Talk is cheap. Show me the code." - Linus Torvalds',
   '"Programs must be written for people to read, and only incidentally for machines to execute." - Harold Abelson',
   '"The most disastrous thing that you can ever learn is your first programming language." - Alan Kay',
@@ -25,39 +25,47 @@ const fortunes = [
 ];
 
 export const fortuneCommand: Command = {
-  name: 'fortune',
-  description: 'Display a random programming fortune',
-  usage: 'fortune',
+  name: "fortune",
+  description: "Display a random programming fortune",
+  usage: "fortune",
   hidden: true,
   execute: (): CommandResult => {
     const fortune = randomFrom(fortunes);
 
     const lines: string[] = [];
-    lines.push('');
-    lines.push('+------------------------------------------------------------------+');
-    lines.push('|  <span class="term-yellow">[*] FORTUNE COOKIE</span>                                              |');
-    lines.push('+------------------------------------------------------------------+');
+    lines.push("");
+    lines.push(
+      "+------------------------------------------------------------------+",
+    );
+    lines.push(
+      '|  <span class="term-yellow">[*] FORTUNE COOKIE</span>                                              |',
+    );
+    lines.push(
+      "+------------------------------------------------------------------+",
+    );
 
     // Word wrap the fortune
-    const words = fortune.split(' ');
-    let currentLine = '|  ';
+    const words = fortune.split(" ");
+    let currentLine = "|  ";
     const maxWidth = 60;
 
     for (const word of words) {
       if ((currentLine + word).length > maxWidth) {
-        lines.push(currentLine.padEnd(66) + ' |');
-        currentLine = '|  ' + word + ' ';
+        lines.push(currentLine.padEnd(66) + " |");
+        currentLine = "|  " + word + " ";
       } else {
-        currentLine += word + ' ';
+        currentLine += word + " ";
       }
     }
-    lines.push(currentLine.padEnd(66) + ' |');
+    lines.push(currentLine.padEnd(66) + " |");
 
-    lines.push('+------------------------------------------------------------------+');
-    lines.push('');
+    lines.push(
+      "+------------------------------------------------------------------+",
+    );
+    lines.push("");
 
     return {
-      output: lines.map((line) => createLine(line, 'output', { isHtml: true })),
+      output: lines.map((line) => createLine(line, "output", { isHtml: true })),
     };
   },
 };

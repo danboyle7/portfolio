@@ -6,35 +6,38 @@ skills:
     icon: "code"
     skills:
       - name: "Python"
-        level: 95
-        years: 8
+        level: 100
+        years: 12
       - name: "C++"
         level: 95
         years: 10
       - name: "C"
         level: 90
         years: 10
-      - name: "TypeScript"
-        level: 90
-        years: 4
-      - name: "Java"
+      - name: "Rust"
         level: 80
-        years: 5
+        years: 3
+      - name: "TypeScript"
+        level: 80
+        years: 3
+      - name: "Java"
+        level: 65
+        years: 2
       - name: "Ada"
         level: 75
         years: 3
       - name: "C#"
-        level: 75
-        years: 3
+        level: 65
+        years: 1
       - name: "Bash"
-        level: 85
+        level: 80
         years: 8
       - name: "SQL"
-        level: 85
-        years: 6
+        level: 80
+        years: 4
       - name: "Matlab"
         level: 70
-        years: 4
+        years: 3
       - name: "LaTeX"
         level: 70
         years: 5
@@ -49,10 +52,10 @@ skills:
         level: 85
         years: 4
       - name: "NumPy"
-        level: 95
+        level: 90
         years: 6
       - name: "Pandas"
-        level: 90
+        level: 95
         years: 6
       - name: "SciPy"
         level: 85
@@ -64,11 +67,11 @@ skills:
         level: 75
         years: 2
       - name: "MLFlow"
-        level: 80
-        years: 3
+        level: 65
+        years: 1
       - name: "LangChain"
         level: 85
-        years: 2
+        years: 3
 
   - name: "Full Stack Frameworks"
     icon: "layers"
@@ -80,26 +83,26 @@ skills:
         level: 90
         years: 4
       - name: "Vue.js"
-        level: 85
-        years: 3
+        level: 50
+        years: 1
       - name: "FastAPI"
         level: 85
-        years: 3
-      - name: "Flask"
-        level: 80
         years: 4
+      - name: "Flask"
+        level: 70
+        years: 3
       - name: "SQLAlchemy"
         level: 80
         years: 4
       - name: "Drizzle"
-        level: 85
-        years: 2
-      - name: "TailwindCSS"
-        level: 90
-        years: 3
-      - name: "Spring Boot"
         level: 70
         years: 2
+      - name: "TailwindCSS"
+        level: 80
+        years: 4
+      - name: "Spring Boot"
+        level: 60
+        years: 1
 
   - name: "DevOps & Tools"
     icon: "wrench"
@@ -108,25 +111,25 @@ skills:
         level: 95
         years: 10
       - name: "Docker"
-        level: 90
+        level: 85
         years: 5
       - name: "Jenkins"
-        level: 80
-        years: 4
+        level: 70
+        years: 2
       - name: "GDB/PDB"
         level: 90
         years: 8
       - name: "Valgrind"
-        level: 85
+        level: 80
         years: 6
       - name: "Jira"
         level: 85
-        years: 6
+        years: 7
       - name: "Linux"
         level: 95
         years: 10
       - name: "CI/CD Pipelines"
-        level: 90
+        level: 80
         years: 6
 
   - name: "Operating Systems"
@@ -136,17 +139,17 @@ skills:
         level: 95
         years: 10
       - name: "Green Hills Integrity"
-        level: 85
-        years: 3
+        level: 80
+        years: 4
       - name: "VxWorks"
-        level: 75
-        years: 2
+        level: 70
+        years: 3
       - name: "Windows"
-        level: 85
+        level: 95
         years: 15
       - name: "macOS"
-        level: 90
-        years: 8
+        level: 95
+        years: 10
 
   - name: "AI Specializations"
     icon: "brain"
@@ -159,13 +162,13 @@ skills:
         years: 3
       - name: "Time Series Forecasting"
         level: 85
-        years: 3
+        years: 4
       - name: "Representation Learning"
         level: 80
         years: 3
       - name: "LLM Integration"
         level: 90
-        years: 2
+        years: 3
       - name: "Prompt Engineering"
         level: 90
-        years: 2
+        years: 4

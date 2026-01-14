@@ -8,8 +8,8 @@
  * Edit YAML files to update content, then run: pnpm run generate-content
  */
 
-import { generatedContent } from './generated-content';
-import { setContentCache } from './file-system';
+import { generatedContent } from "./generated-content";
+import { setContentCache } from "./file-system";
 
 /**
  * Initialize content from generated content file

@@ -1,85 +1,113 @@
-import type { Command, CommandResult, SkillCategory } from '@/lib/terminal/types';
-import { createLine, createProgressBar } from '@/lib/terminal/utils';
-import { getContentData } from '@/lib/terminal/file-system';
+import type {
+  Command,
+  CommandResult,
+  SkillCategory,
+} from "@/lib/terminal/types";
+import { createLine, createProgressBar } from "@/lib/terminal/utils";
+import { getContentData } from "@/lib/terminal/file-system";
 
 export const skillsCommand: Command = {
-  name: 'skills',
-  description: 'Display technical skills',
-  usage: 'skills [-i] [category]',
+  name: "skills",
+  description: "Display technical skills",
+  usage: "skills [-i] [category]",
   execute: (args): CommandResult => {
     // Check for interactive mode flag
-    if (args.includes('-i') || args.includes('--interactive') || args.length === 0) {
+    if (
+      args.includes("-i") ||
+      args.includes("--interactive") ||
+      args.length === 0
+    ) {
       return {
-        output: [createLine('Launching interactive skills viewer...', 'system')],
-        enterInteractiveMode: { type: 'portfolio', section: 'skills' },
+        output: [
+          createLine("Launching interactive skills viewer...", "system"),
+        ],
+        enterInteractiveMode: { type: "portfolio", section: "skills" },
       };
     }
 
-    const skills = getContentData('skills') as SkillCategory[] | undefined;
+    const skills = getContentData("skills") as SkillCategory[] | undefined;
 
     // Check if content is loaded
     if (!skills || skills.length === 0) {
       return {
         output: [
-          createLine('', 'output'),
-          createLine('No skills data found.', 'warning'),
-          createLine('Content may not be loaded. Try running: pnpm run generate-content', 'system'),
-          createLine('', 'output'),
+          createLine("", "output"),
+          createLine("No skills data found.", "warning"),
+          createLine(
+            "Content may not be loaded. Try running: pnpm run generate-content",
+            "system",
+          ),
+          createLine("", "output"),
         ],
       };
     }
 
-    const filteredArgs = args.filter(a => a !== '-i' && a !== '--interactive');
+    const filteredArgs = args.filter(
+      (a) => a !== "-i" && a !== "--interactive",
+    );
     const category = filteredArgs[0]?.toLowerCase();
 
     // Filter by category if specified
     let filteredSkills = skills;
-    if (category && category !== 'all') {
-      filteredSkills = skills.filter(
-        (cat) => cat.name.toLowerCase().includes(category)
+    if (category && category !== "all") {
+      filteredSkills = skills.filter((cat) =>
+        cat.name.toLowerCase().includes(category),
       );
 
       if (filteredSkills.length === 0) {
         return {
           output: [
-            createLine(`skills: category '${category}' not found`, 'error'),
-            createLine(`Available: ${skills.map((s) => s.name.toLowerCase()).join(', ')}`, 'system'),
+            createLine(`skills: category '${category}' not found`, "error"),
+            createLine(
+              `Available: ${skills.map((s) => s.name.toLowerCase()).join(", ")}`,
+              "system",
+            ),
           ],
         };
       }
     }
 
     const lines: string[] = [];
-    lines.push('');
-    lines.push('+------------------------------------------------------------------+');
-    lines.push('|                      TECHNICAL SKILLS                            |');
-    lines.push('+------------------------------------------------------------------+');
-    lines.push('');
+    lines.push("");
+    lines.push(
+      "+------------------------------------------------------------------+",
+    );
+    lines.push(
+      "|                      TECHNICAL SKILLS                            |",
+    );
+    lines.push(
+      "+------------------------------------------------------------------+",
+    );
+    lines.push("");
 
     for (const cat of filteredSkills) {
       // Use >> as icon if emoji present (to avoid emojis in terminal)
-      const icon = cat.icon && !cat.icon.includes('>') ? '>>' : cat.icon;
-      lines.push(`<span class="term-cyan font-bold">${icon} ${cat.name.toUpperCase()}</span>`);
-      lines.push('<span class="term-dim">---------------------------------------------------</span>');
+      const icon = cat.icon && !cat.icon.includes(">") ? ">>" : cat.icon;
+      lines.push(
+        `<span class="term-cyan font-bold">${icon} ${cat.name.toUpperCase()}</span>`,
+      );
+      lines.push(
+        '<span class="term-dim">---------------------------------------------------</span>',
+      );
 
       for (const skill of cat.skills) {
-        const bar = createProgressBar(skill.level, 25, '█', '░');
+        const bar = createProgressBar(skill.level, 25, "█", "░");
         const levelStr = `${skill.level}%`.padStart(4);
         const nameStr = skill.name.padEnd(15);
 
-        let barColor = 'term-green';
-        if (skill.level < 70) barColor = 'term-yellow';
-        if (skill.level < 50) barColor = 'term-red';
+        let barColor = "term-green";
+        if (skill.level < 70) barColor = "term-yellow";
+        if (skill.level < 50) barColor = "term-red";
 
         lines.push(
-          `  ${nameStr} <span class="${barColor}">${bar}</span> <span class="term-dim">${levelStr}</span>`
+          `  ${nameStr} <span class="${barColor}">${bar}</span> <span class="term-dim">${levelStr}</span>`,
         );
       }
-      lines.push('');
+      lines.push("");
     }
 
     return {
-      output: lines.map((line) => createLine(line, 'output', { isHtml: true })),
+      output: lines.map((line) => createLine(line, "output", { isHtml: true })),
     };
   },
 };

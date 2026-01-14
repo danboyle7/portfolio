@@ -1,17 +1,23 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { getContentData } from '@/lib/terminal/file-system';
-import type { About, Experience, Education, SkillCategory, ContactInfo } from '@/lib/terminal/types';
-import { HeroSection } from './sections/HeroSection';
-import { AboutSection } from './sections/AboutSection';
-import { ExperienceSection } from './sections/ExperienceSection';
-import { SkillsSection } from './sections/SkillsSection';
-import { ProjectsSection } from './sections/ProjectsSection';
-import { EducationSection } from './sections/EducationSection';
-import { ContactSection } from './sections/ContactSection';
-import { Navigation } from './Navigation';
-import { Footer } from './Footer';
+import { useState, useEffect } from "react";
+import { getContentData } from "@/lib/terminal/file-system";
+import type {
+  About,
+  Experience,
+  Education,
+  SkillCategory,
+  ContactInfo,
+} from "@/lib/terminal/types";
+import { HeroSection } from "./sections/HeroSection";
+import { AboutSection } from "./sections/AboutSection";
+import { ExperienceSection } from "./sections/ExperienceSection";
+import { SkillsSection } from "./sections/SkillsSection";
+import { ProjectsSection } from "./sections/ProjectsSection";
+import { EducationSection } from "./sections/EducationSection";
+import { ContactSection } from "./sections/ContactSection";
+import { Navigation } from "./Navigation";
+import { Footer } from "./Footer";
 
 interface Project {
   name: string;
@@ -24,16 +30,16 @@ interface Project {
 }
 
 export function ModernPortfolio({ onBack }: { onBack: () => void }) {
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState("hero");
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Load content data
-  const about = getContentData('about') as About;
-  const experience = getContentData('experience') as Experience[];
-  const education = getContentData('education') as Education[];
-  const skills = getContentData('skills') as SkillCategory[];
-  const projects = getContentData('projects') as Project[];
-  const contact = getContentData('contact') as ContactInfo;
+  const about = getContentData("about") as About;
+  const experience = getContentData("experience") as Experience[];
+  const education = getContentData("education") as Education[];
+  const skills = getContentData("skills") as SkillCategory[];
+  const projects = getContentData("projects") as Project[];
+  const contact = getContentData("contact") as ContactInfo;
 
   useEffect(() => {
     setIsLoaded(true);
@@ -42,14 +48,25 @@ export function ModernPortfolio({ onBack }: { onBack: () => void }) {
   // Track scroll position to update active section
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'experience', 'skills', 'projects', 'education', 'contact'];
+      const sections = [
+        "hero",
+        "about",
+        "experience",
+        "skills",
+        "projects",
+        "education",
+        "contact",
+      ];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
             setActiveSection(section);
             break;
           }
@@ -57,28 +74,34 @@ export function ModernPortfolio({ onBack }: { onBack: () => void }) {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <div
-      className={`modern-portfolio modern-scrollbar min-h-screen bg-slate-950 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-      style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
+      className={`modern-portfolio modern-scrollbar min-h-screen bg-slate-950 transition-opacity duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+      style={{
+        fontFamily:
+          "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      }}
     >
       {/* Fixed background that stays in place while content scrolls */}
-      <div className="fixed inset-0 bg-slate-950 pointer-events-none">
+      <div className="pointer-events-none fixed inset-0 bg-slate-950">
         {/* Animated gradient orbs */}
-        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[128px] animate-pulse" />
-        <div className="absolute bottom-1/4 -right-32 w-[400px] h-[400px] bg-indigo-600/15 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 -left-32 h-[500px] w-[500px] animate-pulse rounded-full bg-blue-600/20 blur-[128px]" />
+        <div
+          className="absolute -right-32 bottom-1/4 h-[400px] w-[400px] animate-pulse rounded-full bg-indigo-600/15 blur-[100px]"
+          style={{ animationDelay: "1s" }}
+        />
+        <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-600/10 blur-[120px]" />
         {/* Subtle gradient overlay */}
         <div className="absolute inset-0 bg-linear-to-br from-blue-950/20 via-transparent to-indigo-950/20" />
       </div>
@@ -90,7 +113,11 @@ export function ModernPortfolio({ onBack }: { onBack: () => void }) {
       />
 
       <main className="relative">
-        <HeroSection about={about} contact={contact} onScrollDown={() => scrollToSection('about')} />
+        <HeroSection
+          about={about}
+          contact={contact}
+          onScrollDown={() => scrollToSection("about")}
+        />
         <AboutSection about={about} contact={contact} />
         <ExperienceSection experiences={experience} />
         <SkillsSection skills={skills} />
