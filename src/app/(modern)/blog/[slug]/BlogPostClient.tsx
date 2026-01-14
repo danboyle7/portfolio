@@ -3,65 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import type { BlogPost, About } from "@/lib/terminal/types";
-
-// Simple markdown-to-HTML converter for basic formatting
-function parseMarkdown(content: string): string {
-  return (
-    content
-      // Headers
-      .replace(
-        /^### (.*$)/gim,
-        '<h3 class="text-xl font-semibold text-white mt-8 mb-4">$1</h3>',
-      )
-      .replace(
-        /^## (.*$)/gim,
-        '<h2 class="text-2xl font-bold text-white mt-10 mb-4">$1</h2>',
-      )
-      .replace(
-        /^# (.*$)/gim,
-        '<h1 class="text-3xl font-bold text-white mt-12 mb-6">$1</h1>',
-      )
-      // Bold
-      .replace(
-        /\*\*(.*?)\*\*/g,
-        '<strong class="font-semibold text-white">$1</strong>',
-      )
-      // Italic
-      .replace(/\*(.*?)\*/g, "<em>$1</em>")
-      // Code blocks
-      .replace(
-        /```(\w+)?\n([\s\S]*?)```/g,
-        '<pre class="my-6 overflow-x-auto rounded-xl bg-slate-900 p-4 text-sm"><code class="text-blue-300">$2</code></pre>',
-      )
-      // Inline code
-      .replace(
-        /`([^`]+)`/g,
-        '<code class="rounded bg-slate-800 px-1.5 py-0.5 text-sm text-blue-300">$1</code>',
-      )
-      // Unordered lists
-      .replace(/^\s*-\s+(.*$)/gim, '<li class="ml-4 text-slate-300">$1</li>')
-      // Ordered lists
-      .replace(
-        /^\s*(\d+)\.\s+(.*$)/gim,
-        '<li class="ml-4 text-slate-300"><span class="text-blue-400 mr-2">$1.</span>$2</li>',
-      )
-      // Links
-      .replace(
-        /\[([^\]]+)\]\(([^)]+)\)/g,
-        '<a href="$2" class="text-blue-400 underline hover:text-blue-300" target="_blank" rel="noopener noreferrer">$1</a>',
-      )
-      // Paragraphs (wrap lines not already wrapped)
-      .replace(
-        /^(?!<[h|l|p|u|o|c|b])(.*[^\s].*$)/gim,
-        '<p class="mb-4 text-slate-300 leading-relaxed">$1</p>',
-      )
-      // Clean up empty paragraphs
-      .replace(/<p class="[^"]*"><\/p>/g, "")
-      // Wrap consecutive list items
-      .replace(/(<li[^>]*>.*<\/li>\n?)+/g, '<ul class="my-4 space-y-2">$&</ul>')
-  );
-}
 
 interface BlogPostClientProps {
   post: BlogPost | undefined;
@@ -204,10 +150,45 @@ export function BlogPostClient({
           </header>
 
           {/* Article Content */}
-          <div
-            className="prose prose-lg prose-invert max-w-none"
-            dangerouslySetInnerHTML={{ __html: parseMarkdown(post.content) }}
-          />
+          <div className="prose prose-lg prose-invert max-w-none prose-headings:text-white prose-p:text-slate-300 prose-strong:text-white prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-code:text-blue-300 prose-code:bg-slate-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-transparent prose-pre:p-0 prose-pre:m-0 prose-li:text-slate-300 prose-ul:marker:text-blue-400 prose-ol:marker:text-blue-400 [&_pre]:bg-transparent! [&_pre]:p-0! [&_pre]:m-0!">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                code({ className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || "");
+                  const codeString = String(children).replace(/\n$/, "");
+
+                  // Check if this is an inline code or a code block
+                  const isInline = !match && !className;
+
+                  if (isInline) {
+                    return (
+                      <code className={className} {...props}>
+                        {children}
+                      </code>
+                    );
+                  }
+
+                  return (
+                    <SyntaxHighlighter
+                      style={oneDark}
+                      language={match ? match[1] : "text"}
+                      PreTag="div"
+                      customStyle={{
+                        margin: 0,
+                        borderRadius: "0.75rem",
+                        fontSize: "0.875rem",
+                      }}
+                    >
+                      {codeString}
+                    </SyntaxHighlighter>
+                  );
+                },
+              }}
+            >
+              {post.content}
+            </ReactMarkdown>
+          </div>
 
           {/* Share and Actions */}
           <div className="mt-12 flex items-center justify-between border-t border-slate-800 pt-8">

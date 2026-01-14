@@ -177,27 +177,27 @@ export function PortfolioSplash({
   };
 
   return (
-    <div className="fixed inset-0 flex">
+    <div className="fixed inset-0 flex flex-col sm:flex-row">
       {/* Header with name - always visible */}
-      <div className="absolute top-0 right-0 left-0 z-40 flex justify-center pt-10">
+      <div className="absolute top-0 right-0 left-0 z-40 flex justify-center pt-4 sm:pt-10">
         <div className="text-center">
-          <h1 className="mb-1 text-2xl font-light tracking-widest text-white/90 sm:text-3xl md:text-4xl">
+          <h1 className="mb-1 text-xl font-light tracking-widest text-white/90 sm:text-3xl md:text-4xl">
             DANIEL BOYLE
           </h1>
-          <div className="text-xs tracking-wider text-white/50 sm:text-sm">
+          <div className="text-[10px] tracking-wider text-white/50 sm:text-sm">
             Software Developer
           </div>
         </div>
       </div>
 
-      {/* Left side - Terminal Portfolio */}
+      {/* Top/Left side - Terminal Portfolio */}
       <button
-        className={`group relative h-full cursor-pointer overflow-hidden transition-all duration-500 ${
+        className={`group relative cursor-pointer overflow-hidden transition-all duration-500 ${
           hoveredSide === "left"
-            ? "w-[55%]"
+            ? "h-[55%] w-full sm:h-full sm:w-[55%]"
             : hoveredSide === "right"
-              ? "w-[45%]"
-              : "w-1/2"
+              ? "h-[45%] w-full sm:h-full sm:w-[45%]"
+              : "h-1/2 w-full sm:h-full sm:w-1/2"
         }`}
         onMouseEnter={() => setHoveredSide("left")}
         onMouseLeave={() => setHoveredSide(null)}
@@ -237,9 +237,9 @@ export function PortfolioSplash({
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex h-full flex-col items-center justify-center p-8 pt-24">
-          {/* ASCII Art Header */}
-          <pre className="mb-6 font-mono text-[8px] leading-tight text-green-500 transition-colors select-none group-hover:text-green-400 sm:text-[10px] md:text-xs">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center p-4 pt-16 sm:p-8 sm:pt-24">
+          {/* ASCII Art Header - hidden on mobile */}
+          <pre className="mb-4 hidden font-mono text-[8px] leading-tight text-green-500 transition-colors select-none group-hover:text-green-400 sm:mb-6 sm:block sm:text-[10px] md:text-xs">
             {`
  ████████╗███████╗██████╗ ███╗   ███╗
  ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║
@@ -250,17 +250,17 @@ export function PortfolioSplash({
 `}
           </pre>
 
-          <div className="space-y-3 text-center font-mono text-green-500">
-            <div className="text-lg font-bold tracking-wider transition-colors group-hover:text-green-400 sm:text-xl md:text-2xl">
+          <div className="space-y-2 text-center font-mono text-green-500 sm:space-y-3">
+            <div className="text-base font-bold tracking-wider transition-colors group-hover:text-green-400 sm:text-xl md:text-2xl">
               TERMINAL PORTFOLIO
             </div>
-            <div className="max-w-xs text-xs text-green-700 sm:text-sm">
+            <div className="max-w-xs text-[10px] text-green-700 sm:text-sm">
               Interactive command-line portfolio with retro aesthetics
             </div>
           </div>
 
           {/* Terminal prompt preview */}
-          <div className="mt-8 font-mono text-sm">
+          <div className="mt-4 font-mono text-xs sm:mt-8 sm:text-sm">
             <span className="text-green-700">guest@portfolio</span>
             <span className="text-gray-600">:</span>
             <span className="text-blue-500">~</span>
@@ -271,40 +271,40 @@ export function PortfolioSplash({
             <span className="animate-pulse text-green-500">_</span>
           </div>
 
-          {/* Features list */}
-          <div className="mt-6 space-y-1 text-left font-mono text-[10px] text-green-800 sm:text-xs">
+          {/* Features list - hidden on mobile */}
+          <div className="mt-4 hidden space-y-1 text-left font-mono text-[10px] text-green-800 sm:mt-6 sm:block sm:text-xs">
             <div>• Full terminal emulation</div>
             <div>• Hidden content & easter eggs</div>
             <div>• CRT effects & visual aesthetics</div>
             <div>• Interactive commands</div>
           </div>
 
-          {/* Hover instruction */}
+          {/* Hover/tap instruction */}
           <div
-            className={`mt-8 font-mono text-sm text-green-500 transition-opacity duration-300 ${
-              hoveredSide === "left" ? "opacity-100" : "opacity-0"
+            className={`mt-4 font-mono text-xs text-green-500 transition-opacity duration-300 sm:mt-8 sm:text-sm ${
+              hoveredSide === "left" ? "opacity-100" : "sm:opacity-0"
             }`}
           >
-            [ CLICK TO ENTER ]
+            [ TAP TO ENTER ]
           </div>
         </div>
 
-        {/* Border glow on hover - this is the only divider now */}
+        {/* Border glow on hover - horizontal on mobile, vertical on desktop */}
         <div
-          className={`absolute inset-y-0 right-0 w-[2px] bg-linear-to-b from-green-500/0 via-green-500 to-green-500/0 transition-opacity duration-500 ${
+          className={`absolute inset-x-0 bottom-0 h-[2px] bg-linear-to-r from-green-500/0 via-green-500 to-green-500/0 transition-opacity duration-500 sm:inset-x-auto sm:inset-y-0 sm:right-0 sm:h-auto sm:w-[2px] sm:bg-linear-to-b ${
             hoveredSide === "left" ? "opacity-100" : "opacity-0"
           }`}
         />
       </button>
 
-      {/* Right side - Modern Portfolio */}
+      {/* Bottom/Right side - Modern Portfolio */}
       <button
-        className={`group relative h-full cursor-pointer overflow-hidden transition-all duration-500 ${
+        className={`group relative cursor-pointer overflow-hidden transition-all duration-500 ${
           hoveredSide === "right"
-            ? "w-[55%]"
+            ? "h-[55%] w-full sm:h-full sm:w-[55%]"
             : hoveredSide === "left"
-              ? "w-[45%]"
-              : "w-1/2"
+              ? "h-[45%] w-full sm:h-full sm:w-[45%]"
+              : "h-1/2 w-full sm:h-full sm:w-1/2"
         }`}
         onMouseEnter={() => setHoveredSide("right")}
         onMouseLeave={() => setHoveredSide(null)}
@@ -334,17 +334,17 @@ export function PortfolioSplash({
 
         {/* Content - using modern portfolio font */}
         <div
-          className="relative z-10 flex h-full flex-col items-center justify-center p-8 pt-24"
+          className="relative z-10 flex h-full flex-col items-center justify-center p-4 sm:p-8 sm:pt-24"
           style={{
             fontFamily:
               "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           }}
         >
           {/* Modern icon/logo */}
-          <div className="relative mb-6">
-            <div className="flex h-16 w-16 transform items-center justify-center rounded-2xl border-2 border-slate-700/50 bg-slate-900/50 transition-colors duration-300 group-hover:scale-105 group-hover:border-blue-500/40 sm:h-20 sm:w-20">
+          <div className="relative mb-4 sm:mb-6">
+            <div className="flex h-12 w-12 transform items-center justify-center rounded-2xl border-2 border-slate-700/50 bg-slate-900/50 transition-colors duration-300 group-hover:scale-105 group-hover:border-blue-500/40 sm:h-20 sm:w-20">
               <svg
-                className="h-8 w-8 text-blue-400/70 transition-colors duration-300 group-hover:text-blue-400 sm:h-10 sm:w-10"
+                className="h-6 w-6 text-blue-400/70 transition-colors duration-300 group-hover:text-blue-400 sm:h-10 sm:w-10"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -361,19 +361,19 @@ export function PortfolioSplash({
             <div className="absolute -inset-2 rounded-2xl bg-blue-500/10 blur-xl transition-colors duration-500 group-hover:bg-blue-500/20" />
           </div>
 
-          <div className="space-y-3 text-center">
-            <h2 className="text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
+          <div className="space-y-2 text-center sm:space-y-3">
+            <h2 className="text-base font-bold tracking-tight sm:text-2xl md:text-3xl">
               <span className="bg-linear-to-r from-white via-slate-200 to-slate-400 bg-clip-text font-thin tracking-wide text-transparent">
                 Modern Portfolio
               </span>
             </h2>
-            <p className="max-w-xs text-xs text-slate-400 sm:text-sm">
+            <p className="max-w-xs text-[10px] text-slate-400 sm:text-sm">
               Clean, modern design with smooth animations and easy navigation
             </p>
           </div>
 
-          {/* Features pills */}
-          <div className="mt-8 flex max-w-xs flex-wrap justify-center gap-2">
+          {/* Features pills - hidden on mobile */}
+          <div className="mt-4 hidden max-w-xs flex-wrap justify-center gap-2 sm:mt-8 sm:flex">
             {[
               "Clean Design",
               "Fast Loading",
@@ -389,26 +389,26 @@ export function PortfolioSplash({
             ))}
           </div>
 
-          {/* Hover instruction */}
+          {/* Hover/tap instruction */}
           <div
-            className={`mt-8 text-sm font-medium text-blue-400 transition-opacity duration-300 ${
-              hoveredSide === "right" ? "opacity-100" : "opacity-0"
+            className={`mt-4 text-xs font-medium text-blue-400 transition-opacity duration-300 sm:mt-8 sm:text-sm ${
+              hoveredSide === "right" ? "opacity-100" : "sm:opacity-0"
             }`}
           >
-            Click to enter →
+            Tap to enter →
           </div>
         </div>
 
-        {/* Border glow on hover - this is the only divider now */}
+        {/* Border glow on hover - horizontal on mobile, vertical on desktop */}
         <div
-          className={`absolute inset-y-0 left-0 w-[2px] bg-linear-to-b from-white/0 via-white/70 to-white/0 transition-opacity duration-500 ${
+          className={`absolute inset-x-0 top-0 h-[2px] bg-linear-to-r from-white/0 via-white/70 to-white/0 transition-opacity duration-500 sm:inset-x-auto sm:inset-y-0 sm:left-0 sm:h-auto sm:w-[2px] sm:bg-linear-to-b ${
             hoveredSide === "right" ? "opacity-100" : "opacity-0"
           }`}
         />
       </button>
 
-      {/* Bottom instruction */}
-      <div className="absolute right-0 bottom-6 left-0 z-40 flex justify-center">
+      {/* Bottom instruction - hidden on mobile */}
+      <div className="absolute right-0 bottom-6 left-0 z-40 hidden justify-center sm:flex">
         <div className="text-xs tracking-wider text-white/50">
           Choose your experience
         </div>

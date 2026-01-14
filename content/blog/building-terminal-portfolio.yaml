@@ -18,23 +18,22 @@ tags:
 content: |
   # Building a Terminal-Style Portfolio
 
-  Ever since I first started messing around with front-end development, I have longed to create
-  a unique and intersting portfolio. I first started off creating a basic hero card based portfolio
-  years back, but my tailwind/styling abilities were not very good so I never ended up publishing it.
+  Ever since I first started messing around with front-end development, I have longed to create a unique and
+  intersting portfolio. I first started off creating a basic hero card based portfolio years back, but my tailwind /
+  styling abilities were not very good so I never ended up publishing it.
 
-  About a year ago, I decided to try again -- I created a linkedin-like profile based portfolio
-  as an experiment into making a more customized profile where I could easily blog, update skills,
-  link them to projects and more. It had built-in live editing capabilites and more. But at the end of the
-  day, it still felt very... clunky. Parts of it were very visualy interesting but it did not feel very
-  "unique", and didnt really reflect who I am as an engineer. This project ended up getting published, but
-  since I was never in love with it, I did not keep it up to date -- so a few months later I decided to shelf
-  it.
+  About a year ago, I decided to try again -- I created a linkedin-like profile based portfolio as an experiment into
+  making a more customized profile where I could easily blog, update skills, link them to projects and more. It had
+  built-in live editing capabilites and more. But at the end of the day, it still felt very... clunky. Parts of it were very
+  visualy interesting but it did not feel very "unique", and didnt really reflect who I am as an engineer. This project
+  ended up getting published, but since I was never in love with it, I did not keep it up to date -- so a few months
+  later I decided to shelf it.
 
-  Fast forward to the start of 2026. I decided I wanted something that would stand out
-  and showcase my personality as a developer. What better way than to build an
-  interactive terminal experience? I decided to pair my coding skills with the abilities of Claude Code to help
-  bridge some of the gaps to help bring my idea alive. While it did involve a lot of "vibe" coding to get some
-  of the terminal kinks working properly, it was 100 percent my vision from start to finish.
+  Fast forward to the start of 2026. I decided I wanted something that would stand out and showcase my personality
+  as a developer. What better way than to build an interactive terminal experience? I decided to pair my coding skills
+  with the abilities of Claude Code to help bridge some of the gaps to help bring my idea alive. While it did involve
+  a lot of "vibe" coding to get some of the terminal kinks working properly, it was 100 percent my vision from start
+  to finish.
 
   ## The Concept
 
@@ -46,13 +45,16 @@ content: |
 
   As the experience came together, I realized something crucial: not everyone wants to navigate a portfolio through
   a command line interface-especially visitors from non-technical backgrounds. While the terminal is a big part of
-  who I am as an engineer, accessibility and clarity still matter. To solve this, I decided to go  with a split
-  approach that adds both a terminal and modern UI. On entry, visitors are presented with a split screen and the
-  abilit to choose between an interactive terminal interface or a more traditional, modern portfolio layout. Both
-  present the same core information—projects, experience, skills, etc-but in very different ways. This approach
-  keeps the terminal as a fully-featured, playful experience for those who enjoy exploration, while also providing a
-  straightforward path for anyone who just wants to browse the content traditionally. The choice is left entirely
-  to the user.
+  who I am as an engineer, accessibility and clarity still matter.
+
+  To solve this, I decided to go  with a split approach that adds both a terminal and modern UI. On entry, visitors
+  are presented with a split screen and the abilit to choose between an interactive terminal interface or a more
+  traditional, modern portfolio layout. Both present the same core information—projects, experience, skills, etc-but
+  in very different ways.
+
+  This approach keeps the terminal as a fully-featured, playful experience for those who enjoy exploration, while also
+  providing a straightforward path for anyone who just wants to browse the content traditionally. The choice is left
+  entirely to the user.
 
   ## Technical Implementation
 
@@ -84,6 +86,6 @@ content: |
   - Balancing creativity with usability
   - The importance of small details
 
-  The terminal aesthetic isn't just a gimmick—it's a statement about who I am as
-  a developer: someone who lives in the command line and loves what they do.
+  The terminal aesthetic isn't just a gimmick—it's a statement about who I am as a developer:
+  someone who lives in the command line and loves what they do.
 
