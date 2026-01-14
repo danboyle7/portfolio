@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { About, ContactInfo } from "@/lib/terminal/types";
+import { Card } from "@/components/ui/card";
 
 interface AboutSectionProps {
   about: About;
@@ -243,9 +244,11 @@ export function AboutSection({ about, contact }: AboutSectionProps) {
             }`}
           >
             {highlights.map((item, index) => (
-              <div
+              <Card
                 key={index}
-                className="group rounded-xl border border-slate-800/50 bg-slate-900/30 p-3 transition-all duration-300 hover:border-blue-500/30 hover:bg-slate-900/50 lg:p-4"
+                variant="interactive"
+                size="sm"
+                className="group"
                 style={{ transitionDelay: `${(index + 2) * 100}ms` }}
               >
                 <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500/20">
@@ -257,7 +260,7 @@ export function AboutSection({ about, contact }: AboutSectionProps) {
                 <p className="text-xs leading-relaxed text-slate-500">
                   {item.description}
                 </p>
-              </div>
+              </Card>
             ))}
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Experience } from "@/lib/terminal/types";
+import { Card } from "@/components/ui/card";
 
 interface ExperienceSectionProps {
   experiences: Experience[];
@@ -75,11 +76,12 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                 />
 
                 {/* Card */}
-                <div
-                  className={`group cursor-pointer rounded-xl border bg-slate-900/30 transition-all duration-300 ${
+                <Card
+                  size="none"
+                  className={`group cursor-pointer transition-all duration-300 ${
                     expandedIndex === index
                       ? "border-blue-500/30 bg-slate-900/50 shadow-lg shadow-blue-500/5"
-                      : "border-slate-800/50 hover:border-slate-700 hover:bg-slate-900/40"
+                      : "hover:border-slate-700 hover:bg-slate-900/40"
                   }`}
                   onClick={() =>
                     setExpandedIndex(expandedIndex === index ? null : index)
@@ -192,7 +194,7 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Card>
               </div>
             ))}
           </div>

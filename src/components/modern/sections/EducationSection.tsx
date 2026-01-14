@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Education } from "@/lib/terminal/types";
+import { Card } from "@/components/ui/card";
 
 interface EducationSectionProps {
   education: Education[];
@@ -52,9 +53,10 @@ export function EducationSection({ education }: EducationSectionProps) {
         {/* Education cards */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {education.map((edu, index) => (
-            <div
+            <Card
               key={index}
-              className={`group rounded-xl border border-slate-800/50 bg-slate-900/30 p-6 transition-all duration-500 hover:border-blue-500/30 hover:bg-slate-900/50 hover:shadow-lg hover:shadow-blue-500/5 ${
+              variant="interactive"
+              className={`group ${
                 isVisible
                   ? "translate-y-0 opacity-100"
                   : "translate-y-8 opacity-0"
@@ -119,7 +121,7 @@ export function EducationSection({ education }: EducationSectionProps) {
                   ))}
                 </ul>
               )}
-            </div>
+            </Card>
           ))}
         </div>
       </div>

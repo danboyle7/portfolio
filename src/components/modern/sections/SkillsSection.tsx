@@ -3,6 +3,7 @@
 import type { JSX } from "react";
 import { useEffect, useRef, useState } from "react";
 import type { SkillCategory } from "@/lib/terminal/types";
+import { Card } from "@/components/ui/card";
 
 interface SkillsSectionProps {
   skills: SkillCategory[];
@@ -195,7 +196,7 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
                 : "translate-y-8 opacity-0"
             }`}
           >
-            <div className="rounded-2xl border border-slate-800/50 bg-slate-900/30 p-4 backdrop-blur-sm sm:p-6 md:p-8">
+            <Card rounded="lg" size="none" className="p-4 sm:p-6 md:p-8">
               <div className="grid gap-4 sm:gap-5">
                 {[...(skills[activeCategory]?.skills ?? [])]
                   .sort((a, b) => b.level - a.level)
@@ -230,7 +231,7 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
                     </div>
                   ))}
               </div>
-            </div>
+            </Card>
 
             {/* Category summary */}
             <div className="mt-6 flex flex-wrap gap-4 text-sm text-slate-500">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { Card } from "@/components/ui/card";
 
 interface Project {
   name: string;
@@ -58,8 +59,11 @@ function ProjectModal({
       className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
-      <div
-        className="animate-in fade-in zoom-in-95 relative w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl shadow-blue-500/10 duration-200"
+      <Card
+        variant="modal"
+        size="none"
+        rounded="lg"
+        className="animate-in fade-in zoom-in-95 relative w-full max-w-2xl overflow-hidden duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -194,7 +198,7 @@ function ProjectModal({
             </a>
           )}
         </div>
-      </div>
+      </Card>
     </div>
   );
 }
@@ -269,15 +273,16 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
           {/* Projects grid */}
           <div className="grid gap-6 md:grid-cols-2">
             {projects.map((project, index) => (
-              <button
+              <Card
                 key={index}
-                onClick={() => handleProjectClick(project)}
-                className={`group relative cursor-pointer rounded-xl border border-slate-800/50 bg-slate-900/30 p-6 text-left transition-all duration-500 hover:border-blue-500/30 hover:bg-slate-900/50 hover:shadow-lg hover:shadow-blue-500/5 ${
+                variant="interactive"
+                className={`group relative cursor-pointer text-left ${
                   isVisible
                     ? "translate-y-0 opacity-100"
                     : "translate-y-8 opacity-0"
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
+                onClick={() => handleProjectClick(project)}
               >
                 {/* Header */}
                 <div className="mb-4 flex items-start justify-between">
@@ -399,7 +404,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                 <div className="absolute right-2 bottom-2 text-xs text-slate-600 opacity-0 transition-opacity group-hover:opacity-100">
                   Click for details
                 </div>
-              </button>
+              </Card>
             ))}
           </div>
 

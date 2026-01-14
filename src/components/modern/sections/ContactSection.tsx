@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ContactInfo } from "@/lib/terminal/types";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 interface ContactSectionProps {
   contact: ContactInfo;
@@ -128,8 +129,10 @@ export function ContactSection({ contact }: ContactSectionProps) {
         </div>
 
         {/* Contact card */}
-        <div
-          className={`rounded-2xl border border-slate-800/50 bg-slate-900/30 p-8 backdrop-blur-sm transition-all delay-200 duration-700 sm:p-12 ${
+        <Card
+          rounded="lg"
+          size="lg"
+          className={`transition-all delay-200 duration-700 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
         >
@@ -169,22 +172,31 @@ export function ContactSection({ contact }: ContactSectionProps) {
                         ? undefined
                         : "noopener noreferrer"
                     }
-                    className="group flex h-full items-center gap-4 rounded-xl border border-slate-700/30 bg-slate-800/30 p-4 transition-all hover:border-blue-500/30 hover:bg-slate-800/50"
                   >
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-700/30 text-slate-400 transition-colors group-hover:bg-blue-500/10 group-hover:text-blue-400">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <div className="text-xs tracking-wider text-slate-500 uppercase">
-                        {item.label}
+                    <Card
+                      variant="ghost"
+                      size="none"
+                      className="group flex h-full items-center gap-4 p-4 transition-all hover:border-blue-500/30 hover:bg-slate-800/50"
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-700/30 text-slate-400 transition-colors group-hover:bg-blue-500/10 group-hover:text-blue-400">
+                        {item.icon}
                       </div>
-                      <div className="text-slate-200 transition-colors group-hover:text-blue-400">
-                        {item.value}
+                      <div>
+                        <div className="text-xs tracking-wider text-slate-500 uppercase">
+                          {item.label}
+                        </div>
+                        <div className="text-slate-200 transition-colors group-hover:text-blue-400">
+                          {item.value}
+                        </div>
                       </div>
-                    </div>
+                    </Card>
                   </a>
                 ) : (
-                  <div className="flex h-full items-center gap-4 rounded-xl border border-slate-700/30 bg-slate-800/30 p-4">
+                  <Card
+                    variant="ghost"
+                    size="none"
+                    className="flex h-full items-center gap-4 p-4"
+                  >
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-700/30 text-slate-400">
                       {item.icon}
                     </div>
@@ -194,7 +206,7 @@ export function ContactSection({ contact }: ContactSectionProps) {
                       </div>
                       <div className="text-slate-200">{item.value}</div>
                     </div>
-                  </div>
+                  </Card>
                 )}
               </div>
             ))}
@@ -202,7 +214,7 @@ export function ContactSection({ contact }: ContactSectionProps) {
 
           {/* CTA */}
           <div className="mt-8 border-t border-slate-800/50 pt-8 text-center">
-            <Button variant="gradient" size="lg" className="rounded-xl" asChild>
+            <Button size="lg" className="rounded-xl" asChild>
               <a href={`mailto:${contact.email}`}>
                 <svg
                   className="h-5 w-5"
@@ -221,7 +233,7 @@ export function ContactSection({ contact }: ContactSectionProps) {
               </a>
             </Button>
           </div>
-        </div>
+        </Card>
       </div>
     </section>
   );

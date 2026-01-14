@@ -42,6 +42,7 @@ const QUICK_START_LARGE = `
   <span class="term-yellow">[Quick Start]</span>
     <span class="term-green">help</span>        <span class="term-dim">-</span> List available commands
     <span class="term-green">portfolio</span>   <span class="term-dim">-</span> Interactive portfolio hub
+    <span class="term-green">blog</span>        <span class="term-dim">-</span> View blog posts
     <span class="term-green">profile</span>     <span class="term-dim">-</span> View my profile
     <span class="term-green">contact</span>     <span class="term-dim">-</span> Get in touch
 `;

@@ -8,12 +8,12 @@ hobbies:
 
   - name: "Gaming"
     icon: "gamepad"
-    description: "Strategy games, puzzle games, and the occasional indie gem"
+    description: "Everything from FPSs and MMOs to puzzle games."
     level: "Casual"
 
   - name: "Reading"
     icon: "book"
-    description: "Tech books, sci-fi novels, and software architecture papers"
+    description: "Everything from sci-fi and mystery novels to scientific and medical research papers"
     level: "Avid reader"
 
   - name: "Hiking"
