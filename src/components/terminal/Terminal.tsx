@@ -387,7 +387,14 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
         };
       });
     },
-    [state.currentPath, state.commandHistory, fileSystem, env, crtEnabled, onBackToSplash],
+    [
+      state.currentPath,
+      state.commandHistory,
+      fileSystem,
+      env,
+      crtEnabled,
+      onBackToSplash,
+    ],
   );
 
   // Handle exiting interactive mode

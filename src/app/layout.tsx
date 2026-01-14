@@ -1,6 +1,15 @@
 import "@/styles/globals.css";
 
 import { type Metadata } from "next";
+import { Fira_Code } from "next/font/google";
+
+// Font for the terminal portfolio
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-fira-code",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Daniel Boyle | Portfolio Terminal",
@@ -28,14 +37,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="overflow-x-hidden bg-black text-green-500 antialiased">
+    <html lang="en" className={`dark ${firaCode.variable}`}>
+      <body className="overflow-x-hidden bg-black font-mono text-green-500 antialiased">
         {children}
       </body>
     </html>

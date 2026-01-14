@@ -2,24 +2,24 @@ import type { Command, CommandResult } from "@/lib/terminal/types";
 import { createLine } from "@/lib/terminal/utils";
 import { VERSION } from "@/lib/version";
 
-export const sysinfoCommand: Command = {
-  name: "sysinfo",
+export const neofetchCommand: Command = {
+  name: "neofetch",
   description: "Display system information (neofetch style)",
-  usage: "sysinfo",
-  aliases: ["neofetch", "info"],
+  usage: "neofetch",
+  aliases: ["sysinfo", "info"],
   execute: (_args, _context): CommandResult => {
-    // ASCII art logo
+    // ASCII art logo - each line padded to exactly 28 characters for alignment
     const logo = [
       "        ▄▄▄▄▄▄▄▄▄▄▄        ",
       "      ▄█████████████▄      ",
       "    ▄███▀▀▀▀▀▀▀▀▀▀███▄    ",
-      "   ████   ▄▄▄▄▄   ████   ",
-      "   ████   █████   ████   ",
-      "   ████   █████   ████   ",
-      "   ████   ▀▀▀▀▀   ████   ",
-      "    ▀███▄▄▄▄▄▄▄▄▄███▀    ",
-      "      ▀█████████████▀      ",
-      "        ▀▀▀▀▀▀▀▀▀▀▀        ",
+      "   ████   ▄▄▄▄▄   ████    ",
+      "   ████   █████   ████    ",
+      "   ████   █████   ████    ",
+      "   ████   ▀▀▀▀▀   ████    ",
+      "    ▀███▄▄▄▄▄▄▄▄▄███▀     ",
+      "      ▀█████████████▀     ",
+      "        ▀▀▀▀▀▀▀▀▀▀▀       ",
     ];
 
     // System info lines
@@ -35,11 +35,10 @@ export const sysinfoCommand: Command = {
     ];
 
     const output: string[] = [];
-    const logoWidth = 30;
 
     // Render logo alongside system info
     for (let i = 0; i < Math.max(logo.length, info.length + 2); i++) {
-      const logoLine = logo[i] ?? " ".repeat(28);
+      const logoLine = logo[i] ?? "                            ";
       let infoLine = "";
 
       if (i === 0) {
@@ -51,17 +50,17 @@ export const sysinfoCommand: Command = {
         infoLine = '<span class="term-dim">─────────────────────</span>';
       } else if (i - 2 < info.length) {
         const item = info[i - 2]!;
-        infoLine = `<span class="term-cyan font-bold">${item.label}</span><span class="term-white">:</span> <span class="term-white">${item.value}</span>`;
+        infoLine = `<span class="term-yellow font-bold">${item.label}</span><span class="term-white">:</span> <span class="term-white">${item.value}</span>`;
       }
 
-      output.push(`<span class="term-cyan">${logoLine}</span>  ${infoLine}`);
+      output.push(`<span class="term-cyan">${logoLine}</span>    ${infoLine}`);
     }
 
     output.push("");
 
-    // Color palette
+    // Color palette - positioned under the info section
     output.push(
-      " ".repeat(logoWidth) +
+      "                           " +
         '<span class="term-bg-black">   </span><span class="term-bg-red">   </span><span class="term-bg-green">   </span><span class="term-bg-yellow">   </span><span class="term-bg-blue">   </span><span class="term-bg-magenta">   </span><span class="term-bg-cyan">   </span><span class="term-bg-white">   </span>',
     );
     output.push("");

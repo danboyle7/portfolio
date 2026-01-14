@@ -4,6 +4,9 @@ import tseslint from "typescript-eslint";
 import drizzle from "eslint-plugin-drizzle";
 
 export default tseslint.config(
+  {
+    ignores: ["postcss.config.js", "prettier.config.js"],
+  },
   ...nextConfig,
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,

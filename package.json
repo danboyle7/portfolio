@@ -29,14 +29,18 @@
     "@trpc/react-query": "^11.0.0",
     "@trpc/server": "^11.0.0",
     "better-auth": "^1.3",
+    "clsx": "^2.1.1",
     "drizzle-orm": "^0.41.0",
     "js-yaml": "^4.1.1",
+    "lucide-react": "^0.562.0",
+    "motion": "^12.26.2",
     "next": "16.1.1",
     "postgres": "^3.4.4",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "server-only": "^0.0.1",
     "superjson": "^2.2.1",
+    "tailwind-merge": "^3.4.0",
     "zod": "^4.3.5"
   },
   "devDependencies": {

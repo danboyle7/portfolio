@@ -30,7 +30,6 @@ interface Project {
 }
 
 export function ModernPortfolio({ onBack }: { onBack: () => void }) {
-  const [activeSection, setActiveSection] = useState("hero");
   // Initialize loaded state - CSS transition handles the fade-in effect
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -48,39 +47,6 @@ export function ModernPortfolio({ onBack }: { onBack: () => void }) {
       setIsLoaded(true);
     });
     return () => cancelAnimationFrame(frame);
-  }, []);
-
-  // Track scroll position to update active section
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        "hero",
-        "about",
-        "experience",
-        "skills",
-        "projects",
-        "education",
-        "contact",
-      ];
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -111,11 +77,7 @@ export function ModernPortfolio({ onBack }: { onBack: () => void }) {
         <div className="absolute inset-0 bg-linear-to-br from-blue-950/20 via-transparent to-indigo-950/20" />
       </div>
 
-      <Navigation
-        activeSection={activeSection}
-        onNavigate={scrollToSection}
-        onBack={onBack}
-      />
+      <Navigation onBack={onBack} />
 
       <main className="relative">
         <HeroSection

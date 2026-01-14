@@ -1042,24 +1042,24 @@ The year it came from. The state it represents.
                 modified: dateStr,
                 target: "/usr/bin/profile",
               },
-              sysinfo: {
-                name: "sysinfo",
+              neofetch: {
+                name: "neofetch",
                 type: "executable",
                 permissions: "-rwxr-xr-x",
                 owner: "root",
                 size: "28K",
                 modified: dateStr,
                 content:
-                  "#!/bin/bash\n# display system information (neofetch style)\n# Usage: sysinfo",
+                  "#!/bin/bash\n# display system information (neofetch style)\n# Usage: neofetch",
               },
-              neofetch: {
-                name: "neofetch",
+              sysinfo: {
+                name: "sysinfo",
                 type: "symlink",
                 permissions: "lrwxrwxrwx",
                 owner: "root",
                 size: "7",
                 modified: dateStr,
-                target: "/usr/bin/sysinfo",
+                target: "/usr/bin/neofetch",
               },
               info: {
                 name: "info",
@@ -1068,7 +1068,7 @@ The year it came from. The state it represents.
                 owner: "root",
                 size: "7",
                 modified: dateStr,
-                target: "/usr/bin/sysinfo",
+                target: "/usr/bin/neofetch",
               },
               // ============ PORTFOLIO COMMANDS ============
               portfolio: {

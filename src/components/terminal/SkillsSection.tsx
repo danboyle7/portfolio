@@ -93,7 +93,7 @@ export function SkillsSection({ onExit, onBack }: SkillsSectionProps) {
   // Get all skills or filtered by category, then sort
   const displayedSkills = useMemo(() => {
     let skills = selectedCategory
-      ? categories.find((c) => c.name === selectedCategory)?.skills ?? []
+      ? (categories.find((c) => c.name === selectedCategory)?.skills ?? [])
       : categories.flatMap((c) =>
           c.skills.map((s) => ({ ...s, category: c.name })),
         );

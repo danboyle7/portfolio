@@ -1,12 +1,6 @@
 
 Bugs/fixes:
-1. [esc] to exit help menu does not work. Cant even use scrollbar?
-2. Update help menu, maybe mention there is tab complete, etc.
-3. On the main welcome screen of the portfolio (has PORTFOLIO ascii art) add some spacing before and after the HINT
-4. I do not like the transitions from sizes in the hero card on the modern portfolio
-5. Redesign the hero section part. Proportions are off, it just feels very meh... maybe its the size of the buttons? I dont know... I like the "typing line tho"
-6. BAD: The reboot requence doesnt track the last line, it just runs off the bottom.
-7. Need to come up with a way to make the user more aware of the zoom feature in the terminal portfolio when they first load in...
+1. Commands hacker, reboot and `rm -rf /` (all commands that cause a large amount of delayed text to come out) are not auto scrolling the command line, i.e. they go beyond the bottom and then you cant see what is happening.
 
 MEXT TODO:
 - weird white border under the top nav bar that shows up when moving to / away from the bar (only initially, doesnt happen when scrolling lower on the screen)

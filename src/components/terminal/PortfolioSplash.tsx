@@ -179,7 +179,7 @@ export function PortfolioSplash({
   return (
     <div className="fixed inset-0 flex">
       {/* Header with name - always visible */}
-      <div className="absolute top-0 right-0 left-0 z-40 flex justify-center pt-6">
+      <div className="absolute top-0 right-0 left-0 z-40 flex justify-center pt-10">
         <div className="text-center">
           <h1 className="mb-1 text-2xl font-light tracking-widest text-white/90 sm:text-3xl md:text-4xl">
             DANIEL BOYLE
@@ -291,7 +291,7 @@ export function PortfolioSplash({
 
         {/* Border glow on hover - this is the only divider now */}
         <div
-          className={`absolute inset-y-0 right-0 w-[2px] bg-gradient-to-b from-green-500/0 via-green-500 to-green-500/0 transition-opacity duration-500 ${
+          className={`absolute inset-y-0 right-0 w-[2px] bg-linear-to-b from-green-500/0 via-green-500 to-green-500/0 transition-opacity duration-500 ${
             hoveredSide === "left" ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -401,7 +401,7 @@ export function PortfolioSplash({
 
         {/* Border glow on hover - this is the only divider now */}
         <div
-          className={`absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-white/0 via-white/70 to-white/0 transition-opacity duration-500 ${
+          className={`absolute inset-y-0 left-0 w-[2px] bg-linear-to-b from-white/0 via-white/70 to-white/0 transition-opacity duration-500 ${
             hoveredSide === "right" ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -409,7 +409,7 @@ export function PortfolioSplash({
 
       {/* Bottom instruction */}
       <div className="absolute right-0 bottom-6 left-0 z-40 flex justify-center">
-        <div className="text-xs tracking-wider text-white/30">
+        <div className="text-xs tracking-wider text-white/50">
           Choose your experience
         </div>
       </div>

@@ -145,6 +145,8 @@ export interface BlogPost {
   tags: string[];
   content: string;
   readTime: string;
+  image?: string; // Hero image for modern blog view
+  author?: string; // Author name
 }
 
 // Contact types

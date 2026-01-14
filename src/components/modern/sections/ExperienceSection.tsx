@@ -53,7 +53,7 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute top-0 bottom-0 left-0 w-px bg-gradient-to-b from-blue-500/50 via-slate-700 to-transparent md:left-8" />
+          <div className="absolute top-0 bottom-0 left-0 w-px bg-linear-to-b from-blue-500/50 via-slate-700 to-transparent md:left-8" />
 
           {/* Experience items */}
           <div className="space-y-8">

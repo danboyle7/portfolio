@@ -113,7 +113,7 @@ export const catCommand: Command = {
     }
 
     // Regular text file
-    const lines = (content).split("\n");
+    const lines = content.split("\n");
     return {
       output: lines.map((line) =>
         createLine(escapeHtml(line), "output", { isHtml: true }),

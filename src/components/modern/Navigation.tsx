@@ -1,38 +1,127 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface NavigationProps {
-  activeSection: string;
-  onNavigate: (section: string) => void;
-  onBack: () => void;
+  onBack?: () => void;
 }
 
-export function Navigation({
-  activeSection,
-  onNavigate,
-  onBack,
-}: NavigationProps) {
+const NAV_ITEMS = [
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "education", label: "Education" },
+  { id: "contact", label: "Contact" },
+] as const;
+
+const SECTION_IDS = ["hero", ...NAV_ITEMS.map((item) => item.id)];
+
+export function Navigation({ onBack }: NavigationProps = {}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const pathname = usePathname();
 
+  const isOnBlogPage = pathname?.startsWith("/blog") ?? false;
+  const isOnBlogPostPage =
+    (pathname?.startsWith("/blog/") && pathname !== "/blog") ?? false;
+  const isOnPortfolioPage = pathname === "/portfolio";
+  const canScrollToSections = isOnPortfolioPage || !!onBack;
+
+  // Track scroll position and active section
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Only track active section when on portfolio page or embedded mode
+      if (!canScrollToSections) return;
+
+      const scrollPosition = window.scrollY + 150;
+
+      for (const section of SECTION_IDS) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            // hero doesn't have a nav item, so set null
+            setActiveSection(section === "hero" ? null : section);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial position
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [canScrollToSections]);
 
-  const navItems = [
-    { id: "about", label: "About" },
-    { id: "experience", label: "Experience" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "education", label: "Education" },
-    { id: "contact", label: "Contact" },
-  ];
+  // Compute effective active section - null when not on portfolio page
+  const effectiveActiveSection = canScrollToSections ? activeSection : null;
+
+  // Handle section navigation on portfolio page (scroll directly)
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  // Get the style for a nav item based on whether it's active
+  const getNavItemClass = (itemId: string) => {
+    const isActive = effectiveActiveSection === itemId;
+    return `rounded-lg px-4 py-2 text-sm font-medium transition-all ${
+      isActive
+        ? "bg-blue-500/10 text-blue-400"
+        : "text-white hover:bg-slate-800/50"
+    }`;
+  };
+
+  const getMobileNavItemClass = (itemId: string) => {
+    const isActive = effectiveActiveSection === itemId;
+    return `w-full rounded-lg px-4 py-3 text-left text-sm font-medium transition-all ${
+      isActive
+        ? "bg-blue-500/10 text-blue-400"
+        : "text-white hover:bg-slate-800/50"
+    }`;
+  };
+
+  // Get the style for the blog link
+  const getBlogLinkClass = () => {
+    return `rounded-lg px-4 py-2 text-sm font-medium transition-all ${
+      isOnBlogPage
+        ? "bg-blue-500/10 !text-blue-400"
+        : "text-white hover:bg-slate-800/50"
+    }`;
+  };
+
+  const getMobileBlogLinkClass = () => {
+    return `w-full rounded-lg px-4 py-3 text-left text-sm font-medium transition-all ${
+      isOnBlogPage
+        ? "bg-blue-500/10 !text-blue-400"
+        : "text-white hover:bg-slate-800/50"
+    }`;
+  };
+
+  // Determine back button destination based on current page
+  const getBackDestination = () => {
+    if (isOnBlogPostPage) {
+      return "/blog"; // From blog post -> blog list
+    }
+    if (onBack) {
+      return null; // Use callback for embedded mode (e.g., splash page)
+    }
+    return "/"; // Default to home
+  };
+
+  const backDestination = getBackDestination();
 
   return (
     <header
@@ -44,41 +133,73 @@ export function Navigation({
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center px-6">
         {/* Back button - far left */}
-        <button
-          onClick={onBack}
-          className="group absolute left-6 flex cursor-pointer items-center gap-2 text-slate-400 transition-colors hover:text-white"
-        >
-          <svg
-            className="h-5 w-5 transition-transform group-hover:-translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {backDestination ? (
+          <Link
+            href={backDestination}
+            className="group absolute left-6 flex items-center gap-2 text-slate-400 transition-colors hover:text-white"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-          <span className="hidden text-sm font-medium sm:inline">Back</span>
-        </button>
+            <svg
+              className="h-5 w-5 transition-transform group-hover:-translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            <span className="hidden text-sm font-medium sm:inline">Back</span>
+          </Link>
+        ) : (
+          <button
+            onClick={onBack}
+            className="group absolute left-6 flex cursor-pointer items-center gap-2 text-slate-400 transition-colors hover:text-white"
+          >
+            <svg
+              className="h-5 w-5 transition-transform group-hover:-translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            <span className="hidden text-sm font-medium sm:inline">Back</span>
+          </button>
+        )}
 
         {/* Desktop Navigation - centered */}
         <div className="mx-auto hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => onNavigate(item.id)}
-              className={`cursor-pointer rounded-lg px-4 py-2 text-sm font-medium transition-all ${
-                activeSection === item.id
-                  ? "bg-blue-500/10 text-blue-400"
-                  : "text-slate-400 hover:bg-slate-800/50 hover:text-white"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
+          {NAV_ITEMS.map((item) =>
+            isOnPortfolioPage || onBack ? (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`cursor-pointer ${getNavItemClass(item.id)}`}
+              >
+                {item.label}
+              </button>
+            ) : (
+              <Link
+                key={item.id}
+                href={`/portfolio#${item.id}`}
+                className={getNavItemClass(item.id)}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
+          {/* Blog link - separate page */}
+          <Link href="/blog" className={getBlogLinkClass()}>
+            Blog
+          </Link>
         </div>
 
         {/* Mobile menu button - far right */}
@@ -118,22 +239,34 @@ export function Navigation({
         }`}
       >
         <div className="space-y-1 border-t border-slate-800/50 bg-slate-950/95 px-6 py-4 backdrop-blur-xl">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => {
-                onNavigate(item.id);
-                setIsMobileMenuOpen(false);
-              }}
-              className={`w-full cursor-pointer rounded-lg px-4 py-3 text-left text-sm font-medium transition-all ${
-                activeSection === item.id
-                  ? "bg-blue-500/10 text-blue-400"
-                  : "text-slate-400 hover:bg-slate-800/50 hover:text-white"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
+          {NAV_ITEMS.map((item) =>
+            isOnPortfolioPage || onBack ? (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`cursor-pointer ${getMobileNavItemClass(item.id)}`}
+              >
+                {item.label}
+              </button>
+            ) : (
+              <Link
+                key={item.id}
+                href={`/portfolio#${item.id}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`block ${getMobileNavItemClass(item.id)}`}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
+          {/* Blog link - separate page */}
+          <Link
+            href="/blog"
+            className={`block ${getMobileBlogLinkClass()}`}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Blog
+          </Link>
         </div>
       </div>
     </header>
