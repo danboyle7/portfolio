@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { About, ContactInfo } from "@/lib/terminal/types";
+import { Button } from "@/components/ui/button";
 
 interface HeroSectionProps {
   about: About;
@@ -97,22 +98,16 @@ export function HeroSection({
             isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >
-          <button
-            onClick={onScrollDown}
-            className="group rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/25"
-          >
+          <Button onClick={onScrollDown} className="group">
             View My Work
             <span className="ml-1.5 inline-block transition-transform group-hover:translate-x-0.5">
               →
             </span>
-          </button>
+          </Button>
 
-          <a
-            href={about.resumeUrl ?? "#"}
-            className="rounded-lg border border-slate-700 px-6 py-2.5 text-sm font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:text-white"
-          >
-            Download Resume
-          </a>
+          <Button variant="outline" asChild>
+            <a href={about.resumeUrl ?? "#"}>Download Resume</a>
+          </Button>
         </div>
       </div>
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { ContactInfo } from "@/lib/terminal/types";
+import { Button } from "@/components/ui/button";
 
 interface ContactSectionProps {
   contact: ContactInfo;
@@ -201,25 +202,24 @@ export function ContactSection({ contact }: ContactSectionProps) {
 
           {/* CTA */}
           <div className="mt-8 border-t border-slate-800/50 pt-8 text-center">
-            <a
-              href={`mailto:${contact.email}`}
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-8 py-3.5 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:from-blue-500 hover:to-blue-400 hover:shadow-xl hover:shadow-blue-500/25"
-            >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-              Send me an email
-            </a>
+            <Button variant="gradient" size="lg" className="rounded-xl" asChild>
+              <a href={`mailto:${contact.email}`}>
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                Send me an email
+              </a>
+            </Button>
           </div>
         </div>
       </div>
