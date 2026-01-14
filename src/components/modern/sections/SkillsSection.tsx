@@ -197,36 +197,38 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
           >
             <div className="rounded-2xl border border-slate-800/50 bg-slate-900/30 p-4 backdrop-blur-sm sm:p-6 md:p-8">
               <div className="grid gap-4 sm:gap-5">
-                {skills[activeCategory]?.skills.map((skill, index) => (
-                  <div key={skill.name} className="group">
-                    <div className="mb-2 flex items-center justify-between gap-2">
-                      <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-                        <span className="truncate text-sm font-medium text-slate-200 sm:text-base">
-                          {skill.name}
-                        </span>
-                        {skill.years && (
-                          <span className="flex-shrink-0 rounded bg-slate-800/50 px-1.5 py-0.5 text-[10px] text-slate-500 sm:px-2 sm:text-xs">
-                            {skill.years}+ yrs
+                {[...(skills[activeCategory]?.skills ?? [])]
+                  .sort((a, b) => b.level - a.level)
+                  .map((skill, index) => (
+                    <div key={skill.name} className="group">
+                      <div className="mb-2 flex items-center justify-between gap-2">
+                        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+                          <span className="truncate text-sm font-medium text-slate-200 sm:text-base">
+                            {skill.name}
                           </span>
-                        )}
+                          {skill.years && (
+                            <span className="flex-shrink-0 rounded bg-slate-800/50 px-1.5 py-0.5 text-[10px] text-slate-500 sm:px-2 sm:text-xs">
+                              {skill.years}+ yrs
+                            </span>
+                          )}
+                        </div>
+                        <span className="flex-shrink-0 text-xs text-slate-500 sm:text-sm">
+                          {skill.level}%
+                        </span>
                       </div>
-                      <span className="flex-shrink-0 text-xs text-slate-500 sm:text-sm">
-                        {skill.level}%
-                      </span>
-                    </div>
 
-                    {/* Progress bar */}
-                    <div className="h-2 overflow-hidden rounded-full bg-slate-800/50">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 transition-all duration-1000 ease-out"
-                        style={{
-                          width: isVisible ? `${skill.level}%` : "0%",
-                          transitionDelay: `${index * 50 + 300}ms`,
-                        }}
-                      />
+                      {/* Progress bar */}
+                      <div className="h-2 overflow-hidden rounded-full bg-slate-800/50">
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 transition-all duration-1000 ease-out"
+                          style={{
+                            width: isVisible ? `${skill.level}%` : "0%",
+                            transitionDelay: `${index * 50 + 300}ms`,
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
 
