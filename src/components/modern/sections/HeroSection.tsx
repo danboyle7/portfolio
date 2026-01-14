@@ -1,14 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { About } from '@/lib/terminal/types';
+import type { About, ContactInfo } from '@/lib/terminal/types';
 
 interface HeroSectionProps {
   about: About;
+  contact: ContactInfo;
   onScrollDown: () => void;
 }
 
-export function HeroSection({ about, onScrollDown }: HeroSectionProps) {
+export function HeroSection({ about, contact, onScrollDown }: HeroSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [titleIndex, setTitleIndex] = useState(0);
 
@@ -48,7 +49,7 @@ export function HeroSection({ about, onScrollDown }: HeroSectionProps) {
           }`}
         >
           <span className="inline-block px-4 py-1.5 text-sm font-medium text-blue-300 bg-blue-500/10 rounded-full border border-blue-500/20 mb-8 backdrop-blur-sm">
-            Available for opportunities
+            {contact.availability}
           </span>
         </div>
 

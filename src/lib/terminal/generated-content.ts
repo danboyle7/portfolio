@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-13T18:56:20.309Z
+ * Generated at: 2026-01-14T02:50:48.915Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -194,7 +194,7 @@ export const generatedContent: Record<string, any> = {
   "skills": [
     {
       "name": "Programming Languages",
-      "icon": "💻",
+      "icon": "code",
       "skills": [
         {
           "name": "Python",
@@ -255,7 +255,7 @@ export const generatedContent: Record<string, any> = {
     },
     {
       "name": "AI/ML Frameworks",
-      "icon": "🤖",
+      "icon": "cpu",
       "skills": [
         {
           "name": "PyTorch",
@@ -306,7 +306,7 @@ export const generatedContent: Record<string, any> = {
     },
     {
       "name": "Full Stack Frameworks",
-      "icon": "🚀",
+      "icon": "layers",
       "skills": [
         {
           "name": "Next.js",
@@ -357,7 +357,7 @@ export const generatedContent: Record<string, any> = {
     },
     {
       "name": "DevOps & Tools",
-      "icon": "🔧",
+      "icon": "wrench",
       "skills": [
         {
           "name": "Git/GitLab/GitHub",
@@ -403,7 +403,7 @@ export const generatedContent: Record<string, any> = {
     },
     {
       "name": "Operating Systems",
-      "icon": "🖥️",
+      "icon": "monitor",
       "skills": [
         {
           "name": "Linux",
@@ -434,7 +434,7 @@ export const generatedContent: Record<string, any> = {
     },
     {
       "name": "AI Specializations",
-      "icon": "🧠",
+      "icon": "brain",
       "skills": [
         {
           "name": "Deep Reinforcement Learning",
@@ -480,7 +480,7 @@ export const generatedContent: Record<string, any> = {
       "highlights": [
         "Focus on Deep Reinforcement Learning and Neural Network Architectures",
         "Research in Transformers, CNNs, RNNs/LSTMs, and VAEs",
-        "Applied ML projects in defense and aerospace domains"
+        "Applied ML projects in the financial domain"
       ]
     },
     {
@@ -505,7 +505,7 @@ export const generatedContent: Record<string, any> = {
       "gpa": "3.8",
       "highlights": [
         "Strong foundation in linear algebra, calculus, and statistics",
-        "Applied mathematics coursework supporting ML/AI studies",
+        "Theoretical and applied mathematics coursework supporting ML/AI studies",
         "Dual degree completed alongside Computer Science"
       ]
     }
@@ -513,37 +513,37 @@ export const generatedContent: Record<string, any> = {
   "hobbies": [
     {
       "name": "Open Source",
-      "icon": "🌐",
+      "icon": "globe",
       "description": "Contributing to open source projects and maintaining my own libraries",
       "level": "Active contributor"
     },
     {
       "name": "Gaming",
-      "icon": "🎮",
+      "icon": "gamepad",
       "description": "Strategy games, puzzle games, and the occasional indie gem",
       "level": "Casual"
     },
     {
       "name": "Reading",
-      "icon": "📚",
+      "icon": "book",
       "description": "Tech books, sci-fi novels, and software architecture papers",
       "level": "Avid reader"
     },
     {
       "name": "Hiking",
-      "icon": "🥾",
+      "icon": "mountain",
       "description": "Exploring trails and enjoying nature",
       "level": "Weekend warrior"
     },
     {
       "name": "Photography",
-      "icon": "📷",
+      "icon": "camera",
       "description": "Capturing landscapes and urban scenes",
       "level": "Hobbyist"
     },
     {
       "name": "Music",
-      "icon": "🎵",
+      "icon": "music",
       "description": "Playing guitar and exploring new genres",
       "level": "Learning"
     }

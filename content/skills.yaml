@@ -3,7 +3,7 @@
 
 skills:
   - name: "Programming Languages"
-    icon: "💻"
+    icon: "code"
     skills:
       - name: "Python"
         level: 95
@@ -40,7 +40,7 @@ skills:
         years: 5
 
   - name: "AI/ML Frameworks"
-    icon: "🤖"
+    icon: "cpu"
     skills:
       - name: "PyTorch"
         level: 95
@@ -71,7 +71,7 @@ skills:
         years: 2
 
   - name: "Full Stack Frameworks"
-    icon: "🚀"
+    icon: "layers"
     skills:
       - name: "Next.js"
         level: 90
@@ -102,7 +102,7 @@ skills:
         years: 2
 
   - name: "DevOps & Tools"
-    icon: "🔧"
+    icon: "wrench"
     skills:
       - name: "Git/GitLab/GitHub"
         level: 95
@@ -130,7 +130,7 @@ skills:
         years: 6
 
   - name: "Operating Systems"
-    icon: "🖥️"
+    icon: "monitor"
     skills:
       - name: "Linux"
         level: 95
@@ -149,7 +149,7 @@ skills:
         years: 8
 
   - name: "AI Specializations"
-    icon: "🧠"
+    icon: "brain"
     skills:
       - name: "Deep Reinforcement Learning"
         level: 90

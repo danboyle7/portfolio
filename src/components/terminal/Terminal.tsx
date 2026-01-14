@@ -497,7 +497,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
         {crtEnabled && <GlitchEffect active={glitchActive} />}
         {crtEnabled && <MatrixRain opacity={matrixIntense ? 0.15 : 0.03} speed={matrixIntense ? 2 : 1} />}
 
-        <div className="h-full bg-black text-green-500 font-mono overflow-hidden terminal-text">
+        <div className="h-full bg-black text-green-500 font-mono flex flex-col terminal-text">
         <TerminalHeader
           hostname={HOSTNAME}
           user={USER}
@@ -506,7 +506,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
 
         <main
           ref={terminalRef}
-          className="px-2 md:px-4 py-1 md:py-2 h-[calc(100%-28px)] overflow-y-auto"
+          className="px-2 md:px-4 py-1 md:py-2 flex-1 overflow-y-auto terminal-scrollbar"
         >
           {/* Initial welcome message - responsive (hidden after clear) */}
           {showWelcome && <WelcomeMessage />}
@@ -635,6 +635,15 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       </div>
       </div>
     </ComputerBackground>
+
+    {/* Back button - OUTSIDE computer, fixed to browser window, hidden on mobile */}
+    <button
+      onClick={() => onBackToSplash?.()}
+      className="hidden sm:block fixed top-4 left-4 z-200 px-4 py-2 text-sm font-mono text-green-500 hover:text-green-400 border-2 border-green-700 hover:border-green-500 bg-black/90 hover:bg-black transition-all cursor-pointer shadow-lg shadow-green-900/30 hover:shadow-green-500/20"
+      title="Back to Main Menu"
+    >
+      ← Back
+    </button>
 
     {/* Menu button - OUTSIDE computer, fixed to browser window, hidden on mobile */}
     <button

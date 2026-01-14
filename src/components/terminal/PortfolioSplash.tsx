@@ -326,7 +326,7 @@ export function PortfolioSplash({ onSelectTerminal, onSelectModern }: PortfolioS
               Modern Portfolio
             </div>
             <div className="text-white/40 text-xs sm:text-sm max-w-xs font-light">
-              Clean, minimal design for easy navigation and quick overview
+              Clean, modern design for easy navigation and quick overview
             </div>
           </div>
 

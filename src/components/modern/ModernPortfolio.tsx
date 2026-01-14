@@ -70,7 +70,7 @@ export function ModernPortfolio({ onBack }: { onBack: () => void }) {
 
   return (
     <div
-      className={`min-h-screen bg-slate-950 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+      className={`modern-portfolio modern-scrollbar min-h-screen bg-slate-950 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
       style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
     >
       {/* Subtle global gradient overlay */}
@@ -83,8 +83,8 @@ export function ModernPortfolio({ onBack }: { onBack: () => void }) {
       />
 
       <main className="relative">
-        <HeroSection about={about} onScrollDown={() => scrollToSection('about')} />
-        <AboutSection about={about} />
+        <HeroSection about={about} contact={contact} onScrollDown={() => scrollToSection('about')} />
+        <AboutSection about={about} contact={contact} />
         <ExperienceSection experiences={experience} />
         <SkillsSection skills={skills} />
         <ProjectsSection projects={projects} />

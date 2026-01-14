@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { About } from '@/lib/terminal/types';
+import type { About, ContactInfo } from '@/lib/terminal/types';
 
 interface AboutSectionProps {
   about: About;
+  contact: ContactInfo;
 }
 
-export function AboutSection({ about }: AboutSectionProps) {
+export function AboutSection({ about, contact }: AboutSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -133,14 +134,14 @@ export function AboutSection({ about }: AboutSectionProps) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span>Colorado Springs, CO / Remote</span>
+                  <span>{contact.location}</span>
                 </div>
                 <div className="flex items-center gap-3 text-slate-400">
                   <span className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
                   </span>
-                  <span>Open to opportunities</span>
+                  <span>{contact.availability}</span>
                 </div>
               </div>
             </div>

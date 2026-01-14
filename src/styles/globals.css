@@ -35,10 +35,9 @@
   }
 }
 
-/* Base terminal styles */
+/* Base styles - neutral defaults */
 html {
   background-color: #000;
-  color: #00ff41;
 }
 
 body {
@@ -46,6 +45,17 @@ body {
   background-color: #000;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+/* Terminal-specific color - scoped to terminal */
+.terminal-text {
+  color: #00ff41;
+}
+
+/* Modern portfolio base styles */
+.modern-portfolio {
+  color: #e2e8f0; /* slate-200 */
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Apply terminal scaling to terminal elements */
@@ -223,44 +233,82 @@ body {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Terminal scrollbar styles */
-::-webkit-scrollbar {
+/* Terminal scrollbar styles - scoped to terminal */
+.terminal-scrollbar::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-::-webkit-scrollbar-track {
+.terminal-scrollbar::-webkit-scrollbar-track {
   background: #0a0a0a;
 }
 
-::-webkit-scrollbar-thumb {
+.terminal-scrollbar::-webkit-scrollbar-thumb {
   background: #1a3a1a;
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.terminal-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #2a5a2a;
 }
 
-/* Firefox scrollbar */
-* {
+.terminal-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #1a3a1a #0a0a0a;
 }
 
-/* Selection colors */
-::selection {
+/* Modern portfolio scrollbar styles */
+.modern-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+.modern-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #334155 #0f172a;
+}
+
+/* Selection colors - scoped */
+.terminal-text ::selection {
   background: rgba(0, 255, 65, 0.3);
   color: #00ff41;
 }
 
-/* Focus styles */
-*:focus {
+.modern-portfolio ::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #3b82f6;
+}
+
+/* Focus styles - scoped to terminal */
+.terminal-text *:focus {
   outline: none;
 }
 
-*:focus-visible {
+.terminal-text *:focus-visible {
   outline: 1px solid #00ff41;
+  outline-offset: 2px;
+}
+
+/* Modern portfolio focus styles */
+.modern-portfolio *:focus {
+  outline: none;
+}
+
+.modern-portfolio *:focus-visible {
+  outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
@@ -273,16 +321,26 @@ input.opacity-0:focus-visible,
   box-shadow: none !important;
 }
 
-/* Link styles */
-a {
+/* Link styles - scoped to terminal */
+.terminal-text a {
   color: #00bfff;
   text-decoration: none;
   transition: color 0.2s;
 }
 
-a:hover {
+.terminal-text a:hover {
   color: #00ffff;
   text-decoration: underline;
+}
+
+/* Modern portfolio link styles - no default underline/decoration */
+.modern-portfolio a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.modern-portfolio a:hover {
+  text-decoration: none;
 }
 
 /* Code blocks */

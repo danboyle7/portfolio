@@ -126,8 +126,8 @@ export function BootSequence({ onComplete, skipable = true }: BootSequenceProps)
   if (skipped) return null;
 
   return (
-    <div className="fixed inset-0 z-200 bg-black p-2 overflow-auto">
-      <div className="w-full font-mono terminal-text">
+    <div className="fixed inset-0 z-200 bg-black p-2 overflow-hidden">
+      <div className="w-full font-mono terminal-text text-green-500">
         {/* Boot lines */}
         <div className="space-y-0.5">
           {bootSteps.slice(0, visibleSteps).map((step, index) => (
