@@ -8,7 +8,6 @@ Features:
 
 TODO:
 1. Add updated resume
-2. Make modern portfolio better -- maybe go back to the typewriter font? ikd something feels ehh about the hero section
 3. Make the split screen Vertical instead of horizontal for the smallest screens (on top of each other)
 5. Terminal skills UI has a plane white scroll bar, not the themed green one used elsewhere..?
 
