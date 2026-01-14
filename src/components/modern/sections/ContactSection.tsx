@@ -85,14 +85,14 @@ export function ContactSection({ contact }: ContactSectionProps) {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="text-emerald-400 font-mono text-sm tracking-wider uppercase">
+          <span className="text-blue-400 text-sm font-semibold tracking-wider uppercase">
             Contact
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-100 mt-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2">
             Let&apos;s work
-            <span className="text-emerald-400"> together</span>
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"> together</span>
           </h2>
-          <p className="text-zinc-400 mt-4 max-w-lg mx-auto">
+          <p className="text-slate-400 mt-4 max-w-lg mx-auto">
             I&apos;m always interested in hearing about new opportunities,
             interesting projects, or just connecting with fellow developers.
           </p>
@@ -100,18 +100,18 @@ export function ContactSection({ contact }: ContactSectionProps) {
 
         {/* Contact card */}
         <div
-          className={`bg-zinc-900/50 rounded-2xl border border-zinc-800 p-8 sm:p-12 transition-all duration-700 delay-200 ${
+          className={`bg-slate-900/30 rounded-2xl border border-slate-800/50 p-8 sm:p-12 backdrop-blur-sm transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           {/* Status badge */}
           <div className="flex justify-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 rounded-full border border-emerald-500/30">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
-              <span className="text-emerald-400 text-sm font-medium">
+              <span className="text-blue-300 text-sm font-medium">
                 {contact.availability}
               </span>
             </div>
@@ -132,30 +132,30 @@ export function ContactSection({ contact }: ContactSectionProps) {
                     href={item.href}
                     target={item.href.startsWith('mailto') ? undefined : '_blank'}
                     rel={item.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-zinc-800/50 border border-zinc-700/50 hover:border-emerald-500/30 hover:bg-zinc-800 transition-all group"
+                    className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 border border-slate-700/30 hover:border-blue-500/30 hover:bg-slate-800/50 transition-all group"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-zinc-700/50 flex items-center justify-center text-zinc-400 group-hover:text-emerald-400 group-hover:bg-emerald-500/10 transition-colors">
+                    <div className="w-10 h-10 rounded-lg bg-slate-700/30 flex items-center justify-center text-slate-400 group-hover:text-blue-400 group-hover:bg-blue-500/10 transition-colors">
                       {item.icon}
                     </div>
                     <div>
-                      <div className="text-xs text-zinc-500 uppercase tracking-wider">
+                      <div className="text-xs text-slate-500 uppercase tracking-wider">
                         {item.label}
                       </div>
-                      <div className="text-zinc-200 group-hover:text-emerald-400 transition-colors">
+                      <div className="text-slate-200 group-hover:text-blue-400 transition-colors">
                         {item.value}
                       </div>
                     </div>
                   </a>
                 ) : (
-                  <div className="flex items-center gap-4 p-4 rounded-xl bg-zinc-800/50 border border-zinc-700/50">
-                    <div className="w-10 h-10 rounded-lg bg-zinc-700/50 flex items-center justify-center text-zinc-400">
+                  <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 border border-slate-700/30">
+                    <div className="w-10 h-10 rounded-lg bg-slate-700/30 flex items-center justify-center text-slate-400">
                       {item.icon}
                     </div>
                     <div>
-                      <div className="text-xs text-zinc-500 uppercase tracking-wider">
+                      <div className="text-xs text-slate-500 uppercase tracking-wider">
                         {item.label}
                       </div>
-                      <div className="text-zinc-200">{item.value}</div>
+                      <div className="text-slate-200">{item.value}</div>
                     </div>
                   </div>
                 )}
@@ -164,10 +164,10 @@ export function ContactSection({ contact }: ContactSectionProps) {
           </div>
 
           {/* CTA */}
-          <div className="mt-8 pt-8 border-t border-zinc-800 text-center">
+          <div className="mt-8 pt-8 border-t border-slate-800/50 text-center">
             <a
               href={`mailto:${contact.email}`}
-              className="inline-flex items-center gap-2 px-8 py-3 bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-0.5"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

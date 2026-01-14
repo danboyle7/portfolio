@@ -46,7 +46,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
       case 'development':
         return 'text-blue-400 bg-blue-500/10 border-blue-500/30';
       default:
-        return 'text-zinc-400 bg-zinc-500/10 border-zinc-500/30';
+        return 'text-slate-400 bg-slate-500/10 border-slate-500/30';
     }
   };
 
@@ -63,12 +63,12 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="text-emerald-400 font-mono text-sm tracking-wider uppercase">
+          <span className="text-blue-400 text-sm font-semibold tracking-wider uppercase">
             Projects
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-100 mt-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2">
             Things I&apos;ve
-            <span className="text-emerald-400"> built</span>
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"> built</span>
           </h2>
         </div>
 
@@ -77,7 +77,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`group relative bg-zinc-900/50 rounded-xl border border-zinc-800 p-6 transition-all duration-500 hover:border-zinc-700 hover:bg-zinc-900/80 ${
+              className={`group relative bg-slate-900/30 rounded-xl border border-slate-800/50 p-6 transition-all duration-500 hover:border-blue-500/30 hover:bg-slate-900/50 hover:shadow-lg hover:shadow-blue-500/5 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
@@ -87,7 +87,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                 <div className="flex items-center gap-3">
                   {/* Folder icon */}
                   <svg
-                    className="w-10 h-10 text-emerald-400"
+                    className="w-10 h-10 text-blue-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -107,7 +107,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                     href={`https://${project.github}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-zinc-500 hover:text-zinc-200 transition-colors"
+                    className="text-slate-500 hover:text-blue-400 transition-colors"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -123,7 +123,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                       href={`https://${project.live}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-zinc-500 hover:text-zinc-200 transition-colors"
+                      className="text-slate-500 hover:text-blue-400 transition-colors"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -140,32 +140,32 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
               </div>
 
               {/* Project name */}
-              <h3 className="text-xl font-semibold text-zinc-100 mb-2 group-hover:text-emerald-400 transition-colors">
+              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
                 {project.name}
               </h3>
 
               {/* Description */}
-              <p className="text-zinc-400 text-sm mb-4 line-clamp-2">
+              <p className="text-slate-400 text-sm mb-4 line-clamp-2">
                 {project.description}
               </p>
 
               {/* Footer */}
-              <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-800">
+              <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-800/50">
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.slice(0, 3).map((tech, tIndex) => (
                     <span
                       key={tIndex}
-                      className="text-xs text-zinc-500 font-mono"
+                      className="text-xs text-slate-500"
                     >
                       {tech}
                       {tIndex < Math.min(project.technologies.length, 3) - 1 && (
-                        <span className="ml-2 text-zinc-700">&bull;</span>
+                        <span className="ml-2 text-slate-700">&bull;</span>
                       )}
                     </span>
                   ))}
                   {project.technologies.length > 3 && (
-                    <span className="text-xs text-zinc-600">
+                    <span className="text-xs text-slate-600">
                       +{project.technologies.length - 3}
                     </span>
                   )}
@@ -173,7 +173,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
 
                 {/* Stars & Status */}
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1 text-zinc-500 text-sm">
+                  <div className="flex items-center gap-1 text-slate-500 text-sm">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                     </svg>
@@ -200,7 +200,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             href="https://github.com/danboyle7"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-zinc-400 hover:text-emerald-400 transition-colors"
+            className="inline-flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors"
           >
             <span>View more on GitHub</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

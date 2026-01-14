@@ -34,7 +34,7 @@ export function Navigation({ activeSection, onNavigate, onBack }: NavigationProp
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50'
+          ? 'bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/50 shadow-lg shadow-slate-950/50'
           : 'bg-transparent'
       }`}
     >
@@ -42,7 +42,7 @@ export function Navigation({ activeSection, onNavigate, onBack }: NavigationProp
         {/* Logo / Back button */}
         <button
           onClick={onBack}
-          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-100 transition-colors group cursor-pointer"
+          className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group cursor-pointer"
         >
           <svg
             className="w-5 h-5 transition-transform group-hover:-translate-x-1"
@@ -68,8 +68,8 @@ export function Navigation({ activeSection, onNavigate, onBack }: NavigationProp
               onClick={() => onNavigate(item.id)}
               className={`px-4 py-2 text-sm font-medium rounded-lg transition-all cursor-pointer ${
                 activeSection === item.id
-                  ? 'text-emerald-400 bg-emerald-500/10'
-                  : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50'
+                  ? 'text-blue-400 bg-blue-500/10'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
               }`}
             >
               {item.label}
@@ -80,7 +80,7 @@ export function Navigation({ activeSection, onNavigate, onBack }: NavigationProp
         {/* Mobile menu button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden p-2 text-zinc-400 hover:text-zinc-100 transition-colors cursor-pointer"
+          className="md:hidden p-2 text-slate-400 hover:text-white transition-colors cursor-pointer"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {isMobileMenuOpen ? (
@@ -98,7 +98,7 @@ export function Navigation({ activeSection, onNavigate, onBack }: NavigationProp
           isMobileMenuOpen ? 'max-h-96' : 'max-h-0'
         }`}
       >
-        <div className="px-6 py-4 bg-zinc-950/95 backdrop-blur-lg border-t border-zinc-800/50 space-y-1">
+        <div className="px-6 py-4 bg-slate-950/95 backdrop-blur-xl border-t border-slate-800/50 space-y-1">
           {navItems.map((item) => (
             <button
               key={item.id}
@@ -108,8 +108,8 @@ export function Navigation({ activeSection, onNavigate, onBack }: NavigationProp
               }}
               className={`w-full text-left px-4 py-3 text-sm font-medium rounded-lg transition-all cursor-pointer ${
                 activeSection === item.id
-                  ? 'text-emerald-400 bg-emerald-500/10'
-                  : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50'
+                  ? 'text-blue-400 bg-blue-500/10'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
               }`}
             >
               {item.label}
