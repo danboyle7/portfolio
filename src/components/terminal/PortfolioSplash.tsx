@@ -255,8 +255,8 @@ export function PortfolioSplash({ onSelectTerminal, onSelectModern }: PortfolioS
           {/* Features list */}
           <div className="mt-6 text-green-800 text-[10px] sm:text-xs font-mono space-y-1 text-left">
             <div>• Full terminal emulation</div>
-            <div>• Hidden easter eggs</div>
-            <div>• CRT effects & matrix rain</div>
+            <div>• Hidden content & easter eggs</div>
+            <div>• CRT effects & visual aesthetics</div>
             <div>• Interactive commands</div>
           </div>
 

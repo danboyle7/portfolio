@@ -1,6 +1,9 @@
 
-1. There is a weird bug when you enter on a new command, it shifts that command line up slightly, its very visually annoying.
+Bugs:
+1. [esc] to exit help menu does not work. Cant even use scrollbar?
+2. Scrolling up in the terminal is not working?
+3. Update help menu, maybe mention there is tab complete, etc.
 
-
-
-1. The split screen nature should CHANGE to be vertical instead of horizontal for small screens, cause this would likely be on mobile which has that form of aspect ratio.
+Features:
+1. ChatGPT interface for prometheus (if we can make this secure) - limit token to 5 bucks
+2. Make SHELL ascii art in boot be something else?

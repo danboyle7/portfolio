@@ -41,7 +41,7 @@ export function TerminalMenu({ onClose, onBackToSplash }: TerminalMenuProps) {
         ref={menuRef}
         tabIndex={0}
         onKeyDown={handleKeyDown}
-        className="w-full max-w-2xl mx-4 bg-black border-2 border-green-500 outline-none font-mono"
+        className="w-full max-w-2xl mx-4 bg-black border border-green-500 outline-none font-mono"
       >
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-green-600">
@@ -100,7 +100,7 @@ export function TerminalMenu({ onClose, onBackToSplash }: TerminalMenuProps) {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between gap-2">
                   <span className="text-cyan-400 font-mono">help</span>
-                  <span className="text-gray-400">Common commands</span>
+                  <span className="text-gray-400">List Common commands</span>
                 </div>
                 <div className="flex justify-between gap-2">
                   <span className="text-cyan-400 font-mono">portfolio</span>
@@ -111,7 +111,7 @@ export function TerminalMenu({ onClose, onBackToSplash }: TerminalMenuProps) {
                   <span className="text-gray-400">Clear terminal screen</span>
                 </div>
                 <div className="flex justify-between gap-2">
-                  <span className="text-cyan-400 font-mono">ls / cat</span>
+                  <span className="text-cyan-400 font-mono">ls / cd / cat</span>
                   <span className="text-gray-400">Browse files</span>
                 </div>
               </div>
@@ -169,7 +169,6 @@ export function TerminalMenu({ onClose, onBackToSplash }: TerminalMenuProps) {
         {/* Footer */}
         <div className="px-4 py-3 border-t border-green-700 bg-green-950/30 flex justify-between items-center">
           <div className="flex gap-4 text-gray-500 text-sm">
-            <span><span className="text-green-600">[h]</span> close</span>
             <span><span className="text-green-600">[esc]</span> close</span>
           </div>
           <button
