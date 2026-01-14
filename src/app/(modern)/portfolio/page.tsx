@@ -47,6 +47,11 @@ export default function PortfolioPage() {
     return () => cancelAnimationFrame(frame);
   }, []);
 
+  // Set document title
+  useEffect(() => {
+    document.title = "Daniel Boyle's Portfolio | Modern";
+  }, []);
+
   // Handle hash navigation on mount
   useEffect(() => {
     const hash = window.location.hash.slice(1);

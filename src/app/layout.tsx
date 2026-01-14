@@ -12,9 +12,9 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Daniel Boyle | Portfolio Terminal",
+  title: "Daniel Boyle's Portfolio",
   description:
-    "A terminal-style portfolio for a software developer. Navigate through my experience, skills, and projects using familiar terminal commands.",
+    "Daniel Boyle's portfolio - a software developer showcasing experience, skills, and projects.",
   keywords: [
     "portfolio",
     "developer",
@@ -23,11 +23,13 @@ export const metadata: Metadata = {
     "react",
     "typescript",
     "next.js",
+    "daniel w boyle",
+    "daniel walker boyle"
   ],
   authors: [{ name: "Daniel Boyle" }],
   openGraph: {
-    title: "Daniel Boyle | Portfolio Terminal",
-    description: "A terminal-style portfolio for a software developer",
+    title: "Daniel Boyle's Portfolio",
+    description: "Daniel Boyle's portfolio - a software developer showcasing experience, skills, and projects.",
     type: "website",
   },
   icons: [{ rel: "icon", url: "/favicon.ico" }],
