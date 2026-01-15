@@ -62,10 +62,7 @@ function calculateDuration(startDate: string, endDate?: string): string {
 }
 
 // Truncate text to approximately maxSentences worth of content
-function truncateDescription(
-  description: string,
-  maxChars: number = 150,
-): string {
+function truncateDescription(description: string, maxChars = 150): string {
   // First, normalize the text by joining lines within paragraphs
   const normalized = description
     .split(/\n\s*\n/)
