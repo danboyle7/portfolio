@@ -31,6 +31,7 @@ export interface InteractiveMode {
     | "portfolio"
     | "hub"
     | "contact"
+    | "sl"
     | null;
   data?: unknown;
   section?: "skills" | "experience" | "education" | "projects" | "hobbies";

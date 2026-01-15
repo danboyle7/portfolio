@@ -25,6 +25,7 @@ import { SkillsSection } from "./SkillsSection";
 import { EducationSection } from "./EducationSection";
 import { HobbiesSection } from "./HobbiesSection";
 import { TerminalMenu } from "./TerminalMenu";
+import { SteamLocomotive } from "./SteamLocomotive";
 import { useZoom } from "./ZoomContext";
 import { VERSION } from "@/lib/version";
 import type { InteractiveMode } from "@/lib/terminal/types";
@@ -698,6 +699,16 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
             {/* Scroll anchor - this is what we scroll to, positioned just below input with small gap */}
             <div ref={scrollAnchorRef} className="h-4" aria-hidden="true" />
           </main>
+
+          {/* Steam Locomotive - absolute positioned to cover terminal, above CRT effects */}
+          {interactiveMode?.type === "sl" && (
+            <div
+              className="absolute inset-0 z-[200]"
+              style={{ backgroundColor: "#000" }}
+            >
+              <SteamLocomotive onComplete={handleExitInteractive} />
+            </div>
+          )}
         </div>
       </ComputerBackground>
 

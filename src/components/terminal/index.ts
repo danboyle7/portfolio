@@ -9,3 +9,4 @@ export { TerminalOutput, CommandLine } from "./TerminalOutput";
 export { TerminalHeader, TerminalFooter } from "./TerminalHeader";
 export { PortfolioSplash } from "./PortfolioSplash";
 export { TerminalMenu } from "./TerminalMenu";
+export { SteamLocomotive } from "./SteamLocomotive";
