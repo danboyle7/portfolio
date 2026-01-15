@@ -46,41 +46,41 @@ skills:
     icon: "cpu"
     skills:
       - name: "PyTorch"
-        level: 95
+        level: 75
         years: 5
       - name: "TensorFlow/Keras"
-        level: 85
+        level: 75
         years: 4
       - name: "NumPy"
         level: 90
         years: 6
       - name: "Pandas"
-        level: 95
+        level: 90
         years: 6
       - name: "SciPy"
-        level: 85
+        level: 65
         years: 5
       - name: "Scikit-learn"
-        level: 90
+        level: 75
         years: 5
       - name: "Ray"
-        level: 75
+        level: 65
         years: 2
       - name: "MLFlow"
-        level: 65
+        level: 70
         years: 1
       - name: "LangChain"
-        level: 85
+        level: 80
         years: 3
 
   - name: "Full Stack Frameworks"
     icon: "layers"
     skills:
       - name: "Next.js"
-        level: 90
+        level: 85
         years: 3
       - name: "React"
-        level: 90
+        level: 80
         years: 4
       - name: "Vue.js"
         level: 50
@@ -111,20 +111,20 @@ skills:
         level: 95
         years: 10
       - name: "Docker"
-        level: 85
+        level: 80
         years: 5
       - name: "Jenkins"
         level: 70
         years: 2
       - name: "GDB/PDB"
-        level: 90
-        years: 8
+        level: 80
+        years: 5
       - name: "Valgrind"
         level: 80
-        years: 6
+        years: 3
       - name: "Jira"
         level: 85
-        years: 7
+        years: 3
       - name: "Linux"
         level: 95
         years: 10
@@ -139,8 +139,8 @@ skills:
         level: 95
         years: 10
       - name: "Green Hills Integrity"
-        level: 80
-        years: 4
+        level: 75
+        years: 3
       - name: "VxWorks"
         level: 70
         years: 3
@@ -155,20 +155,20 @@ skills:
     icon: "brain"
     skills:
       - name: "Deep Reinforcement Learning"
-        level: 90
+        level: 85
         years: 4
       - name: "Natural Language Processing"
-        level: 85
-        years: 3
+        level: 75
+        years: 4
       - name: "Time Series Forecasting"
-        level: 85
+        level: 80
         years: 4
       - name: "Representation Learning"
-        level: 80
-        years: 3
+        level: 75
+        years: 2
       - name: "LLM Integration"
         level: 90
         years: 3
       - name: "Prompt Engineering"
         level: 90
-        years: 4
+        years: 3
