@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://gitlab.com/public-danboyle7/portfolio/compare/v1.0.0...v1.0.1) (2026-01-15)
+
+
+### Bug Fixes
+
+* align commitlint versioning with code versions ([aa79d2a](https://gitlab.com/public-danboyle7/portfolio/commit/aa79d2aac1179002fda9bb0f517e75898638e6f9))
+
 ## 1.0.0 (2026-01-15)
 
 
