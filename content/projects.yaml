@@ -12,12 +12,15 @@ projects:
       - "TypeScript"
       - "Tailwind CSS"
       - "React"
+      - "Vercel"
     start_date: "2025-12"
     end_date: "2026-1"
     status: "production"
     repo: "gitlab.com/public-danboyle7/portfolio"
     repo_source: "gitlab"
     live: "daniel-boyle.com"
+
+  # -------------------------------------------------------------------------------------------------------------------
 
   # Keep this paragraph for later on Overseer:
 
@@ -65,7 +68,10 @@ projects:
       execution workflows.
 
       Due to the nature of this project, and the proprietary nature of of the strategies, this project has been
-      kept private. However, I do have plans in the future to open-source the base framework once I am out of development.
+      kept private. However, I do have plans in the future to open-source the base framework once I have finished
+      initial development.
+
+      Blog post with more details coming soon...
     technologies:
       - "Python"
       - "Rust"
@@ -78,3 +84,29 @@ projects:
       - "LLM"
       - "LangGraph"
     status: "development"
+
+  # -------------------------------------------------------------------------------------------------------------------
+
+  - name: "The Better Page"
+    start_date: "2025-11"
+    description: |
+      The Better Page is a side business I started with my wife, Ashlynn, and a close friend, Chris Macklen, to
+      address a problem we noticed locally. Many small businesses either do not have a website at all or rely on
+      outdated, low-quality sites built with platforms like GoDaddy or Wix. These sites often lack strong visual
+      design and clear calls to action.
+
+      We set out to solve this by building fully custom, personalized websites tailored specifically for small and
+      medium-sized businesses.
+
+      Our website is still under development and will be added once it’s live. That said, we already have several
+      happy clients. Here’s an example from a local bookkeeping business in Hertford, NC: https://www.hinshawbookkeeping.com/
+    status: "development"
+    technologies:
+      - "Next.js"
+      - "TypeScript"
+      - "Tailwind CSS"
+      - "React"
+      - "Vercel"
+      - "Google Analytics"
+      - "SEO"
+      - "E-commerce"

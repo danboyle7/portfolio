@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-15T15:54:32.046Z
+ * Generated at: 2026-01-15T16:57:38.838Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -589,7 +589,8 @@ export const generatedContent: Record<string, any> = {
         "Next.js",
         "TypeScript",
         "Tailwind CSS",
-        "React"
+        "React",
+        "Vercel"
       ],
       "start_date": "2025-12",
       "end_date": "2026-1",
@@ -601,7 +602,7 @@ export const generatedContent: Record<string, any> = {
     {
       "name": "Overseer",
       "start_date": "2020-1",
-      "description": "Overseer is an event-driven algorithmic trading framework built in Rust and Python for backtesting and live\ntrading of equities and derivatives. It uses a modular, plug-and-play componetized architecture, allowing\nthe same strategies to be deployed unchanged in simulated or live environments. The system provides\nrealistic market simulation, slippage modeling, commissions, delays, margin management, and settlement\nmechanics. It also integrates with multiple data providers (Alpaca, Interactive Brokers, YFinance,\nPolygon, and FRED) and supports notification and control channels (Telegram, Discord) for alerts and\ncommand execution. Additional features include integrated risk management, component health monitoring,\noptional human-in-the-loop controls and extensible AI/LLM integrations for advanced strategy and\nexecution workflows.\n\nDue to the nature of this project, and the proprietary nature of of the strategies, this project has been\nkept private. However, I do have plans in the future to open-source the base framework once I am out of development.\n",
+      "description": "Overseer is an event-driven algorithmic trading framework built in Rust and Python for backtesting and live\ntrading of equities and derivatives. It uses a modular, plug-and-play componetized architecture, allowing\nthe same strategies to be deployed unchanged in simulated or live environments. The system provides\nrealistic market simulation, slippage modeling, commissions, delays, margin management, and settlement\nmechanics. It also integrates with multiple data providers (Alpaca, Interactive Brokers, YFinance,\nPolygon, and FRED) and supports notification and control channels (Telegram, Discord) for alerts and\ncommand execution. Additional features include integrated risk management, component health monitoring,\noptional human-in-the-loop controls and extensible AI/LLM integrations for advanced strategy and\nexecution workflows.\n\nDue to the nature of this project, and the proprietary nature of of the strategies, this project has been\nkept private. However, I do have plans in the future to open-source the base framework once I have finished\ninitial development.\n\nBlog post with more details coming soon...\n",
       "technologies": [
         "Python",
         "Rust",
@@ -615,6 +616,22 @@ export const generatedContent: Record<string, any> = {
         "LangGraph"
       ],
       "status": "development"
+    },
+    {
+      "name": "The Better Page",
+      "start_date": "2025-11",
+      "description": "The Better Page is a side business I started with my wife, Ashlynn, and a close friend, Chris Macklen, to\naddress a problem we noticed locally. Many small businesses either do not have a website at all or rely on\noutdated, low-quality sites built with platforms like GoDaddy or Wix. These sites often lack strong visual\ndesign and clear calls to action.\n\nWe set out to solve this by building fully custom, personalized websites tailored specifically for small and\nmedium-sized businesses.\n\nOur website is still under development and will be added once it’s live. That said, we already have several\nhappy clients. Here’s an example from a local bookkeeping business in Hertford, NC: https://www.hinshawbookkeeping.com/\n",
+      "status": "development",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "React",
+        "Vercel",
+        "Google Analytics",
+        "SEO",
+        "E-commerce"
+      ]
     }
   ]
 };

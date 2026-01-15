@@ -26,6 +26,7 @@ export function TerminalInput({
   disabled = false,
 }: TerminalInputProps) {
   const [input, setInput] = useState("");
+  const [cursorPos, setCursorPos] = useState(0);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [savedInput, setSavedInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -41,6 +42,7 @@ export function TerminalInput({
         // Move cursor to end of input
         const len = inputRef.current.value.length;
         inputRef.current.setSelectionRange(len, len);
+        setCursorPos(len);
       }
     };
 
@@ -57,6 +59,7 @@ export function TerminalInput({
         // Submit even if empty (for new line behavior)
         onSubmit(input);
         setInput("");
+        setCursorPos(0);
         setHistoryIndex(-1);
         setSavedInput("");
       }
@@ -77,7 +80,10 @@ export function TerminalInput({
 
         const newIndex = Math.min(historyIndex + 1, commandHistory.length - 1);
         setHistoryIndex(newIndex);
-        setInput(commandHistory[commandHistory.length - 1 - newIndex] ?? "");
+        const newInput =
+          commandHistory[commandHistory.length - 1 - newIndex] ?? "";
+        setInput(newInput);
+        setCursorPos(newInput.length);
       }
 
       if (e.key === "ArrowDown") {
@@ -85,12 +91,16 @@ export function TerminalInput({
         if (historyIndex <= 0) {
           setHistoryIndex(-1);
           setInput(savedInput);
+          setCursorPos(savedInput.length);
           return;
         }
 
         const newIndex = historyIndex - 1;
         setHistoryIndex(newIndex);
-        setInput(commandHistory[commandHistory.length - 1 - newIndex] ?? "");
+        const newInput =
+          commandHistory[commandHistory.length - 1 - newIndex] ?? "";
+        setInput(newInput);
+        setCursorPos(newInput.length);
       }
 
       // Tab completion
@@ -107,11 +117,14 @@ export function TerminalInput({
           // Command completion
           const suggestions = getCommandSuggestions(lastPart);
           if (suggestions.length === 1) {
-            setInput(suggestions[0]! + " ");
+            const newInput = suggestions[0]! + " ";
+            setInput(newInput);
+            setCursorPos(newInput.length);
           } else if (suggestions.length > 1) {
             const commonPrefix = findCommonPrefix(suggestions);
             if (commonPrefix.length > lastPart.length) {
               setInput(commonPrefix);
+              setCursorPos(commonPrefix.length);
             }
           }
         } else {
@@ -137,13 +150,17 @@ export function TerminalInput({
             if (matches.length === 1) {
               const prefix = parts.slice(0, -1).join(" ");
               const newPath = basePath + matches[0];
-              setInput(prefix ? prefix + " " + newPath : newPath);
+              const newInput = prefix ? prefix + " " + newPath : newPath;
+              setInput(newInput);
+              setCursorPos(newInput.length);
             } else if (matches.length > 1) {
               const commonPrefix = findCommonPrefix(matches);
               if (commonPrefix.length > partial.length) {
                 const prefix = parts.slice(0, -1).join(" ");
                 const newPath = basePath + commonPrefix;
-                setInput(prefix ? prefix + " " + newPath : newPath);
+                const newInput = prefix ? prefix + " " + newPath : newPath;
+                setInput(newInput);
+                setCursorPos(newInput.length);
               }
             }
           }
@@ -154,6 +171,7 @@ export function TerminalInput({
       if (e.key === "u" && e.ctrlKey) {
         e.preventDefault();
         setInput("");
+        setCursorPos(0);
       }
 
       // Clear screen with Ctrl+L
@@ -161,6 +179,7 @@ export function TerminalInput({
         e.preventDefault();
         onSubmit("clear");
         setInput("");
+        setCursorPos(0);
       }
 
       // Cancel current line with Ctrl+C or Cmd+C
@@ -169,6 +188,7 @@ export function TerminalInput({
         // Submit current text + ^C indicator, then clear
         const cancelledLine = input + "^C";
         setInput("");
+        setCursorPos(0);
         setHistoryIndex(-1);
         setSavedInput("");
         onSubmit(cancelledLine);
@@ -185,6 +205,26 @@ export function TerminalInput({
     ],
   );
 
+  // Track cursor position changes (arrow keys, mouse clicks, etc.)
+  const handleSelect = useCallback(() => {
+    if (inputRef.current) {
+      setCursorPos(inputRef.current.selectionStart ?? input.length);
+    }
+  }, [input.length]);
+
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInput(e.target.value);
+      // Update cursor position after the change
+      setCursorPos(e.target.selectionStart ?? e.target.value.length);
+    },
+    [],
+  );
+
+  // Split input around cursor for display
+  const textBeforeCursor = input.slice(0, cursorPos);
+  const textAfterCursor = input.slice(cursorPos);
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -199,18 +239,22 @@ export function TerminalInput({
         <span className="text-green-600">:</span>
         <span className="font-bold text-blue-400">{displayPath}</span>
         <span className="whitespace-pre text-green-600">$ </span>
-        <span className="whitespace-pre text-green-300">{input}</span>
+        <span className="whitespace-pre text-green-300">
+          {textBeforeCursor}
+        </span>
         <span className="relative">
           <span className="animate-blink absolute top-0 left-0 h-[1.1em] w-[0.6em] bg-green-400" />
         </span>
+        <span className="whitespace-pre text-green-300">{textAfterCursor}</span>
       </div>
       {/* Hidden input for capturing keystrokes */}
       <input
         ref={inputRef}
         type="text"
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={handleInputChange}
         onKeyDown={handleKeyDown}
+        onSelect={handleSelect}
         disabled={disabled}
         className="terminal-input absolute inset-0 h-full w-full cursor-text border-none opacity-0 outline-none focus:border-none focus:ring-0 focus:outline-none"
         style={{

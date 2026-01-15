@@ -63,8 +63,13 @@ interface Project {
   technologies?: string[];
   url?: string;
   github?: string;
+  repo?: string;
+  repo_source?: "github" | "gitlab" | "bitbucket";
   live?: string;
   highlights?: string[];
+  status?: "production" | "beta" | "development" | "archived";
+  start_date?: string;
+  end_date?: string;
 }
 
 export function InteractivePortfolio({
@@ -452,24 +457,111 @@ function EducationView({ edu }: { edu: Education }) {
   );
 }
 
+// Format date string (YYYY-MM) to readable format (e.g., "Jan 2024")
+function formatDate(dateStr: string): string {
+  const [year, month] = dateStr.split("-");
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const monthIndex = parseInt(month ?? "1", 10) - 1;
+  return `${monthNames[monthIndex]} ${year}`;
+}
+
+// Calculate duration between two dates
+function calculateDuration(startDate: string, endDate?: string): string {
+  const [startYear, startMonth] = startDate.split("-").map(Number);
+  const end = endDate
+    ? endDate.split("-").map(Number)
+    : [new Date().getFullYear(), new Date().getMonth() + 1];
+  const [endYear, endMonth] = end;
+
+  if (!startYear || !startMonth || !endYear || !endMonth) return "";
+
+  let months = (endYear - startYear) * 12 + (endMonth - startMonth);
+  months = Math.max(1, months + 1);
+
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+
+  if (years === 0) {
+    return `${remainingMonths}mo`;
+  } else if (remainingMonths === 0) {
+    return `${years}yr`;
+  } else {
+    return `${years}yr ${remainingMonths}mo`;
+  }
+}
+
+// Normalize description text: join lines within paragraphs, preserve paragraph breaks
+function normalizeDescription(description: string): string {
+  return description
+    .split(/\n\s*\n/) // Split on paragraph breaks (double newlines)
+    .map((paragraph) =>
+      paragraph
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line !== "")
+        .join(" "),
+    )
+    .filter((p) => p.trim() !== "")
+    .join("\n\n"); // Rejoin with double newlines for paragraph breaks
+}
+
 function ProjectView({ project }: { project: Project }) {
   const liveUrl = project.url ?? project.live;
+  const repoUrl = project.repo ?? project.github;
+
+  // Status styling
+  const statusStyles: Record<string, { color: string; icon: string }> = {
+    production: { color: "text-green-500", icon: "●" },
+    beta: { color: "text-yellow-500", icon: "◐" },
+    development: { color: "text-cyan-500", icon: "○" },
+    archived: { color: "text-gray-600", icon: "◌" },
+  };
+  const statusStyle = project.status ? statusStyles[project.status] : null;
 
   return (
     <div className="space-y-3">
       <div>
-        <div className="text-green-400">{project.name}</div>
+        <div className="flex items-center gap-2 text-green-400">
+          {project.name}
+          {statusStyle && (
+            <span className={`text-xs ${statusStyle.color}`}>
+              {statusStyle.icon} {project.status}
+            </span>
+          )}
+        </div>
+        {project.start_date && (
+          <div className="text-xs text-gray-600">
+            {formatDate(project.start_date)} –{" "}
+            {project.end_date ? formatDate(project.end_date) : "Present"}
+            <span className="ml-2 text-cyan-600">
+              ({calculateDuration(project.start_date, project.end_date)})
+            </span>
+          </div>
+        )}
       </div>
 
-      <div className="border-l-2 border-green-900 pl-2 text-gray-400">
-        {project.description}
+      <div className="border-l-2 border-green-900 pl-2 whitespace-pre-line text-gray-400">
+        {normalizeDescription(project.description)}
       </div>
 
-      {(liveUrl ?? project.github) && (
+      {(liveUrl ?? repoUrl) && (
         <div className="flex gap-3">
           {liveUrl && (
             <a
-              href={liveUrl}
+              href={liveUrl.startsWith("http") ? liveUrl : `https://${liveUrl}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-green-500 underline hover:text-green-400"
@@ -477,9 +569,9 @@ function ProjectView({ project }: { project: Project }) {
               [view live ↗]
             </a>
           )}
-          {project.github && (
+          {repoUrl && (
             <a
-              href={project.github}
+              href={repoUrl.startsWith("http") ? repoUrl : `https://${repoUrl}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 underline hover:text-gray-400"

@@ -23,7 +23,20 @@ interface Project {
 // Format date string (YYYY-MM) to readable format (e.g., "Jan 2024")
 const formatProjectDate = (dateStr: string): string => {
   const [year, month] = dateStr.split("-");
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   const monthIndex = parseInt(month ?? "1", 10) - 1;
   return `${monthNames[monthIndex]} ${year}`;
 };
@@ -31,7 +44,9 @@ const formatProjectDate = (dateStr: string): string => {
 // Calculate duration between two dates
 const calculateDuration = (startDate: string, endDate?: string): string => {
   const [startYear, startMonth] = startDate.split("-").map(Number);
-  const end = endDate ? endDate.split("-").map(Number) : [new Date().getFullYear(), new Date().getMonth() + 1];
+  const end = endDate
+    ? endDate.split("-").map(Number)
+    : [new Date().getFullYear(), new Date().getMonth() + 1];
   const [endYear, endMonth] = end;
 
   if (!startYear || !startMonth || !endYear || !endMonth) return "";
@@ -53,7 +68,13 @@ const calculateDuration = (startDate: string, endDate?: string): string => {
 };
 
 // SVG icons for different repo sources
-const RepoIcon = ({ source, className }: { source?: RepoSource; className?: string }) => {
+const RepoIcon = ({
+  source,
+  className,
+}: {
+  source?: RepoSource;
+  className?: string;
+}) => {
   switch (source) {
     case "gitlab":
       return (
@@ -214,7 +235,7 @@ function ProjectModal({
             <h4 className="mb-2 text-sm font-semibold text-slate-300">
               Description
             </h4>
-            <div className="prose prose-sm prose-invert max-w-none text-slate-400 prose-headings:text-slate-300 prose-p:text-slate-400 prose-a:text-blue-400 prose-strong:text-slate-300 prose-code:rounded prose-code:bg-slate-800 prose-code:px-1 prose-code:py-0.5 prose-code:text-blue-300 prose-pre:bg-slate-800 prose-li:text-slate-400">
+            <div className="prose prose-sm prose-invert prose-headings:text-slate-300 prose-p:text-slate-400 prose-a:text-blue-400 prose-strong:text-slate-300 prose-code:rounded prose-code:bg-slate-800 prose-code:px-1 prose-code:py-0.5 prose-code:text-blue-300 prose-pre:bg-slate-800 prose-li:text-slate-400 max-w-none text-slate-400">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {project.description}
               </ReactMarkdown>
@@ -242,7 +263,10 @@ function ProjectModal({
                   />
                 </svg>
                 <span>
-                  {formatProjectDate(project.start_date)} - {project.end_date ? formatProjectDate(project.end_date) : "Present"}
+                  {formatProjectDate(project.start_date)} -{" "}
+                  {project.end_date
+                    ? formatProjectDate(project.end_date)
+                    : "Present"}
                 </span>
                 <span className="rounded-full bg-slate-800 px-2 py-0.5 text-xs text-slate-300">
                   {calculateDuration(project.start_date, project.end_date)}
@@ -459,7 +483,10 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                         }}
                         className={`text-slate-500 transition-colors ${getRepoHoverColor(project.repo_source)}`}
                       >
-                        <RepoIcon source={project.repo_source} className="h-5 w-5" />
+                        <RepoIcon
+                          source={project.repo_source}
+                          className="h-5 w-5"
+                        />
                       </span>
                     ) : null}
                     {project.live && (
@@ -515,10 +542,15 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                       />
                     </svg>
                     <span>
-                      {formatProjectDate(project.start_date)} - {project.end_date ? formatProjectDate(project.end_date) : "Present"}
+                      {formatProjectDate(project.start_date)} -{" "}
+                      {project.end_date
+                        ? formatProjectDate(project.end_date)
+                        : "Present"}
                     </span>
                     <span className="text-slate-600">•</span>
-                    <span className="text-slate-400">{calculateDuration(project.start_date, project.end_date)}</span>
+                    <span className="text-slate-400">
+                      {calculateDuration(project.start_date, project.end_date)}
+                    </span>
                   </div>
                 )}
 
@@ -576,8 +608,8 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             ))}
           </div>
 
-          {/* View more link */}
-          <div
+          {/* View more link -- Commented out, but may add back in the future when I make more repos public on github */}
+          {/* <div
             className={`mt-12 text-center transition-all delay-500 duration-700 ${
               isVisible
                 ? "translate-y-0 opacity-100"
@@ -605,7 +637,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                 />
               </svg>
             </a>
-          </div>
+          </div> */}
         </div>
       </section>
 

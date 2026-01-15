@@ -6,20 +6,20 @@ An interactive terminal-styled portfolio website built with Next.js, featuring a
 
 ## Features
 
-### 🖥️ Interactive Terminal
+### Interactive Terminal
 - Fully functional command-line interface with tab completion
 - Command history navigation (↑/↓ arrows)
 - Environment variables support
 - File system navigation (`cd`, `ls`, `cat`, `pwd`)
 
-### 🎮 Interactive Applications
+### Interactive Applications
 - **Portfolio Hub** - Browse experience, skills, projects, education, and hobbies
 - **Blog** - Interactive searchable blog with full post viewing
 - **Contact** - Send messages directly from the terminal
 - **Snake** - Classic snake game, playable in the terminal
 - **Hidden Easter Eggs** - Discover secrets hidden throughout the system
 
-### 🎨 Visual Effects
+### Visual Effects
 - Authentic CRT monitor display with scanlines and vignette
 - Matrix rain animation
 - Glitch effects
@@ -50,7 +50,7 @@ An interactive terminal-styled portfolio website built with Next.js, featuring a
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+
+- Node.js 23+
 - pnpm (recommended) or npm
 
 ### Installation
@@ -128,8 +128,8 @@ pnpm run generate-content
 Create a new command file in `src/lib/terminal/commands/`:
 
 ```typescript
-import type { Command, CommandResult } from '../types';
-import { createLine } from '../utils';
+import type { Command, CommandResult } from '@/lib/terminal/types';
+import { createLine } from '@/lib/terminal/utils';
 
 export const myCommand: Command = {
   name: 'mycommand',
@@ -161,5 +161,4 @@ MIT © Daniel Boyle
 
 **Daniel W. Boyle**
 - Email: dan.boyle7@gmail.com
-- GitHub: [@danboyle7](https://github.com/danboyle7)
 - LinkedIn: [daniel-w-boyle](https://linkedin.com/in/daniel-w-boyle)
