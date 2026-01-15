@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { formatPath } from "@/lib/terminal/utils";
+import { VERSION } from "@/lib/version";
 
 interface TerminalHeaderProps {
   hostname: string;
@@ -53,7 +54,7 @@ export function TerminalHeader({
         {/* Left: Window controls + path */}
         <div className="flex items-center gap-2 md:gap-3">
           <span className="text-green-500">&gt;</span>
-          <span className="font-bold text-green-300">PORTFOLIO</span>
+          <span className="font-bold text-green-300">PORTFOLIO v{VERSION}</span>
         </div>
 
         {/* Right: Time + uptime */}
