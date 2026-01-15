@@ -3,6 +3,12 @@
 import { useEffect, useState } from "react";
 import type { About, ContactInfo } from "@/lib/terminal/types";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface HeroSectionProps {
   about: About;
@@ -76,9 +82,57 @@ export function HeroSection({
             </span>
           </Button>
 
-          <Button variant="outline" size="lg" asChild>
-            <a href={about.resumeUrl ?? "#"}>Download Resume</a>
-          </Button>
+          {/* Split button for resume download */}
+          <div className="flex">
+            {/* Main button - downloads condensed by default */}
+            <Button
+              variant="outline"
+              size="lg"
+              className="rounded-r-none border-r-0"
+              asChild
+            >
+              <a href="/resume/dboyle-resume-condensed.pdf" download>
+                Download Resume
+              </a>
+            </Button>
+            {/* Dropdown toggle */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="rounded-l-none border-l-slate-700 px-2"
+                  aria-label="More resume options"
+                >
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <a href="/resume/dboyle-resume-condensed.pdf" download>
+                    One-page
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="/resume/dboyle-resume-full.pdf" download>
+                    Full
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
 

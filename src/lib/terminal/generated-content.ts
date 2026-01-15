@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-15T17:10:23.068Z
+ * Generated at: 2026-01-15T21:44:15.912Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,16 +28,23 @@ export const generatedContent: Record<string, any> = {
       "location": "Full Remote",
       "description": "Developing enterprise applications for government clients, leading AI/ML initiatives, and building data science solutions for the United States Space Force.",
       "highlights": [
-        "Developed CAPS-5 training platform for the VA using Next.js, TailwindCSS, and Drizzle ORM",
-        "Primary Data Scientist for USSF S1A division, analyzing military and civilian personnel datasets",
+        "Developed CAPS-5 training platform (C5T) for the VA using Next.js, TailwindCSS, and Drizzle ORM",
+        "Implemented React Three Fiber (Three.js) with Blender models for realistic 3D character animations and lip-syncing in C5T patient conversations",
+        "Established GitLab CI/CD pipelines and configured Vercel deployments with Sentry monitoring for C5T",
         "Led summer internship engineering team building LLM-powered automated customer report tool",
         "Integrated LangChain and OpenAI models for streamlined reporting processes",
-        "Collaborated on business process design for software idea submission and management"
+        "Primary Data Scientist for USSF S1A division, analyzing military and civilian personnel datasets to support workforce planning and staffing decisions"
       ],
       "technologies": [
         "Next.js",
         "TailwindCSS",
         "Drizzle ORM",
+        "React Three Fiber",
+        "Three.js",
+        "Blender",
+        "GitLab CI/CD",
+        "Vercel",
+        "Sentry",
         "LangChain",
         "OpenAI",
         "Python",
@@ -51,11 +58,11 @@ export const generatedContent: Record<string, any> = {
       "location": "Remote (Hillsboro, Oregon)",
       "description": "Contributed to Intel's Neural Processing Unit development, building C++17 firmware and automation tools in a large-scale multi-team production environment.",
       "highlights": [
-        "Developed C++17 firmware for next-gen NPU hardware focusing on neural network scheduling and execution",
+        "Developed C++17 firmware for next-gen NPU hardware, supporting end-to-end neural network workload scheduling and execution",
         "Used JTAG debugging to diagnose and resolve firmware issues for model loading and inference",
         "Created automation tools: build systems, remote debugging setups, driver installation scripts",
         "Built Python-based machine reservation system to enhance team productivity",
-        "Facilitated unification of software baselines across multiple firmware products"
+        "Facilitated unification of software baselines across multiple large-scale firmware products"
       ],
       "technologies": [
         "C++17",
