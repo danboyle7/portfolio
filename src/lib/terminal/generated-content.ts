@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-15T21:44:15.912Z
+ * Generated at: 2026-01-15T22:10:29.324Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

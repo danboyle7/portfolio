@@ -30,6 +30,7 @@ import { messageCommand } from "./message";
 import { envCommand } from "./env";
 import { portfolioHubCommand } from "./portfolio-hub";
 import { neofetchCommand } from "./neofetch";
+import { resumeCommand } from "./resume";
 
 // Easter egg commands
 import { cowsayCommand } from "./easter-eggs/cowsay";
@@ -69,6 +70,7 @@ const allCommands: Command[] = [
   envCommand,
   portfolioHubCommand,
   neofetchCommand,
+  resumeCommand,
   exitCommand,
   rebootCommand,
   // Easter eggs

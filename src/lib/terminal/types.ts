@@ -51,6 +51,7 @@ export interface CommandResult {
     | "exit";
   animatedOutput?: AnimatedLine[]; // For step-by-step animation
   enterInteractiveMode?: InteractiveMode; // Enter an interactive TUI mode
+  openUrl?: string; // Open a URL in a new tab
 }
 
 export interface Command {

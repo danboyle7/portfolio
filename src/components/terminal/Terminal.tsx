@@ -374,6 +374,11 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
         setInteractiveMode(result.enterInteractiveMode);
       }
 
+      // Handle opening URL in new tab
+      if (result.openUrl) {
+        window.open(result.openUrl, "_blank");
+      }
+
       // Update state
       setState((prev) => {
         const newLines = result.clearScreen ? [] : prev.lines;

@@ -62,6 +62,7 @@ esac
 alias ll='ls -la'
 alias la='ls -A'
 alias l='ls -CF'
+alias cv='resume'
 
 # Custom prompt
 PS1='\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '
@@ -1220,6 +1221,25 @@ The year it came from. The state it represents.
                 size: "7",
                 modified: dateStr,
                 target: "/usr/bin/message",
+              },
+              resume: {
+                name: "resume",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "12K",
+                modified: dateStr,
+                content:
+                  "#!/bin/bash\n# download resume PDF\n# Usage: resume [--full | --short]",
+              },
+              cv: {
+                name: "cv",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "6",
+                modified: dateStr,
+                target: "/usr/bin/resume",
               },
               blog: {
                 name: "blog",

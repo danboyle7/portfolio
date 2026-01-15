@@ -76,6 +76,7 @@ export const helpCommand: Command = {
         createLine("  projects       View portfolio projects", "output"),
         createLine("  blog           View blog posts", "output"),
         createLine("  contact        View contact information", "output"),
+        createLine("  resume         Download resume", "output"),
         createLine("  message        Send me a message", "output"),
         createLine("", "output"),
         createLine("  UTILITIES", "success"),
@@ -187,6 +188,13 @@ function getCommandHelp(name: string): CommandHelp | null {
       name: "contact",
       description: "Display contact information",
       usage: "contact",
+    },
+    resume: {
+      name: "resume",
+      description: "Download resume PDF",
+      usage:
+        "resume [--full | --short]\n\n  Options:\n    --full    Download full resume (multi-page)\n    --short   Download one-page resume (default)",
+      aliases: ["cv"],
     },
   };
 
