@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-15T22:10:29.324Z
+ * Generated at: 2026-01-15T22:21:35.176Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -226,7 +226,7 @@ export const generatedContent: Record<string, any> = {
         },
         {
           "name": "Java",
-          "level": 65,
+          "level": 50,
           "years": 2
         },
         {
@@ -236,13 +236,13 @@ export const generatedContent: Record<string, any> = {
         },
         {
           "name": "C#",
-          "level": 65,
+          "level": 50,
           "years": 1
         },
         {
           "name": "Bash",
-          "level": 80,
-          "years": 8
+          "level": 70,
+          "years": 6
         },
         {
           "name": "SQL",
@@ -267,47 +267,47 @@ export const generatedContent: Record<string, any> = {
       "skills": [
         {
           "name": "PyTorch",
-          "level": 95,
+          "level": 75,
           "years": 5
         },
         {
           "name": "TensorFlow/Keras",
-          "level": 85,
+          "level": 75,
           "years": 4
         },
         {
           "name": "NumPy",
-          "level": 90,
+          "level": 85,
           "years": 6
         },
         {
           "name": "Pandas",
-          "level": 95,
+          "level": 85,
           "years": 6
         },
         {
           "name": "SciPy",
-          "level": 85,
+          "level": 65,
           "years": 5
         },
         {
           "name": "Scikit-learn",
-          "level": 90,
+          "level": 75,
           "years": 5
         },
         {
           "name": "Ray",
-          "level": 75,
+          "level": 65,
           "years": 2
         },
         {
           "name": "MLFlow",
-          "level": 65,
+          "level": 70,
           "years": 1
         },
         {
           "name": "LangChain",
-          "level": 85,
+          "level": 80,
           "years": 3
         }
       ]
@@ -318,12 +318,12 @@ export const generatedContent: Record<string, any> = {
       "skills": [
         {
           "name": "Next.js",
-          "level": 90,
+          "level": 85,
           "years": 3
         },
         {
           "name": "React",
-          "level": 90,
+          "level": 80,
           "years": 4
         },
         {
@@ -374,7 +374,7 @@ export const generatedContent: Record<string, any> = {
         },
         {
           "name": "Docker",
-          "level": 85,
+          "level": 80,
           "years": 5
         },
         {
@@ -384,22 +384,22 @@ export const generatedContent: Record<string, any> = {
         },
         {
           "name": "GDB/PDB",
-          "level": 90,
-          "years": 8
+          "level": 80,
+          "years": 5
         },
         {
           "name": "Valgrind",
           "level": 80,
-          "years": 6
+          "years": 3
         },
         {
           "name": "Jira",
           "level": 85,
-          "years": 7
+          "years": 3
         },
         {
           "name": "Linux",
-          "level": 95,
+          "level": 90,
           "years": 10
         },
         {
@@ -420,8 +420,8 @@ export const generatedContent: Record<string, any> = {
         },
         {
           "name": "Green Hills Integrity",
-          "level": 80,
-          "years": 4
+          "level": 75,
+          "years": 3
         },
         {
           "name": "VxWorks",
@@ -446,23 +446,23 @@ export const generatedContent: Record<string, any> = {
       "skills": [
         {
           "name": "Deep Reinforcement Learning",
-          "level": 90,
+          "level": 85,
           "years": 4
         },
         {
           "name": "Natural Language Processing",
-          "level": 85,
-          "years": 3
+          "level": 75,
+          "years": 4
         },
         {
           "name": "Time Series Forecasting",
-          "level": 85,
+          "level": 80,
           "years": 4
         },
         {
           "name": "Representation Learning",
-          "level": 80,
-          "years": 3
+          "level": 75,
+          "years": 2
         },
         {
           "name": "LLM Integration",
@@ -472,7 +472,7 @@ export const generatedContent: Record<string, any> = {
         {
           "name": "Prompt Engineering",
           "level": 90,
-          "years": 4
+          "years": 3
         }
       ]
     }

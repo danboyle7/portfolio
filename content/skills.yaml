@@ -52,10 +52,10 @@ skills:
         level: 75
         years: 4
       - name: "NumPy"
-        level: 90
+        level: 85
         years: 6
       - name: "Pandas"
-        level: 90
+        level: 85
         years: 6
       - name: "SciPy"
         level: 65
@@ -125,9 +125,6 @@ skills:
       - name: "Jira"
         level: 85
         years: 3
-      - name: "Linux"
-        level: 95
-        years: 10
       - name: "CI/CD Pipelines"
         level: 80
         years: 6
@@ -136,7 +133,7 @@ skills:
     icon: "monitor"
     skills:
       - name: "Linux"
-        level: 95
+        level: 90
         years: 10
       - name: "Green Hills Integrity"
         level: 75
@@ -155,7 +152,7 @@ skills:
     icon: "brain"
     skills:
       - name: "Deep Reinforcement Learning"
-        level: 85
+        level: 80
         years: 4
       - name: "Natural Language Processing"
         level: 75
@@ -167,8 +164,8 @@ skills:
         level: 75
         years: 2
       - name: "LLM Integration"
-        level: 90
+        level: 85
         years: 3
       - name: "Prompt Engineering"
-        level: 90
+        level: 85
         years: 3
