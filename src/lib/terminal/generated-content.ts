@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-15T22:21:35.176Z
+ * Generated at: 2026-01-15T22:26:05.647Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -398,11 +398,6 @@ export const generatedContent: Record<string, any> = {
           "years": 3
         },
         {
-          "name": "Linux",
-          "level": 90,
-          "years": 10
-        },
-        {
           "name": "CI/CD Pipelines",
           "level": 80,
           "years": 6
@@ -415,7 +410,7 @@ export const generatedContent: Record<string, any> = {
       "skills": [
         {
           "name": "Linux",
-          "level": 95,
+          "level": 90,
           "years": 10
         },
         {
@@ -446,7 +441,7 @@ export const generatedContent: Record<string, any> = {
       "skills": [
         {
           "name": "Deep Reinforcement Learning",
-          "level": 85,
+          "level": 80,
           "years": 4
         },
         {
@@ -466,12 +461,12 @@ export const generatedContent: Record<string, any> = {
         },
         {
           "name": "LLM Integration",
-          "level": 90,
+          "level": 85,
           "years": 3
         },
         {
           "name": "Prompt Engineering",
-          "level": 90,
+          "level": 85,
           "years": 3
         }
       ]
