@@ -1,0 +1,63 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## 1.0.0 (2026-01-15)
+
+
+### Features
+
+* add (reverse-i-search) to terminal to search through terminal history ([dda5b42](https://gitlab.com/public-danboyle7/portfolio/commit/dda5b4233f7a42bab15c6648a814a9c882752bc4))
+* add csp headers, update metadata descriptions ([49c8588](https://gitlab.com/public-danboyle7/portfolio/commit/49c85889ae5c61526f1c3d18df76c18de211a368))
+* add resume and multi-resume download button to modern ui ([9eedbd6](https://gitlab.com/public-danboyle7/portfolio/commit/9eedbd6cd9d58202b5c92a65f5364447eca84570))
+* add split main mnu, help menu, misc fixes and more... ([aef9bff](https://gitlab.com/public-danboyle7/portfolio/commit/aef9bff33b07f7a5d1fd6e331c0d7e18dd44f790))
+* add terminal resume/cv command for downloading resume ([39c4be7](https://gitlab.com/public-danboyle7/portfolio/commit/39c4be7642879ad43bf1f6ed86afeaab2e57e304))
+* added animated sl command ([ac9d5e5](https://gitlab.com/public-danboyle7/portfolio/commit/ac9d5e52f1db8b687908ee0dd2b7b8cf44f64b79))
+* added different scaled image to better fit normal screen ([9e34ee2](https://gitlab.com/public-danboyle7/portfolio/commit/9e34ee265f21dfa4cefb1071d126d26975ea69ee))
+* amazing first progress on terminal portfolio ([06713f2](https://gitlab.com/public-danboyle7/portfolio/commit/06713f2a7a99959ed355a24a56a353f94ea4042b))
+* condensed profile ASCII art for mobile ([8926f7c](https://gitlab.com/public-danboyle7/portfolio/commit/8926f7ca9cb1ae69328651088e724e0112d0b5b9))
+* embed terminal inside vintage computer monitor ([d7f2ef4](https://gitlab.com/public-danboyle7/portfolio/commit/d7f2ef4aa984baddfcb478c190ccf2fb5a3038bf))
+* extra options to closing main help menu ([64d5998](https://gitlab.com/public-danboyle7/portfolio/commit/64d5998312fef2ed1d4d0ad0f25406963644ed7c))
+* first verion of interactive commands ([d291c71](https://gitlab.com/public-danboyle7/portfolio/commit/d291c7179241396f57cbfb0297a4e6205c50b779))
+* integrate versioning for future releases ([51143ba](https://gitlab.com/public-danboyle7/portfolio/commit/51143ba03094907a222dc3e026c54a265a96a155))
+* interactive blog and many many fixes ([917b7e0](https://gitlab.com/public-danboyle7/portfolio/commit/917b7e0af8d7a4f7caf3ba806b3eaa6eb472e22d))
+* modern portfolio -- needs edits, too much terminal lokoing stuff ([fd482ec](https://gitlab.com/public-danboyle7/portfolio/commit/fd482ece860c8ada056d2001ed4757683be87704))
+* modern portfolio -- part 2, removed text feel ([711b2a3](https://gitlab.com/public-danboyle7/portfolio/commit/711b2a3f25467df1eae7dbfbe9a6bdc05646dc9d))
+* update markdown renderer ([619882f](https://gitlab.com/public-danboyle7/portfolio/commit/619882fa4b1589b7102de106c75319d465e765ae))
+* working animated sl command with moving wheels ([d474d80](https://gitlab.com/public-danboyle7/portfolio/commit/d474d80aea42f8436ae08349a8efb3ce9f143d85))
+
+
+### Bug Fixes
+
+* Almost perfect ([4a607f9](https://gitlab.com/public-danboyle7/portfolio/commit/4a607f9738319aef5866c6bf3ea5897d2d0cd89b))
+* auto-sort skills in modern ui ([824400b](https://gitlab.com/public-danboyle7/portfolio/commit/824400b32b200ee04dd215d551a4b5c4e4cc0a73))
+* countless fixes, mobile imporvements, and feature additions ([ccdcc9f](https://gitlab.com/public-danboyle7/portfolio/commit/ccdcc9f64d0e0f356077657d6b1d2960bbe85bb2))
+* fix a TON of issues, added some more fun stuff ([4335f8a](https://gitlab.com/public-danboyle7/portfolio/commit/4335f8a59479bf19c1b5bfd558c4cd2af7d9f397))
+* fix markdown list items ([ce0e419](https://gitlab.com/public-danboyle7/portfolio/commit/ce0e4192f308f43ceb7d5f334adc523a08d61b62))
+* fix misc scale issues on modern ui ([24b50bf](https://gitlab.com/public-danboyle7/portfolio/commit/24b50bf2c764a7b32034e9e8b7ddecfa521765ed))
+* fix misc term and back button issues ([41b19c3](https://gitlab.com/public-danboyle7/portfolio/commit/41b19c30ffcf581d83e4edf96e99a38b86c5587c))
+* fix scroll issue in booting, add tip for screen zooming in terminal welcomne, hero fixes in modern, and more.. ([9bb6013](https://gitlab.com/public-danboyle7/portfolio/commit/9bb601311ab7af0afde9659a9428a99642752020))
+* fix typing issue with train ([cabe1c5](https://gitlab.com/public-danboyle7/portfolio/commit/cabe1c5c8a9afdb25403067b3382f41b6f7173d3))
+* fixed lint errors ([1003f96](https://gitlab.com/public-danboyle7/portfolio/commit/1003f96ba076f114234e6b98d5cba451373c6ece))
+* fixed weird line adjustment issue ([722be25](https://gitlab.com/public-danboyle7/portfolio/commit/722be255750e8fb12d943075fa71b09d2acd1a47))
+* migrate images to git-lfs... oops ([3ca2453](https://gitlab.com/public-danboyle7/portfolio/commit/3ca2453a4b357446ebceb809ac4e228e6cb9792e))
+* misc issues, styling, all static ([c333d26](https://gitlab.com/public-danboyle7/portfolio/commit/c333d26b9e0da1b98936431343f013a333051f18))
+* project text spacing in terminal, and current cursor postion when tabbing backwards ([6a169b1](https://gitlab.com/public-danboyle7/portfolio/commit/6a169b1c5f2d42ae08f4a29ee0433ed16fd02fcb))
+* update skills ([5b4a5db](https://gitlab.com/public-danboyle7/portfolio/commit/5b4a5db3458c66708179cac75427bd2864df52b6))
+* update skills - languages ([a623205](https://gitlab.com/public-danboyle7/portfolio/commit/a6232057fe0fe17443adfacb861d22419d2fbfab))
+* zoom offset glitch working ([304ec5d](https://gitlab.com/public-danboyle7/portfolio/commit/304ec5da03bc7441731d494e4467e205dadd50f9))
+
+
+### Refactoring
+
+* add shadcn and replace some components, fix blog post revert (not sure what caused it) ([9350112](https://gitlab.com/public-danboyle7/portfolio/commit/93501126a0f69b22d81b20fc37ba196067338105))
+* additional fixes, terminal OS boot sequence changes, terminal OS welcome updates for mobiles creens ([f33d951](https://gitlab.com/public-danboyle7/portfolio/commit/f33d951a9ed81c588f6b0a5291f6e20bd45a73af))
+* better scaling ([54d6f35](https://gitlab.com/public-danboyle7/portfolio/commit/54d6f355f6650ff1ed326f7858e630f35f1443d1))
+* change styling of hub/interactive portfolio ([a4929cf](https://gitlab.com/public-danboyle7/portfolio/commit/a4929cf8b02678dfa44b170dae5fecddd6be4470))
+* fixes / other modern changes -- before retheming modern splash ([3b95980](https://gitlab.com/public-danboyle7/portfolio/commit/3b95980512048a58284d9eea87a29871cc6f963d))
+* misc fixes to projects, added overseer project description, and added profile image to lfs ([3a7abc3](https://gitlab.com/public-danboyle7/portfolio/commit/3a7abc36fa31824e55a7cd9a53ab4b637da64ba7))
+* round 3 of updates ([64ec9eb](https://gitlab.com/public-danboyle7/portfolio/commit/64ec9ebbd87dc6fb66023143fb10447df4d470ac))
+* separate out sysinfo and profile commands ([fbbc256](https://gitlab.com/public-danboyle7/portfolio/commit/fbbc256df8f799b5c034cf096d62229373d1fc71))
+* shadcn card additions ([6251f52](https://gitlab.com/public-danboyle7/portfolio/commit/6251f52ca6f6cc57705ca956cc0811f260fb58c8))
+* terminal portfolio hub updates -- mostly to skills / hub ([da35c35](https://gitlab.com/public-danboyle7/portfolio/commit/da35c35797b13c6f119e70a3fdad40f4d36c8a76))
+* update content ([c4b3d6e](https://gitlab.com/public-danboyle7/portfolio/commit/c4b3d6e9b4f2229197b692caa50b86db1caa5efe))
