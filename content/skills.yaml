@@ -21,17 +21,17 @@ skills:
         level: 80
         years: 3
       - name: "Java"
-        level: 65
+        level: 50
         years: 2
       - name: "Ada"
         level: 75
         years: 3
       - name: "C#"
-        level: 65
+        level: 50
         years: 1
       - name: "Bash"
-        level: 80
-        years: 8
+        level: 70
+        years: 6
       - name: "SQL"
         level: 80
         years: 4
