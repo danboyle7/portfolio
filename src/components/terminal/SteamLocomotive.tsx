@@ -103,8 +103,8 @@ export function SteamLocomotive({ onComplete }: SteamLocomotiveProps) {
   }, [onComplete]);
 
   // Compose the full train from parts
-  const currentSmoke = SMOKE_FRAMES[smokeFrame] ?? SMOKE_FRAMES[0];
-  const currentWheels = WHEEL_FRAMES[wheelFrame] ?? WHEEL_FRAMES[0];
+  const currentSmoke = SMOKE_FRAMES[smokeFrame] ?? SMOKE_FRAMES[0]!;
+  const currentWheels = WHEEL_FRAMES[wheelFrame] ?? WHEEL_FRAMES[0]!;
   const fullTrain = [...currentSmoke, ...TRAIN_BODY, ...currentWheels];
 
   return (

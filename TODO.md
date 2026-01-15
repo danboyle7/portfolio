@@ -9,5 +9,5 @@ Features:
 TODO:
 1. Add updated resume
 
-Look into:
-4. Weird highlighted list item in portfolio hub
+2. Add projects
+3. Add hobbies (and should I add this to modern UI? Where?)
