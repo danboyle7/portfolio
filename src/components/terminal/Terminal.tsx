@@ -86,7 +86,6 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputLineRef = useRef<HTMLDivElement>(null);
   const scrollAnchorRef = useRef<HTMLDivElement>(null);
-  const lastHistoryLengthRef = useRef(0);
   const zoomScaleRef = useRef(zoomScale);
 
   // Keep ref in sync with context value
@@ -449,45 +448,44 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
     [state.currentPath, state.commandHistory, fileSystem, env],
   );
 
-  // Scroll input into view when NEW history entries are added
-  useEffect(() => {
-    // Only scroll if history grew (new command was added by user)
-    if (history.length > lastHistoryLengthRef.current) {
-      lastHistoryLengthRef.current = history.length;
+  // Calculate total output lines for scroll tracking
+  const totalOutputLines = history.reduce(
+    (sum, entry) => sum + entry.output.length,
+    0,
+  );
 
-      // Skip ALL scrolling when zoomed - prevents transform container shift
-      const currentZoomScale = zoomScaleRef.current;
-      if (currentZoomScale > 1) {
+  // Scroll to bottom when history changes (new commands or animated output)
+  useEffect(() => {
+    // Skip ALL scrolling when zoomed - prevents transform container shift
+    const currentZoomScale = zoomScaleRef.current;
+    if (currentZoomScale > 1) {
+      return;
+    }
+
+    // Use setTimeout to ensure DOM has fully updated after React render
+    const timer = setTimeout(() => {
+      if (!scrollAnchorRef.current || !terminalRef.current) return;
+
+      const anchor = scrollAnchorRef.current;
+      const container = terminalRef.current;
+
+      // Check if container is scrollable at all
+      const isScrollable = container.scrollHeight > container.clientHeight;
+      if (!isScrollable) {
         return;
       }
 
-      // Use setTimeout to ensure DOM has fully updated after React render
-      const timer = setTimeout(() => {
-        if (!scrollAnchorRef.current || !terminalRef.current) return;
+      const anchorRect = anchor.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
 
-        const anchor = scrollAnchorRef.current;
-        const container = terminalRef.current;
+      if (anchorRect.bottom > containerRect.bottom) {
+        const scrollNeeded = anchorRect.bottom - containerRect.bottom + 8;
+        container.scrollTop += scrollNeeded;
+      }
+    }, 16);
 
-        // Check if container is scrollable at all
-        const isScrollable = container.scrollHeight > container.clientHeight;
-        if (!isScrollable) {
-          return;
-        }
-
-        const anchorRect = anchor.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
-
-        if (anchorRect.bottom > containerRect.bottom) {
-          const scrollNeeded = anchorRect.bottom - containerRect.bottom + 8;
-          container.scrollTop += scrollNeeded;
-        }
-      }, 16);
-
-      return () => clearTimeout(timer);
-    }
-
-    lastHistoryLengthRef.current = history.length;
-  }, [history.length]);
+    return () => clearTimeout(timer);
+  }, [history.length, totalOutputLines]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -600,7 +598,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
             )}
 
             {interactiveMode?.type === "snake" && (
-              <div className="absolute inset-0 z-50">
+              <div className="fixed inset-0 z-50 bg-black">
                 <SnakeGame
                   onExit={handleExitInteractive}
                   onGameOver={handleSnakeGameOver}

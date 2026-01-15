@@ -313,7 +313,8 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
   return (
     <div
       ref={containerRef}
-      className="terminal-text flex h-full w-full flex-col bg-black font-mono"
+      className="flex h-full w-full flex-col bg-black font-mono text-green-500"
+      style={{ fontSize: "14px", lineHeight: "1.2" }}
     >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-green-700 px-4 py-2 text-green-400">
@@ -328,8 +329,12 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
       <div className="flex flex-1 items-center justify-center overflow-hidden p-4">
         <div className="relative border border-green-700 bg-gray-950">
           <pre
-            className="leading-none text-green-500 select-none"
-            style={{ fontSize: "14px", lineHeight: "16px" }}
+            className="leading-none whitespace-pre text-green-500 select-none"
+            style={{
+              fontSize: "14px",
+              lineHeight: "16px",
+              fontFamily: "monospace",
+            }}
           >
             <span className="text-green-700">
               {"╔" + "═".repeat(GRID_WIDTH * CELL_CHAR_WIDTH) + "╗"}
@@ -365,7 +370,7 @@ export function SnakeGame({ onExit, onGameOver }: SnakeGameProps) {
                     );
                   return (
                     <span key={x} className="text-gray-900">
-                      {" "}
+                      {"  "}
                     </span>
                   );
                 })}

@@ -25,7 +25,7 @@ const config = {
   trailingSlash: true,
 
   // Security headers
-  async headers() {
+  headers() {
     return [
       {
         source: "/(.*)",

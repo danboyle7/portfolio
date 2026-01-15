@@ -50,17 +50,6 @@ export function TerminalInput({
     return () => window.removeEventListener("click", focusInput);
   }, [disabled]);
 
-  // Re-focus when input value changes (for backspace to work properly)
-  useEffect(() => {
-    if (
-      !disabled &&
-      inputRef.current &&
-      document.activeElement !== inputRef.current
-    ) {
-      inputRef.current.focus({ preventScroll: true });
-    }
-  }, [input, disabled]);
-
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
@@ -197,7 +186,11 @@ export function TerminalInput({
   );
 
   return (
-    <form onSubmit={handleSubmit} className="outline-none" tabIndex={-1}>
+    <form
+      onSubmit={handleSubmit}
+      className="relative outline-none"
+      tabIndex={-1}
+    >
       {/* Text that wraps to the left edge */}
       <div className="break-all">
         <span className="font-bold text-green-400">

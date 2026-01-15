@@ -24,12 +24,13 @@ export const metadata: Metadata = {
     "typescript",
     "next.js",
     "daniel w boyle",
-    "daniel walker boyle"
+    "daniel walker boyle",
   ],
   authors: [{ name: "Daniel Boyle" }],
   openGraph: {
     title: "Daniel Boyle's Portfolio",
-    description: "Daniel Boyle's portfolio - a software developer showcasing experience, skills, and projects.",
+    description:
+      "Daniel Boyle's portfolio - a software developer showcasing experience, skills, and projects.",
     type: "website",
   },
   icons: [{ rel: "icon", url: "/favicon.ico" }],

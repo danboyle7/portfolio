@@ -74,6 +74,7 @@
 /* Base styles - neutral defaults */
 html {
   background-color: #000;
+  scroll-behavior: smooth;
 }
 
 body {

@@ -150,13 +150,19 @@ export function BlogPostClient({
           </header>
 
           {/* Article Content */}
-          <div className="prose prose-lg prose-invert max-w-none prose-headings:text-white prose-p:text-slate-300 prose-strong:text-white prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-code:text-blue-300 prose-code:bg-slate-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-transparent prose-pre:p-0 prose-pre:m-0 prose-li:text-slate-300 prose-ul:marker:text-blue-400 prose-ol:marker:text-blue-400 [&_pre]:bg-transparent! [&_pre]:p-0! [&_pre]:m-0!">
+          <div className="prose prose-lg prose-invert prose-headings:text-white prose-p:text-slate-300 prose-strong:text-white prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-code:text-blue-300 prose-code:bg-slate-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-transparent prose-pre:p-0 prose-pre:m-0 prose-li:text-slate-300 prose-ul:marker:text-blue-400 prose-ol:marker:text-blue-400 max-w-none [&_pre]:m-0! [&_pre]:bg-transparent! [&_pre]:p-0!">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
                 code({ className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || "");
-                  const codeString = String(children).replace(/\n$/, "");
+                  const match = /language-(\w+)/.exec(className ?? "");
+                  // Extract text content from children (react-markdown passes string children for code)
+                  const childContent = Array.isArray(children)
+                    ? children.join("")
+                    : typeof children === "string"
+                      ? children
+                      : "";
+                  const codeString = childContent.replace(/\n$/, "");
 
                   // Check if this is an inline code or a code block
                   const isInline = !match && !className;

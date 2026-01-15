@@ -25,9 +25,12 @@ export function Navigation({ onBack }: NavigationProps = {}) {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const pathname = usePathname();
 
-  const isOnBlogPage = pathname?.startsWith("/blog") ?? false;
+  // Normalize pathname by removing trailing slash for consistent comparison
+  const normalizedPath = pathname?.replace(/\/$/, "") ?? "";
+  const isOnBlogPage = normalizedPath.startsWith("/blog");
+  // A blog post page is any path like /blog/some-slug (but not /blog itself)
   const isOnBlogPostPage =
-    (pathname?.startsWith("/blog/") && pathname !== "/blog") ?? false;
+    normalizedPath !== "/blog" && normalizedPath.startsWith("/blog/");
   const isOnPortfolioPage = pathname === "/portfolio";
   const canScrollToSections = isOnPortfolioPage || !!onBack;
 

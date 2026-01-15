@@ -8,9 +8,6 @@ Features:
 
 TODO:
 1. Add updated resume
-3. Make the split screen Vertical instead of horizontal for the smallest screens (on top of each other)
-5. Terminal skills UI has a plane white scroll bar, not the themed green one used elsewhere..?
-
 
 Look into:
 4. Weird highlighted list item in portfolio hub
