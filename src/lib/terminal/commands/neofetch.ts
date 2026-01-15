@@ -27,7 +27,7 @@ export const neofetchCommand: Command = {
       { label: "OS", value: `Portfolio OS v${VERSION}` },
       { label: "Host", value: "Web Browser" },
       { label: "Kernel", value: "Next.js 16.x" },
-      { label: "Shell", value: "zsh" },
+      { label: "Shell", value: "bash" },
       { label: "Terminal", value: "Portfolio Terminal" },
       { label: "Resolution", value: "Responsive" },
       { label: "Theme", value: "Dracula" },

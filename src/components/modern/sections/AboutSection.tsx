@@ -188,12 +188,11 @@ export function AboutSection({ about, contact }: AboutSectionProps) {
             >
               <div className="mx-auto aspect-square w-full max-w-[200px] overflow-hidden rounded-2xl border border-slate-700/50 bg-linear-to-br from-slate-800/50 to-slate-900/50 md:mx-0 md:aspect-auto md:h-full md:w-[240px] md:max-w-none lg:aspect-auto lg:h-full lg:w-[320px]">
                 <Image
-                  src="https://media.licdn.com/dms/image/v2/C4E03AQEyaAZMhih_KA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1558729641546?e=1770249600&v=beta&t=53Wkqm6Ku1qUOaZRD-D1yPPFupKwYySvKayQYD1FDm8"
+                  src="/images/profile.jpeg"
                   alt="Daniel Boyle"
                   width={400}
                   height={400}
                   className="h-full w-full object-cover"
-                  unoptimized
                 />
               </div>
             </div>

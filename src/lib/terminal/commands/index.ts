@@ -149,7 +149,7 @@ export async function executeCommand(
   if (!command) {
     return {
       output: [
-        createLine(`zsh: command not found: ${commandName}`, "error"),
+        createLine(`bash: command not found: ${commandName}`, "error"),
         createLine(`Type 'help' to see available commands.`, "system"),
       ],
     };

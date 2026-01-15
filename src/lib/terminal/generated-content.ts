@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-15T03:00:15.606Z
+ * Generated at: 2026-01-15T15:54:32.046Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -583,73 +583,38 @@ export const generatedContent: Record<string, any> = {
   ],
   "projects": [
     {
-      "name": "terminal-portfolio",
-      "description": "This terminal-style portfolio you're viewing right now!",
+      "name": "Personal Portfolio",
+      "description": "A dual-mode portfolio featuring an interactive retro terminal emulator alongside a sleek modern UI for quick viewing. The terminal boasts a large array of commands, file system navigation, and many hidden surprises.",
       "technologies": [
         "Next.js",
         "TypeScript",
         "Tailwind CSS",
         "React"
       ],
+      "start_date": "2025-12",
+      "end_date": "2026-1",
       "status": "production",
-      "github": "github.com/danielboyle/terminal-portfolio",
-      "live": "danielboyle.dev",
-      "stars": 42
+      "repo": "gitlab.com/public-danboyle7/portfolio",
+      "repo_source": "gitlab",
+      "live": "daniel-boyle.com"
     },
     {
-      "name": "cloud-sync",
-      "description": "Real-time file synchronization service with conflict resolution and cross-platform support",
-      "technologies": [
-        "Rust",
-        "gRPC",
-        "PostgreSQL",
-        "Redis",
-        "Docker"
-      ],
-      "status": "production",
-      "github": "github.com/danielboyle/cloud-sync",
-      "stars": 128
-    },
-    {
-      "name": "devtools-extension",
-      "description": "Browser extension for debugging React applications with component tree visualization",
-      "technologies": [
-        "TypeScript",
-        "React",
-        "Chrome APIs",
-        "WebExtensions"
-      ],
-      "status": "beta",
-      "github": "github.com/danielboyle/devtools-extension",
-      "stars": 67
-    },
-    {
-      "name": "ml-pipeline",
-      "description": "Automated machine learning pipeline for data processing, training, and deployment",
+      "name": "Overseer",
+      "start_date": "2020-1",
+      "description": "Overseer is an event-driven algorithmic trading framework built in Rust and Python for backtesting and live\ntrading of equities and derivatives. It uses a modular, plug-and-play componetized architecture, allowing\nthe same strategies to be deployed unchanged in simulated or live environments. The system provides\nrealistic market simulation, slippage modeling, commissions, delays, margin management, and settlement\nmechanics. It also integrates with multiple data providers (Alpaca, Interactive Brokers, YFinance,\nPolygon, and FRED) and supports notification and control channels (Telegram, Discord) for alerts and\ncommand execution. Additional features include integrated risk management, component health monitoring,\noptional human-in-the-loop controls and extensible AI/LLM integrations for advanced strategy and\nexecution workflows.\n\nDue to the nature of this project, and the proprietary nature of of the strategies, this project has been\nkept private. However, I do have plans in the future to open-source the base framework once I am out of development.\n",
       "technologies": [
         "Python",
-        "TensorFlow",
-        "Docker",
-        "Airflow",
-        "MLflow"
+        "Rust",
+        "SQLAlchemy",
+        "Alembic",
+        "Pandas",
+        "Numpy",
+        "PostgreSQL",
+        "Reinforcement Leearning",
+        "LLM",
+        "LangGraph"
       ],
-      "status": "development",
-      "github": "github.com/danielboyle/ml-pipeline",
-      "stars": 34
-    },
-    {
-      "name": "api-gateway",
-      "description": "High-performance API gateway with rate limiting, caching, and observability",
-      "technologies": [
-        "Go",
-        "Redis",
-        "Prometheus",
-        "Kubernetes",
-        "gRPC"
-      ],
-      "status": "production",
-      "github": "github.com/danielboyle/api-gateway",
-      "stars": 256
+      "status": "development"
     }
   ]
 };

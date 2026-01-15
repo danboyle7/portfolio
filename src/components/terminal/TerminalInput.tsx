@@ -198,8 +198,8 @@ export function TerminalInput({
         </span>
         <span className="text-green-600">:</span>
         <span className="font-bold text-blue-400">{displayPath}</span>
-        <span className="text-green-600">$ </span>
-        <span className="text-green-300">{input}</span>
+        <span className="whitespace-pre text-green-600">$ </span>
+        <span className="whitespace-pre text-green-300">{input}</span>
         <span className="relative">
           <span className="animate-blink absolute top-0 left-0 h-[1.1em] w-[0.6em] bg-green-400" />
         </span>

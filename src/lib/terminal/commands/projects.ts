@@ -7,9 +7,43 @@ interface Project {
   description: string;
   technologies: string[];
   status: "production" | "beta" | "development" | "archived";
-  github?: string;
+  repo?: string;
+  repo_source?: "github" | "gitlab" | "bitbucket";
   live?: string;
   stars?: number;
+  start_date?: string; // Format: YYYY-MM
+  end_date?: string; // Format: YYYY-MM
+}
+
+// Format date string (YYYY-MM) to readable format (e.g., "Jan 2024")
+function formatDate(dateStr: string): string {
+  const [year, month] = dateStr.split("-");
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const monthIndex = parseInt(month ?? "1", 10) - 1;
+  return `${monthNames[monthIndex]} ${year}`;
+}
+
+// Calculate duration between two dates
+function calculateDuration(startDate: string, endDate?: string): string {
+  const [startYear, startMonth] = startDate.split("-").map(Number);
+  const end = endDate ? endDate.split("-").map(Number) : [new Date().getFullYear(), new Date().getMonth() + 1];
+  const [endYear, endMonth] = end;
+
+  if (!startYear || !startMonth || !endYear || !endMonth) return "";
+
+  let months = (endYear - startYear) * 12 + (endMonth - startMonth);
+  months = Math.max(1, months + 1);
+
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+
+  if (years === 0) {
+    return `${remainingMonths}mo`;
+  } else if (remainingMonths === 0) {
+    return `${years}yr`;
+  } else {
+    return `${years}yr ${remainingMonths}mo`;
+  }
 }
 
 export const projectsCommand: Command = {
@@ -80,19 +114,45 @@ export const projectsCommand: Command = {
               ? "[.]"
               : "[-]";
 
+      // Project header with name and status
       lines.push(
         `<span class="term-blue font-bold">>> ${project.name}</span>  <span class="${statusColor}">${statusIcon} ${project.status.toUpperCase()}</span>`,
       );
-      lines.push(`   ${project.description}`);
+
+      // Timeline (if available)
+      if (project.start_date) {
+        const endDisplay = project.end_date ? formatDate(project.end_date) : "Present";
+        const duration = calculateDuration(project.start_date, project.end_date);
+        lines.push(
+          `   <span class="term-dim">${formatDate(project.start_date)} - ${endDisplay}</span>  <span class="term-cyan">(${duration})</span>`,
+        );
+      }
+
+      // Handle multi-line descriptions (preserving paragraph breaks)
+      const paragraphs = project.description.split(/\n\s*\n/);
+      for (let i = 0; i < paragraphs.length; i++) {
+        const paragraph = paragraphs[i];
+        if (!paragraph) continue;
+        // Split paragraph into lines and output each
+        const paraLines = paragraph.split("\n").filter((line) => line.trim() !== "");
+        for (const line of paraLines) {
+          lines.push(`   ${line.trim()}`);
+        }
+        // Add blank line between paragraphs (but not after the last one)
+        if (i < paragraphs.length - 1) {
+          lines.push("");
+        }
+      }
       lines.push(
         `   <span class="term-magenta">${project.technologies.join(" | ")}</span>`,
       );
 
-      if (detailed || project.stars) {
+      if (detailed || project.stars || project.repo) {
         const extras: string[] = [];
         if (project.stars) extras.push(`* ${project.stars}`);
-        if (project.github) extras.push(`@ ${project.github}`);
+        if (project.repo) extras.push(`@ ${project.repo}`);
         if (project.live) extras.push(`> ${project.live}`);
+        if (!project.repo) extras.push(`[private]`);
         if (extras.length > 0) {
           lines.push(`   <span class="term-dim">${extras.join("  ")}</span>`);
         }

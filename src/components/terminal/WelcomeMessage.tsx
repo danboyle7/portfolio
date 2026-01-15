@@ -61,7 +61,6 @@ const ZOOM_HINT = `
 
 const NAV_INFO_LARGE = `
 <span class="term-dim">  Navigate this terminal like you would any Unix system.</span>
-<span class="term-dim">  Explore the filesystem and run commands.</span>
 `;
 
 export function WelcomeMessage() {

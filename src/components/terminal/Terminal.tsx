@@ -77,10 +77,10 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
     HOME: HOME_PATH,
     HOSTNAME,
     PATH: "/usr/bin:/bin",
-    SHELL: "/bin/zsh",
+    SHELL: "/bin/bash",
     TERM: "xterm-256color",
     PORTFOLIO_VERSION: VERSION,
-    "0": "zsh",
+    "0": "bash",
     "?": "0",
     $: "1337", // Fake PID
   });

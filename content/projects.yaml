@@ -1,62 +1,80 @@
 # Portfolio Projects
+# repo_source options: github, gitlab, bitbucket (determines icon)
+# If no repo is provided, project displays as "Private"
+# start_date: required, format YYYY-MM
+# end_date: optional, format YYYY-MM (omit for ongoing projects, displays as "Present")
 
 projects:
-  - name: "terminal-portfolio"
-    description: "This terminal-style portfolio you're viewing right now!"
+  - name: "Personal Portfolio"
+    description: "A dual-mode portfolio featuring an interactive retro terminal emulator alongside a sleek modern UI for quick viewing. The terminal boasts a large array of commands, file system navigation, and many hidden surprises."
     technologies:
       - "Next.js"
       - "TypeScript"
       - "Tailwind CSS"
       - "React"
+    start_date: "2025-12"
+    end_date: "2026-1"
     status: "production"
-    github: "github.com/danielboyle/terminal-portfolio"
-    live: "danielboyle.dev"
-    stars: 42
+    repo: "gitlab.com/public-danboyle7/portfolio"
+    repo_source: "gitlab"
+    live: "daniel-boyle.com"
 
-  - name: "cloud-sync"
-    description: "Real-time file synchronization service with conflict resolution and cross-platform support"
-    technologies:
-      - "Rust"
-      - "gRPC"
-      - "PostgreSQL"
-      - "Redis"
-      - "Docker"
-    status: "production"
-    github: "github.com/danielboyle/cloud-sync"
-    stars: 128
+  # Keep this paragraph for later on Overseer:
 
-  - name: "devtools-extension"
-    description: "Browser extension for debugging React applications with component tree visualization"
-    technologies:
-      - "TypeScript"
-      - "React"
-      - "Chrome APIs"
-      - "WebExtensions"
-    status: "beta"
-    github: "github.com/danielboyle/devtools-extension"
-    stars: 67
+  # Overseer is an event-driven algorithmic trading framework built in Rust and Python for backtesting and live
+  # trading of equities and derivatives. It uses a modular, plug-and-play componetized architecture, allowing
+  # the same strategies to be deployed unchanged in simulated or live environments. The system provides
+  # realistic market simulation, including slippage, commissions, margin management, and settlement
+  # mechanics. It also integrates with multiple data providers (Alpaca, Interactive Brokers, YFinance,
+  # Polygon, and FRED) and supports notification and control channels (Telegram, Discord) for alerts and
+  # command execution. Additional features include integrated risk management, component health monitoring,
+  # optional human-in-the-loop controls and extensible AI/LLM integrations for advanced strategy and
+  # execution workflows.
 
-  - name: "ml-pipeline"
-    description: "Automated machine learning pipeline for data processing, training, and deployment"
+  # I spent over four years designing and reworking this platform until I was satisfied with the architecture.
+  # It was built to fill a gap I consistently encountered with existing tools: the ability to move a strategy
+  # smoothly from backtesting to paper trading to live execution without friction. The platform also needed to
+  # integrate data from many sources while providing a high-fidelity market simulation.
+
+  # At the time, most backtesting frameworks I evaluated did not attempt to model many real-world trading
+  # mechanics at all. Concepts such as slippage, fees, margin, margin calls, forced liquidation, cash settlement,
+  # order delays, and realistic execution were often ignored, and support for derivatives like futures and
+  # options was rare. After years of surveying countless repos and libraries built by others, it became clear
+  # these gaps would need to be addressed from the ground up—leading to the creation of my platform: Overseer.
+
+  # Due to the nature of this project, and the proprietary nature of of the strategies, this project has been
+  # kept private. However, I do have plans in the future to open-source the base trading framework to help
+  # aid others in their algorithmic trading endeavors, as well as to help further improve the quality of the
+  # project.
+
+  # The project is still under active development but is approaching a beta phase. It is currently used for
+  # simulated and paper trading environments. While the system is already capable of live trading, additional
+  # guardrails and refinements are being implemented before it is fully trusted for continuous live deployment.
+
+  - name: "Overseer"
+    start_date: "2020-1"
+    description: |
+      Overseer is an event-driven algorithmic trading framework built in Rust and Python for backtesting and live
+      trading of equities and derivatives. It uses a modular, plug-and-play componetized architecture, allowing
+      the same strategies to be deployed unchanged in simulated or live environments. The system provides
+      realistic market simulation, slippage modeling, commissions, delays, margin management, and settlement
+      mechanics. It also integrates with multiple data providers (Alpaca, Interactive Brokers, YFinance,
+      Polygon, and FRED) and supports notification and control channels (Telegram, Discord) for alerts and
+      command execution. Additional features include integrated risk management, component health monitoring,
+      optional human-in-the-loop controls and extensible AI/LLM integrations for advanced strategy and
+      execution workflows.
+
+      Due to the nature of this project, and the proprietary nature of of the strategies, this project has been
+      kept private. However, I do have plans in the future to open-source the base framework once I am out of development.
     technologies:
       - "Python"
-      - "TensorFlow"
-      - "Docker"
-      - "Airflow"
-      - "MLflow"
+      - "Rust"
+      - "SQLAlchemy"
+      - "Alembic"
+      - "Pandas"
+      - "Numpy"
+      - "PostgreSQL"
+      - "Reinforcement Leearning"
+      - "LLM"
+      - "LangGraph"
     status: "development"
-    github: "github.com/danielboyle/ml-pipeline"
-    stars: 34
-
-  - name: "api-gateway"
-    description: "High-performance API gateway with rate limiting, caching, and observability"
-    technologies:
-      - "Go"
-      - "Redis"
-      - "Prometheus"
-      - "Kubernetes"
-      - "gRPC"
-    status: "production"
-    github: "github.com/danielboyle/api-gateway"
-    stars: 256
-
