@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://gitlab.com/public-danboyle7/portfolio/compare/v1.0.1...v1.0.2) (2026-01-15)
+
+
+### Documentation
+
+* update terminal header to display version ([d2333f7](https://gitlab.com/public-danboyle7/portfolio/commit/d2333f7e15d4a898a44a9ccaeb4fddb5f20fe648))
+
+
+### Refactoring
+
+* change download to view for modern ui, to prevent from force downloading resume ([6268976](https://gitlab.com/public-danboyle7/portfolio/commit/6268976f05cdeef0c98c3ee3de41b012f4d5c860))
+
 ### [1.0.1](https://gitlab.com/public-danboyle7/portfolio/compare/v1.0.0...v1.0.1) (2026-01-15)
 
 
