@@ -82,17 +82,21 @@ export function HeroSection({
             </span>
           </Button>
 
-          {/* Split button for resume download */}
+          {/* Split button for resume */}
           <div className="flex">
-            {/* Main button - downloads condensed by default */}
+            {/* Main button - opens condensed by default */}
             <Button
               variant="outline"
               size="lg"
               className="rounded-r-none border-r-0"
               asChild
             >
-              <a href="/resume/dboyle-resume-condensed.pdf" download>
-                Download Resume
+              <a
+                href="/resume/dboyle-resume-condensed.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Resume
               </a>
             </Button>
             {/* Dropdown toggle */}
@@ -121,12 +125,20 @@ export function HeroSection({
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                  <a href="/resume/dboyle-resume-condensed.pdf" download>
+                  <a
+                    href="/resume/dboyle-resume-condensed.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     One-page
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/resume/dboyle-resume-full.pdf" download>
+                  <a
+                    href="/resume/dboyle-resume-full.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Full
                   </a>
                 </DropdownMenuItem>
