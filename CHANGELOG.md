@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://gitlab.com/public-danboyle7/portfolio/compare/v1.0.2...v1.1.0) (2026-01-18)
+
+
+### Features
+
+* add sitemap and robots.txt ([095b34f](https://gitlab.com/public-danboyle7/portfolio/commit/095b34fe2f5b9ba6af10f90f4afcf91754bed619))
+* add vim, file editing, and additional commands for higher fidelity ([0c0268b](https://gitlab.com/public-danboyle7/portfolio/commit/0c0268b9a09c9a1391f9b1921f99a35cbbeb53ec))
+* initial changes to support nextjs static export ([705a263](https://gitlab.com/public-danboyle7/portfolio/commit/705a26393ec5a52712f6e6f467209b2a38b565dc))
+
+
+### Bug Fixes
+
+* formatting ([21a1925](https://gitlab.com/public-danboyle7/portfolio/commit/21a1925d9807f805e16b9c24a3c5992e4ad493f7))
+* revert output dir back to out ([cbe235d](https://gitlab.com/public-danboyle7/portfolio/commit/cbe235d4fb34c9aef837f33f124c1711cf9b4e01))
+
 ### [1.0.2](https://gitlab.com/public-danboyle7/portfolio/compare/v1.0.1...v1.0.2) (2026-01-15)
 
 
