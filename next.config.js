@@ -30,6 +30,8 @@ const config = {
 
   // Security headers (used by Vercel and other platforms)
   // For Cloudflare Pages, these are also defined in public/_headers
+  // NOTE: These headers will give a warning, since we have `output: export` turned on. However, since we
+  // also define them in public/_headers, we can ignore the warning.
   headers() {
     return [
       {

@@ -14,7 +14,7 @@ export const messageCommand: Command = {
   aliases: ["msg", "send_message", "./send_message"],
   execute: (args): CommandResult => {
     const contactData = getContentData("contact") as ContactInfo | undefined;
-    const email = contactData?.email ?? "hello@danielboyle.dev";
+    const email = contactData?.email ?? "dan.boyle7@gmail.com";
 
     // Parse arguments
     let title = "";
