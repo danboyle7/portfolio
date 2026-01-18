@@ -1429,6 +1429,86 @@ The year it came from. The state it represents.
                 content:
                   "#!/bin/bash\n# [CLASSIFIED]\n# Usage: prometheus <passphrase>",
               },
+              // ============ FILE SYSTEM COMMANDS ============
+              mkdir: {
+                name: "mkdir",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "24K",
+                modified: dateStr,
+                content:
+                  "#!/bin/bash\n# make directories\n# Usage: mkdir [-p] <directory>",
+              },
+              rmdir: {
+                name: "rmdir",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "20K",
+                modified: dateStr,
+                content:
+                  "#!/bin/bash\n# remove empty directories\n# Usage: rmdir <directory>",
+              },
+              rm: {
+                name: "rm",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "32K",
+                modified: dateStr,
+                content:
+                  "#!/bin/bash\n# remove files or directories\n# Usage: rm [-r] [-f] <file>",
+              },
+              touch: {
+                name: "touch",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "20K",
+                modified: dateStr,
+                content:
+                  "#!/bin/bash\n# change file timestamps or create empty files\n# Usage: touch <file>",
+              },
+              tee: {
+                name: "tee",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "16K",
+                modified: dateStr,
+                content:
+                  "#!/bin/bash\n# read from stdin and write to stdout and files\n# Usage: tee [-a] <file>",
+              },
+              vim: {
+                name: "vim",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "3.2M",
+                modified: dateStr,
+                content:
+                  "#!/bin/bash\n# Vi IMproved - programmers text editor\n# Usage: vim [file]",
+              },
+              vi: {
+                name: "vi",
+                type: "symlink",
+                permissions: "lrwxrwxrwx",
+                owner: "root",
+                size: "3",
+                modified: dateStr,
+                target: "/usr/bin/vim",
+              },
+              reset: {
+                name: "reset",
+                type: "executable",
+                permissions: "-rwxr-xr-x",
+                owner: "root",
+                size: "8K",
+                modified: dateStr,
+                content:
+                  "#!/bin/bash\n# reset terminal to initial state\n# Usage: reset [-y]",
+              },
             },
           },
           share: {
