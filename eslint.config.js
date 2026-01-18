@@ -1,7 +1,5 @@
 import nextConfig from "eslint-config-next";
 import tseslint from "typescript-eslint";
-// @ts-expect-error -- no types for this plugin
-import drizzle from "eslint-plugin-drizzle";
 
 export default tseslint.config(
   {
@@ -12,10 +10,6 @@ export default tseslint.config(
   ...tseslint.configs.stylisticTypeChecked,
   {
     files: ["**/*.ts", "**/*.tsx"],
-    plugins: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      drizzle,
-    },
     rules: {
       "@typescript-eslint/array-type": "off",
       "@typescript-eslint/consistent-type-definitions": "off",
@@ -31,14 +25,6 @@ export default tseslint.config(
       "@typescript-eslint/no-misused-promises": [
         "error",
         { checksVoidReturn: { attributes: false } },
-      ],
-      "drizzle/enforce-delete-with-where": [
-        "error",
-        { drizzleObjectName: ["db", "ctx.db"] },
-      ],
-      "drizzle/enforce-update-with-where": [
-        "error",
-        { drizzleObjectName: ["db", "ctx.db"] },
       ],
     },
   },

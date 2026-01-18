@@ -9,13 +9,18 @@ const cspHeader = `
     connect-src 'self';
     object-src 'none';
     base-uri 'self';
-    form-action 'self' https://airform.io;
+    form-action 'self' https://formsubmit.co;
     frame-ancestors 'none';
     upgrade-insecure-requests;
 `;
 
 /** @type {import("next").NextConfig} */
 const config = {
+  // Enable static export for Cloudflare Pages
+  // Remove or comment this out for Vercel/other serverful deployments
+  output: "export",
+  distDir: 'static',
+
   // Image optimization settings for static export
   images: {
     unoptimized: true,
@@ -24,7 +29,8 @@ const config = {
   // Trailing slashes for better static hosting compatibility
   trailingSlash: true,
 
-  // Security headers
+  // Security headers (used by Vercel and other platforms)
+  // For Cloudflare Pages, these are also defined in public/_headers
   headers() {
     return [
       {
