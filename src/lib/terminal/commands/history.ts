@@ -3,9 +3,17 @@ import { createLine } from "@/lib/terminal/utils";
 
 export const historyCommand: Command = {
   name: "history",
-  description: "Show command history",
-  usage: "history [n]",
+  description: "Show or clear command history",
+  usage: "history [-c] [n]",
   execute: (args, context): CommandResult => {
+    // Check for -c flag (clear history)
+    if (args.includes("-c") || args.includes("--clear")) {
+      return {
+        output: [createLine("History cleared", "system")],
+        clearHistory: true,
+      };
+    }
+
     let limit = context.history.length;
 
     if (args.length > 0) {

@@ -32,6 +32,7 @@ export interface InteractiveMode {
     | "hub"
     | "contact"
     | "sl"
+    | "vim"
     | null;
   data?: unknown;
   section?: "skills" | "experience" | "education" | "projects" | "hobbies";
@@ -52,6 +53,8 @@ export interface CommandResult {
   animatedOutput?: AnimatedLine[]; // For step-by-step animation
   enterInteractiveMode?: InteractiveMode; // Enter an interactive TUI mode
   openUrl?: string; // Open a URL in a new tab
+  clearHistory?: boolean; // Clear command history
+  resetTerminal?: boolean; // Full reset (history + files + screen)
 }
 
 export interface Command {
@@ -197,4 +200,13 @@ export interface BootStep {
   delay: number;
   type: "info" | "success" | "warning" | "loading" | "complete" | "ascii";
   progress?: number;
+}
+
+// Vim mode data passed to VimEditor
+export interface VimModeData {
+  filePath: string;
+  initialContent: string;
+  isReadOnly?: boolean;
+  isNewFile?: boolean;
+  showSplash?: boolean;
 }

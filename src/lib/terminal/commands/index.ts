@@ -5,7 +5,8 @@ import type {
   CommandContext,
   CommandResult,
 } from "@/lib/terminal/types";
-import { createLine } from "@/lib/terminal/utils";
+import { createLine, resolvePath } from "@/lib/terminal/utils";
+import { writeFile, appendFile } from "@/lib/terminal/storage";
 
 // Import all commands
 import { helpCommand } from "./help";
@@ -31,6 +32,15 @@ import { envCommand } from "./env";
 import { portfolioHubCommand } from "./portfolio-hub";
 import { neofetchCommand } from "./neofetch";
 import { resumeCommand } from "./resume";
+
+// File system commands
+import { mkdirCommand } from "./mkdir";
+import { rmdirCommand } from "./rmdir";
+import { rmCommand } from "./rm";
+import { touchCommand } from "./touch";
+import { teeCommand, executeTee } from "./tee";
+import { vimCommand } from "./vim";
+import { resetCommand } from "./reset";
 
 // Easter egg commands
 import { cowsayCommand } from "./easter-eggs/cowsay";
@@ -73,6 +83,14 @@ const allCommands: Command[] = [
   resumeCommand,
   exitCommand,
   rebootCommand,
+  // File system commands
+  mkdirCommand,
+  rmdirCommand,
+  rmCommand,
+  touchCommand,
+  teeCommand,
+  vimCommand,
+  resetCommand,
   // Easter eggs
   cowsayCommand,
   slCommand,
@@ -120,9 +138,60 @@ export function getAllCommands(): Command[] {
 }
 
 /**
- * Execute a command
+ * Parse redirects from a command string
+ * Returns { command, redirects } where redirects contains file targets
  */
-export async function executeCommand(
+function parseRedirects(commandStr: string): {
+  command: string;
+  redirectFile: string | null;
+  appendMode: boolean;
+} {
+  // Match >> or > followed by filename (with possible whitespace)
+  const appendMatch = /^(.+?)\s*>>\s*(\S+)\s*$/.exec(commandStr);
+  if (appendMatch) {
+    return {
+      command: appendMatch[1]!.trim(),
+      redirectFile: appendMatch[2]!,
+      appendMode: true,
+    };
+  }
+
+  const redirectMatch = /^(.+?)\s*>\s*(\S+)\s*$/.exec(commandStr);
+  if (redirectMatch) {
+    return {
+      command: redirectMatch[1]!.trim(),
+      redirectFile: redirectMatch[2]!,
+      appendMode: false,
+    };
+  }
+
+  return { command: commandStr, redirectFile: null, appendMode: false };
+}
+
+/**
+ * Parse pipes from a command string
+ * Returns array of command strings
+ */
+function parsePipes(commandStr: string): string[] {
+  // Simple pipe parsing - split on | but not inside quotes
+  // For simplicity, we'll just split on | for now
+  return commandStr.split(/\s*\|\s*/).filter(Boolean);
+}
+
+/**
+ * Extract text output from a command result
+ */
+function extractOutputText(result: CommandResult): string {
+  return result.output
+    .filter((line) => line.type !== "system")
+    .map((line) => line.content)
+    .join("\n");
+}
+
+/**
+ * Execute a single command (no pipes/redirects)
+ */
+async function executeSingleCommand(
   commandStr: string,
   context: CommandContext,
 ): Promise<CommandResult> {
@@ -169,6 +238,96 @@ export async function executeCommand(
       ],
     };
   }
+}
+
+/**
+ * Execute a command with pipe and redirect support
+ */
+export async function executeCommand(
+  commandStr: string,
+  context: CommandContext,
+): Promise<CommandResult> {
+  const trimmed = commandStr.trim();
+
+  if (!trimmed) {
+    return { output: [] };
+  }
+
+  // First, check for redirects (applied to the whole pipeline)
+  const {
+    command: commandWithoutRedirect,
+    redirectFile,
+    appendMode,
+  } = parseRedirects(trimmed);
+
+  // Parse pipes
+  const pipeCommands = parsePipes(commandWithoutRedirect);
+
+  // Handle pipe to tee specially
+  const teeIndex = pipeCommands.findIndex(
+    (cmd) => cmd.trim().startsWith("tee ") || cmd.trim() === "tee",
+  );
+
+  if (teeIndex > 0) {
+    // Execute commands before tee
+    let result = await executeSingleCommand(pipeCommands[0]!, context);
+
+    for (let i = 1; i < teeIndex; i++) {
+      // For now, we don't support full piping of output as stdin
+      // Just execute each command
+      result = await executeSingleCommand(pipeCommands[i]!, context);
+    }
+
+    // Get output text for tee
+    const outputText = extractOutputText(result);
+
+    // Execute tee with the output
+    const teeCmd = pipeCommands[teeIndex]!.trim();
+    const teeArgs = teeCmd.split(/\s+/).slice(1);
+
+    const teeError = executeTee(
+      context.fileSystem,
+      context.currentPath,
+      outputText,
+      teeArgs,
+    );
+
+    if (teeError) {
+      return {
+        output: [...result.output, createLine(teeError, "error")],
+      };
+    }
+
+    // Return original output (tee passes through)
+    return result;
+  }
+
+  // Execute the command (or first command in a simple pipe)
+  const result = await executeSingleCommand(pipeCommands[0]!, context);
+
+  // Note: If there are more pipe commands (but not tee), we just show output of first command
+  // Full pipe support would require stdin handling which we don't have
+
+  // Handle redirect
+  if (redirectFile && result.output.length > 0) {
+    const outputText = extractOutputText(result);
+    const fullPath = resolvePath(context.currentPath, redirectFile);
+
+    const writeResult = appendMode
+      ? appendFile(context.fileSystem, fullPath, outputText + "\n")
+      : writeFile(context.fileSystem, fullPath, outputText);
+
+    if (writeResult !== true) {
+      return {
+        output: [createLine(writeResult, "error")],
+      };
+    }
+
+    // Redirect means no output to terminal
+    return { output: [] };
+  }
+
+  return result;
 }
 
 /**

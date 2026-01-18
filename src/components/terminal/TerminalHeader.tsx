@@ -1,20 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { formatPath } from "@/lib/terminal/utils";
 import { VERSION } from "@/lib/version";
 
-interface TerminalHeaderProps {
-  hostname: string;
-  user: string;
-  currentPath: string;
-}
-
-export function TerminalHeader({
-  hostname,
-  user,
-  currentPath,
-}: TerminalHeaderProps) {
+export function TerminalHeader() {
   const [currentTime, setCurrentTime] = useState<string>("");
   const [uptime, setUptime] = useState<number>(0);
 
@@ -44,8 +33,6 @@ export function TerminalHeader({
     const secs = seconds % 60;
     return `${mins}m ${secs}s`;
   };
-
-  const displayPath = formatPath(currentPath);
 
   return (
     <header className="sticky top-0 z-30 border-b border-green-900/50 bg-black/95 backdrop-blur">

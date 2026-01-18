@@ -26,9 +26,16 @@ import { EducationSection } from "./EducationSection";
 import { HobbiesSection } from "./HobbiesSection";
 import { TerminalMenu } from "./TerminalMenu";
 import { SteamLocomotive } from "./SteamLocomotive";
+import { VimEditor } from "./VimEditor";
 import { useZoom } from "./ZoomContext";
 import { VERSION } from "@/lib/version";
-import type { InteractiveMode } from "@/lib/terminal/types";
+import type { InteractiveMode, VimModeData } from "@/lib/terminal/types";
+import {
+  writeFile,
+  clearCommandHistory,
+  clearUserFiles,
+  removeUserFilesFromFileSystem,
+} from "@/lib/terminal/storage";
 
 // Initialize content on module load
 initializeContent();
@@ -207,7 +214,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       }
 
       // Add to command history (store original command for display)
-      const newCommandHistory = [...state.commandHistory, trimmedCommand];
+      let newCommandHistory = [...state.commandHistory, trimmedCommand];
 
       // Check for variable assignment (VAR=value or export VAR=value)
       const exportMatch = /^export\s+(\w+)=(.*)$/.exec(actualCommand);
@@ -367,6 +374,22 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
       if (result.clearScreen) {
         setHistory([]);
         setShowWelcome(false);
+      }
+
+      // Handle clear command history (history -c)
+      if (result.clearHistory) {
+        clearCommandHistory();
+        newCommandHistory = [];
+      }
+
+      // Handle full terminal reset
+      if (result.resetTerminal) {
+        // Clear localStorage
+        clearCommandHistory();
+        removeUserFilesFromFileSystem(fileSystem);
+        clearUserFiles();
+        // Clear command history in state
+        newCommandHistory = [];
       }
 
       // Handle entering interactive mode
@@ -565,11 +588,7 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
             />
           )}
 
-          <TerminalHeader
-            hostname={HOSTNAME}
-            user={USER}
-            currentPath={state.currentPath}
-          />
+          <TerminalHeader />
 
           <main
             ref={terminalRef}
@@ -684,6 +703,38 @@ export function Terminal({ onBackToSplash }: TerminalProps) {
 
             {interactiveMode?.type === "contact" && (
               <ContactApp onClose={handleExitInteractive} />
+            )}
+
+            {interactiveMode?.type === "vim" && (
+              <div className="fixed inset-0 z-50 bg-black">
+                <VimEditor
+                  filePath={(interactiveMode.data as VimModeData).filePath}
+                  initialContent={
+                    (interactiveMode.data as VimModeData).initialContent
+                  }
+                  isReadOnly={(interactiveMode.data as VimModeData).isReadOnly}
+                  showSplash={(interactiveMode.data as VimModeData).showSplash}
+                  onSave={(content, newFilePath) => {
+                    const vimData = interactiveMode.data as VimModeData;
+                    // Use newFilePath if provided (for :w filename), otherwise use original path
+                    let targetPath = newFilePath ?? vimData.filePath;
+
+                    // If no path at all, need a filename
+                    if (!targetPath) {
+                      return "E32: No file name";
+                    }
+
+                    // Resolve relative paths
+                    if (!targetPath.startsWith("/")) {
+                      targetPath = `${state.currentPath}/${targetPath}`;
+                    }
+
+                    const result = writeFile(fileSystem, targetPath, content);
+                    return result;
+                  }}
+                  onExit={handleExitInteractive}
+                />
+              </div>
             )}
 
             {/* Input line - only show when not in interactive mode */}
