@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://gitlab.com/public-danboyle7/portfolio/compare/v1.1.1...v1.1.2) (2026-01-18)
+
+
+### Bug Fixes
+
+* fix missing commands from /usr/bin ([f8ed93f](https://gitlab.com/public-danboyle7/portfolio/commit/f8ed93f5cbbc9a0564c0028a1daf5c133f1d8a6f))
+
 ### [1.1.1](https://gitlab.com/public-danboyle7/portfolio/compare/v1.1.0...v1.1.1) (2026-01-18)
 
 
