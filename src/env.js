@@ -18,8 +18,7 @@ export const env = createEnv({
 
   // Skip validation for static export builds
   skipValidation:
-    !!process.env.SKIP_ENV_VALIDATION ||
-    process.env.NODE_ENV === "production",
+    !!process.env.SKIP_ENV_VALIDATION || process.env.NODE_ENV === "production",
 
   emptyStringAsUndefined: true,
 });
