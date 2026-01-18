@@ -19,7 +19,10 @@ export const resetCommand: Command = {
           createLine("", "output"),
           createLine("This command will:", "output"),
           createLine("  - Clear all command history", "output"),
-          createLine("  - Delete all user-created files and directories", "output"),
+          createLine(
+            "  - Delete all user-created files and directories",
+            "output",
+          ),
           createLine("", "output"),
           createLine(
             "Note: System files are not affected. This clears localStorage.",
@@ -48,7 +51,10 @@ export const resetCommand: Command = {
       output: [
         createLine("This will:", "warning"),
         createLine("  - Clear all command history", "output"),
-        createLine("  - Delete all user-created files and directories", "output"),
+        createLine(
+          "  - Delete all user-created files and directories",
+          "output",
+        ),
         createLine("", "output"),
         createLine("Run 'reset -y' to confirm.", "system"),
       ],

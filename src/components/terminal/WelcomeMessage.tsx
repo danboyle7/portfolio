@@ -55,7 +55,7 @@ const HINT_LARGE = `
 `;
 
 const ZOOM_HINT = `
-<span class="term-yellow">  Tip:</span> <span class="term-dim">Click the</span> <span class="term-cyan">[⊕]</span> <span class="term-dim">button (bottom-right of monitor) to zoom in for a better view!</span>
+<span class="term-yellow">  Tip:</span> <span class="term-dim">Click the</span> <span class="term-dim">button (bottom-right of monitor) to zoom in!</span>
 
 `;
 

@@ -214,7 +214,9 @@ export function clearUserFiles(): void {
  * Remove all user-created files/directories from the in-memory file system
  * Call this along with clearUserFiles() to fully reset
  */
-export function removeUserFilesFromFileSystem(fileSystem: FileSystemNode): void {
+export function removeUserFilesFromFileSystem(
+  fileSystem: FileSystemNode,
+): void {
   const userFiles = loadUserFiles();
 
   // Sort by path length descending so we remove children before parents

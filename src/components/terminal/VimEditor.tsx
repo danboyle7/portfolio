@@ -32,31 +32,32 @@ import {
   handleMotion,
 } from "@/lib/terminal/vim/commands";
 
-// Number of visible lines in the editor
-const VISIBLE_LINES = 20;
+// Default line height - will be measured dynamically
+const DEFAULT_LINE_HEIGHT = 24;
 
-// VIM splash screen content (centered for ~80 char width)
+// VIM splash screen content (centered horizontally)
 const VIM_SPLASH = [
-  "",
-  "",
-  "",
-  "",
-  "~                          VIM - Vi IMproved",
   "~",
-  "~                            version 9.0",
-  "~                      by Bram Moolenaar et al.",
   "~",
-  "~               Vim is open source and freely distributable",
   "~",
-  "~                   type  :q<Enter>          to exit",
-  "~                   type  :help<Enter>       for help",
-  "~                   type  :w <file><Enter>   to save",
   "~",
-  "~                Help poor stranded strays in the Outback!",
-  "~           type  :help iccf<Enter>     for information",
+  "~                                     VIM - Vi IMproved",
   "~",
-  "",
-  "",
+  "~                                        version 9.0",
+  "~                                  by Bram Moolenaar et al.",
+  "~",
+  "~                        Vim is open source and freely distributable",
+  "~",
+  "~                              type  :q<Enter>          to exit",
+  "~                              type  :help<Enter>       for help",
+  "~                              type  :w <file><Enter>   to save",
+  "~",
+  "~                         Help poor stranded strays in the Outback!",
+  "~                         type  :help iccf<Enter>     for information",
+  "~",
+  "~",
+  "~",
+  "~",
 ];
 
 export function VimEditor({
@@ -79,6 +80,33 @@ export function VimEditor({
 
   const editorRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const linesContainerRef = useRef<HTMLDivElement>(null);
+  const measureLineRef = useRef<HTMLDivElement>(null);
+
+  // Track container height for dynamic line calculation
+  const [visibleLineCount, setVisibleLineCount] = useState(20); // Default fallback
+
+  // Measure container and calculate visible lines
+  useEffect(() => {
+    const updateVisibleLines = () => {
+      if (linesContainerRef.current && measureLineRef.current) {
+        const containerHeight = linesContainerRef.current.clientHeight;
+        const lineHeight =
+          measureLineRef.current.offsetHeight || DEFAULT_LINE_HEIGHT;
+        // Calculate how many lines fit
+        const lines = Math.max(1, Math.floor(containerHeight / lineHeight));
+        setVisibleLineCount(lines);
+      }
+    };
+
+    // Small delay to ensure DOM is ready
+    const timeoutId = setTimeout(updateVisibleLines, 0);
+    window.addEventListener("resize", updateVisibleLines);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", updateVisibleLines);
+    };
+  }, []);
 
   // Track pending 'g' key for gg command
   const [pendingG, setPendingG] = useState(false);
@@ -575,16 +603,18 @@ export function VimEditor({
   );
 
   // Calculate scroll position to keep cursor visible
+  // Status bar is now outside the lines container, so all visible lines are editable
+  const editableLines = visibleLineCount;
   const scrollTop = Math.max(
     0,
     Math.min(
-      state.cursorRow - Math.floor(VISIBLE_LINES / 2),
-      state.lines.length - VISIBLE_LINES,
+      state.cursorRow - Math.floor(editableLines / 2),
+      state.lines.length - editableLines,
     ),
   );
 
-  // Get visible lines
-  const visibleLines = state.lines.slice(scrollTop, scrollTop + VISIBLE_LINES);
+  // Get visible lines (excluding status line)
+  const visibleLines = state.lines.slice(scrollTop, scrollTop + editableLines);
   const lineNumberWidth = state.showLineNumbers
     ? Math.max(3, state.lines.length.toString().length)
     : 0;
@@ -615,14 +645,8 @@ export function VimEditor({
       className="flex h-full w-full flex-col bg-black font-mono text-green-500"
       onClick={handleEditorClick}
     >
-      {/* Header */}
-      <div className="border-b border-green-900 px-2 py-1 text-sm text-green-600">
-        vim: {filePath} {state.isDirty ? "[+]" : ""}{" "}
-        {state.isReadOnly ? "[RO]" : ""}
-      </div>
-
-      {/* Editor area */}
-      <div className="relative flex-1 overflow-hidden">
+      {/* Editor area - uses flex to push status line to bottom */}
+      <div className="relative flex flex-1 flex-col overflow-hidden">
         {/* Hidden input for capturing keyboard events */}
         <input
           ref={inputRef}
@@ -636,8 +660,17 @@ export function VimEditor({
           spellCheck={false}
         />
 
-        {/* Lines */}
-        <div className="h-full overflow-hidden px-1 py-1">
+        {/* Lines - flex-1 to take remaining space, pushing status to bottom */}
+        <div ref={linesContainerRef} className="flex-1 overflow-hidden px-1">
+          {/* Hidden div to measure line height */}
+          <div
+            ref={measureLineRef}
+            className="invisible absolute flex leading-normal whitespace-pre"
+            aria-hidden="true"
+          >
+            X
+          </div>
+
           {visibleLines.map((line, idx) => {
             const actualRow = scrollTop + idx;
             const isCursorLine = actualRow === state.cursorRow;
@@ -645,8 +678,7 @@ export function VimEditor({
             return (
               <div
                 key={actualRow}
-                className={`flex whitespace-pre ${isCursorLine ? "bg-green-900/20" : ""}`}
-                style={{ minHeight: "1.5em" }}
+                className={`flex leading-normal whitespace-pre ${isCursorLine ? "bg-green-900/20" : ""}`}
               >
                 {/* Line number */}
                 {state.showLineNumbers && (
@@ -687,41 +719,40 @@ export function VimEditor({
           })}
 
           {/* Empty line indicators (~) */}
-          {visibleLines.length < VISIBLE_LINES &&
-            Array.from({ length: VISIBLE_LINES - visibleLines.length }).map(
-              (_, idx) => (
-                <div
-                  key={`empty-${idx}`}
-                  className="text-green-700"
-                  style={{ minHeight: "1.5em" }}
-                >
-                  {state.showLineNumbers && (
-                    <span
-                      style={{ width: `${lineNumberWidth}ch` }}
-                      className="mr-2 inline-block"
-                    />
-                  )}
-                  <span>~</span>
-                </div>
-              ),
-            )}
+          {visibleLines.length < editableLines &&
+            Array.from({
+              length: editableLines - visibleLines.length,
+            }).map((_, idx) => (
+              <div
+                key={`empty-${idx}`}
+                className="leading-normal text-green-700"
+              >
+                {state.showLineNumbers && (
+                  <span
+                    style={{ width: `${lineNumberWidth}ch` }}
+                    className="mr-2 inline-block"
+                  />
+                )}
+                <span>~</span>
+              </div>
+            ))}
         </div>
-      </div>
 
-      {/* Status line */}
-      <div className="flex justify-between border-t border-green-900 px-2 py-1 text-sm">
-        <span
-          className={
-            state.statusType === "error" ? "text-red-500" : "text-green-500"
-          }
-        >
-          {getModeDisplay() || state.statusMessage}
-        </span>
-        <span className="text-green-600">
-          {state.cursorRow + 1},{state.cursorCol + 1}
-          {"    "}
-          {cursorPercent}%
-        </span>
+        {/* Status/command line - fixed at bottom of editor area */}
+        <div className="flex justify-between px-2 leading-normal whitespace-pre">
+          <span
+            className={
+              state.statusType === "error" ? "text-red-500" : "text-green-500"
+            }
+          >
+            {getModeDisplay() || state.statusMessage}
+          </span>
+          <span className="text-green-600">
+            {state.cursorRow + 1},{state.cursorCol + 1}
+            {"    "}
+            {cursorPercent}%
+          </span>
+        </div>
       </div>
     </div>
   );
