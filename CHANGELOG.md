@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://gitlab.com/public-danboyle7/portfolio/compare/v1.1.0...v1.1.1) (2026-01-18)
+
+
+### Bug Fixes
+
+* minor issues in vim ([b0a3e8c](https://gitlab.com/public-danboyle7/portfolio/commit/b0a3e8cfc2394796c82c3030b1efa55bf51e1cd4))
+
 ## [1.1.0](https://gitlab.com/public-danboyle7/portfolio/compare/v1.0.2...v1.1.0) (2026-01-18)
 
 
