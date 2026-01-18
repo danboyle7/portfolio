@@ -19,7 +19,6 @@ const config = {
   // Enable static export for Cloudflare Pages
   // Remove or comment this out for Vercel/other serverful deployments
   output: "export",
-  distDir: 'static',
 
   // Image optimization settings for static export
   images: {
