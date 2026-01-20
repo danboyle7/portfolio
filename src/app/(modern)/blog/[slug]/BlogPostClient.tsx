@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
 import type { BlogPost, About } from "@/lib/terminal/types";
 
 interface BlogPostClientProps {
@@ -175,19 +175,20 @@ export function BlogPostClient({
                     );
                   }
 
+                  const language = match?.[1] ?? "plaintext";
+                  const highlighted = hljs.getLanguage(language)
+                    ? hljs.highlight(codeString, { language })
+                    : hljs.highlightAuto(codeString);
+
                   return (
-                    <SyntaxHighlighter
-                      style={oneDark}
-                      language={match ? match[1] : "text"}
-                      PreTag="div"
-                      customStyle={{
-                        margin: 0,
-                        borderRadius: "0.75rem",
-                        fontSize: "0.875rem",
-                      }}
+                    <div
+                      className="hljs overflow-x-auto rounded-xl p-4 text-sm"
+                      style={{ margin: 0 }}
                     >
-                      {codeString}
-                    </SyntaxHighlighter>
+                      <code
+                        dangerouslySetInnerHTML={{ __html: highlighted.value }}
+                      />
+                    </div>
                   );
                 },
               }}
