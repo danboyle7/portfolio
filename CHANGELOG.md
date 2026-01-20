@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://gitlab.com/public-danboyle7/portfolio/compare/v1.1.2...v1.1.3) (2026-01-20)
+
+
+### Bug Fixes
+
+* remove decap, no longer needed ([ba91488](https://gitlab.com/public-danboyle7/portfolio/commit/ba91488abb0d399ab9611786b2d63ba4edd4d6a6))
+* remove old dep, not used ([a13b5fc](https://gitlab.com/public-danboyle7/portfolio/commit/a13b5fccdde7b539d8cf3e4d4d8e2e4639c339ce))
+
 ### [1.1.2](https://gitlab.com/public-danboyle7/portfolio/compare/v1.1.1...v1.1.2) (2026-01-18)
 
 
