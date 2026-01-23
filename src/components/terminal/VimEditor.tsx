@@ -139,7 +139,23 @@ export function VimEditor({
       }
 
       if (result.state) {
-        setState((prev) => ({ ...prev, ...result.state }));
+        setState((prev) => {
+          // When entering insert mode while showing splash screen, clear the content
+          if (
+            showSplash &&
+            result.state?.mode === "insert" &&
+            prev.lines === VIM_SPLASH
+          ) {
+            return {
+              ...prev,
+              ...result.state,
+              lines: [""],
+              cursorRow: 0,
+              cursorCol: 0,
+            };
+          }
+          return { ...prev, ...result.state };
+        });
       }
 
       if (result.statusMessage !== undefined) {
