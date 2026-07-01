@@ -35,14 +35,13 @@ export function EducationSection({ education }: EducationSectionProps) {
       <div className="mx-auto max-w-6xl px-6">
         {/* Section Header */}
         <SectionHeading
-          index="05"
           label="Education"
           isVisible={isVisible}
           className="mb-16"
           title={
             <>
               Academic
-              <span className="text-gradient"> background</span>
+              <span className="text-accent"> background</span>
             </>
           }
         />

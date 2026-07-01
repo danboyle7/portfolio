@@ -176,14 +176,13 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
       <div className="mx-auto max-w-6xl px-6">
         {/* Section Header */}
         <SectionHeading
-          index="03"
           label="Skills"
           isVisible={isVisible}
           className="mb-16"
           title={
             <>
               Technical
-              <span className="text-gradient"> expertise</span>
+              <span className="text-accent"> expertise</span>
             </>
           }
         />

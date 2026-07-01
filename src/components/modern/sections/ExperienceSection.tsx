@@ -36,14 +36,13 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
       <div className="mx-auto max-w-6xl px-6">
         {/* Section Header */}
         <SectionHeading
-          index="02"
           label="Experience"
           isVisible={isVisible}
           className="mb-16"
           title={
             <>
               Where I&apos;ve
-              <span className="text-gradient"> made an impact</span>
+              <span className="text-accent"> made an impact</span>
             </>
           }
         />

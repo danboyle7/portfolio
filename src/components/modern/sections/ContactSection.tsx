@@ -109,7 +109,6 @@ export function ContactSection({ contact }: ContactSectionProps) {
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <SectionHeading
-          index="06"
           label="Contact"
           align="center"
           isVisible={isVisible}
@@ -117,7 +116,7 @@ export function ContactSection({ contact }: ContactSectionProps) {
           title={
             <>
               Let&apos;s work
-              <span className="text-gradient"> together</span>
+              <span className="text-accent"> together</span>
             </>
           }
         >

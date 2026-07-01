@@ -123,7 +123,6 @@ export function AboutSection({ about, contact }: AboutSectionProps) {
       <div className="mx-auto max-w-6xl px-6">
         {/* Section Header */}
         <SectionHeading
-          index="01"
           label="About Me"
           align="center"
           isVisible={isVisible}
@@ -131,7 +130,7 @@ export function AboutSection({ about, contact }: AboutSectionProps) {
           title={
             <>
               Passionate about building
-              <span className="text-gradient"> exceptional software</span>
+              <span className="text-accent"> exceptional software</span>
             </>
           }
         >

@@ -326,16 +326,12 @@ body {
   scrollbar-color: #1a3a1a #0a0a0a;
 }
 
-/* ============================================
-   MODERN PORTFOLIO EFFECTS
-   ============================================ */
-
-/* Gradient accent text used in section headings */
-.modern-portfolio .text-gradient {
-  background-image: linear-gradient(90deg, #22d3ee 0%, #60a5fa 55%, #818cf8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* Accent word in section titles — solid color with a soft glow */
+.modern-portfolio .text-accent {
+  color: #38bdf8; /* sky-400 */
+  text-shadow:
+    0 0 18px rgba(56, 189, 248, 0.45),
+    0 0 45px rgba(56, 189, 248, 0.2);
 }
 
 /* Modern portfolio scrollbar styles */

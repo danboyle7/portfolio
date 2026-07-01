@@ -422,14 +422,13 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         <div className="mx-auto max-w-6xl px-6">
           {/* Section Header */}
           <SectionHeading
-            index="04"
             label="Projects"
             isVisible={isVisible}
             className="mb-16"
             title={
               <>
                 Things I&apos;ve
-                <span className="text-gradient"> built</span>
+                <span className="text-accent"> built</span>
               </>
             }
           />
