@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Experience } from "@/lib/terminal/types";
 import { Card } from "@/components/ui/card";
+import { SectionHeading } from "../SectionHeading";
 
 interface ExperienceSectionProps {
   experiences: Experience[];
@@ -34,22 +35,18 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
     <section id="experience" ref={sectionRef} className="py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         {/* Section Header */}
-        <div
-          className={`mb-16 transition-all duration-700 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}
-        >
-          <span className="text-sm font-semibold tracking-wider text-blue-400 uppercase">
-            Experience
-          </span>
-          <h2 className="mt-2 text-3xl font-bold text-white sm:text-4xl">
-            Where I&apos;ve
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              {" "}
-              made an impact
-            </span>
-          </h2>
-        </div>
+        <SectionHeading
+          index="02"
+          label="Experience"
+          isVisible={isVisible}
+          className="mb-16"
+          title={
+            <>
+              Where I&apos;ve
+              <span className="text-gradient"> made an impact</span>
+            </>
+          }
+        />
 
         {/* Timeline */}
         <div className="relative">

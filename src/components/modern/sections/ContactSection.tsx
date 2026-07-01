@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { ContactInfo } from "@/lib/terminal/types";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SectionHeading } from "../SectionHeading";
 
 interface ContactSectionProps {
   contact: ContactInfo;
@@ -107,26 +108,24 @@ export function ContactSection({ contact }: ContactSectionProps) {
     <section id="contact" ref={sectionRef} className="py-24 sm:py-32">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
-        <div
-          className={`mb-16 text-center transition-all duration-700 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}
+        <SectionHeading
+          index="06"
+          label="Contact"
+          align="center"
+          isVisible={isVisible}
+          className="mb-16"
+          title={
+            <>
+              Let&apos;s work
+              <span className="text-gradient"> together</span>
+            </>
+          }
         >
-          <span className="text-sm font-semibold tracking-wider text-blue-400 uppercase">
-            Contact
-          </span>
-          <h2 className="mt-2 text-3xl font-bold text-white sm:text-4xl">
-            Let&apos;s work
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              {" "}
-              together
-            </span>
-          </h2>
           <p className="mx-auto mt-4 max-w-lg text-slate-400">
             I&apos;m always interested in hearing about new opportunities,
             interesting projects, or just connecting with fellow developers.
           </p>
-        </div>
+        </SectionHeading>
 
         {/* Contact card */}
         <Card

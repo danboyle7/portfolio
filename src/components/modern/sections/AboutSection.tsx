@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { About, ContactInfo } from "@/lib/terminal/types";
 import { Card } from "@/components/ui/card";
+import { SectionHeading } from "../SectionHeading";
 
 interface AboutSectionProps {
   about: About;
@@ -121,21 +122,19 @@ export function AboutSection({ about, contact }: AboutSectionProps) {
     <section id="about" ref={sectionRef} className="py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         {/* Section Header */}
-        <div
-          className={`mb-12 text-center transition-all duration-700 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}
+        <SectionHeading
+          index="01"
+          label="About Me"
+          align="center"
+          isVisible={isVisible}
+          className="mb-12"
+          title={
+            <>
+              Passionate about building
+              <span className="text-gradient"> exceptional software</span>
+            </>
+          }
         >
-          <span className="text-sm font-semibold tracking-wider text-blue-400 uppercase">
-            About Me
-          </span>
-          <h2 className="mt-2 text-3xl font-bold text-white sm:text-4xl">
-            Passionate about building
-            <span className="bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              {" "}
-              exceptional software
-            </span>
-          </h2>
           {/* Locations */}
           <div
             className={`mt-4 flex flex-wrap justify-center gap-3 transition-all delay-400 duration-700 ${
@@ -172,7 +171,7 @@ export function AboutSection({ about, contact }: AboutSectionProps) {
               </div>
             ))}
           </div>
-        </div>
+        </SectionHeading>
 
         {/* Main Content - Three Column Layout */}
         <div className="grid gap-6 md:gap-8 lg:grid-cols-12 lg:gap-8">

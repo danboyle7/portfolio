@@ -10,7 +10,7 @@ const cardVariants = cva(
       variant: {
         default: "",
         interactive:
-          "transition-all duration-300 hover:border-blue-500/30 hover:bg-slate-900/50 hover:shadow-lg hover:shadow-blue-500/5",
+          "transition-all duration-300 hover:border-cyan-400/30 hover:bg-slate-900/60 hover:shadow-[0_0_30px_-8px_rgba(34,211,238,0.25)]",
         ghost: "border-slate-700/30 bg-slate-800/30",
         modal: "border-slate-800 bg-slate-900 shadow-2xl shadow-blue-500/10",
       },

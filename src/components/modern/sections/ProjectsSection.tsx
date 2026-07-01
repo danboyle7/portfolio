@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Card } from "@/components/ui/card";
+import { SectionHeading } from "../SectionHeading";
 
 type RepoSource = "github" | "gitlab" | "bitbucket";
 
@@ -420,24 +421,18 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
       <section id="projects" ref={sectionRef} className="py-24 sm:py-32">
         <div className="mx-auto max-w-6xl px-6">
           {/* Section Header */}
-          <div
-            className={`mb-16 transition-all duration-700 ${
-              isVisible
-                ? "translate-y-0 opacity-100"
-                : "translate-y-8 opacity-0"
-            }`}
-          >
-            <span className="text-sm font-semibold tracking-wider text-blue-400 uppercase">
-              Projects
-            </span>
-            <h2 className="mt-2 text-3xl font-bold text-white sm:text-4xl">
-              Things I&apos;ve
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                {" "}
-                built
-              </span>
-            </h2>
-          </div>
+          <SectionHeading
+            index="04"
+            label="Projects"
+            isVisible={isVisible}
+            className="mb-16"
+            title={
+              <>
+                Things I&apos;ve
+                <span className="text-gradient"> built</span>
+              </>
+            }
+          />
 
           {/* Projects grid */}
           <div className="grid gap-6 md:grid-cols-2">

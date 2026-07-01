@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { LayoutDashboard } from "lucide-react";
+import { TechBackground } from "@/components/modern/TechBackground";
 
 interface PortfolioSplashProps {
   onSelectTerminal: () => void;
@@ -310,60 +312,28 @@ export function PortfolioSplash({
         onMouseLeave={() => setHoveredSide(null)}
         onClick={onSelectModern}
       >
-        {/* Modern gradient background - matches modern portfolio */}
-        <div className="absolute inset-0 bg-slate-950">
-          {/* Subtle grid pattern */}
-          <div
-            className="absolute inset-0 opacity-[0.02] transition-opacity duration-500 group-hover:opacity-[0.05]"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: "50px 50px",
-            }}
-          />
-
-          {/* Floating orbs - same colors as modern portfolio */}
-          <div className="absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-blue-600/20 blur-3xl transition-colors duration-700 group-hover:bg-blue-600/30" />
-          <div className="absolute right-1/4 bottom-1/4 h-48 w-48 rounded-full bg-indigo-600/15 blur-3xl transition-colors duration-700 group-hover:bg-indigo-600/25" />
-          <div className="absolute top-1/2 right-1/3 h-32 w-32 rounded-full bg-cyan-600/10 blur-2xl transition-colors duration-700 group-hover:bg-cyan-600/20" />
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-linear-to-br from-blue-950/20 via-transparent to-indigo-950/20" />
+        {/* Same circuit background as the modern portfolio */}
+        <div className="absolute inset-0 opacity-80 transition-opacity duration-500 group-hover:opacity-100">
+          <TechBackground position="absolute" />
         </div>
 
         {/* Content - using modern portfolio font */}
         <div
-          className="relative z-10 flex h-full flex-col items-center justify-center p-4 sm:p-8 sm:pt-24"
+          className="modern-portfolio relative z-10 flex h-full flex-col items-center justify-center bg-transparent p-4 sm:p-8 sm:pt-24"
           style={{
             fontFamily:
               "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           }}
         >
-          {/* Modern icon/logo */}
-          <div className="relative mb-4 sm:mb-6">
-            <div className="flex h-12 w-12 transform items-center justify-center rounded-2xl border-2 border-slate-700/50 bg-slate-900/50 transition-colors duration-300 group-hover:scale-105 group-hover:border-blue-500/40 sm:h-20 sm:w-20">
-              <svg
-                className="h-6 w-6 text-blue-400/70 transition-colors duration-300 group-hover:text-blue-400 sm:h-10 sm:w-10"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                />
-              </svg>
-            </div>
-            {/* Glow effect */}
-            <div className="absolute -inset-2 rounded-2xl bg-blue-500/10 blur-xl transition-colors duration-500 group-hover:bg-blue-500/20" />
-          </div>
+          {/* Minimal layout icon */}
+          <LayoutDashboard
+            strokeWidth={1.25}
+            className="mb-4 h-10 w-10 text-slate-300 transition-colors duration-300 group-hover:text-white sm:mb-8 sm:h-16 sm:w-16"
+          />
 
           <div className="space-y-2 text-center sm:space-y-3">
-            <h2 className="text-base font-bold tracking-tight sm:text-2xl md:text-3xl">
-              <span className="bg-linear-to-r from-white via-slate-200 to-slate-400 bg-clip-text font-thin tracking-wide text-transparent">
+            <h2 className="text-xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
+              <span className="bg-linear-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
                 Modern Portfolio
               </span>
             </h2>
@@ -376,14 +346,15 @@ export function PortfolioSplash({
           <div className="mt-4 hidden max-w-xs flex-wrap justify-center gap-2 sm:mt-8 sm:flex">
             {[
               "Clean Design",
-              "Fast Loading",
+              "Smooth Animations",
               "Easy Navigation",
-              "CTA Layout",
+              "Fast Loading",
             ].map((feature) => (
               <span
                 key={feature}
-                className="rounded-full border border-slate-700/50 px-3 py-1 text-[10px] text-slate-400 transition-colors duration-300 group-hover:border-blue-500/30 group-hover:text-slate-300 sm:text-xs"
+                className="flex items-center gap-1.5 rounded-full border border-slate-700/60 bg-slate-900/40 px-3 py-1 text-[10px] text-slate-400 backdrop-blur-sm transition-colors duration-300 group-hover:border-cyan-400/30 group-hover:text-slate-300 sm:text-xs"
               >
+                <span className="h-1 w-1 rounded-full bg-cyan-400/70" />
                 {feature}
               </span>
             ))}
@@ -391,7 +362,7 @@ export function PortfolioSplash({
 
           {/* Hover/tap instruction */}
           <div
-            className={`mt-4 text-xs font-medium text-blue-400 transition-opacity duration-300 sm:mt-8 sm:text-sm ${
+            className={`mt-4 text-xs font-medium text-cyan-300 transition-opacity duration-300 sm:mt-8 sm:text-sm ${
               hoveredSide === "right" ? "opacity-100" : "sm:opacity-0"
             }`}
           >
@@ -401,7 +372,7 @@ export function PortfolioSplash({
 
         {/* Border glow on hover - horizontal on mobile, vertical on desktop */}
         <div
-          className={`absolute inset-x-0 top-0 h-[2px] bg-linear-to-r from-white/0 via-white/70 to-white/0 transition-opacity duration-500 sm:inset-x-auto sm:inset-y-0 sm:left-0 sm:h-auto sm:w-[2px] sm:bg-linear-to-b ${
+          className={`absolute inset-x-0 top-0 h-[2px] bg-linear-to-r from-cyan-400/0 via-cyan-400/70 to-cyan-400/0 transition-opacity duration-500 sm:inset-x-auto sm:inset-y-0 sm:left-0 sm:h-auto sm:w-[2px] sm:bg-linear-to-b ${
             hoveredSide === "right" ? "opacity-100" : "opacity-0"
           }`}
         />

@@ -18,6 +18,7 @@ import { EducationSection } from "./sections/EducationSection";
 import { ContactSection } from "./sections/ContactSection";
 import { Navigation } from "./Navigation";
 import { Footer } from "./Footer";
+import { TechBackground } from "./TechBackground";
 
 interface Project {
   name: string;
@@ -65,17 +66,7 @@ export function ModernPortfolio({ onBack }: { onBack: () => void }) {
       }}
     >
       {/* Fixed background that stays in place while content scrolls */}
-      <div className="pointer-events-none fixed inset-0 bg-slate-950">
-        {/* Animated gradient orbs */}
-        <div className="absolute top-1/4 -left-32 h-[500px] w-[500px] animate-pulse rounded-full bg-blue-600/20 blur-[128px]" />
-        <div
-          className="absolute -right-32 bottom-1/4 h-[400px] w-[400px] animate-pulse rounded-full bg-indigo-600/15 blur-[100px]"
-          style={{ animationDelay: "1s" }}
-        />
-        <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-600/10 blur-[120px]" />
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-linear-to-br from-blue-950/20 via-transparent to-indigo-950/20" />
-      </div>
+      <TechBackground />
 
       <Navigation onBack={onBack} />
 

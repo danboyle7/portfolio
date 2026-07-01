@@ -38,16 +38,19 @@ export function HeroSection({
       id="hero"
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
     >
+      {/* Focused glow behind the name */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[420px] w-[760px] max-w-[95vw] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-blue-500/10 blur-[110px]" />
+
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center lg:max-w-5xl">
         {/* Status badge */}
         <div className="mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-cyan-500/20 bg-cyan-500/[0.07] px-4 py-2 shadow-[0_0_20px_-6px_rgba(34,211,238,0.4)] backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
             </span>
-            <span className="text-sm font-medium tracking-wide text-blue-300">
+            <span className="font-mono text-xs font-medium tracking-wider text-cyan-300 sm:text-sm">
               {contact.availability}
             </span>
           </div>
@@ -60,17 +63,22 @@ export function HeroSection({
           </span>
         </h1>
 
-        {/* Title */}
-        <h2 className="mb-6 text-xl text-slate-400 sm:text-2xl md:text-3xl lg:text-4xl">
-          {about.title}
-        </h2>
+        {/* Title flanked by rule lines */}
+        <div className="mb-6 flex items-center justify-center gap-4">
+          <span className="hidden h-px w-16 bg-linear-to-r from-transparent to-slate-600 sm:block" />
+          <h2 className="text-xl text-slate-300 sm:text-2xl md:text-3xl lg:text-4xl">
+            {about.title}
+          </h2>
+          <span className="hidden h-px w-16 bg-linear-to-l from-transparent to-slate-600 sm:block" />
+        </div>
 
-        {/* Tagline with typing effect */}
-        <p className="mx-auto mb-10 min-h-8 max-w-2xl text-base text-slate-500 sm:text-lg md:text-xl">
+        {/* Tagline with terminal-style typing effect */}
+        <p className="mx-auto mb-10 min-h-8 max-w-2xl font-mono text-sm sm:text-base md:text-lg">
+          <span className="text-cyan-500/70">~ $&nbsp;</span>
           <span className="text-slate-400">
             {about.tagline.slice(0, titleIndex)}
           </span>
-          <span className="ml-0.5 inline-block h-5 w-0.5 translate-y-0.5 animate-pulse bg-blue-400 align-text-bottom" />
+          <span className="animate-cursor-blink ml-1 inline-block h-4 w-2 bg-cyan-400/80 align-middle md:h-5" />
         </p>
 
         {/* CTA Buttons */}
@@ -154,8 +162,10 @@ export function HeroSection({
         className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
         aria-label="Scroll down"
       >
-        <div className="flex flex-col items-center gap-2 text-slate-500 transition-colors hover:text-blue-400">
-          <span className="text-xs tracking-widest uppercase">Scroll</span>
+        <div className="flex flex-col items-center gap-2 text-slate-500 transition-colors hover:text-cyan-400">
+          <span className="font-mono text-xs tracking-widest uppercase">
+            Scroll
+          </span>
           <svg
             className="h-5 w-5 animate-bounce"
             fill="none"
