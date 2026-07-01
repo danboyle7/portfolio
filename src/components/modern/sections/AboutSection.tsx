@@ -245,12 +245,10 @@ export function AboutSection({ about, contact }: AboutSectionProps) {
             {highlights.map((item, index) => (
               <Card
                 key={index}
-                variant="interactive"
                 size="sm"
-                className="group"
                 style={{ transitionDelay: `${(index + 2) * 100}ms` }}
               >
-                <div className="mb-2 text-blue-400 transition-colors group-hover:text-blue-300">
+                <div className="mb-2 text-blue-400">
                   <div className="h-6 w-6">{item.icon}</div>
                 </div>
                 <h3 className="mb-0.5 text-sm font-semibold text-slate-200">

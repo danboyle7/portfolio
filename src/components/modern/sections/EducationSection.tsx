@@ -55,8 +55,7 @@ export function EducationSection({ education }: EducationSectionProps) {
           {education.map((edu, index) => (
             <Card
               key={index}
-              variant="interactive"
-              className={`group ${
+              className={`${
                 isVisible
                   ? "translate-y-0 opacity-100"
                   : "translate-y-8 opacity-0"
@@ -64,7 +63,7 @@ export function EducationSection({ education }: EducationSectionProps) {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               {/* Degree icon */}
-              <div className="mb-4 text-blue-400 transition-colors group-hover:text-blue-300">
+              <div className="mb-4 text-blue-400">
                 <svg
                   className="h-8 w-8"
                   fill="none"
@@ -83,7 +82,7 @@ export function EducationSection({ education }: EducationSectionProps) {
               </div>
 
               {/* Degree info */}
-              <h3 className="mb-1 text-lg font-semibold text-white transition-colors group-hover:text-blue-400">
+              <h3 className="mb-1 text-lg font-semibold text-white">
                 {edu.degree}
               </h3>
               <p className="mb-2 text-sm font-medium text-blue-400">
