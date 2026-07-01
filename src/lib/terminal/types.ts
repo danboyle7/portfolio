@@ -124,7 +124,6 @@ export interface SkillCategory {
 
 export interface Skill {
   name: string;
-  level: number; // 0-100
   years?: number;
   icon?: string;
 }

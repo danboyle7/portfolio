@@ -6,166 +6,170 @@ skills:
     icon: "code"
     skills:
       - name: "Python"
-        level: 100
         years: 12
       - name: "C++"
-        level: 95
         years: 10
       - name: "C"
-        level: 90
         years: 7
       - name: "Rust"
-        level: 80
-        years: 3
+        years: 5
       - name: "TypeScript"
-        level: 80
-        years: 3
+        years: 4
       - name: "Java"
-        level: 50
         years: 2
       - name: "Ada"
-        level: 75
         years: 3
       - name: "C#"
-        level: 50
         years: 1
       - name: "Bash"
-        level: 70
         years: 6
       - name: "SQL"
-        level: 80
         years: 4
       - name: "Matlab"
-        level: 70
         years: 3
       - name: "LaTeX"
-        level: 70
         years: 5
 
   - name: "AI/ML Frameworks"
     icon: "cpu"
     skills:
       - name: "PyTorch"
-        level: 75
         years: 5
       - name: "TensorFlow/Keras"
-        level: 75
         years: 4
       - name: "NumPy"
-        level: 85
         years: 6
       - name: "Pandas"
-        level: 85
         years: 6
       - name: "SciPy"
-        level: 65
-        years: 5
+        years: 3
       - name: "Scikit-learn"
-        level: 75
-        years: 5
+        years: 3
       - name: "Ray"
-        level: 65
         years: 2
       - name: "MLFlow"
-        level: 70
         years: 1
       - name: "LangChain"
-        level: 80
-        years: 3
+        years: 4
 
   - name: "Full Stack Frameworks"
     icon: "layers"
     skills:
       - name: "Next.js"
-        level: 85
-        years: 3
+        years: 4
       - name: "React"
-        level: 80
         years: 4
       - name: "Vue.js"
-        level: 50
         years: 1
       - name: "FastAPI"
-        level: 85
-        years: 4
-      - name: "Flask"
-        level: 70
         years: 3
-      - name: "SQLAlchemy"
-        level: 80
-        years: 4
-      - name: "Drizzle"
-        level: 70
+      - name: "Flask"
+        years: 3
+      - name: "Vite"
         years: 2
+      - name: "React Three Fiber"
+        years: 2
+      - name: "Three.js"
+        years: 1
       - name: "TailwindCSS"
-        level: 80
         years: 4
       - name: "Spring Boot"
-        level: 50
         years: 1
 
   - name: "DevOps & Tools"
     icon: "wrench"
     skills:
       - name: "Git/GitLab/GitHub"
-        level: 95
-        years: 10
+        years: 12
       - name: "Docker"
-        level: 80
         years: 5
       - name: "Jenkins"
-        level: 70
         years: 2
       - name: "GDB/PDB"
-        level: 80
         years: 5
       - name: "Valgrind"
-        level: 80
         years: 3
       - name: "Jira"
-        level: 85
         years: 3
       - name: "CI/CD Pipelines"
-        level: 80
         years: 6
+      - name: "Vercel"
+        years: 2
+      - name: "AWS"
+        years: 2
+      - name: "Sentry"
+        years: 2
+      - name: "JTAG"
+        years: 3
+
+  - name: "Databases & Storage"
+    icon: "database"
+    skills:
+      - name: "PostgreSQL"
+        years: 6
+      - name: "SQLite"
+        years: 4
+      - name: "SQLAlchemy"
+        years: 6
+      - name: "Drizzle"
+        years: 3
+      - name: "Alembic"
+        years: 6
+      - name: "Redis"
+        years: 4
+      - name: "Convex"
+        years: 1
+      - name: "AWS S3"
+        years: 3
+      - name: "Cloudflare R2"
+        years: 1
+
+  - name: "LLM Tools & Platforms"
+    icon: "sparkles"
+    skills:
+      - name: "MCP"
+        years: 1
+      - name: "Claude Code"
+        years: 1
+      - name: "Cursor"
+        years: 2
+      - name: "Codex"
+        years: 1
+      - name: "OpenCode"
+        years: 1
+      - name: "Augment"
+        years: 1
+      - name: "Ollama"
+        years: 2
+      - name: "vLLM"
+        years: 1
 
   - name: "Operating Systems"
     icon: "monitor"
     skills:
       - name: "Linux"
-        level: 90
-        years: 10
+        years: 12
       - name: "Green Hills Integrity"
-        level: 75
         years: 3
       - name: "VxWorks"
-        level: 70
         years: 3
       - name: "Windows"
-        level: 95
-        years: 15
+        years: 20
       - name: "macOS"
-        level: 95
-        years: 10
+        years: 20
 
   - name: "AI Specializations"
     icon: "brain"
     skills:
       - name: "Deep Reinforcement Learning"
-        level: 80
         years: 4
       - name: "Natural Language Processing"
-        level: 75
         years: 4
       - name: "Time Series Forecasting"
-        level: 80
         years: 4
       - name: "Representation Learning"
-        level: 75
         years: 2
       - name: "LLM Integration"
-        level: 85
         years: 3
       - name: "Prompt Engineering"
-        level: 85
         years: 3

@@ -250,8 +250,8 @@ export function AboutSection({ about, contact }: AboutSectionProps) {
                 className="group"
                 style={{ transitionDelay: `${(index + 2) * 100}ms` }}
               >
-                <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500/20">
-                  <div className="h-5 w-5">{item.icon}</div>
+                <div className="mb-2 text-blue-400 transition-colors group-hover:text-blue-300">
+                  <div className="h-6 w-6">{item.icon}</div>
                 </div>
                 <h3 className="mb-0.5 text-sm font-semibold text-slate-200">
                   {item.title}

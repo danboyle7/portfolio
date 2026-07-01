@@ -3,7 +3,7 @@ import type {
   CommandResult,
   SkillCategory,
 } from "@/lib/terminal/types";
-import { createLine, createProgressBar } from "@/lib/terminal/utils";
+import { createLine } from "@/lib/terminal/utils";
 import { getContentData } from "@/lib/terminal/file-system";
 
 export const skillsCommand: Command = {
@@ -91,16 +91,12 @@ export const skillsCommand: Command = {
       );
 
       for (const skill of cat.skills) {
-        const bar = createProgressBar(skill.level, 25, "█", "░");
-        const levelStr = `${skill.level}%`.padStart(4);
-        const nameStr = skill.name.padEnd(15);
-
-        let barColor = "term-green";
-        if (skill.level < 70) barColor = "term-yellow";
-        if (skill.level < 50) barColor = "term-red";
-
+        const nameStr = skill.name.padEnd(24);
+        const years = skill.years
+          ? `<span class="term-dim">${skill.years}+ yrs</span>`
+          : "";
         lines.push(
-          `  ${nameStr} <span class="${barColor}">${bar}</span> <span class="term-dim">${levelStr}</span>`,
+          `  <span class="term-green">›</span> <span class="term-green">${nameStr}</span>${years}`,
         );
       }
       lines.push("");

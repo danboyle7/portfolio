@@ -25,7 +25,6 @@ interface Hobby {
 
 interface Skill {
   name: string;
-  level: number;
   years?: number;
 }
 
@@ -337,31 +336,14 @@ function SkillsView({ skill }: { skill: SkillCategory }) {
         ── {skill.name} ──
       </div>
 
-      <div className="space-y-2">
+      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
         {skills.map((s, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <span className="w-32 truncate text-gray-300">{s.name}</span>
-            <div className="flex flex-1 items-center gap-1">
-              <span className="text-green-700">[</span>
-              <div className="relative h-2 flex-1 bg-gray-900">
-                <div
-                  className={`h-full ${
-                    s.level >= 80
-                      ? "bg-green-500"
-                      : s.level >= 60
-                        ? "bg-green-600"
-                        : s.level >= 40
-                          ? "bg-yellow-600"
-                          : "bg-red-600"
-                  }`}
-                  style={{ width: `${s.level}%` }}
-                />
-              </div>
-              <span className="text-green-700">]</span>
-              <span className="w-8 text-right text-gray-500">{s.level}%</span>
-            </div>
+          <div key={i} className="flex items-center justify-between gap-2">
+            <span className="truncate text-gray-300">
+              <span className="text-green-700">›</span> {s.name}
+            </span>
             {s.years && (
-              <span className="text-xs text-gray-600">{s.years}y</span>
+              <span className="shrink-0 text-xs text-gray-600">{s.years}y</span>
             )}
           </div>
         ))}

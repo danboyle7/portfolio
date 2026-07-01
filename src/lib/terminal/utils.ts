@@ -168,34 +168,6 @@ export function formatPath(path: string): string {
 }
 
 /**
- * Create progress bar string
- */
-export function createProgressBar(
-  percent: number,
-  width = 30 as number,
-  filled = "█" as string,
-  empty = "░" as string,
-): string {
-  const filledCount = Math.round((percent / 100) * width);
-  const emptyCount = width - filledCount;
-  return filled.repeat(filledCount) + empty.repeat(emptyCount);
-}
-
-/**
- * Create a skill bar with label
- */
-export function createSkillBar(
-  name: string,
-  level: number,
-  width = 20 as number,
-): string {
-  const bar = createProgressBar(level, width, "▓", "░");
-  const levelStr = `${level}%`.padStart(4);
-  const nameStr = name.padEnd(15);
-  return `${nameStr} ${bar} ${levelStr}`;
-}
-
-/**
  * Wrap text to a specific width
  */
 export function wrapText(text: string, width: number): string[] {

@@ -1,9 +1,9 @@
 "use client";
 
-import type { JSX } from "react";
+import type { CSSProperties, JSX } from "react";
 import { useEffect, useRef, useState } from "react";
 import type { SkillCategory } from "@/lib/terminal/types";
-import { Card } from "@/components/ui/card";
+import { getSkillIcon } from "@/lib/skill-icons.generated";
 
 interface SkillsSectionProps {
   skills: SkillCategory[];
@@ -107,6 +107,36 @@ function SkillIcon({ name }: { name: string }): JSX.Element {
         />
       </svg>
     ),
+    sparkles: (
+      <svg
+        className="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-6.857 2.286L12 21l-2.286-6.857L3 12l6.857-2.286L12 3z"
+        />
+      </svg>
+    ),
+    database: (
+      <svg
+        className="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M4 7c0 1.657 3.582 3 8 3s8-1.343 8-3-3.582-3-8-3-8 1.343-8 3zm16 0v10c0 1.657-3.582 3-8 3s-8-1.343-8-3V7m16 5c0 1.657-3.582 3-8 3s-8-1.343-8-3"
+        />
+      </svg>
+    ),
   };
 
   return (
@@ -196,56 +226,50 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
                 : "translate-y-8 opacity-0"
             }`}
           >
-            <Card rounded="lg" size="none" className="p-4 sm:p-6 md:p-8">
-              <div className="grid gap-4 sm:gap-5">
-                {[...(skills[activeCategory]?.skills ?? [])]
-                  .sort((a, b) => b.level - a.level)
-                  .map((skill, index) => (
-                    <div key={skill.name} className="group">
-                      <div className="mb-2 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-                          <span className="truncate text-sm font-medium text-slate-200 sm:text-base">
-                            {skill.name}
-                          </span>
-                          {skill.years && (
-                            <span className="flex-shrink-0 rounded bg-slate-800/50 px-1.5 py-0.5 text-[10px] text-slate-500 sm:px-2 sm:text-xs">
-                              {skill.years}+ yrs
-                            </span>
-                          )}
-                        </div>
-                        <span className="flex-shrink-0 text-xs text-slate-500 sm:text-sm">
-                          {skill.level}%
-                        </span>
-                      </div>
-
-                      {/* Progress bar */}
-                      <div className="h-2 overflow-hidden rounded-full bg-slate-800/50">
+            <div className="rounded-2xl border border-slate-800/50 bg-slate-900/20 p-4 backdrop-blur-sm sm:p-5">
+              <div className="modern-scrollbar max-h-[60vh] overflow-y-auto px-1 py-2 lg:max-h-[520px]">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-4">
+                  {(skills[activeCategory]?.skills ?? []).map(
+                    (skill, index) => {
+                      const icon = getSkillIcon(skill.name);
+                      return (
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 transition-all duration-1000 ease-out"
-                          style={{
-                            width: isVisible ? `${skill.level}%` : "0%",
-                            transitionDelay: `${index * 50 + 300}ms`,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </Card>
-
-            {/* Category summary */}
-            <div className="mt-6 flex flex-wrap gap-4 text-sm text-slate-500">
-              <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500" />
-                <span>90-100%: Expert</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-gradient-to-r from-blue-500/70 to-cyan-500/70" />
-                <span>80-89%: Advanced</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-gradient-to-r from-blue-500/50 to-cyan-500/50" />
-                <span>70-79%: Proficient</span>
+                          key={skill.name}
+                          className="skill-item group flex flex-col items-center gap-3 text-center"
+                          style={
+                            {
+                              "--skill-color": icon.color,
+                              transitionDelay: isVisible
+                                ? `${index * 35 + 200}ms`
+                                : "0ms",
+                            } as CSSProperties
+                          }
+                        >
+                          <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-slate-800/70 bg-slate-900/40 transition-all duration-300 group-hover:-translate-y-1 group-hover:border-[var(--skill-color)] group-hover:bg-slate-800/40">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={icon.src}
+                              alt=""
+                              aria-hidden="true"
+                              loading="lazy"
+                              className="h-10 w-10 object-contain"
+                            />
+                          </span>
+                          <div className="w-full">
+                            <div className="text-sm leading-tight font-semibold text-balance text-slate-100">
+                              {skill.name}
+                            </div>
+                            {skill.years && (
+                              <div className="mt-1 text-[11px] text-slate-500">
+                                {skill.years}+ yrs
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    },
+                  )}
+                </div>
               </div>
             </div>
           </div>

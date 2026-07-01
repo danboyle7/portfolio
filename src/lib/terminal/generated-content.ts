@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-01-20T01:13:28.787Z
+ * Generated at: 2026-07-01T21:28:02.502Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,17 +29,23 @@ export const generatedContent: Record<string, any> = {
       description:
         "Developing enterprise applications for government clients, leading AI/ML initiatives, and building data science solutions for the United States Space Force.",
       highlights: [
-        "Developed CAPS-5 training platform (C5T) for the VA using Next.js, TailwindCSS, and Drizzle ORM",
-        "Implemented React Three Fiber (Three.js) with Blender models for realistic 3D character animations and lip-syncing in C5T patient conversations",
-        "Established GitLab CI/CD pipelines and configured Vercel deployments with Sentry monitoring for C5T",
-        "Led summer internship engineering team building LLM-powered automated customer report tool",
-        "Integrated LangChain and OpenAI models for streamlined reporting processes",
-        "Primary Data Scientist for USSF S1A division, analyzing military and civilian personnel datasets to support workforce planning and staffing decisions",
+        "Lead developmer for CAPS-5 Training (C5T), a patient-simulation training platform for the Department of Veterans Affairs, using Next.js, TailwindCSS, PostgreSQL, Drizzle ORM, AWS S3, and Sentry",
+        "Build and integrate realistic 3D patient simulations using Blender and React Three Fiber, including talking animations, fidgets, gestures, and lip-synced conversational interactions",
+        "Designed a script-guided agentic conversation engine to support structured, interactive simulated patient interviews and improve training realism",
+        "Manage CI/CD pipelines, Vercel and AWS deployments, application monitoring, and platform analytics to improve reliability, observability, and release workflows",
+        "Led internal R&D team developing a collaborative AI-backed document generation platform using Next.js, Convex, AWS S3, and LLM-based workflows",
+        "Led summer intern engineering team in building an LLM-powered automated reporting tool using Next.js, LangChain, and OpenAI models to streamline customer report generation",
+        "Served as Primary Data Scientist for the United States Space Force S1A division, creating and managing Palantir-based data pipelines, analytics workflows, and reports across military and civilian personnel datasets",
+        "Generated data-driven insights and actionable recommendations for USSF leadership to support personnel planning, strategic decision-making, and operational reporting",
+        "Collaborated on the design and rollout of an internal business process for submitting, evaluating, and managing software ideas, increasing innovation visibility and employee engagement",
       ],
       technologies: [
         "Next.js",
         "TailwindCSS",
+        "PostgreSQL",
         "Drizzle ORM",
+        "AWS S3",
+        "Convex",
         "React Three Fiber",
         "Three.js",
         "Blender",
@@ -48,6 +54,7 @@ export const generatedContent: Record<string, any> = {
         "Sentry",
         "LangChain",
         "OpenAI",
+        "Palantir",
         "Python",
         "Data Science",
       ],
@@ -200,62 +207,50 @@ export const generatedContent: Record<string, any> = {
       skills: [
         {
           name: "Python",
-          level: 100,
           years: 12,
         },
         {
           name: "C++",
-          level: 95,
           years: 10,
         },
         {
           name: "C",
-          level: 90,
           years: 7,
         },
         {
           name: "Rust",
-          level: 80,
-          years: 3,
+          years: 5,
         },
         {
           name: "TypeScript",
-          level: 80,
-          years: 3,
+          years: 4,
         },
         {
           name: "Java",
-          level: 50,
           years: 2,
         },
         {
           name: "Ada",
-          level: 75,
           years: 3,
         },
         {
           name: "C#",
-          level: 50,
           years: 1,
         },
         {
           name: "Bash",
-          level: 70,
           years: 6,
         },
         {
           name: "SQL",
-          level: 80,
           years: 4,
         },
         {
           name: "Matlab",
-          level: 70,
           years: 3,
         },
         {
           name: "LaTeX",
-          level: 70,
           years: 5,
         },
       ],
@@ -266,48 +261,39 @@ export const generatedContent: Record<string, any> = {
       skills: [
         {
           name: "PyTorch",
-          level: 75,
           years: 5,
         },
         {
           name: "TensorFlow/Keras",
-          level: 75,
           years: 4,
         },
         {
           name: "NumPy",
-          level: 85,
           years: 6,
         },
         {
           name: "Pandas",
-          level: 85,
           years: 6,
         },
         {
           name: "SciPy",
-          level: 65,
-          years: 5,
+          years: 3,
         },
         {
           name: "Scikit-learn",
-          level: 75,
-          years: 5,
+          years: 3,
         },
         {
           name: "Ray",
-          level: 65,
           years: 2,
         },
         {
           name: "MLFlow",
-          level: 70,
           years: 1,
         },
         {
           name: "LangChain",
-          level: 80,
-          years: 3,
+          years: 4,
         },
       ],
     },
@@ -317,47 +303,42 @@ export const generatedContent: Record<string, any> = {
       skills: [
         {
           name: "Next.js",
-          level: 85,
-          years: 3,
+          years: 4,
         },
         {
           name: "React",
-          level: 80,
           years: 4,
         },
         {
           name: "Vue.js",
-          level: 50,
           years: 1,
         },
         {
           name: "FastAPI",
-          level: 85,
-          years: 4,
-        },
-        {
-          name: "Flask",
-          level: 70,
           years: 3,
         },
         {
-          name: "SQLAlchemy",
-          level: 80,
-          years: 4,
+          name: "Flask",
+          years: 3,
         },
         {
-          name: "Drizzle",
-          level: 70,
+          name: "Vite",
           years: 2,
         },
         {
+          name: "React Three Fiber",
+          years: 2,
+        },
+        {
+          name: "Three.js",
+          years: 1,
+        },
+        {
           name: "TailwindCSS",
-          level: 80,
           years: 4,
         },
         {
           name: "Spring Boot",
-          level: 50,
           years: 1,
         },
       ],
@@ -368,38 +349,127 @@ export const generatedContent: Record<string, any> = {
       skills: [
         {
           name: "Git/GitLab/GitHub",
-          level: 95,
-          years: 10,
+          years: 12,
         },
         {
           name: "Docker",
-          level: 80,
           years: 5,
         },
         {
           name: "Jenkins",
-          level: 70,
           years: 2,
         },
         {
           name: "GDB/PDB",
-          level: 80,
           years: 5,
         },
         {
           name: "Valgrind",
-          level: 80,
           years: 3,
         },
         {
           name: "Jira",
-          level: 85,
           years: 3,
         },
         {
           name: "CI/CD Pipelines",
-          level: 80,
           years: 6,
+        },
+        {
+          name: "Vercel",
+          years: 2,
+        },
+        {
+          name: "AWS",
+          years: 2,
+        },
+        {
+          name: "Sentry",
+          years: 2,
+        },
+        {
+          name: "JTAG",
+          years: 3,
+        },
+      ],
+    },
+    {
+      name: "Databases & Storage",
+      icon: "database",
+      skills: [
+        {
+          name: "PostgreSQL",
+          years: 6,
+        },
+        {
+          name: "SQLite",
+          years: 4,
+        },
+        {
+          name: "SQLAlchemy",
+          years: 6,
+        },
+        {
+          name: "Drizzle",
+          years: 3,
+        },
+        {
+          name: "Alembic",
+          years: 6,
+        },
+        {
+          name: "Redis",
+          years: 4,
+        },
+        {
+          name: "Convex",
+          years: 1,
+        },
+        {
+          name: "AWS S3",
+          years: 3,
+        },
+        {
+          name: "Cloudflare R2",
+          years: 1,
+        },
+      ],
+    },
+    {
+      name: "LLM Tools & Platforms",
+      icon: "sparkles",
+      skills: [
+        {
+          name: "MCP",
+          years: 1,
+        },
+        {
+          name: "Claude Code",
+          years: 1,
+        },
+        {
+          name: "Cursor",
+          years: 2,
+        },
+        {
+          name: "Codex",
+          years: 1,
+        },
+        {
+          name: "OpenCode",
+          years: 1,
+        },
+        {
+          name: "Augment",
+          years: 1,
+        },
+        {
+          name: "Ollama",
+          years: 2,
+        },
+        {
+          name: "vLLM",
+          years: 1,
         },
       ],
     },
@@ -409,28 +479,23 @@ export const generatedContent: Record<string, any> = {
       skills: [
         {
           name: "Linux",
-          level: 90,
-          years: 10,
+          years: 12,
         },
         {
           name: "Green Hills Integrity",
-          level: 75,
           years: 3,
         },
         {
           name: "VxWorks",
-          level: 70,
           years: 3,
         },
         {
           name: "Windows",
-          level: 95,
-          years: 15,
+          years: 20,
         },
         {
           name: "macOS",
-          level: 95,
-          years: 10,
+          years: 20,
         },
       ],
     },
@@ -440,32 +505,26 @@ export const generatedContent: Record<string, any> = {
       skills: [
         {
           name: "Deep Reinforcement Learning",
-          level: 80,
           years: 4,
         },
         {
           name: "Natural Language Processing",
-          level: 75,
           years: 4,
         },
         {
           name: "Time Series Forecasting",
-          level: 80,
           years: 4,
         },
         {
           name: "Representation Learning",
-          level: 75,
           years: 2,
         },
         {
           name: "LLM Integration",
-          level: 85,
           years: 3,
         },
         {
           name: "Prompt Engineering",
-          level: 85,
           years: 3,
         },
       ],

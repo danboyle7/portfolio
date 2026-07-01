@@ -18,7 +18,7 @@ import type {
   ContactInfo,
   Hobby,
 } from "./types";
-import { createLine, createProgressBar } from "./utils";
+import { createLine } from "./utils";
 import { getContentData } from "./file-system";
 
 /**
@@ -165,10 +165,10 @@ function renderSkills(): CommandResult {
     lines.push("");
 
     for (const skill of category.skills) {
-      const bar = createProgressBar(skill.level, 20, "▓", "░");
-      lines.push(
-        `  ${skill.name.padEnd(15)} <span class="term-green">${bar}</span> ${skill.level}%`,
-      );
+      const years = skill.years
+        ? ` <span class="term-dim">(${skill.years}+ yrs)</span>`
+        : "";
+      lines.push(`  <span class="term-green">›</span> ${skill.name}${years}`);
     }
     lines.push("");
   }

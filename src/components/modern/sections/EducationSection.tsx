@@ -64,9 +64,9 @@ export function EducationSection({ education }: EducationSectionProps) {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               {/* Degree icon */}
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 transition-colors group-hover:bg-blue-500/20">
+              <div className="mb-4 text-blue-400 transition-colors group-hover:text-blue-300">
                 <svg
-                  className="h-6 w-6 text-blue-400"
+                  className="h-8 w-8"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
