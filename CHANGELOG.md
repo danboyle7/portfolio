@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [semantic-release](https://github.com/semantic-release/semantic-release) for commit guidelines.
 
+## [1.3.0](https://github.com/danboyle7/portfolio/compare/v1.2.4...v1.3.0) (2026-07-02)
+
 ## [1.2.4](https://github.com/danboyle7/portfolio/compare/v1.2.3...v1.2.4) (2026-07-02)
 
 ## [1.2.3](https://github.com/danboyle7/portfolio/compare/v1.2.2...v1.2.3) (2026-07-02)
