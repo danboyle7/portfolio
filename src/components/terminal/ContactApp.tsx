@@ -197,10 +197,10 @@ export function ContactApp({ onClose }: ContactAppProps) {
         : undefined,
     },
     {
-      key: "gitlab",
-      label: "GitLab",
-      value: contact?.gitlab,
-      href: contact?.gitlab ? `https://${contact.gitlab}` : undefined,
+      key: "github",
+      label: "GitHub",
+      value: contact?.github,
+      href: contact?.github ? `https://${contact.github}` : undefined,
     },
     {
       key: "linkedin",

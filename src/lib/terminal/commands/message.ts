@@ -72,7 +72,7 @@ export const messageCommand: Command = {
         '  * <span class="term-white">LinkedIn:</span> Great for professional connections',
       );
       lines.push(
-        '  * <span class="term-white">GitLab:</span>   View my public project source',
+        '  * <span class="term-white">GitHub:</span>   View my public project source',
       );
       lines.push("");
       lines.push(

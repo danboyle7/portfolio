@@ -195,10 +195,7 @@ function contactToMarkdown(): string | null {
   lines.push("# Contact");
   lines.push("");
   lines.push(`- **Email:** ${contact.email}`);
-  lines.push(`- **GitLab:** ${contact.gitlab}`);
-  if (contact.github) {
-    lines.push(`- **GitHub:** ${contact.github}`);
-  }
+  lines.push(`- **GitHub:** ${contact.github}`);
   lines.push(`- **LinkedIn:** ${contact.linkedin}`);
   if (contact.twitter) {
     lines.push(`- **Twitter:** ${contact.twitter}`);
