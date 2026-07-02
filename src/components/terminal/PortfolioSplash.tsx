@@ -57,7 +57,7 @@ export function PortfolioSplash({
     // Use requestAnimationFrame to batch state update and avoid React Compiler warning
     const frame = requestAnimationFrame(() => {
       const initialStreams: MatrixStream[] = [];
-      const numStreams = 60; // Denser rain
+      const numStreams = 100; // Denser rain
 
       for (let i = 0; i < numStreams; i++) {
         const stream = createStream();
