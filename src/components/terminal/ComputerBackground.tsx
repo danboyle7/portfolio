@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { ZoomIn } from "lucide-react";
 import { ZoomProvider } from "./ZoomContext";
 
 interface ComputerBackgroundProps {
@@ -376,6 +377,17 @@ export function ComputerBackground({
           className="fixed right-4 bottom-4 z-50 rounded border border-green-500/50 bg-black/80 px-4 py-2 font-mono text-sm text-green-500 transition-colors hover:bg-green-500/10"
         >
           [ESC] Zoom Out
+        </button>
+      )}
+
+      {/* Fixed zoom in button (visible when zoomed out, so users know they can zoom) */}
+      {imageLoaded && !isZoomed && (
+        <button
+          onClick={handleZoomToggle}
+          className="fixed right-4 bottom-4 z-50 flex items-center gap-2 rounded border border-green-500/50 bg-black/80 px-4 py-2 font-mono text-sm text-green-500 transition-colors hover:bg-green-500/10"
+        >
+          <ZoomIn className="h-4 w-4" />
+          Zoom In
         </button>
       )}
     </div>
