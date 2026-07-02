@@ -2,6 +2,7 @@ import type { Command, CommandResult } from "@/lib/terminal/types";
 import { createLine, resolvePath } from "@/lib/terminal/utils";
 import { navigateToPath } from "@/lib/terminal/file-system";
 import { isUserCreated, createFile } from "@/lib/terminal/storage";
+import { contentDataToMarkdown } from "@/lib/terminal/content-to-markdown";
 
 export const vimCommand: Command = {
   name: "vim",
@@ -52,15 +53,20 @@ export const vimCommand: Command = {
         typeof node.content === "object" &&
         "type" in node.content
       ) {
-        // It's a ContentData object - can't edit these
-        return {
-          output: [
-            createLine(
-              `vim: '${fileName}' is a special file (read-only)`,
-              "error",
-            ),
-          ],
-        };
+        // It's a ContentData placeholder - render it as read-only Markdown
+        // source so vim shows a real .md file instead of refusing to open it.
+        const markdown = contentDataToMarkdown(node.content);
+        if (markdown === null) {
+          return {
+            output: [
+              createLine(
+                `vim: '${fileName}' is a special file (read-only)`,
+                "error",
+              ),
+            ],
+          };
+        }
+        content = markdown;
       }
 
       return {
