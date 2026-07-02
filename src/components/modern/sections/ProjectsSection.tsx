@@ -593,11 +593,6 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                     </span>
                   </div>
                 </div>
-
-                {/* Click hint */}
-                <div className="absolute right-2 bottom-2 text-xs text-slate-600 opacity-0 transition-opacity group-hover:opacity-100">
-                  Click for details
-                </div>
               </Card>
             ))}
           </div>

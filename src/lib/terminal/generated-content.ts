@@ -683,7 +683,7 @@ export const generatedContent: Record<string, any> = {
       name: "The Better Page",
       start_date: "2025-11",
       description:
-        "The Better Page is a side business I started with my wife, Ashlynn, and a close friend, Chris Macklen, to\naddress a problem we noticed locally. Many small businesses either do not have a website at all or rely on\noutdated, low-quality sites built with platforms like GoDaddy or Wix. These sites often lack strong visual\ndesign and clear calls to action.\n\nWe set out to solve this by building fully custom, personalized websites tailored specifically for small and\nmedium-sized businesses.\n\nOur website is still under development and will be added once it’s live. That said, we already have several\nhappy clients. Here’s an example from a local bookkeeping business in Hertford, NC: https://www.hinshawbookkeeping.com/\n",
+        "The Better Page is a side business I started with my wife to\naddress a problem we noticed locally. Many small businesses either do not have a website at all or rely on\noutdated, low-quality sites built with platforms like GoDaddy or Wix. These sites often lack strong visual\ndesign and clear calls to action.\n\nWe set out to solve this by building fully custom, personalized websites tailored specifically for small and\nmedium-sized businesses.\n\nOur website is still under development and will be added once it’s live. That said, we already have several\nhappy clients. Here’s an example from a local bookkeeping business in Hertford, NC: https://www.hinshawbookkeeping.com/\n",
       status: "development",
       technologies: [
         "Next.js",
