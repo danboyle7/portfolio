@@ -141,7 +141,7 @@ function getCommandHelp(name: string): CommandHelp | null {
       name: "skills",
       description: "Display technical skills with proficiency levels",
       usage:
-        "skills [category]\n\n  Categories: languages, frameworks, tools, all",
+        "skills [category]\n\n  Examples: skills ci/cd, skills devops, skills tools, skills all",
     },
     blog: {
       name: "blog",

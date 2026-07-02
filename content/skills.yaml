@@ -76,30 +76,40 @@ skills:
       - name: "Spring Boot"
         years: 1
 
-  - name: "DevOps & Tools"
+  - name: "CI/CD & DevOps"
     icon: "wrench"
     skills:
-      - name: "Git/GitLab/GitHub"
+      - name: "GitHub"
         years: 12
-      - name: "Docker"
-        years: 5
-      - name: "Jenkins"
-        years: 2
-      - name: "GDB/PDB"
-        years: 5
-      - name: "Valgrind"
-        years: 3
-      - name: "Jira"
-        years: 3
+      - name: "GitLab"
+        years: 12
       - name: "CI/CD Pipelines"
         years: 6
+      - name: "Terraform"
+        years: 1
+      - name: "Jenkins"
+        years: 2
+      - name: "Docker"
+        years: 5
       - name: "Vercel"
         years: 2
       - name: "AWS"
         years: 2
       - name: "Sentry"
         years: 2
+
+  - name: "Developer Tools"
+    icon: "code"
+    skills:
+      - name: "Git"
+        years: 12
+      - name: "GDB/PDB"
+        years: 5
+      - name: "Valgrind"
+        years: 3
       - name: "JTAG"
+        years: 3
+      - name: "Jira"
         years: 3
 
   - name: "Databases & Storage"
@@ -167,9 +177,11 @@ skills:
         years: 4
       - name: "Time Series Forecasting"
         years: 4
-      - name: "Representation Learning"
-        years: 2
       - name: "LLM Integration"
         years: 3
       - name: "Prompt Engineering"
+        years: 3
+      - name: "Agent Development"
+        years: 3
+      - name: "Retrieval-Augmented Generation (RAG)"
         years: 3

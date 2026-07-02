@@ -171,14 +171,24 @@ export const skillIcons: Record<string, SkillIcon> = {
     color: "#77bc1f",
     brand: true,
   },
-  "Git/GitLab/GitHub": {
-    src: "/skills/git-original.svg",
-    color: "#F34F29",
+  GitHub: {
+    src: "/skills/github.svg",
+    color: "#E8EAED",
     brand: true,
   },
-  Docker: {
-    src: "/skills/docker-original.svg",
-    color: "#019BC6",
+  GitLab: {
+    src: "/skills/gitlab-original.svg",
+    color: "#FC6D26",
+    brand: true,
+  },
+  "CI/CD Pipelines": {
+    src: "/skills/githubactions-original.svg",
+    color: "#2088ff",
+    brand: true,
+  },
+  Terraform: {
+    src: "/skills/terraform-original.svg",
+    color: "#5c4ee5",
     brand: true,
   },
   Jenkins: {
@@ -186,24 +196,9 @@ export const skillIcons: Record<string, SkillIcon> = {
     color: "#ef3d3a",
     brand: true,
   },
-  "GDB/PDB": {
-    src: "/skills/gnu.svg",
-    color: "#E8EAED",
-    brand: true,
-  },
-  Valgrind: {
-    src: "/skills/valgrind.svg",
-    color: "#38BDF8",
-    brand: false,
-  },
-  Jira: {
-    src: "/skills/jira-original.svg",
-    color: "#0052cc",
-    brand: true,
-  },
-  "CI/CD Pipelines": {
-    src: "/skills/githubactions-original.svg",
-    color: "#2088ff",
+  Docker: {
+    src: "/skills/docker-original.svg",
+    color: "#019BC6",
     brand: true,
   },
   Vercel: {
@@ -221,10 +216,30 @@ export const skillIcons: Record<string, SkillIcon> = {
     color: "#362d59",
     brand: true,
   },
+  Git: {
+    src: "/skills/git-original.svg",
+    color: "#F34F29",
+    brand: true,
+  },
+  "GDB/PDB": {
+    src: "/skills/gnu.svg",
+    color: "#E8EAED",
+    brand: true,
+  },
+  Valgrind: {
+    src: "/skills/valgrind.svg",
+    color: "#38BDF8",
+    brand: false,
+  },
   JTAG: {
     src: "/skills/jtag.svg",
     color: "#38BDF8",
     brand: false,
+  },
+  Jira: {
+    src: "/skills/jira-original.svg",
+    color: "#0052cc",
+    brand: true,
   },
   PostgreSQL: {
     src: "/skills/postgresql-original.svg",
@@ -351,11 +366,6 @@ export const skillIcons: Record<string, SkillIcon> = {
     color: "#38BDF8",
     brand: false,
   },
-  "Representation Learning": {
-    src: "/skills/representation-learning.svg",
-    color: "#38BDF8",
-    brand: false,
-  },
   "LLM Integration": {
     src: "/skills/llm-integration.svg",
     color: "#38BDF8",
@@ -363,6 +373,16 @@ export const skillIcons: Record<string, SkillIcon> = {
   },
   "Prompt Engineering": {
     src: "/skills/prompt-engineering.svg",
+    color: "#38BDF8",
+    brand: false,
+  },
+  "Agent Development": {
+    src: "/skills/agent-development.svg",
+    color: "#38BDF8",
+    brand: false,
+  },
+  "Retrieval-Augmented Generation (RAG)": {
+    src: "/skills/retrieval-augmented-generation-rag.svg",
     color: "#38BDF8",
     brand: false,
   },

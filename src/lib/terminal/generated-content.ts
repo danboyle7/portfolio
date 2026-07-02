@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-07-01T21:55:31.276Z
+ * Generated at: 2026-07-02T20:15:01.776Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -344,36 +344,32 @@ export const generatedContent: Record<string, any> = {
       ],
     },
     {
-      name: "DevOps & Tools",
+      name: "CI/CD & DevOps",
       icon: "wrench",
       skills: [
         {
-          name: "Git/GitLab/GitHub",
+          name: "GitHub",
           years: 12,
         },
         {
-          name: "Docker",
-          years: 5,
+          name: "GitLab",
+          years: 12,
+        },
+        {
+          name: "CI/CD Pipelines",
+          years: 6,
+        },
+        {
+          name: "Terraform",
+          years: 1,
         },
         {
           name: "Jenkins",
           years: 2,
         },
         {
-          name: "GDB/PDB",
+          name: "Docker",
           years: 5,
-        },
-        {
-          name: "Valgrind",
-          years: 3,
-        },
-        {
-          name: "Jira",
-          years: 3,
-        },
-        {
-          name: "CI/CD Pipelines",
-          years: 6,
         },
         {
           name: "Vercel",
@@ -387,8 +383,30 @@ export const generatedContent: Record<string, any> = {
           name: "Sentry",
           years: 2,
         },
+      ],
+    },
+    {
+      name: "Developer Tools",
+      icon: "code",
+      skills: [
+        {
+          name: "Git",
+          years: 12,
+        },
+        {
+          name: "GDB/PDB",
+          years: 5,
+        },
+        {
+          name: "Valgrind",
+          years: 3,
+        },
         {
           name: "JTAG",
+          years: 3,
+        },
+        {
+          name: "Jira",
           years: 3,
         },
       ],
@@ -516,15 +534,19 @@ export const generatedContent: Record<string, any> = {
           years: 4,
         },
         {
-          name: "Representation Learning",
-          years: 2,
-        },
-        {
           name: "LLM Integration",
           years: 3,
         },
         {
           name: "Prompt Engineering",
+          years: 3,
+        },
+        {
+          name: "Agent Development",
+          years: 3,
+        },
+        {
+          name: "Retrieval-Augmented Generation (RAG)",
           years: 3,
         },
       ],

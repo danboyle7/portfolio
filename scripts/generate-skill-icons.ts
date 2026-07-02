@@ -63,8 +63,10 @@ const DEVICON: Record<string, string> = {
   Vite: "vitejs-original",
   TailwindCSS: "tailwindcss-original",
   "Spring Boot": "spring-original",
-  "Git/GitLab/GitHub": "git-original",
+  Git: "git-original",
+  GitLab: "gitlab-original",
   Docker: "docker-original",
+  Terraform: "terraform-original",
   Jenkins: "jenkins-original",
   Jira: "jira-original",
   "CI/CD Pipelines": "githubactions-original",
@@ -93,6 +95,7 @@ const BRAND: Record<string, string> = {
   "React Three Fiber": "threedotjs",
   "Three.js": "threedotjs",
   "GDB/PDB": "gnu",
+  GitHub: "github",
   Vercel: "vercel",
   Drizzle: "drizzle",
   Convex: "convex",
@@ -127,9 +130,10 @@ const FALLBACK: Record<string, { icon: string; color?: string }> = {
   "Deep Reinforcement Learning": { icon: "brain" },
   "Natural Language Processing": { icon: "languages" },
   "Time Series Forecasting": { icon: "trending-up" },
-  "Representation Learning": { icon: "network" },
   "LLM Integration": { icon: "plug" },
   "Prompt Engineering": { icon: "terminal" },
+  "Agent Development": { icon: "bot" },
+  "Retrieval-Augmented Generation (RAG)": { icon: "search-check" },
 };
 
 interface SkillIconEntry {
