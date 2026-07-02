@@ -314,7 +314,7 @@ export function PortfolioSplash({
       >
         {/* Same circuit background as the modern portfolio */}
         <div className="absolute inset-0 opacity-80 transition-opacity duration-500 group-hover:opacity-100">
-          <TechBackground position="absolute" />
+          <TechBackground position="absolute" fade={false} />
         </div>
 
         {/* Content - using modern portfolio font */}
@@ -327,23 +327,23 @@ export function PortfolioSplash({
         >
           {/* Minimal layout icon */}
           <LayoutDashboard
-            strokeWidth={1.25}
-            className="mb-4 h-10 w-10 text-slate-300 transition-colors duration-300 group-hover:text-white sm:mb-8 sm:h-16 sm:w-16"
+            strokeWidth={1}
+            className="mb-4 h-10 w-10 text-slate-300 transition-colors duration-300 group-hover:text-white sm:mb-10 sm:h-24 sm:w-24"
           />
 
-          <div className="space-y-2 text-center sm:space-y-3">
-            <h2 className="text-xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
+          <div className="space-y-2 text-center sm:space-y-4">
+            <h2 className="text-xl font-bold tracking-tight sm:text-3xl md:text-5xl lg:text-6xl">
               <span className="bg-linear-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
                 Modern Portfolio
               </span>
             </h2>
-            <p className="max-w-xs text-[10px] text-slate-400 sm:text-sm">
+            <p className="max-w-xs text-[10px] text-slate-400 sm:max-w-md sm:text-base">
               Clean, modern design with smooth animations and easy navigation
             </p>
           </div>
 
           {/* Features pills - hidden on mobile */}
-          <div className="mt-4 hidden max-w-xs flex-wrap justify-center gap-2 sm:mt-8 sm:flex">
+          <div className="mt-4 hidden max-w-md flex-wrap justify-center gap-2.5 sm:mt-10 sm:flex">
             {[
               "Clean Design",
               "Smooth Animations",
@@ -352,7 +352,7 @@ export function PortfolioSplash({
             ].map((feature) => (
               <span
                 key={feature}
-                className="flex items-center gap-1.5 rounded-full border border-slate-700/60 bg-slate-900/40 px-3 py-1 text-[10px] text-slate-400 backdrop-blur-sm transition-colors duration-300 group-hover:border-cyan-400/30 group-hover:text-slate-300 sm:text-xs"
+                className="flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/40 px-3.5 py-1.5 text-[10px] text-slate-400 backdrop-blur-sm transition-colors duration-300 group-hover:border-cyan-400/30 group-hover:text-slate-300 sm:text-sm"
               >
                 <span className="h-1 w-1 rounded-full bg-cyan-400/70" />
                 {feature}
@@ -362,7 +362,7 @@ export function PortfolioSplash({
 
           {/* Hover/tap instruction */}
           <div
-            className={`mt-4 text-xs font-medium text-cyan-300 transition-opacity duration-300 sm:mt-8 sm:text-sm ${
+            className={`mt-4 text-xs font-medium text-cyan-300 transition-opacity duration-300 sm:mt-10 sm:text-base ${
               hoveredSide === "right" ? "opacity-100" : "sm:opacity-0"
             }`}
           >

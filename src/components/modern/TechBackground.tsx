@@ -208,9 +208,14 @@ const NOISE_TEXTURE = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2
 interface TechBackgroundProps {
   /** "fixed" fills the viewport (default); "absolute" fills the nearest positioned ancestor */
   position?: "fixed" | "absolute";
+  /** Fade the grid/pulses out toward the edges (default true) */
+  fade?: boolean;
 }
 
-export function TechBackground({ position = "fixed" }: TechBackgroundProps) {
+export function TechBackground({
+  position = "fixed",
+  fade = true,
+}: TechBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -364,8 +369,7 @@ export function TechBackground({ position = "fixed" }: TechBackgroundProps) {
           backgroundImage: `linear-gradient(to right, rgba(148,163,184,0.055) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(148,163,184,0.055) 1px, transparent 1px)`,
           backgroundSize: `${GRID}px ${GRID}px`,
-          maskImage: GRID_MASK,
-          WebkitMaskImage: GRID_MASK,
+          ...(fade && { maskImage: GRID_MASK, WebkitMaskImage: GRID_MASK }),
         }}
       />
 
@@ -373,7 +377,9 @@ export function TechBackground({ position = "fixed" }: TechBackgroundProps) {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 h-full w-full"
-        style={{ maskImage: GRID_MASK, WebkitMaskImage: GRID_MASK }}
+        style={
+          fade ? { maskImage: GRID_MASK, WebkitMaskImage: GRID_MASK } : undefined
+        }
       />
 
       {/* Mouse-reactive glow */}
