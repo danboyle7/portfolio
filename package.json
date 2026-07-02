@@ -16,10 +16,6 @@
     "lint": "next typegen && eslint --cache --concurrency auto .",
     "lint:fix": "next typegen && eslint --fix --cache --concurrency auto .",
     "preview": "next build && next start",
-    "release": "standard-version",
-    "release:major": "standard-version --release-as major",
-    "release:minor": "standard-version --release-as minor",
-    "release:patch": "standard-version --release-as patch",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
@@ -49,12 +45,19 @@
     "@commitlint/config-conventional": "^20.3.1",
     "@eslint/eslintrc": "^3.3.1",
     "@lobehub/icons-static-svg": "^1.91.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.9",
+    "@semantic-release/npm": "^13.1.5",
+    "@semantic-release/release-notes-generator": "^14.1.1",
     "@tailwindcss/postcss": "^4.0.15",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.14.10",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "commitizen": "^4.3.1",
+    "conventional-changelog-conventionalcommits": "^10.2.0",
     "cz-conventional-changelog": "^3.3.0",
     "devicon": "^2.17.0",
     "eslint": "^9.23.0",
@@ -63,8 +66,8 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
+    "semantic-release": "^25.0.5",
     "simple-icons": "^16.24.1",
-    "standard-version": "^9.5.0",
     "tailwindcss": "^4.0.15",
     "tsx": "^4.21.0",
     "typescript": "^5.8.2",
@@ -74,12 +77,6 @@
     "initVersion": "7.40.0"
   },
   "packageManager": "pnpm@9.4.0",
-  "pnpm": {
-    "overrides": {
-      "@types/react": "19.2.7",
-      "@types/react-dom": "19.2.3"
-    }
-  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"

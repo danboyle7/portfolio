@@ -24,6 +24,9 @@ next-env.d.ts
 # misc
 .DS_Store
 *.pem
+.eslintcache
+.pnpm-store/
+.wrangler/
 
 # debug
 npm-debug.log*
