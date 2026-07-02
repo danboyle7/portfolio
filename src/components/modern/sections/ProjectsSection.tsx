@@ -597,7 +597,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             ))}
           </div>
 
-          {/* View more link -- Commented out, but may add back in the future when I make more repos public on github */}
+          {/* View more link -- Commented out, but may add back in the future when I make more repos public on GitLab */}
           {/* <div
             className={`mt-12 text-center transition-all delay-500 duration-700 ${
               isVisible
@@ -606,7 +606,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             }`}
           >
             <a
-              href="https://github.com/danboyle7"
+              href="https://gitlab.com/public-danboyle7"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-blue-400"

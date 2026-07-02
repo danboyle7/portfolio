@@ -11,6 +11,7 @@ interface ContactInfo {
   email?: string;
   phone?: string;
   github?: string;
+  gitlab?: string;
   linkedin?: string;
   website?: string;
   locations?: string[];
@@ -196,10 +197,10 @@ export function ContactApp({ onClose }: ContactAppProps) {
         : undefined,
     },
     {
-      key: "github",
-      label: "GitHub",
-      value: contact?.github,
-      href: contact?.github ? `https://${contact.github}` : undefined,
+      key: "gitlab",
+      label: "GitLab",
+      value: contact?.gitlab,
+      href: contact?.gitlab ? `https://${contact.gitlab}` : undefined,
     },
     {
       key: "linkedin",

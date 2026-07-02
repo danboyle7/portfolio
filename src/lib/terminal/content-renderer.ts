@@ -269,7 +269,7 @@ function renderContact(): CommandResult {
   lines.push(
     `<span class="term-cyan">Email:</span>    <span class="term-green">${contact.email}</span>`,
   );
-  lines.push(`<span class="term-cyan">GitHub:</span>   ${contact.github}`);
+  lines.push(`<span class="term-cyan">GitLab:</span>   ${contact.gitlab}`);
   lines.push(`<span class="term-cyan">LinkedIn:</span> ${contact.linkedin}`);
   if (contact.twitter) {
     lines.push(`<span class="term-cyan">Twitter:</span>  ${contact.twitter}`);

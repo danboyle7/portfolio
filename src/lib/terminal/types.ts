@@ -157,6 +157,7 @@ export interface BlogPost {
 export interface ContactInfo {
   email: string;
   github: string;
+  gitlab: string;
   linkedin: string;
   twitter?: string;
   website?: string;

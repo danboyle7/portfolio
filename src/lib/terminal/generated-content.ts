@@ -7,7 +7,7 @@
  * To update content, edit the YAML files and run:
  *   pnpm run generate-content
  *
- * Generated at: 2026-07-02T20:15:01.776Z
+ * Generated at: 2026-07-02T20:20:18.107Z
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -637,6 +637,7 @@ export const generatedContent: Record<string, any> = {
     email: "dan.boyle7@gmail.com",
     phone: "(719) 650-6222",
     github: "github.com/danboyle7",
+    gitlab: "gitlab.com/public-danboyle7",
     linkedin: "linkedin.com/in/daniel-w-boyle",
     locations: ["Elizabeth City, NC", "Norfolk, VA", "Remote"],
     availability: "Open to opportunities",

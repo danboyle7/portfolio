@@ -57,7 +57,7 @@ An interactive terminal-styled portfolio website built with Next.js, featuring a
 
 ```bash
 # Clone the repository
-git clone https://github.com/danboyle7/portfolio.git
+git clone https://gitlab.com/public-danboyle7/portfolio.git
 cd portfolio
 
 # Install dependencies
