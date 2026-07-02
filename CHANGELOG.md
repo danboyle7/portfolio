@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://gitlab.com/public-danboyle7/portfolio/compare/v1.1.4...v1.2.0) (2026-07-02)
+
+
+### Features
+
+* render terminal *.md files via vim ([3061525](https://gitlab.com/public-danboyle7/portfolio/commit/3061525cf3014ed68b60d72c8a7293abdd3b4a52))
+
+
+### Bug Fixes
+
+* adjustments to project card ([fb445f0](https://gitlab.com/public-danboyle7/portfolio/commit/fb445f04f89923e5be01f9068d3f388724437b7c))
+* denser matrix on terminal side ([1398c19](https://gitlab.com/public-danboyle7/portfolio/commit/1398c19f3773a4f27efbf0f0e5a914d7bcc9ba7b))
+* fix unbalanced feel to modern size, and animation fils screen ([e9d3c9a](https://gitlab.com/public-danboyle7/portfolio/commit/e9d3c9a6a366c1465988a35eb3e1a8e036a7f6d1))
+* image fixes ([8d0d48e](https://gitlab.com/public-danboyle7/portfolio/commit/8d0d48e811b7e780cc99e72d2f827d31d9bce23f))
+* remove full from terminal emulation descriptor ([92ccb1f](https://gitlab.com/public-danboyle7/portfolio/commit/92ccb1fc21d7f7a7d8b4065bd035b2b88fc9564a))
+* remove github link ([0fbf993](https://gitlab.com/public-danboyle7/portfolio/commit/0fbf993fc3ba921074d042a6d92f649b68489495))
+* remove hover on non-clickable cards ([65d9489](https://gitlab.com/public-danboyle7/portfolio/commit/65d9489bd4abe4ff1cfd20ad1dbcc9aa96bd6ca2))
+* title fix in modern portfolio ([4ca6f25](https://gitlab.com/public-danboyle7/portfolio/commit/4ca6f25275be4dc31ed566678450077455be3aa8))
+* update skill splits ([85c5746](https://gitlab.com/public-danboyle7/portfolio/commit/85c5746899f2820959d7ccbc17c5a38ad80f2004))
+* updated resumes, refactored skills section ([c0712f0](https://gitlab.com/public-danboyle7/portfolio/commit/c0712f00ca4fc480b56a3183db1de50971a83c1a))
+
+
+### Refactoring
+
+* fable-improved modenrized portfolio side with fun background ([0d28e28](https://gitlab.com/public-danboyle7/portfolio/commit/0d28e28190c3289875f8c200ba0a23f6af57d599))
+
 ### [1.1.4](https://gitlab.com/public-danboyle7/portfolio/compare/v1.1.3...v1.1.4) (2026-01-23)
 
 
