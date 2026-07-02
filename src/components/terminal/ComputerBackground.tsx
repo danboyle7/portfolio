@@ -15,10 +15,10 @@ interface ComputerBackgroundProps {
 
 // TERMINAL SCREEN - Position on monitor (% of image)
 const SCREEN_BOUNDS = {
-  top: 11.9,
-  left: 31.6,
-  bottom: 56.8,
-  right: 68.4,
+  top: 11.25,
+  left: 31.5,
+  bottom: 57.5,
+  right: 68.5,
 };
 
 // ZOOM SETTINGS - Zooms the whole monitor for better UX
@@ -31,17 +31,17 @@ const ZOOM_CONFIG = {
 // POWER BUTTON - Position on the monitor (% of image)
 const POWER_BUTTON = {
   top: 62.6,
-  left: 32.6,
-  width: 2.8,
+  left: 32.7,
+  width: 2.7,
   height: 3.5,
 };
 
 // ZOOM BUTTON - Position on monitor (% of image)
 const ZOOM_BUTTON = {
-  top: 63.3,
+  top: 63.2,
   left: 64,
   width: 1.8,
-  height: 2.1,
+  height: 2,
 };
 
 // CRT ANIMATION TIMING (milliseconds)
@@ -127,7 +127,7 @@ export function ComputerBackground({
     if (isMobile) return;
 
     const img = new window.Image();
-    img.src = "/computer2.png";
+    img.src = "/computer3.png";
     img.onload = () => {
       setImageDimensions({
         width: img.naturalWidth,
@@ -304,7 +304,7 @@ export function ComputerBackground({
         {/* Computer image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/computer2.png"
+          src="/computer3.png"
           alt="Vintage computer monitor"
           className="absolute inset-0 h-full w-full"
         />

@@ -27,15 +27,57 @@ interface MatrixStream {
   opacity: number;
 }
 
+// Splash particles - characters scattering when a stream head hits the floor
+interface SplashParticle {
+  id: string;
+  x: number; // % horizontal
+  y: number; // row position (same units as streams, 1 row = 2% height)
+  vx: number; // % per tick
+  vy: number; // rows per tick
+  char: string;
+  life: number; // ticks remaining
+  maxLife: number;
+}
+
+interface RainState {
+  streams: MatrixStream[];
+  splashes: SplashParticle[];
+}
+
+const FLOOR_ROW = 49; // Visible bottom edge (row * 2% ≈ 98%)
+const SPLASH_GRAVITY = 0.12; // rows per tick²
+const MAX_SPLASHES = 150;
+
 const getRandomChar = () =>
   MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)]!;
+
+const createSplashParticle = (x: number): SplashParticle => {
+  const maxLife = 10 + Math.floor(Math.random() * 8);
+  return {
+    id: Math.random().toString(36).slice(2),
+    x,
+    y: FLOOR_ROW,
+    vx: (Math.random() - 0.5) * 1.1,
+    vy: -(0.4 + Math.random() * 0.8),
+    char: getRandomChar(),
+    life: maxLife,
+    maxLife,
+  };
+};
+
+const splashColor = (lifeRatio: number): string => {
+  if (lifeRatio > 0.75) return "#ccffcc";
+  if (lifeRatio > 0.5) return "#00ff41";
+  if (lifeRatio > 0.25) return "#00cc33";
+  return "#009922";
+};
 
 export function PortfolioSplash({
   onSelectTerminal,
   onSelectModern,
 }: PortfolioSplashProps) {
   const [hoveredSide, setHoveredSide] = useState<"left" | "right" | null>(null);
-  const [streams, setStreams] = useState<MatrixStream[]>([]);
+  const [rain, setRain] = useState<RainState>({ streams: [], splashes: [] });
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Initialize streams
@@ -65,7 +107,7 @@ export function PortfolioSplash({
         stream.y = Math.random() * 70; // Spread across the screen
         initialStreams.push(stream);
       }
-      setStreams(initialStreams);
+      setRain({ streams: initialStreams, splashes: [] });
     });
     return () => cancelAnimationFrame(frame);
   }, [createStream]);
@@ -73,8 +115,10 @@ export function PortfolioSplash({
   // Animation loop
   useEffect(() => {
     const interval = setInterval(() => {
-      setStreams((prevStreams) => {
-        return prevStreams.map((stream) => {
+      setRain(({ streams, splashes }) => {
+        const impacts: number[] = [];
+
+        const newStreams = streams.map((stream) => {
           const newY = stream.y + stream.speed;
           let newChars = stream.chars;
 
@@ -83,6 +127,11 @@ export function PortfolioSplash({
             newChars = stream.chars.map((char) =>
               Math.random() < MUTATION_CHANCE ? getRandomChar() : char,
             );
+          }
+
+          // Head crossed the floor this tick - splash
+          if (stream.y < FLOOR_ROW && newY >= FLOOR_ROW) {
+            impacts.push(stream.x);
           }
 
           // Reset stream when the entire trail has gone off screen
@@ -103,6 +152,32 @@ export function PortfolioSplash({
             chars: newChars,
           };
         });
+
+        // Step splash particles: ballistic arc + fade out
+        let newSplashes = splashes
+          .map((p) => ({
+            ...p,
+            x: p.x + p.vx,
+            y: p.y + p.vy,
+            vy: p.vy + SPLASH_GRAVITY,
+            life: p.life - 1,
+            char:
+              Math.random() < MUTATION_CHANCE * 3 ? getRandomChar() : p.char,
+          }))
+          .filter((p) => p.life > 0 && p.y < FLOOR_ROW + 3);
+
+        // Spawn a small burst of particles per impact
+        for (const x of impacts) {
+          const count = 3 + Math.floor(Math.random() * 3);
+          for (let i = 0; i < count; i++) {
+            newSplashes.push(createSplashParticle(x));
+          }
+        }
+        if (newSplashes.length > MAX_SPLASHES) {
+          newSplashes = newSplashes.slice(-MAX_SPLASHES);
+        }
+
+        return { streams: newStreams, splashes: newSplashes };
       });
     }, 50);
 
@@ -118,8 +193,9 @@ export function PortfolioSplash({
     for (let i = 0; i < stream.length; i++) {
       const rowPosition = headPosition - i; // Head at bottom, trail goes up
 
-      // Only render if visible on screen (0-50 range roughly maps to 0-100%)
-      if (rowPosition >= 0 && rowPosition < 55) {
+      // Only render between the top and the floor - streams visually
+      // terminate at the floor line, where the splash particles take over
+      if (rowPosition >= 0 && rowPosition <= FLOOR_ROW) {
         const char = stream.chars[i % stream.chars.length];
         const distanceFromHead = i; // 0 = head (bottom), increases going up
 
@@ -212,11 +288,31 @@ export function PortfolioSplash({
             ref={containerRef}
             className="absolute inset-0 overflow-hidden opacity-70 transition-opacity duration-500 group-hover:opacity-100"
           >
-            {streams.map((stream, i) => (
+            {rain.streams.map((stream, i) => (
               <React.Fragment key={`${i}-${stream.x}`}>
                 {renderStream(stream)}
               </React.Fragment>
             ))}
+
+            {/* Splash particles - letters scattering off the floor */}
+            {rain.splashes.map((p) => {
+              const lifeRatio = p.life / p.maxLife;
+              return (
+                <div
+                  key={p.id}
+                  className="absolute font-mono text-[10px]"
+                  style={{
+                    left: `${p.x}%`,
+                    top: `${p.y * 2}%`,
+                    color: splashColor(lifeRatio),
+                    opacity: lifeRatio,
+                    textShadow: lifeRatio > 0.75 ? "0 0 8px #00ff00" : "none",
+                  }}
+                >
+                  {p.char}
+                </div>
+              );
+            })}
           </div>
 
           {/* CRT scanlines */}

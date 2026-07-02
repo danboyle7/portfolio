@@ -378,7 +378,9 @@ export function TechBackground({
         ref={canvasRef}
         className="absolute inset-0 h-full w-full"
         style={
-          fade ? { maskImage: GRID_MASK, WebkitMaskImage: GRID_MASK } : undefined
+          fade
+            ? { maskImage: GRID_MASK, WebkitMaskImage: GRID_MASK }
+            : undefined
         }
       />
 
