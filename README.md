@@ -2,7 +2,7 @@
 
 An interactive terminal-styled portfolio website built with Next.js, featuring a fully functional command-line interface, CRT effects, and a retro computer aesthetic.
 
-![Terminal Portfolio](./public/computer3.png)
+![Terminal Portfolio](./private/preview.png)
 
 ## Features
 
