@@ -371,7 +371,7 @@ export function PortfolioSplash({
 
           {/* Features list - hidden on mobile */}
           <div className="mt-4 hidden space-y-1 text-left font-mono text-[10px] text-green-800 sm:mt-6 sm:block sm:text-xs">
-            <div>• Full terminal emulation</div>
+            <div>• Terminal emulation</div>
             <div>• Hidden content & easter eggs</div>
             <div>• CRT effects & visual aesthetics</div>
             <div>• Interactive commands</div>
